@@ -685,7 +685,7 @@ GameObject:
   - component: {fileID: 988792649}
   - component: {fileID: 988792648}
   m_Layer: 10
-  m_Name: day_background
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 1072307108}
   - component: {fileID: 1072307107}
   m_Layer: 10
-  m_Name: day_ground
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
