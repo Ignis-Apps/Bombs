@@ -13,8 +13,15 @@ public class StartMenu : MonoBehaviour
         
     }
 
-    public void startGame()
+    public void hide()
     {
         StartMenuUI.SetActive(false);
+        IsInStartMenu = false;
+    }
+
+    public void show()
+    {
+        StartMenuUI.SetActive(true);
+        IsInStartMenu = true;
     }
 }

@@ -15,6 +15,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
+        if (StartMenu.IsInStartMenu)
+        {
+            return;
+        }
+
         if (Input.touchCount <= 0)
         {
             return;
@@ -39,23 +44,6 @@ public class PlayerMovement : MonoBehaviour
         {
             moveDir = 0;
         }
-        /*
-        if(targetPosition.x <= transform.position.x)
-        {
-            moveDir = -movementSpeed;
-        }
-        else
-        {
-            moveDir = movementSpeed;
-        }
-        
-        if(touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
-        {
-            moveDir = movementSpeed;
-            if (touch.position.x < Screen.width/2)
-                moveDir *= -1;
-        }
-        */
         if (touch.phase == TouchPhase.Ended)
         {
             moveDir = 0;
