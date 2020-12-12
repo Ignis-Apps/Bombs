@@ -45,7 +45,6 @@ public class Bomb : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
         Instantiate(explosionPrefab, bombBody.transform.position, bombBody.transform.rotation);
         Destroy(gameObject);
     }
