@@ -39,7 +39,11 @@ public class SpawnScript : MonoBehaviour
         if(bombTimer > bombSpawnInterval)
         {
             bombTimer = 0f;
-            SpawnBomb();
+            for(int i = Random.Range(1,4); i>0; i--)
+            {
+                SpawnBomb();
+            }
+            
         }
 
         if (coinTimer > coinSpawnInterval)

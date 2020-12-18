@@ -16,12 +16,6 @@ public class Coin : MonoBehaviour
         coinBody.velocity = transform.up * -startSpeed;
     }
 
-    // Update is called once per frame  
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         coinBody.velocity = new Vector2(0, 0);

@@ -10,9 +10,13 @@ public class Bomb : MonoBehaviour
     public float acceleration;
 
     public float shakeAngle;
-    public Rigidbody2D bombBody;
     private float angularAcceleration = 30f;
+    public Rigidbody2D bombBody;
+
     public GameObject explosionPrefab;
+    public GameObject scoreOrbPrefab;
+
+    private float ScorePointDropRate_Percent = 25;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +50,12 @@ public class Bomb : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Instantiate(explosionPrefab, bombBody.transform.position, bombBody.transform.rotation);
+        
+        if(Random.Range(0,100) < ScorePointDropRate_Percent)
+        {
+            Instantiate(scoreOrbPrefab, bombBody.transform.position, bombBody.transform.rotation);
+        }
+
         Destroy(gameObject);
     }
 }

@@ -145,6 +145,8 @@ MonoBehaviour:
   bombBody: {fileID: 5347834380977207288}
   explosionPrefab: {fileID: 3811380740657919097, guid: 06f3c3d68fb388a4f9919602eab20244,
     type: 3}
+  scoreOrbPrefab: {fileID: 8059208126762768387, guid: fffc950aaba18354589060c017218a24,
+    type: 3}
 --- !u!61 &5347834380977207269
 BoxCollider2D:
   m_ObjectHideFlags: 0
