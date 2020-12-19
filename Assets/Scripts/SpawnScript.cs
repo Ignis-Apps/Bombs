@@ -18,17 +18,21 @@ public class SpawnScript : MonoBehaviour
 
     private bool running;
 
-    public void StartDropping()
-    {
-        running = true;
-    }
+    private GameMenuManager gameMenuManager;
 
-    public void StopDropping()
+
+    private void Start()
     {
-        running = false;
+        gameMenuManager = GameMenuManager.GetInstance();
     }
 
     public void Update()
+    {
+        // FIXME
+        running = gameMenuManager.CanPlayerMove();
+    }
+
+    private void FixedUpdate()
     {
         if (!running)
             return;
@@ -36,14 +40,14 @@ public class SpawnScript : MonoBehaviour
         bombTimer += Time.deltaTime;
         coinTimer += Time.deltaTime;
 
-        if(bombTimer > bombSpawnInterval)
+        if (bombTimer > bombSpawnInterval)
         {
             bombTimer = 0f;
-            for(int i = Random.Range(1,4); i>0; i--)
+            for (int i = Random.Range(1, 4); i > 0; i--)
             {
                 SpawnBomb();
             }
-            
+
         }
 
         if (coinTimer > coinSpawnInterval)
@@ -51,10 +55,7 @@ public class SpawnScript : MonoBehaviour
             coinTimer = 0f;
             SpawnCoin();
         }
-
     }
-
-    
 
     void SpawnBomb()
     {

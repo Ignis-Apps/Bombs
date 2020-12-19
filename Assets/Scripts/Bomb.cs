@@ -56,6 +56,11 @@ public class Bomb : MonoBehaviour
             Instantiate(scoreOrbPrefab, bombBody.transform.position, bombBody.transform.rotation);
         }
 
+        if (!collision.gameObject.name.Contains("Player"))
+        {
+            GameManager.GetInstance().addDodgedBomb();
+        }
+
         Destroy(gameObject);
     }
 }
