@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 8059208126762768386}
+  maxLifeTime: 5
   HoverAmplitude: 0.05
   HoverFrequency: 2.5
 --- !u!50 &8059208126762768386
