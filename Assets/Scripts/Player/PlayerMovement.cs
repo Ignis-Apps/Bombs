@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField]
+    private CharacterController2D controller2D;
+    
+    [SerializeField]
+    private Animator animator;
+    
+    [SerializeField]
+    private float playerMovementSpeed;
 
-    public CharacterController2D controller2D;
-    public Animator animator;
-    public float movementSpeed = 20f;
-
-    float moveDir = 0.5f;
-
+    private float playerMovementDirection = 0f;
+    private bool playerIsMoving;
+    private Vector2 playerTargetPosition;
     private GameMenuManager gameMenuManager;
 
     void Start()
@@ -22,42 +27,54 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        if ( !gameMenuManager.CanPlayerMove() || Input.touchCount <= 0)
-        {
-            return;
-        }
+        if ( !gameMenuManager.CanPlayerMove() || Input.touchCount <= 0) { return; }
 
         Touch touch = Input.GetTouch(0);
-
-        Vector3 targetPosition = Camera.main.ScreenToWorldPoint(touch.position);
-
-        float distance = transform.position.x - targetPosition.x;
-
-        float threshold = 0.1f;
-
-        if(distance < -threshold)
-        {
-            moveDir = movementSpeed;
-        }else if (distance > threshold)
-        {
-            moveDir = -movementSpeed;
-        }
-        else
-        {
-            moveDir = 0;
-        }
-        if (touch.phase == TouchPhase.Ended)
-        {
-            moveDir = 0;
-        }
+        playerTargetPosition = Camera.main.ScreenToWorldPoint(touch.position);
         
-        animator.SetFloat("playerSpeed", Mathf.Abs(moveDir));        
+        if(touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved) { playerIsMoving = true; }
+
+            if (touch.phase == TouchPhase.Ended)
+            {
+            playerMovementDirection = 0;
+            playerIsMoving = false;
+            controller2D.Move(0, false, false);
+            }
+      
+
+        animator.SetFloat("playerSpeed", Mathf.Abs(playerMovementDirection));        
 
     }
 
     void FixedUpdate() {
 
-        controller2D.Move(moveDir * Time.fixedDeltaTime, false, false);
+        if (!playerIsMoving) { return; }
+
+        float distanceToTarget = playerTargetPosition.x - transform.position.x;
+        float distanceToNextPosition = Mathf.Abs(playerMovementSpeed * Time.fixedDeltaTime);
+            
+        float EPSILON = 0.1f;
+
+        if (distanceToTarget > EPSILON)
+        {
+            playerMovementDirection = 1f;
+        }
+        else if (distanceToTarget < -EPSILON)
+        {
+            playerMovementDirection = -1f;
+        }
+        else
+        {
+            playerMovementDirection = 0f;
+        }
+
+        if (Mathf.Abs(distanceToTarget) <= distanceToNextPosition)
+        {
+            playerMovementDirection *= Mathf.Abs(distanceToTarget / distanceToNextPosition);
+            
+        }
+
+        controller2D.Move(playerMovementDirection* distanceToNextPosition, false, false);
 
     }
 }

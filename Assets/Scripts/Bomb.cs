@@ -4,23 +4,31 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
+    [SerializeField]
+    private float startSpeed;
+    [SerializeField]
+    private float maxSpeed;
+    [SerializeField]
+    private float acceleration;
 
-    public float startSpeed;
-    public float maxSpeed;
-    public float acceleration;
+   
 
     public float shakeAngle;
-    private float angularAcceleration = 30f;
     public Rigidbody2D bombBody;
 
     public GameObject explosionPrefab;
     public GameObject scoreOrbPrefab;
 
+    private float angularAcceleration = 30f;
     private float ScorePointDropRate_Percent = 25;
 
     // Start is called before the first frame update
     void Start()
     {
+        Animator anim = GetComponent<Animator>();
+        AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
+        anim.Play(state.fullPathHash, -1, Random.Range(0f, 1f));
+
         bombBody.velocity = transform.up * - startSpeed;
         bombBody.angularVelocity = angularAcceleration;
     }

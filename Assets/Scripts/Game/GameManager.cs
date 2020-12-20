@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameEvent
+{
+    RESET_GAME
+}
+
 
 public class GameManager : Singleton<GameManager>
 {
@@ -60,6 +65,19 @@ public class GameManager : Singleton<GameManager>
         survivedSecounds = 0;
         dodgedBombs = 0;
         survivedWaves = 0;
+    }
+
+    public void handleGameEvent(GameEvent gameEvent)
+    {
+        switch (gameEvent)
+        {
+            case GameEvent.RESET_GAME:
+                resetStats();
+                break;
+
+            default:
+                break;
+        }
     }
 
 }
