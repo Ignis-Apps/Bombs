@@ -5,12 +5,9 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    private bool isInvincible;
 
-    public TextMeshProUGUI CoinText;
-    public TextMeshProUGUI ScoreText;
-
-    private int Coins;
-    private int Points;
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +18,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // CoinText.text = Coins.ToString();
-        //ScoreText.text = Points.ToString();
+   
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,24 +26,22 @@ public class Player : MonoBehaviour
 
         if (collision.name.Contains("Coin"))
         {
-            Destroy(collision.gameObject);
+           // Destroy(collision.gameObject);
             GameManager.GetInstance().increaseCoins(1);
             
-            //
-            Coins++;
+    
         }
 
         if (collision.name.Contains("ScoreOrb"))
         {
-            Destroy(collision.gameObject);
-            Points+=Random.Range(2,7);
-            GameManager.GetInstance().increaseScorePoints(Random.Range(2, 7));
+           // Destroy(collision.gameObject);      
+            GameManager.GetInstance().increaseScorePoints(1);
         }
 
         if (collision.name.Contains("Bomb"))
         {
             Destroy(collision.gameObject);
-
+            if (isInvincible) { return; }
             GameMenuManager.GetInstance().SwitchController(GameMenu.GAME_OVER_SCREEN);
         }
 

@@ -27,6 +27,22 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
+        // FOR PC KEY_BINDING
+
+        if (!Application.isMobilePlatform)
+        {
+
+            float inputDir = Input.GetAxisRaw("Horizontal");
+            //if ()
+
+
+
+            return;
+        }
+
+        // END OF PC BINDING
+
+
         if ( !gameMenuManager.CanPlayerMove() || Input.touchCount <= 0) { return; }
 
         Touch touch = Input.GetTouch(0);
@@ -36,9 +52,9 @@ public class PlayerMovement : MonoBehaviour
 
             if (touch.phase == TouchPhase.Ended)
             {
-            playerMovementDirection = 0;
-            playerIsMoving = false;
-            controller2D.Move(0, false, false);
+                playerMovementDirection = 0;
+                playerIsMoving = false;
+                controller2D.Move(0, false, false);
             }
       
 

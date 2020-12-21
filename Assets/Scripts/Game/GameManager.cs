@@ -65,6 +65,19 @@ public class GameManager : Singleton<GameManager>
         survivedSecounds = 0;
         dodgedBombs = 0;
         survivedWaves = 0;
+
+
+        // Delete all old objects
+        List<GameObject> deleteList = new List<GameObject>();
+        deleteList.AddRange(GameObject.FindGameObjectsWithTag("Coin"));
+        deleteList.AddRange(GameObject.FindGameObjectsWithTag("ScoreOrb"));
+        deleteList.AddRange(GameObject.FindGameObjectsWithTag("Bomb"));
+        foreach (GameObject o in deleteList) { Destroy(o); }
+
+        // Reset player position
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.position = new Vector2(0, player.transform.position.y);
+        
     }
 
     public void handleGameEvent(GameEvent gameEvent)

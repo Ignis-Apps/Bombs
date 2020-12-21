@@ -61,7 +61,12 @@ public class Bomb : MonoBehaviour
         
         if(Random.Range(0,100) < ScorePointDropRate_Percent)
         {
-            Instantiate(scoreOrbPrefab, bombBody.transform.position, bombBody.transform.rotation);
+            
+            for (int i = Random.Range(1,5); i>0; i--)
+            {
+                Instantiate(scoreOrbPrefab, bombBody.transform.position, bombBody.transform.rotation);
+            }
+            
         }
 
         if (!collision.gameObject.name.Contains("Player"))

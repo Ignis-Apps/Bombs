@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - ScoreOrb
+  - Ground
+  - Coin
+  - Bomb
   layers:
   - Default
   - TransparentFX
@@ -21,7 +24,8 @@ TagManager:
   - Player
   - Bombs
   - Explosion
-  - Collectables
+  - Collectable/Coins
+  - Collectable/ScoreOrbs
   - 
   - 
   - 
@@ -36,8 +40,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - NoCollision
   m_SortingLayers:
   - name: Default
     uniqueID: 0

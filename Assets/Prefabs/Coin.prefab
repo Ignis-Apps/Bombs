@@ -13,9 +13,12 @@ GameObject:
   - component: {fileID: 2620283784387210901}
   - component: {fileID: 3287834873512796330}
   - component: {fileID: -6227966469311330176}
-  m_Layer: 13
+  - component: {fileID: 717987763673656753}
+  - component: {fileID: -3279784040170209237}
+  - component: {fileID: 1579884324088852348}
+  m_Layer: 15
   m_Name: Coin
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6376339539627395642}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.505, y: -1.526, z: -0.22466816}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.10822714, y: 0.10822714, z: 0.10822714}
   m_Children: []
   m_Father: {fileID: 0}
@@ -99,7 +102,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 0.3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -115,7 +118,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -133,6 +136,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67204fda6799a24c9f34e69d504175f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinAnimator: {fileID: 0}
-  coinBody: {fileID: 2620283784387210901}
-  startSpeed: 3
+--- !u!114 &717987763673656753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6376339539627395642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050596014be3dac44894c36e232830ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &-3279784040170209237
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6376339539627395642}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.7677022
+--- !u!114 &1579884324088852348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6376339539627395642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a278848f36f0be345af6f17613b784c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToPickup: 0.2
