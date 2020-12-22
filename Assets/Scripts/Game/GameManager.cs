@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum GameEvent
 {
-    RESET_GAME
+    RESET_GAME,
+    CHANGE_TIME
 }
 
 
@@ -15,6 +16,8 @@ public class GameManager : Singleton<GameManager>
     private int collectedCoins;
     private int collectedScorePoints;
     private float survivedSecounds;
+
+    private float daytime =0.1f;
     
     private int dodgedBombs;
     private int survivedWaves;
@@ -48,6 +51,12 @@ public class GameManager : Singleton<GameManager>
     {
         dodgedBombs += 1;
     }
+
+    public float getDaytime()
+    {
+        return daytime;
+    }
+
 
     void FixedUpdate()
     {
@@ -88,6 +97,11 @@ public class GameManager : Singleton<GameManager>
                 resetStats();
                 break;
 
+
+            case GameEvent.CHANGE_TIME:
+                daytime += 0.25f;
+                daytime %= 1f;
+                break;
             default:
                 break;
         }

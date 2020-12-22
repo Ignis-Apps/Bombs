@@ -147,4 +147,5 @@ public class SkyGradient : MonoBehaviour
         meshRenderer.reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.Off;
         meshRenderer.sharedMaterial = material;
     }
+
 }
