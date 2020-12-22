@@ -28,38 +28,61 @@ public class PlayerMovement : MonoBehaviour
     {
 
         // FOR PC KEY_BINDING
-
         if (!Application.isMobilePlatform)
         {
-
             float inputDir = Input.GetAxisRaw("Horizontal");
-            //if ()
-
-
-
+            if (inputDir < 0)
+            {
+                playerTargetPosition = new Vector2(-1000, 0);
+                StartMoving();
+            }
+            else if (inputDir > 0)
+            {
+                playerTargetPosition = new Vector2(1000, 0);
+                StartMoving();
+            }
+            else
+            {
+                StopMoving();
+            }
+            animator.SetFloat("playerSpeed", Mathf.Abs(playerMovementDirection));
             return;
         }
-
         // END OF PC BINDING
 
 
-        if ( !gameMenuManager.CanPlayerMove() || Input.touchCount <= 0) { return; }
-
+        if (!gameMenuManager.CanPlayerMove() || Input.touchCount <= 0) { return; }
         Touch touch = Input.GetTouch(0);
         playerTargetPosition = Camera.main.ScreenToWorldPoint(touch.position);
-        
-        if(touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved) { playerIsMoving = true; }
 
-            if (touch.phase == TouchPhase.Ended)
-            {
-                playerMovementDirection = 0;
-                playerIsMoving = false;
-                controller2D.Move(0, false, false);
-            }
-      
+        switch (touch.phase)
+        {
+            case TouchPhase.Began:          
+            case TouchPhase.Moved:
+                StartMoving();
+                break;
+            case TouchPhase.Ended:
+                StopMoving();
+                break;
+            default:
+                break;
+        }
 
-        animator.SetFloat("playerSpeed", Mathf.Abs(playerMovementDirection));        
+        animator.SetFloat("playerSpeed", Mathf.Abs(playerMovementDirection));
 
+             
+    }
+
+    private void StartMoving()
+    {
+        playerIsMoving = true;
+    }
+
+    private void StopMoving()
+    {
+        playerMovementDirection = 0;
+        playerIsMoving = false;
+        controller2D.Move(0, false, false);
     }
 
     void FixedUpdate() {
