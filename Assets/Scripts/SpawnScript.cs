@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Game;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,6 @@ public class SpawnScript : MonoBehaviour
 
     public GameObject bombPrefab;
     public GameObject coinPrefab;
-
     public Transform[] bombSpawnPoints;
     
     public float bombSpawnInterval;
@@ -16,12 +16,15 @@ public class SpawnScript : MonoBehaviour
     private float bombTimer;
     private float coinTimer;
 
+    [SerializeField]
     private bool running;
 
     private GameMenuManager gameMenuManager;
 
+    [SerializeField]
+    private GameWave[] waves;
 
-    private void Start()
+    public void Start()
     {
         gameMenuManager = GameMenuManager.GetInstance();
     }
@@ -67,7 +70,6 @@ public class SpawnScript : MonoBehaviour
     {
         Transform spawnPoint = bombSpawnPoints[Random.Range(0, bombSpawnPoints.Length)];
         Instantiate(coinPrefab, spawnPoint.position, spawnPoint.rotation);
-    }
-
+    }   
  
 }

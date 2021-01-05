@@ -7,6 +7,8 @@ public class InGameUIUpdater : MonoBehaviour
 {
     public TextMeshProUGUI CoinText;
     public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI LiveText;
+
     private GameManager gameManager;
     
     // Start is called before the first frame update
@@ -20,5 +22,6 @@ public class InGameUIUpdater : MonoBehaviour
     {
         CoinText.text = gameManager.getCollectedCoins().ToString();
         ScoreText.text = gameManager.getCollectedScorePoints().ToString();
+        LiveText.text = gameManager.getPlayerLives().ToString();
     }
 }

@@ -11,6 +11,8 @@ public class DayNightCycle : MonoBehaviour
     private float time;
     [SerializeField]
     private bool fetchTimeFromGameManager;
+    [SerializeField]
+    private bool forceRedraw;
 
     private float currentTime;
     private GameManager gameManager;
@@ -30,7 +32,7 @@ public class DayNightCycle : MonoBehaviour
         if (fetchTimeFromGameManager)
         {
             // Throws an error in editor cause the game manager doesnt exist there
-            if(gameManager.getDaytime() != currentTime)
+            if(gameManager.getDaytime() != currentTime || forceRedraw)
             {
                 setGradient(gameManager.getDaytime());
                 
@@ -38,7 +40,7 @@ public class DayNightCycle : MonoBehaviour
         }
         else
         {
-              if(time != currentTime)
+              if(time != currentTime || forceRedraw)
               {
                setGradient(time);
                }

@@ -9,23 +9,29 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField]
     private Animator animator;
-    
+  
     [SerializeField]
-    private float playerMovementSpeed;
+    private float playerDefaultSpeed;
 
+    private float playerMovementSpeed;
     private float playerMovementDirection = 0f;
     private bool playerIsMoving;
     private Vector2 playerTargetPosition;
+
     private GameMenuManager gameMenuManager;
+    private GameManager gameManager;
 
     void Start()
     {
         gameMenuManager = GameMenuManager.GetInstance();
+        gameManager = GameManager.GetInstance();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        playerMovementSpeed = gameManager.getPlayerSpeedMultiplier() * playerDefaultSpeed;
 
         // FOR PC KEY_BINDING
         if (!Application.isMobilePlatform)

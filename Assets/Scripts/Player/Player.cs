@@ -8,11 +8,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool isInvincible;
 
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameManager.GetInstance();
     }
 
     // Update is called once per frame
@@ -38,10 +39,15 @@ public class Player : MonoBehaviour
             GameManager.GetInstance().increaseScorePoints(1);
         }
 
-        if (collision.name.Contains("Bomb"))
+        if (collision.CompareTag("Bomb"))
         {
             Destroy(collision.gameObject);
             if (isInvincible) { return; }
+            if(gameManager.getPlayerLives() > 1)
+            {
+                gameManager.decreasePlayerLive();
+                return;
+            }
             GameMenuManager.GetInstance().SwitchController(GameMenu.GAME_OVER_SCREEN);
         }
 
