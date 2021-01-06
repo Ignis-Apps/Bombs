@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Assets.Scripts.Game
 {
+    [ExecuteInEditMode]
     public class GameWaveSpawner : MonoBehaviour
     {
         [SerializeField] private float spawnFieldWidth;
         [SerializeField] private int spawnColums;
         [SerializeField] private float spawnRowOffset;
         [SerializeField] private float screenEdgeMargin;
+        [SerializeField] private float verticalSpawnSalt;
+        [SerializeField] private int debugSpawnBombAtPosition;
 
         private Vector3[] spawnPoints;
 
@@ -26,10 +29,9 @@ namespace Assets.Scripts.Game
         private GameTimer spawnTimer;
 
         // Spawnable game objects
-        [SerializeField]
-        private GameObject defaultBomb;
-        [SerializeField]
-        private GameObject homingRocket;
+        [SerializeField] private GameObject defaultBomb;
+        [SerializeField] private GameObject homingRocket;
+        [SerializeField] private GameObject smallBomb;
 
         public void Start()
         {
@@ -44,6 +46,21 @@ namespace Assets.Scripts.Game
 
         public void Update()
         {
+
+            // START TEST CODE
+
+            if (debugSpawnBombAtPosition >= 0)
+            {
+                GameObject spawnedObject = Instantiate(defaultBomb);
+                spawnedObject.transform.position = GetSpawnPoint(debugSpawnBombAtPosition);
+                debugSpawnBombAtPosition = -1;
+            }
+
+
+            // END TEST CODE
+
+
+
             running = gameMenuManager.CanPlayerMove();
             if (!running || onTimeout) return;
 
@@ -54,8 +71,7 @@ namespace Assets.Scripts.Game
             if (waveTimer.IsDone())
             {
                 int nextWave = Mathf.Min(currentWaveIndex + 1, gameWaves.Length - 1);
-                StartCoroutine(LoadWaveDelayed(2f,nextWave));
-                //LoadWave(nextWave);
+                StartCoroutine(LoadWaveDelayed(2f,nextWave));                
                 return;
             }
 
@@ -63,7 +79,7 @@ namespace Assets.Scripts.Game
             if (spawnTimer.IsDone())
             {
                 // Decrease spawn time
-                spawnTimer.SetTargetTime(gameWaves[currentWaveIndex].GetSpawnInterval(waveTimer.getProgress()));
+                spawnTimer.SetTargetTime(gameWaves[currentWaveIndex].GetSpawnInterval(waveTimer.getProgress()));                
                 SpawnBombs();
                 spawnTimer.Reset();
                 Debug.Log("SPAWNING !!!");
@@ -92,6 +108,7 @@ namespace Assets.Scripts.Game
             foreach (int position in spawnPositions)
             {
                 Vector3 spawnPosition = GetSpawnPoint(position);
+                spawnPosition.y += Random.Range(0, verticalSpawnSalt);
                 GameWave.SpawnType spawnType = currentWave.GetRandomSpawnType();
                 GameObject spawnedObject;
                 switch (spawnType)
@@ -103,6 +120,11 @@ namespace Assets.Scripts.Game
                     case GameWave.SpawnType.HOMING_BOMB:
                         spawnedObject = Instantiate(homingRocket);
                         break;
+
+                    case GameWave.SpawnType.SMALL_BOMB:
+                        spawnedObject = Instantiate(smallBomb);
+                        break;
+
                     default:
                         continue;
                 }
@@ -120,7 +142,6 @@ namespace Assets.Scripts.Game
 
         private void LoadWave(int waveIndex)
         {
-
 
             if(waveIndex > 0)
             {

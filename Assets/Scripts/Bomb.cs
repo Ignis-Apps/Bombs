@@ -18,9 +18,11 @@ public class Bomb : MonoBehaviour
 
     public GameObject explosionPrefab;
     public GameObject scoreOrbPrefab;
+    public GameObject coinPrefab;
 
     private float angularAcceleration = 30f;
     private float ScorePointDropRate_Percent = 25;
+    private float CoinDropRate_Percent = 15;
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +69,16 @@ public class Bomb : MonoBehaviour
                 Instantiate(scoreOrbPrefab, bombBody.transform.position, bombBody.transform.rotation);
             }
             
+        }
+
+        if (Random.Range(0, 100) < CoinDropRate_Percent)
+        {
+
+            for (int i = Random.Range(1, 3); i > 0; i--)
+            {
+                Instantiate(coinPrefab, bombBody.transform.position, bombBody.transform.rotation);
+            }
+
         }
 
         if (!collision.gameObject.name.Contains("Player"))

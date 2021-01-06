@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CloudMove : MonoBehaviour
 {
+
+    [SerializeField] private float speed;
     // Start is called before the first frame update
     void Start()
     {

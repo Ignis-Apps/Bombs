@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5198683452681065715}
   - component: {fileID: 1820345373780418126}
   - component: {fileID: 2385120703234416651}
+  - component: {fileID: 5033526069261769039}
   m_Layer: 16
   m_Name: ScoreOrb
   m_TagString: ScoreOrb
@@ -186,3 +187,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.28
+--- !u!114 &5033526069261769039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059208126762768387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc91b4846ebf9141833bd8dbf6daa19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialMovementAngleMin: 60
+  initialMovementAngleMax: 120
+  initialMovementSpeedMin: 2
+  initialMovementSpeedMax: 3

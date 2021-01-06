@@ -9,14 +9,10 @@ public class ScoreOrb : MonoBehaviour
     public float HoverAmplitude;
     public float HoverFrequency;
 
-    [SerializeField]
-    private float initialMovementAngleMin;
-    [SerializeField]
-    private float initialMovementAngleMax;
-    [SerializeField]
-    private float initialMovementSpeedMin;
-    [SerializeField]
-    private float initialMovementSpeedMax;
+    [SerializeField] private float initialMovementAngleMin;
+    [SerializeField] private float initialMovementAngleMax;
+    [SerializeField] private float initialMovementSpeedMin;
+    [SerializeField] private float initialMovementSpeedMax;
 
     private float CurrentAmpPos = Mathf.PI * 1.5f;
     private float lifetime = 0f;
@@ -27,11 +23,13 @@ public class ScoreOrb : MonoBehaviour
     private void Start()
     {
         // HoverOrigin = body.transform.position;
+        /*
         float startAngle = Random.Range(initialMovementAngleMin, initialMovementAngleMax);
         startAngle *= Mathf.PI / 180f;
         Vector2 startDir = new Vector2(Mathf.Cos(startAngle), Mathf.Sin(startAngle));
         float startSpeed = Random.Range(initialMovementSpeedMin, initialMovementSpeedMax);
         body.velocity = startDir * startSpeed;
+        */
 
     }
     private void FixedUpdate()

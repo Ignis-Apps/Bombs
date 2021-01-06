@@ -18,9 +18,11 @@ public class Rocket : MonoBehaviour
 
     public GameObject explosionPrefab;
     public GameObject scoreOrbPrefab;
+    public GameObject coinPrefab;
 
     private float angularAcceleration = 30f;
     private float ScorePointDropRate_Percent = 25;
+    private float CoinDropRate_Percent = 20;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +54,16 @@ public class Rocket : MonoBehaviour
             for (int i = Random.Range(1, 5); i > 0; i--)
             {
                 Instantiate(scoreOrbPrefab, bombBody.transform.position, bombBody.transform.rotation);
+            }
+
+        }
+
+        if (Random.Range(0, 100) < CoinDropRate_Percent)
+        {
+
+            for (int i = Random.Range(1, 1); i > 0; i--)
+            {
+                Instantiate(coinPrefab, bombBody.transform.position, bombBody.transform.rotation);
             }
 
         }

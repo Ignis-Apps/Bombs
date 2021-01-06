@@ -51,6 +51,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -146,6 +147,8 @@ MonoBehaviour:
   explosionPrefab: {fileID: 3811380740657919097, guid: 06f3c3d68fb388a4f9919602eab20244,
     type: 3}
   scoreOrbPrefab: {fileID: 8059208126762768387, guid: fffc950aaba18354589060c017218a24,
+    type: 3}
+  coinPrefab: {fileID: 6376339539627395642, guid: 02962b1e87578474aac123ac6648ca72,
     type: 3}
 --- !u!61 &5347834380977207269
 BoxCollider2D:

@@ -4956,6 +4956,7 @@ GameObject:
   - component: {fileID: 4352265985643330581}
   - component: {fileID: 734721428404244095}
   - component: {fileID: 5031220203544326144}
+  - component: {fileID: 1897785822213981259}
   m_Layer: 13
   m_Name: Homing Rocket
   m_TagString: Bomb
@@ -5098,6 +5099,8 @@ MonoBehaviour:
     type: 3}
   scoreOrbPrefab: {fileID: 8059208126762768387, guid: fffc950aaba18354589060c017218a24,
     type: 3}
+  coinPrefab: {fileID: 6376339539627395642, guid: 02962b1e87578474aac123ac6648ca72,
+    type: 3}
 --- !u!114 &5031220203544326144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5113,3 +5116,22 @@ MonoBehaviour:
   laser: {fileID: 4324697514144547252}
   showLaser: 0
   rotationSpeed: 3
+--- !u!95 &1897785822213981259
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5198068931683851065}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4c76f3b42ca97fd4090fbe1bb157d3ed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
