@@ -26,6 +26,10 @@ public class GameManager : Singleton<GameManager>
     private int dodgedBombs;
     private int survivedWaves;
 
+
+
+    private GameUIMessageTypes currentMessage;
+
     public int getCollectedCoins()
     {
         return collectedCoins;
@@ -140,6 +144,19 @@ public class GameManager : Singleton<GameManager>
     public GameObject getPlayer()
     {
         return GameObject.FindGameObjectWithTag("Player");
+    }    
+
+    public void SetCurrentGameMessage(GameUIMessageTypes message)
+    {
+        currentMessage = message;
     }
+
+    public GameUIMessageTypes getCurrentMessage()
+    {
+        GameUIMessageTypes output = currentMessage;
+        currentMessage = GameUIMessageTypes.NONE;
+        return output;
+    }
+
 
 }

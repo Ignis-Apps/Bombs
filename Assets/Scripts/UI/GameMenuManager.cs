@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Assets.Scripts.Game;
+
 public enum GameMenu
 {
     TITLE_SCREEN,
@@ -15,12 +17,15 @@ public class GameMenuManager : Singleton<GameMenuManager>
 
     private List<GameMenuController> gameMenuControllerList;
     private GameMenuController currentActiveController;
+   
 
     protected override void Awake()
     {
+       
         gameMenuControllerList = GetComponentsInChildren<GameMenuController>().ToList();
         gameMenuControllerList.ForEach(controler => controler.gameObject.SetActive(false));
         SwitchController(initialGameMenu);
+        
     }
 
     public void SwitchController(GameMenu nextGameMenu)
@@ -45,5 +50,4 @@ public class GameMenuManager : Singleton<GameMenuManager>
     {
         return currentActiveController.allowPlayerMovement;
     }
-
 }

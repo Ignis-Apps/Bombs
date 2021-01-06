@@ -1,28 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 namespace Assets.Scripts.Game
 {
     public class GameWaveSpawner : MonoBehaviour
     {
-        [SerializeField]
-        private float spawnFieldWidth;
-        [SerializeField]
-        private int spawnColums;
-        [SerializeField]
-        private float spawnRowOffset;
-        [SerializeField]
-        private float screenEdgeMargin;
+        [SerializeField] private float spawnFieldWidth;
+        [SerializeField] private int spawnColums;
+        [SerializeField] private float spawnRowOffset;
+        [SerializeField] private float screenEdgeMargin;
 
         private Vector3[] spawnPoints;
 
         private GameMenuManager gameMenuManager;
         private GameManager gameManager;
 
-        [SerializeField]
-        private GameWave[] gameWaves;
+        [SerializeField] private GameWave[] gameWaves;
+        
         private GameWave currentWave;
         private int currentWaveIndex;
         private bool running;
+        private bool onTimeout;
 
         private GameTimer waveTimer;
         private GameTimer spawnTimer;
@@ -47,7 +45,7 @@ namespace Assets.Scripts.Game
         public void Update()
         {
             running = gameMenuManager.CanPlayerMove();
-            if (!running) return;
+            if (!running || onTimeout) return;
 
             waveTimer.Tick(Time.deltaTime);
             spawnTimer.Tick(Time.deltaTime);
@@ -56,7 +54,8 @@ namespace Assets.Scripts.Game
             if (waveTimer.IsDone())
             {
                 int nextWave = Mathf.Min(currentWaveIndex + 1, gameWaves.Length - 1);
-                LoadWave(nextWave);
+                StartCoroutine(LoadWaveDelayed(2f,nextWave));
+                //LoadWave(nextWave);
                 return;
             }
 
@@ -71,6 +70,17 @@ namespace Assets.Scripts.Game
             }
 
         }
+
+        IEnumerator LoadWaveDelayed(float time, int wave)
+        {
+            onTimeout = true;
+            yield return new WaitForSeconds(1.5f);            
+            LoadWave(wave);
+            yield return new WaitForSeconds(4f);
+            onTimeout = false;
+        }
+
+
 
         private void SpawnBombs()
         {
@@ -110,6 +120,12 @@ namespace Assets.Scripts.Game
 
         private void LoadWave(int waveIndex)
         {
+
+
+            if(waveIndex > 0)
+            {
+                gameManager.SetCurrentGameMessage(GameUIMessageTypes.WAVE_COMPLETE);
+            }
 
             Debug.Log("LOADING NEXT WAVE");
             GameWave wave = gameWaves[waveIndex];

@@ -21,9 +21,9 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 21300000, guid: c11aa5ef93826f54da3ff31c5594ffe1, type: 3}
-    - time: 0.1
+    - time: 0.083333336
       value: {fileID: 21300000, guid: ad669c1bca30fd14b8ad85c93371f4ab, type: 3}
-    - time: 0.18333334
+    - time: 0.16666667
       value: {fileID: 21300000, guid: eb7e4f4baeca2ae48b23de7c9d1422c9, type: 3}
     - time: 0.25
       value: {fileID: 21300000, guid: d1ef45ec988b7fb4fbcdad919f5b002a, type: 3}
@@ -36,7 +36,7 @@ AnimationClip:
     - time: 0.5833333
       value: {fileID: 21300000, guid: 105141e6f53bf2b4698c9a9dbed044c0, type: 3}
     attribute: m_Sprite
-    path: 
+    path: Sprite
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 60
@@ -47,7 +47,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
+      path: 850496168
       attribute: 0
       script: {fileID: 0}
       typeID: 212
