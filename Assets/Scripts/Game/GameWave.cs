@@ -10,6 +10,13 @@ namespace Assets.Scripts.Game
 
         [SerializeField] private AnimationCurve spawnIntervall;
 
+        [SerializeField] private AnimationCurve defaultBombInitialSpeed;
+        [SerializeField] private AnimationCurve defaultBombMaxSpeed;       
+        [SerializeField] private AnimationCurve homingBombInitialSpeed;
+        [SerializeField] private AnimationCurve homingBombMaxSpeed;      
+        [SerializeField] private AnimationCurve smallBombInitialSpeed;
+        [SerializeField] private AnimationCurve smallBombMaxSpeed;
+
         [SerializeField] private int spawnGroupSizeMin;
         [SerializeField] private int spawnGroupSizeMax;
 
@@ -18,6 +25,8 @@ namespace Assets.Scripts.Game
         [SerializeField] private float spawnWeightDefaultBomb;
         [SerializeField] private float spawnWeightHomingBomb;
         [SerializeField] private float spawnWeightSmallBomb;
+
+        [SerializeField] private bool endWaveWithCrate;
 
         public float GetSpawnInterval(float waveProgress)
         {
@@ -55,6 +64,11 @@ namespace Assets.Scripts.Game
         public float GetPlayerSpeedMultiplier()
         {
             return playerSpeedMultiplier;
+        }
+
+        public bool SpawnCrateAtEnd()
+        {
+            return endWaveWithCrate;
         }
 
         public enum SpawnType

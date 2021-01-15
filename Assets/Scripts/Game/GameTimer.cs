@@ -37,5 +37,10 @@ namespace Assets.Scripts.Game
             return tickedTime / targetTime;
         }
 
+        public float GetRemainingTime()
+        {
+            return targetTime - tickedTime;
+        }
+
     }
 }

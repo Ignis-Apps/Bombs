@@ -40,9 +40,9 @@ public class GameManager : Singleton<GameManager>
         return collectedScorePoints;
     }
 
-    public float getSurvivedSecounds()
+    public int getSurvivedSecounds()
     {
-        return survivedSecounds;
+        return (int)survivedSecounds;
     }
 
     public void increaseCoins(int value)
@@ -85,12 +85,23 @@ public class GameManager : Singleton<GameManager>
         remainingLives--;
     }
 
-    void FixedUpdate()
+    public void OnWaveSurvived()
     {
-        if (!IsGameRunning) { 
-            return;       
-        }
+        survivedWaves++;
+    }
 
+    public int GetSurvivedWaves()
+    {
+        return survivedWaves;
+    }
+
+    public int GetPoints()
+    {
+        return (int)((1+survivedWaves) * survivedSecounds);
+    }
+
+    public void Tick()
+    {
         survivedSecounds += Time.deltaTime;
     }
 

@@ -34,22 +34,21 @@ public class DayNightCycle : MonoBehaviour
             // Throws an error in editor cause the game manager doesnt exist there
             if(gameManager.getDaytime() != currentTime || forceRedraw)
             {
-                setGradient(gameManager.getDaytime());
-                
+                SetGradient(gameManager.getDaytime());               
             }
         }
         else
         {
               if(time != currentTime || forceRedraw)
               {
-               setGradient(time);
+               SetGradient(time);
                }
         }
 
       
     }
 
-    private void setGradient(float time)
+    private void SetGradient(float time)
     {
         int index = Mathf.RoundToInt(time * (skyGradients.Length - 1));
         targetGradient.SetKeys(skyGradients[index].colorKeys, skyGradients[index].alphaKeys);

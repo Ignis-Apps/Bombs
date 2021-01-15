@@ -32,6 +32,7 @@ namespace Assets.Scripts.Game
         [SerializeField] private GameObject defaultBomb;
         [SerializeField] private GameObject homingRocket;
         [SerializeField] private GameObject smallBomb;
+        [SerializeField] private GameObject crate;
 
         public void Start()
         {
@@ -48,18 +49,16 @@ namespace Assets.Scripts.Game
         {
 
             // START TEST CODE
-
-            if (debugSpawnBombAtPosition >= 0)
-            {
+            #if UNITY_EDITOR
+                if (debugSpawnBombAtPosition >= 0)
+                {
                 GameObject spawnedObject = Instantiate(defaultBomb);
                 spawnedObject.transform.position = GetSpawnPoint(debugSpawnBombAtPosition);
-                debugSpawnBombAtPosition = -1;
-            }
-
-
+                debugSpawnBombAtPosition = -1;                
+                }
+                
+            #endif
             // END TEST CODE
-
-
 
             running = gameMenuManager.CanPlayerMove();
             if (!running || onTimeout) return;
@@ -68,10 +67,15 @@ namespace Assets.Scripts.Game
             spawnTimer.Tick(Time.deltaTime);
 
             // Load next wave
-            if (waveTimer.IsDone())
+            if (waveTimer.IsDone() || waveTimer.GetRemainingTime() < spawnTimer.GetRemainingTime())
             {
                 int nextWave = Mathf.Min(currentWaveIndex + 1, gameWaves.Length - 1);
-                StartCoroutine(LoadWaveDelayed(2f,nextWave));                
+                StartCoroutine(LoadWaveDelayed(2f,nextWave));
+                if (currentWave.SpawnCrateAtEnd())
+                {
+                    SpawnCrate();
+                }
+                gameManager.OnWaveSurvived();
                 return;
             }
 
@@ -84,6 +88,9 @@ namespace Assets.Scripts.Game
                 spawnTimer.Reset();
                 Debug.Log("SPAWNING !!!");
             }
+
+            // Timer
+            gameManager.Tick();
 
         }
 
@@ -132,6 +139,15 @@ namespace Assets.Scripts.Game
                 spawnedObject.transform.position = spawnPosition;
 
             }
+
+        }
+
+        private void SpawnCrate()
+        {
+            int positionIndex = Random.Range(0, spawnColums);
+            Vector3 spawnPosition = GetSpawnPoint(positionIndex);
+            GameObject c = Instantiate(crate);
+            c.transform.position = spawnPosition;
 
         }
 
