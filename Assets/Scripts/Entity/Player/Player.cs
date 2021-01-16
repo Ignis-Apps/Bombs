@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         if (collision.name.Contains("Coin"))
         {
            // Destroy(collision.gameObject);
-            GameManager.GetInstance().increaseCoins(1);
+            GameManager.GetInstance().OnCoinCollected(1);
             
     
         }
@@ -36,18 +36,20 @@ public class Player : MonoBehaviour
         if (collision.name.Contains("ScoreOrb"))
         {
            // Destroy(collision.gameObject);      
-            GameManager.GetInstance().increaseScorePoints(1);
+            GameManager.GetInstance().OnPointCollected(1);
         }
 
         if (collision.CompareTag("Bomb"))
         {
             Destroy(collision.gameObject);
             if (isInvincible) { return; }
-            if(gameManager.getPlayerLives() > 1)
+            if(gameManager.PlayerLifes > 1)
             {
-                gameManager.decreasePlayerLive();
+                gameManager.OnPlayerHit();
                 return;
             }
+
+            gameManager.OnPlayerDied();
             GameMenuManager.GetInstance().SwitchController(GameMenu.GAME_OVER_SCREEN);
         }
 

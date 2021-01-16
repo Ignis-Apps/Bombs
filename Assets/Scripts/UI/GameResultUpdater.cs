@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Assets.Scripts.Game;
 
 public class GameResultUpdater : MonoBehaviour
 {
@@ -13,11 +14,14 @@ public class GameResultUpdater : MonoBehaviour
     [SerializeField] TextMeshProUGUI revivePriceText;
 
     private GameManager gameManager;
+    private GameData gameData;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameManager.GetInstance();
+        gameData = GameData.GetInstance();
+       
     }
 
     private void Update()
@@ -25,15 +29,14 @@ public class GameResultUpdater : MonoBehaviour
         UpdateText();
     }
 
-
     private void UpdateText()
     {
 
-        scoreText.SetText(gameManager.GetPoints().ToString());
-        survivedSecoundsText.SetText(gameManager.getSurvivedSecounds().ToString());
-        survivedWavesText.SetText(gameManager.GetSurvivedWaves().ToString());
+        scoreText.SetText(gameManager.Score.ToString());
+        survivedSecoundsText.SetText(gameManager.SurvivedSecounds.ToString());
+        survivedWavesText.SetText(gameManager.SurvivedWaves.ToString());
 
-        bestScoreText.SetText("Best ?");
+        bestScoreText.SetText("Best " + gameData.HighScore);
         revivePriceText.SetText("50");
 
     }

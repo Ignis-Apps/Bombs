@@ -80,7 +80,7 @@ public class Bomb : MonoBehaviour
 
         if (!collision.gameObject.name.Contains("Player"))
         {
-            GameManager.GetInstance().addDodgedBomb();
+            GameManager.GetInstance().OnBombDodged();
         }
 
         Destroy(gameObject);

@@ -19,7 +19,7 @@ public class Crate : MonoBehaviour
     
     private Animator animator;
     private Rigidbody2D body;
-    private BoxCollider2D collider2D;
+    private BoxCollider2D boxColider;
 
     private bool hasLanded;
     private bool isPlayerNear;
@@ -29,7 +29,7 @@ public class Crate : MonoBehaviour
     {        
         animator   = GetComponent<Animator>();
         body       = GetComponent<Rigidbody2D>();
-        collider2D = GetComponent<BoxCollider2D>();
+        boxColider = GetComponent<BoxCollider2D>();
 
         body.velocity = new Vector2(0, -dropVelocity);
         progressIndicator.SetActive(false);
@@ -89,7 +89,7 @@ public class Crate : MonoBehaviour
         // Ensures that the player can walk into the crate
         if (collision.CompareTag("Ground"))
         {
-            collider2D.isTrigger = true;
+            boxColider.isTrigger = true;
             body.velocity = Vector2.zero;
             body.bodyType = RigidbodyType2D.Static;
         }

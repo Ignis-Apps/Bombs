@@ -5,29 +5,26 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField]
-    private const float aspectRatioThreshold = 9f/16f;
+    [SerializeField] private const float aspectRatioThreshold = 9f/16f;
+    [SerializeField] private float defaultSize;
 
-    [SerializeField]
-    private float defaultSize;
-
-    private Camera camera;
+    private Camera cam;
     private float aspectRatio;
 
     private float originalAspectRatio;
     private float originalOrthograficSize;
     private Vector3 originalCameraPosition;
 
-    void Start()
+    void Awake()
     {
-        camera = GetComponent<Camera>();
+        cam = GetComponent<Camera>();
         
         // Just to keep the editor clean
-        camera.orthographicSize = defaultSize;
+        cam.orthographicSize = defaultSize;
         
-        originalAspectRatio = camera.aspect;
-        originalOrthograficSize = camera.orthographicSize;
-        originalCameraPosition = camera.transform.position;
+        originalAspectRatio = cam.aspect;
+        originalOrthograficSize = cam.orthographicSize;
+        originalCameraPosition = cam.transform.position;
 
         fitCameraToScreen();
     }
@@ -36,7 +33,7 @@ public class CameraManager : MonoBehaviour
     void Update()
     {
         // Only triggers in Unity since i cant change the aspect ratio of a physical deivce
-        if(aspectRatio != camera.aspect)
+        if(aspectRatio != cam.aspect)
         {
             fitCameraToScreen();
         }
@@ -45,19 +42,19 @@ public class CameraManager : MonoBehaviour
     private void fitCameraToScreen()
     {
            
-        aspectRatio = camera.aspect;
+        aspectRatio = cam.aspect;
         
         if (aspectRatio > aspectRatioThreshold) {
 
-            camera.orthographicSize = originalOrthograficSize;
-            camera.transform.position = originalCameraPosition;
+            cam.orthographicSize = originalOrthograficSize;
+            cam.transform.position = originalCameraPosition;
 
             return;
         }
 
-        camera.orthographicSize = (originalOrthograficSize / aspectRatio) * aspectRatioThreshold;
+        cam.orthographicSize = (originalOrthograficSize / aspectRatio) * aspectRatioThreshold;
         Vector3 camPos = originalCameraPosition;
-        camPos.y = camera.orthographicSize - originalOrthograficSize;
-        camera.transform.position = camPos;
+        camPos.y = cam.orthographicSize - originalOrthograficSize;
+        cam.transform.position = camPos;
     }
 }

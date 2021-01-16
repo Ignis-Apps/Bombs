@@ -56,10 +56,9 @@ namespace Assets.Scripts.Game
                 spawnedObject.transform.position = GetSpawnPoint(debugSpawnBombAtPosition);
                 debugSpawnBombAtPosition = -1;                
                 }
-                
             #endif
             // END TEST CODE
-
+            if (gameMenuManager == null || gameManager == null) { return; }
             running = gameMenuManager.CanPlayerMove();
             if (!running || onTimeout) return;
 
@@ -159,6 +158,8 @@ namespace Assets.Scripts.Game
         private void LoadWave(int waveIndex)
         {
 
+            if(gameManager == null) { return; }
+
             if(waveIndex > 0)
             {
                 gameManager.SetCurrentGameMessage(GameUIMessageTypes.WAVE_COMPLETE);
@@ -173,7 +174,7 @@ namespace Assets.Scripts.Game
             waveTimer.SetTargetTime(wave.GetWaveDuration());
             spawnTimer.SetTargetTime(wave.GetSpawnInterval(0f));
 
-            gameManager.setPlayerSpeedMultiplier(wave.GetPlayerSpeedMultiplier());
+            gameManager.PlayerSpeedFactor = wave.GetPlayerSpeedMultiplier();
 
         }
 

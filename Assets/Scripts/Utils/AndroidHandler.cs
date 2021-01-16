@@ -15,10 +15,15 @@ public class AndroidHandler : MonoBehaviour
     {
         if (pause && gameMenuManager.CanPlayerMove())
         {
-            gameMenuManager.SwitchController(GameMenu.PAUSE_SCREEN);
-            previousTimeScale = Time.timeScale;
-            Time.timeScale = 0;
+            Pause();
         }
+    }
+
+    public void Pause()
+    {
+        gameMenuManager.SwitchController(GameMenu.PAUSE_SCREEN);
+        previousTimeScale = Time.timeScale;
+        Time.timeScale = 0;
     }
 
     public void restore()

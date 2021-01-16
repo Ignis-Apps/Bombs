@@ -4,35 +4,26 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    [SerializeField]
-    private float startSpeed;
-    [SerializeField]
-    private float maxSpeed;
-    [SerializeField]
-    private float acceleration;
-
+    [SerializeField] private float startSpeed;
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float acceleration;
 
 
     public float shakeAngle;
+    
     public Rigidbody2D bombBody;
 
     public GameObject explosionPrefab;
     public GameObject scoreOrbPrefab;
     public GameObject coinPrefab;
-
-    private float angularAcceleration = 30f;
+ 
     private float ScorePointDropRate_Percent = 25;
     private float CoinDropRate_Percent = 20;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Animator anim = GetComponent<Animator>();
-        //AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
-        //anim.Play(state.fullPathHash, -1, Random.Range(0f, 1f));
-
-        bombBody.velocity = transform.up * -startSpeed;
-       // bombBody.angularVelocity = angularAcceleration;
+        bombBody.velocity = transform.up * -startSpeed;     
     }
 
     // Update is called once per frame
@@ -40,7 +31,6 @@ public class Rocket : MonoBehaviour
     {
         bombBody.velocity *= 1 + (acceleration * Time.deltaTime);
         bombBody.velocity = -transform.up * bombBody.velocity.magnitude;
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -70,11 +60,10 @@ public class Rocket : MonoBehaviour
 
         if (!collision.gameObject.name.Contains("Player"))
         {
-            GameManager.GetInstance().addDodgedBomb();
+            GameManager.GetInstance().OnBombDodged();
         }
 
-        transform.position = new Vector2(0, -1000);
-        //bombBody.bodyType = RigidbodyType2D.Static;
+        transform.position = new Vector2(0, -1000);        
         Destroy(this.gameObject,0.5f);
     }
 }

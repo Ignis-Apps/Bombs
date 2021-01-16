@@ -17,95 +17,35 @@ public class GameManager : Singleton<GameManager>
     private int collectedCoins;
     private int collectedScorePoints;
     private int remainingLives = 3;
+    
     private float survivedSecounds;
-
     private float daytime =0.1f;
-
     private float playerSpeedMultiplier = 1f;
 
     private int dodgedBombs;
     private int survivedWaves;
 
+    public int CollectedCoins { get => collectedCoins; set { collectedCoins = value; } }
+    public int CollectedPoints { get => collectedScorePoints; set { collectedScorePoints = value; } }
+    public float PlayerSpeedFactor { get => playerSpeedMultiplier; set { playerSpeedMultiplier = value; } }
+    public int SurvivedSecounds { get => (int)survivedSecounds; }
+    public int SurvivedWaves { get => survivedWaves; }
+    public float DayTime { get => daytime; }
+    public int PlayerLifes { get => remainingLives; }
 
+    public int Score { get => (1 + survivedWaves) * (int) survivedSecounds; }
 
     private GameUIMessageTypes currentMessage;
 
-    public int getCollectedCoins()
-    {
-        return collectedCoins;
-    }
+    public void OnCoinCollected(int amount){ collectedCoins += amount; }
+    public void OnPointCollected(int amount){ collectedScorePoints += amount;}
+    public void OnBombDodged(){ dodgedBombs += 1; }
+    public void OnWaveSurvived(){ survivedWaves++; }
+    public void OnPlayerHit() { remainingLives--; }
+    public void OnPlayerDied() { GameData.GetInstance().HighScore = Score; }
+    public void Tick(){ survivedSecounds += Time.deltaTime; }
 
-    public int getCollectedScorePoints()
-    {
-        return collectedScorePoints;
-    }
-
-    public int getSurvivedSecounds()
-    {
-        return (int)survivedSecounds;
-    }
-
-    public void increaseCoins(int value)
-    {
-        collectedCoins += value;
-    }
-
-    public void increaseScorePoints(int value)
-    {
-        collectedScorePoints += value;
-    }
-
-    public void addDodgedBomb()
-    {
-        dodgedBombs += 1;
-    }
-
-    public float getDaytime()
-    {
-        return daytime;
-    }
-
-    public void setPlayerSpeedMultiplier(float multiplier)
-    {
-        playerSpeedMultiplier = multiplier;
-    }
-
-    public float getPlayerSpeedMultiplier()
-    {
-        return playerSpeedMultiplier;
-    }
-
-    public int getPlayerLives()
-    {
-        return remainingLives;
-    }
-
-    public void decreasePlayerLive()
-    {
-        remainingLives--;
-    }
-
-    public void OnWaveSurvived()
-    {
-        survivedWaves++;
-    }
-
-    public int GetSurvivedWaves()
-    {
-        return survivedWaves;
-    }
-
-    public int GetPoints()
-    {
-        return (int)((1+survivedWaves) * survivedSecounds);
-    }
-
-    public void Tick()
-    {
-        survivedSecounds += Time.deltaTime;
-    }
-
-    public void resetStats()
+    public void ResetStats()
     {
         collectedCoins = 0;
         collectedScorePoints = 0;
@@ -120,7 +60,11 @@ public class GameManager : Singleton<GameManager>
         deleteList.AddRange(GameObject.FindGameObjectsWithTag("Coin"));
         deleteList.AddRange(GameObject.FindGameObjectsWithTag("ScoreOrb"));
         deleteList.AddRange(GameObject.FindGameObjectsWithTag("Bomb"));
+        deleteList.AddRange(GameObject.FindGameObjectsWithTag("Crate"));
         foreach (GameObject o in deleteList) { Destroy(o); }
+
+        // Delete ingame message
+        currentMessage = GameUIMessageTypes.NONE;
 
         // Reset player position
         GameObject player = getPlayer();
@@ -139,14 +83,14 @@ public class GameManager : Singleton<GameManager>
         switch (gameEvent)
         {
             case GameEvent.RESET_GAME:
-                resetStats();
+                ResetStats();
                 break;
-
 
             case GameEvent.CHANGE_TIME:
                 daytime += 0.25f;
                 daytime %= 1f;
                 break;
+
             default:
                 break;
         }

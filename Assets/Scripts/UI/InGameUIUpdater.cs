@@ -20,8 +20,8 @@ public class InGameUIUpdater : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CoinText.text = gameManager.getCollectedCoins().ToString();
-        ScoreText.text = gameManager.getCollectedScorePoints().ToString();
-        LiveText.text = gameManager.getPlayerLives().ToString();
+        CoinText.text = gameManager.CollectedCoins.ToString();
+        ScoreText.text = gameManager.CollectedPoints.ToString();
+        LiveText.text = gameManager.PlayerLifes.ToString();
     }
 }

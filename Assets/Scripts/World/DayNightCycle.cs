@@ -32,9 +32,9 @@ public class DayNightCycle : MonoBehaviour
         if (fetchTimeFromGameManager)
         {
             // Throws an error in editor cause the game manager doesnt exist there
-            if(gameManager.getDaytime() != currentTime || forceRedraw)
+            if(gameManager.DayTime != currentTime || forceRedraw)
             {
-                SetGradient(gameManager.getDaytime());               
+                SetGradient(gameManager.DayTime);               
             }
         }
         else

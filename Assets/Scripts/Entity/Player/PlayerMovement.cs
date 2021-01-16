@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private CharacterController2D controller2D;
-    
-    [SerializeField]
-    private Animator animator;
-  
-    [SerializeField]
-    private float playerDefaultSpeed;
+
+    [SerializeField] private Animator animator; 
+    [SerializeField] private float playerDefaultSpeed;
 
     private float playerMovementSpeed;
     private float playerMovementDirection = 0f;
@@ -21,17 +16,23 @@ public class PlayerMovement : MonoBehaviour
     private GameMenuManager gameMenuManager;
     private GameManager gameManager;
 
+    private Rigidbody2D playerBody;
+    private Vector3 m_Velocity = Vector3.zero;
+
+    private bool m_FacingRight = true;
+
     void Start()
     {
         gameMenuManager = GameMenuManager.GetInstance();
         gameManager = GameManager.GetInstance();
+        playerBody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        playerMovementSpeed = gameManager.getPlayerSpeedMultiplier() * playerDefaultSpeed;
+        playerMovementSpeed = gameManager.PlayerSpeedFactor * playerDefaultSpeed;
 
         // FOR PC KEY_BINDING
         if (!Application.isMobilePlatform)
@@ -51,13 +52,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 StopMoving();
             }
-            animator.SetFloat("playerSpeed", Mathf.Abs(playerMovementDirection));
+            animator.SetFloat("playerSpeed", Mathf.Abs(playerBody.velocity.x));
             return;
         }
         // END OF PC BINDING
 
 
-        if (!gameMenuManager.CanPlayerMove() || Input.touchCount <= 0) { return; }
+        if (!gameMenuManager.CanPlayerMove() || Input.touchCount <= 0) { StopMoving(); return; }
         Touch touch = Input.GetTouch(0);
         playerTargetPosition = Camera.main.ScreenToWorldPoint(touch.position);
 
@@ -74,9 +75,8 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
 
-        animator.SetFloat("playerSpeed", Mathf.Abs(playerMovementDirection));
-
-             
+        animator.SetFloat("playerSpeed", Mathf.Abs(playerBody.velocity.x));
+        
     }
 
     private void StartMoving()
@@ -88,7 +88,8 @@ public class PlayerMovement : MonoBehaviour
     {
         playerMovementDirection = 0;
         playerIsMoving = false;
-        controller2D.Move(0, false, false);
+        //controller2D.Move(0, false, false);
+        playerBody.velocity = Vector3.zero;
     }
 
     void FixedUpdate() {
@@ -98,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
         float distanceToTarget = playerTargetPosition.x - transform.position.x;
         float distanceToNextPosition = Mathf.Abs(playerMovementSpeed * Time.fixedDeltaTime);
             
-        float EPSILON = 0.1f;
+        float EPSILON = 0.001f;
 
         if (distanceToTarget > EPSILON)
         {
@@ -119,7 +120,23 @@ public class PlayerMovement : MonoBehaviour
             
         }
 
-        controller2D.Move(playerMovementDirection* distanceToNextPosition, false, false);
+        if (playerMovementDirection > 0 && !m_FacingRight || playerMovementDirection < 0 && m_FacingRight)
+        {
+            Flip();
+        }
 
+        
+        Vector3 targetVelocity = new Vector2(playerMovementDirection*distanceToNextPosition*10, playerBody.velocity.y);
+        
+        playerBody.velocity = Vector3.SmoothDamp(playerBody.velocity, targetVelocity, ref m_Velocity , 0f);
+       // controller2D.Move(playerMovementDirection * distanceToNextPosition, false, false);
+
+    }
+
+    private void Flip()
+    {
+        // Switch the way the player is labelled as facing.
+        m_FacingRight = !m_FacingRight;
+        transform.Rotate(0f, 180f, 0f);
     }
 }

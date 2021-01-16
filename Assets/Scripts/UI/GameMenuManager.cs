@@ -22,11 +22,14 @@ public class GameMenuManager : Singleton<GameMenuManager>
     protected override void Awake()
     {
        
-        gameMenuControllerList = GetComponentsInChildren<GameMenuController>().ToList();
+        gameMenuControllerList = GetComponentsInChildren<GameMenuController>().ToList();       
         gameMenuControllerList.ForEach(controler => controler.gameObject.SetActive(false));
+        gameMenuControllerList.ForEach(controler => controler.gameObject.GetComponent<RectTransform>().position = transform.position);
         SwitchController(initialGameMenu);
         
     }
+
+
 
     public void SwitchController(GameMenu nextGameMenu)
     {
