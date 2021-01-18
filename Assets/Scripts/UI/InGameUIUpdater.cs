@@ -16,7 +16,6 @@ public class InGameUIUpdater : MonoBehaviour
     {
         gameManager = GameManager.GetInstance();
     }
-
     // Update is called once per frame
     void Update()
     {

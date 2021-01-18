@@ -13,7 +13,7 @@ public enum GameEvent
 public class GameManager : Singleton<GameManager>
 {
     public bool IsGameRunning;
-
+    
     private int collectedCoins;
     private int collectedScorePoints;
     private int remainingLives = 3;
@@ -25,6 +25,7 @@ public class GameManager : Singleton<GameManager>
     private int dodgedBombs;
     private int survivedWaves;
 
+    public GameObject Player { get; set; }
     public int CollectedCoins { get => collectedCoins; set { collectedCoins = value; } }
     public int CollectedPoints { get => collectedScorePoints; set { collectedScorePoints = value; } }
     public float PlayerSpeedFactor { get => playerSpeedMultiplier; set { playerSpeedMultiplier = value; } }
@@ -40,9 +41,14 @@ public class GameManager : Singleton<GameManager>
     public void OnCoinCollected(int amount){ collectedCoins += amount; }
     public void OnPointCollected(int amount){ collectedScorePoints += amount;}
     public void OnBombDodged(){ dodgedBombs += 1; }
-    public void OnWaveSurvived(){ survivedWaves++; }
+    public void OnWaveSurvived(){ 
+        survivedWaves++;
+        getPlayer().OnWaveSurvived();
+    }
     public void OnPlayerHit() { remainingLives--; }
-    public void OnPlayerDied() { GameData.GetInstance().HighScore = Score; }
+    public void OnPlayerDied() {
+        Player.SetActive(false);
+        GameData.GetInstance().HighScore = Score; }
     public void Tick(){ survivedSecounds += Time.deltaTime; }
 
     public void ResetStats()
@@ -66,9 +72,9 @@ public class GameManager : Singleton<GameManager>
         // Delete ingame message
         currentMessage = GameUIMessageTypes.NONE;
 
-        // Reset player position
-        GameObject player = getPlayer();
-        player.transform.position = new Vector2(0, player.transform.position.y);
+        // Reset player position        
+        Player.SetActive(true);
+        Player.transform.position = new Vector2(0, Player.transform.position.y);
 
         // Reset waves
         GameObject spawner = GameObject.FindGameObjectWithTag("Spawner");
@@ -96,9 +102,9 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public GameObject getPlayer()
+    public Player getPlayer()
     {
-        return GameObject.FindGameObjectWithTag("Player");
+        return Player.GetComponent<Player>();
     }    
 
     public void SetCurrentGameMessage(GameUIMessageTypes message)

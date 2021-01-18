@@ -5,8 +5,8 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    private bool isInvincible;
+    [SerializeField] private bool isInvincible;
+    [SerializeField] private ParticleSystem particles;
 
     private GameManager gameManager;
 
@@ -14,14 +14,10 @@ public class Player : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.GetInstance();
+        gameManager.Player = gameObject;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-   
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
@@ -56,6 +52,11 @@ public class Player : MonoBehaviour
         Debug.Log(collision.name);
        
       
+    }
+
+    public void OnWaveSurvived()
+    {
+        particles.Play();
     }
 
 

@@ -23,7 +23,7 @@ public class PlayerTarget : MonoBehaviour
     void Start()
     {
         lineRenderer = laser.GetComponent<LineRenderer>();
-        player = GameManager.GetInstance().getPlayer();
+        player = GameManager.GetInstance().Player;
     }
 
     // Update is called once per frame

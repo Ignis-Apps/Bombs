@@ -16,8 +16,12 @@ public class GameResultUpdater : MonoBehaviour
     private GameManager gameManager;
     private GameData gameData;
 
-    // Start is called before the first frame update
-    void Start()
+    private float scoreCountUpTime = .5f;
+    private float scoreCountUpTimeProgress;
+
+    private int targetScoreText;
+
+    void Awake()
     {
         gameManager = GameManager.GetInstance();
         gameData = GameData.GetInstance();
@@ -26,13 +30,29 @@ public class GameResultUpdater : MonoBehaviour
 
     private void Update()
     {
+       if(scoreCountUpTimeProgress >= scoreCountUpTime) { return; }
+
+        scoreCountUpTimeProgress += Time.unscaledDeltaTime;
+        scoreCountUpTimeProgress = Mathf.Min(scoreCountUpTimeProgress, scoreCountUpTime);
         UpdateText();
+
     }
+
+    private void OnEnable()
+    {
+        //scoreCountUpTimeProgress = scoreCountUpTime;
+        targetScoreText = gameManager.Score;
+        scoreCountUpTimeProgress = 0;
+        //UpdateText();
+    }
+
 
     private void UpdateText()
     {
 
-        scoreText.SetText(gameManager.Score.ToString());
+        int score = (int)(scoreCountUpTimeProgress / scoreCountUpTime * targetScoreText);
+
+        scoreText.SetText(score.ToString());
         survivedSecoundsText.SetText(gameManager.SurvivedSecounds.ToString());
         survivedWavesText.SetText(gameManager.SurvivedWaves.ToString());
 

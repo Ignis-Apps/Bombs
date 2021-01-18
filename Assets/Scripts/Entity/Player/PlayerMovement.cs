@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -57,6 +58,10 @@ public class PlayerMovement : MonoBehaviour
         }
         // END OF PC BINDING
 
+        if (EventSystem.current.IsPointerOverGameObject() || EventSystem.current.currentSelectedGameObject != null)
+        {
+            return;
+        }
 
         if (!gameMenuManager.CanPlayerMove() || Input.touchCount <= 0) { StopMoving(); return; }
         Touch touch = Input.GetTouch(0);
