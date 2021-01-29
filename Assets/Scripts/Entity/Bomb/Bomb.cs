@@ -1,82 +1,65 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
+
     [SerializeField] private float startSpeed;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float acceleration;
-
-   
-    public float shakeAngle;
-    public Rigidbody2D bombBody;
-
-    public GameObject explosionPrefab;
-    public GameObject scoreOrbPrefab;
-    public GameObject coinPrefab;
-
+    [SerializeField] private float shakeAngle;
+    
+    [SerializeField] private LootTableSettings lootTableSettings;
+    
+    [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private GameObject scoreOrbPrefab;
+    [SerializeField] private GameObject coinPrefab;
+    
+    private Rigidbody2D bombRigidBody;
     private float angularAcceleration = 30f;
 
-    private float ScorePointDropRate_Percent = 25;
-    private float CoinDropRate_Percent = 15;
-
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        Animator anim = GetComponent<Animator>();
-        AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
-        anim.Play(state.fullPathHash, -1, Random.Range(0f, 1f));
+        bombRigidBody = GetComponent<Rigidbody2D>();
 
-        bombBody.velocity = transform.up * - startSpeed;
-        bombBody.angularVelocity = angularAcceleration;
+        Animator animationControlelr = GetComponent<Animator>();
+        AnimatorStateInfo currentState = animationControlelr.GetCurrentAnimatorStateInfo(0);
+        animationControlelr.Play(currentState.fullPathHash, -1, Random.Range(0f, 1f));
+
+        GameManager gameManager = GameManager.GetInstance();
+        
+        float waveStartSpeed = gameManager.CurrentWave.GetDefaultBombInitialSpeed(gameManager.CurrentWaveProgress);
+
+        bombRigidBody.velocity = transform.up * - waveStartSpeed;
+        bombRigidBody.angularVelocity = angularAcceleration;
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
-
-     
-        if(bombBody.rotation >= shakeAngle)
+  
+        if(bombRigidBody.rotation >= shakeAngle)
         {
-            bombBody.angularVelocity = -angularAcceleration;
+            bombRigidBody.angularVelocity = -angularAcceleration;
         }
-        if(bombBody.rotation <= -shakeAngle)
+        if(bombRigidBody.rotation <= -shakeAngle)
         {
-            bombBody.angularVelocity = +angularAcceleration;
+            bombRigidBody.angularVelocity = +angularAcceleration;
         }
-
-
-        if(bombBody.velocity.y < -maxSpeed)
+        if(bombRigidBody.velocity.y < -maxSpeed) 
         {
-            bombBody.velocity = new Vector2(0,bombBody.velocity.y - acceleration);
+            bombRigidBody.velocity = new Vector2(0,bombRigidBody.velocity.y - acceleration);
         }
 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Instantiate(explosionPrefab, bombBody.transform.position, bombBody.transform.rotation);
-        
-        if(Random.Range(0,100) < ScorePointDropRate_Percent)
-        {
-            
-            for (int i = Random.Range(1,5); i>0; i--)
-            {
-                Instantiate(scoreOrbPrefab, bombBody.transform.position, bombBody.transform.rotation);
-            }
-            
-        }
+        Instantiate(explosionPrefab, bombRigidBody.transform.position, bombRigidBody.transform.rotation);
 
-        if (Random.Range(0, 100) < CoinDropRate_Percent)
-        {
-
-            for (int i = Random.Range(1, 3); i > 0; i--)
-            {
-                Instantiate(coinPrefab, bombBody.transform.position, bombBody.transform.rotation);
-            }
-
-        }
+        SpawnPrefabs(coinPrefab, lootTableSettings.GetRandomCoinAmount());
+        SpawnPrefabs(scoreOrbPrefab, lootTableSettings.GetRandomScoreAmount());
+        SpawnPrefabs(coinPrefab, lootTableSettings.GetRandomSpecialCoinAmount());
 
         if (!collision.gameObject.name.Contains("Player"))
         {
@@ -84,5 +67,13 @@ public class Bomb : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    private void SpawnPrefabs(GameObject prefab, int amount)
+    {
+        for(int i=0; i<amount; i++)
+        {
+            Instantiate(prefab, bombRigidBody.transform.position, bombRigidBody.transform.rotation);
+        }
     }
 }

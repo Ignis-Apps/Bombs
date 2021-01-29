@@ -4948,6 +4948,7 @@ GameObject:
   - component: {fileID: 734721428404244095}
   - component: {fileID: 5031220203544326144}
   - component: {fileID: 1897785822213981259}
+  - component: {fileID: -7982438943064246857}
   m_Layer: 13
   m_Name: Homing Rocket
   m_TagString: Bomb
@@ -5010,7 +5011,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 36558a0f4a9cf0d498fa70517d0d3645, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5085,13 +5086,13 @@ MonoBehaviour:
   maxSpeed: 15
   acceleration: 0.3
   shakeAngle: 2
-  bombBody: {fileID: 3100298996894366143}
   explosionPrefab: {fileID: 3811380740657919097, guid: 06f3c3d68fb388a4f9919602eab20244,
     type: 3}
   scoreOrbPrefab: {fileID: 8059208126762768387, guid: fffc950aaba18354589060c017218a24,
     type: 3}
   coinPrefab: {fileID: 6376339539627395642, guid: 02962b1e87578474aac123ac6648ca72,
     type: 3}
+  lootTableSettings: {fileID: 11400000, guid: 6124c79d54ce42243aa8455ccb8072b7, type: 2}
 --- !u!114 &5031220203544326144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5126,3 +5127,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-7982438943064246857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5198068931683851065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 096ad66f37cb0c54d998c134bdb3102c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startSpeed: 2
+  maxSpeed: 15
+  acceleration: 0.3
+  shakeAngle: 2
+  explosionPrefab: {fileID: 3811380740657919097, guid: 06f3c3d68fb388a4f9919602eab20244,
+    type: 3}
+  scoreOrbPrefab: {fileID: 8059208126762768387, guid: fffc950aaba18354589060c017218a24,
+    type: 3}
+  coinPrefab: {fileID: 6376339539627395642, guid: 02962b1e87578474aac123ac6648ca72,
+    type: 3}
+  lootTableSettings: {fileID: 11400000, guid: 6124c79d54ce42243aa8455ccb8072b7, type: 2}

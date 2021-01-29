@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5347834380977207295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.766, y: 3.337, z: -0.79839724}
+  m_LocalPosition: {x: -0.389, y: 4.638, z: -0.79839724}
   m_LocalScale: {x: 0.29690152, y: 0.29690152, z: 0.29690152}
   m_Children: []
   m_Father: {fileID: 0}
@@ -143,7 +143,7 @@ MonoBehaviour:
   maxSpeed: 15
   acceleration: 0.1
   shakeAngle: 7
-  bombBody: {fileID: 5347834380977207288}
+  lootTableSettings: {fileID: 11400000, guid: f48cc93f1dd60fd4289ccce82689ff88, type: 2}
   explosionPrefab: {fileID: 3811380740657919097, guid: 06f3c3d68fb388a4f9919602eab20244,
     type: 3}
   scoreOrbPrefab: {fileID: 8059208126762768387, guid: fffc950aaba18354589060c017218a24,

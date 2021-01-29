@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Game
 {
@@ -14,9 +15,22 @@ namespace Assets.Scripts.Game
         public int HighScore { get => highScore; set { if (value > highScore) { highScore = value; } } }
         public int CoinBalance { get => coinBalance; set { coinBalance = value; } }
         
+         /*
+            Load/Save - Sollte man anderst machen aber im Moment reicht es.            
+         */
 
-        public void LoadData() { }
-        public void SaveData() { }
+        public void LoadData() {
+
+            highScore = PlayerPrefs.GetInt("highScore");
+            coinBalance = PlayerPrefs.GetInt("coinBalance");
+        
+        }
+        public void SaveData() {
+
+            PlayerPrefs.SetInt("highScore", highScore);
+            PlayerPrefs.SetInt("coinBalance", coinBalance);
+
+        }
 
     }
 }

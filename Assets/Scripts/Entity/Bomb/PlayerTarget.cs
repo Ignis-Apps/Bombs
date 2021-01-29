@@ -3,17 +3,11 @@ using UnityEngine;
 public class PlayerTarget : MonoBehaviour
 {
 
+    [SerializeField] private GameObject laser;
+    [SerializeField] private bool showLaser;
+    [SerializeField] private float rotationSpeed;
+
     private GameObject player;
-
-    [SerializeField]
-    private GameObject laser;
-
-    [SerializeField]
-    private bool showLaser;
-
-    [SerializeField]
-    private float rotationSpeed;
-
     private LineRenderer lineRenderer;
     private Vector3 startPosition;
     private Vector3 endPosition;

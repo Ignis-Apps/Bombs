@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scriptable;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace Assets.Scripts.Game
@@ -15,10 +16,10 @@ namespace Assets.Scripts.Game
 
         private Vector3[] spawnPoints;
 
-        private GameMenuManager gameMenuManager;
+        private GameStateManager gameMenuManager;
         private GameManager gameManager;
 
-        [SerializeField] private GameWave[] gameWaves;
+        [SerializeField] private GameWaveSettings gameWaveSettings;
         
         private GameWave currentWave;
         private int currentWaveIndex;
@@ -34,9 +35,9 @@ namespace Assets.Scripts.Game
         [SerializeField] private GameObject smallBomb;
         [SerializeField] private GameObject crate;
 
-        public void Start()
-        {
-            gameMenuManager = GameMenuManager.GetInstance();
+        public void Awake()
+        {   
+            gameMenuManager = GameStateManager.GetInstance();
             gameManager = GameManager.GetInstance();
 
             waveTimer = new GameTimer();
@@ -47,7 +48,6 @@ namespace Assets.Scripts.Game
 
         public void Update()
         {
-
             // START TEST CODE
             #if UNITY_EDITOR
                 if (debugSpawnBombAtPosition >= 0)
@@ -58,23 +58,25 @@ namespace Assets.Scripts.Game
                 }
             #endif
             // END TEST CODE
+
             if (gameMenuManager == null || gameManager == null) { return; }
             running = gameMenuManager.CanPlayerMove();
             if (!running || onTimeout) return;
 
             waveTimer.Tick(Time.deltaTime);
             spawnTimer.Tick(Time.deltaTime);
+            gameManager.CurrentWaveProgress = waveTimer.getProgress();
 
             // Load next wave
             if (waveTimer.IsDone() || waveTimer.GetRemainingTime() < spawnTimer.GetRemainingTime())
             {
-                int nextWave = Mathf.Min(currentWaveIndex + 1, gameWaves.Length - 1);
+                int nextWave = Mathf.Min(currentWaveIndex + 1, gameWaveSettings.waves.Length - 1);
                 StartCoroutine(LoadWaveDelayed(2f,nextWave));
                 if (currentWave.SpawnCrateAtEnd())
                 {
                     SpawnCrate();
                 }
-                gameManager.OnWaveSurvived();
+                
                 return;
             }
 
@@ -82,7 +84,7 @@ namespace Assets.Scripts.Game
             if (spawnTimer.IsDone())
             {
                 // Decrease spawn time
-                spawnTimer.SetTargetTime(gameWaves[currentWaveIndex].GetSpawnInterval(waveTimer.getProgress()));                
+                spawnTimer.SetTargetTime(gameWaveSettings.waves[currentWaveIndex].GetSpawnInterval(waveTimer.getProgress()));                
                 SpawnBombs();
                 spawnTimer.Reset();
                 Debug.Log("SPAWNING !!!");
@@ -97,6 +99,7 @@ namespace Assets.Scripts.Game
         {
             onTimeout = true;
             yield return new WaitForSeconds(1.5f);            
+            gameManager.OnWaveSurvived();
             LoadWave(wave);
             yield return new WaitForSeconds(4f);
             onTimeout = false;
@@ -166,9 +169,12 @@ namespace Assets.Scripts.Game
             }
 
             Debug.Log("LOADING NEXT WAVE");
-            GameWave wave = gameWaves[waveIndex];
+            GameWave wave = gameWaveSettings.waves[waveIndex];
             currentWaveIndex = waveIndex;
             currentWave = wave;
+            
+            gameManager.CurrentWave = wave;
+            
             ResetTimers();
 
             waveTimer.SetTargetTime(wave.GetWaveDuration());

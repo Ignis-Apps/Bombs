@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private bool playerIsMoving;
     private Vector2 playerTargetPosition;
 
-    private GameMenuManager gameMenuManager;
+    private GameStateManager gameMenuManager;
     private GameManager gameManager;
 
     private Rigidbody2D playerBody;
@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        gameMenuManager = GameMenuManager.GetInstance();
+        gameMenuManager = GameStateManager.GetInstance();
         gameManager = GameManager.GetInstance();
         playerBody = GetComponent<Rigidbody2D>();
     }

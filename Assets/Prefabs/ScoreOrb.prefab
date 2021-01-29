@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1820345373780418126}
   - component: {fileID: 2385120703234416651}
   - component: {fileID: 5033526069261769039}
+  - component: {fileID: -1602691256942200348}
   m_Layer: 16
   m_Name: ScoreOrb
   m_TagString: ScoreOrb
@@ -118,13 +119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 8059208126762768386}
-  maxLifeTime: 5
   HoverAmplitude: 0.05
   HoverFrequency: 2.5
-  initialMovementAngleMin: 60
-  initialMovementAngleMax: 120
-  initialMovementSpeedMin: 2
-  initialMovementSpeedMax: 3
 --- !u!50 &8059208126762768386
 Rigidbody2D:
   serializedVersion: 4
@@ -203,3 +199,17 @@ MonoBehaviour:
   initialMovementAngleMax: 120
   initialMovementSpeedMin: 2
   initialMovementSpeedMax: 3
+--- !u!114 &-1602691256942200348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059208126762768387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a58104ec3a89dbb48806354a72cd31f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 5
+  useUnscaledTime: 0

@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Game;
+﻿using Assets.Scriptable;
+using Assets.Scripts.Game;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,9 @@ public class GameManager : Singleton<GameManager>
     private int dodgedBombs;
     private int survivedWaves;
 
+    public GameWave CurrentWave;
+    public float CurrentWaveProgress;
+
     public GameObject Player { get; set; }
     public int CollectedCoins { get => collectedCoins; set { collectedCoins = value; } }
     public int CollectedPoints { get => collectedScorePoints; set { collectedScorePoints = value; } }
@@ -47,6 +51,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void OnPlayerHit() { remainingLives--; }
     public void OnPlayerDied() {
+        GameStateManager.GetInstance().SwitchController(GameMenu.GAME_OVER_SCREEN);
         Player.SetActive(false);
         GameData.GetInstance().HighScore = Score; }
     public void Tick(){ survivedSecounds += Time.deltaTime; }
@@ -89,6 +94,7 @@ public class GameManager : Singleton<GameManager>
         switch (gameEvent)
         {
             case GameEvent.RESET_GAME:
+                GameData.GetInstance().SaveData();
                 ResetStats();
                 break;
 

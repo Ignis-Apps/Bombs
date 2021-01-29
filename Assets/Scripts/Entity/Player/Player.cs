@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     {
         gameManager = GameManager.GetInstance();
         gameManager.Player = gameObject;
+                
     }
 
     // Update is called once per frame
@@ -44,9 +45,8 @@ public class Player : MonoBehaviour
                 gameManager.OnPlayerHit();
                 return;
             }
-
+            
             gameManager.OnPlayerDied();
-            GameMenuManager.GetInstance().SwitchController(GameMenu.GAME_OVER_SCREEN);
         }
 
         Debug.Log(collision.name);

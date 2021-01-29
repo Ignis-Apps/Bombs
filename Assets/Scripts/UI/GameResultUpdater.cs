@@ -1,12 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Assets.Scripts.Game;
 
 public class GameResultUpdater : MonoBehaviour
 {
-
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI bestScoreText;
     [SerializeField] TextMeshProUGUI survivedSecoundsText;
@@ -15,49 +13,63 @@ public class GameResultUpdater : MonoBehaviour
 
     private GameManager gameManager;
     private GameData gameData;
-
-    private float scoreCountUpTime = .5f;
-    private float scoreCountUpTimeProgress;
-
-    private int targetScoreText;
+    private Animator animator;
 
     void Awake()
     {
         gameManager = GameManager.GetInstance();
         gameData = GameData.GetInstance();
-       
-    }
-
-    private void Update()
-    {
-       if(scoreCountUpTimeProgress >= scoreCountUpTime) { return; }
-
-        scoreCountUpTimeProgress += Time.unscaledDeltaTime;
-        scoreCountUpTimeProgress = Mathf.Min(scoreCountUpTimeProgress, scoreCountUpTime);
-        UpdateText();
-
+        animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
     {
-        //scoreCountUpTimeProgress = scoreCountUpTime;
-        targetScoreText = gameManager.Score;
-        scoreCountUpTimeProgress = 0;
-        //UpdateText();
+        StartCoroutine(AnimateUI());
+        bestScoreText.SetText("Best " + gameData.HighScore);
+        revivePriceText.SetText("50");
     }
 
 
-    private void UpdateText()
+    private void Reset()
     {
+        scoreText.SetText("?");
+        survivedWavesText.SetText("?");
+        survivedSecoundsText.SetText("???");
+    }
 
-        int score = (int)(scoreCountUpTimeProgress / scoreCountUpTime * targetScoreText);
+    private IEnumerator AnimateUI()
+    {
+        Reset();
+        animator.Play("Transition_In");
 
-        scoreText.SetText(score.ToString());
-        survivedSecoundsText.SetText(gameManager.SurvivedSecounds.ToString());
-        survivedWavesText.SetText(gameManager.SurvivedWaves.ToString());
+        yield return new WaitForSeconds(.7f);
 
-        bestScoreText.SetText("Best " + gameData.HighScore);
-        revivePriceText.SetText("50");
+        // Sequenziell
+        StartCoroutine(AnimateText(survivedSecoundsText, 0f, .25f, "", 0, gameManager.SurvivedSecounds));
+        yield return new WaitForSeconds(.5f);
+        StartCoroutine(AnimateText(survivedWavesText, 0f, .5f, "", 0, gameManager.SurvivedWaves));
+        yield return new WaitForSeconds(.5f);
+        StartCoroutine(AnimateText(scoreText, 0f, .5f, "", 0, gameManager.Score));
+    }
+
+    private IEnumerator AnimateText(TextMeshProUGUI target, float startDelay, float duration,string prefix, int startValue, int endValue)
+    {   
+        yield return new WaitForSeconds(startDelay);
+
+        float elapsedTime = 0f;
+        int animatedRange = endValue - startValue;
+
+        while(elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            elapsedTime = Mathf.Min(duration, elapsedTime);
+
+            float progress = elapsedTime / duration;
+            int value = (int) (progress * animatedRange + startValue);
+            
+            target.SetText(prefix + value.ToString());
+            yield return null;
+        }
 
     }
 }

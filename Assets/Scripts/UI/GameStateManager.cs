@@ -1,0 +1,54 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
+using Assets.Scripts.Game;
+
+public enum GameMenu
+{
+    TITLE_SCREEN,
+    INGAME_OVERLAY,
+    PAUSE_SCREEN,
+    GAME_OVER_SCREEN
+};
+public class GameStateManager : Singleton<GameStateManager>
+{
+    public GameMenu initialGameMenu;
+
+    private List<GameMenuController> gameMenuControllerList;
+    private GameMenuController currentActiveController;
+   
+
+    protected override void Awake()
+    {
+       
+        gameMenuControllerList = GetComponentsInChildren<GameMenuController>().ToList();       
+        gameMenuControllerList.ForEach(controler => controler.gameObject.SetActive(false));        
+        gameMenuControllerList.ForEach(controler => controler.gameObject.GetComponent<RectTransform>().position = transform.position);        
+        SwitchController(initialGameMenu);
+        
+    }
+
+    public void SwitchController(GameMenu nextGameMenu)
+    {
+        if(currentActiveController != null)
+        {
+            currentActiveController.gameObject.SetActive(false);
+        }
+
+        GameMenuController nextController = gameMenuControllerList.Find(controller => controller.menuType == nextGameMenu);
+        if(nextController == null)
+        {
+            return;
+        }
+
+        nextController.gameObject.SetActive(true);
+        currentActiveController = nextController;
+        
+    }
+
+    public bool CanPlayerMove()
+    {
+        return currentActiveController.allowPlayerMovement;
+    }
+}

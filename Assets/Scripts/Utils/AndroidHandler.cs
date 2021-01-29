@@ -1,14 +1,20 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Game;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AndroidHandler : MonoBehaviour
 {
-    private GameMenuManager gameMenuManager;
+    private GameStateManager gameMenuManager;
+    private GameData gameData;
     private float previousTimeScale = 1f;
     void Start()
     {
-        gameMenuManager = GameMenuManager.GetInstance();
+        gameMenuManager = GameStateManager.GetInstance();
+        gameData = GameData.GetInstance();
+        
+        gameData.LoadData();    // Passt bisher nirgends richtig hin
+        Application.targetFrameRate = 300;
     }
 
     private void OnApplicationPause(bool pause)
@@ -16,6 +22,7 @@ public class AndroidHandler : MonoBehaviour
         if (pause && gameMenuManager.CanPlayerMove())
         {
             Pause();
+            gameData.SaveData();
         }
     }
 

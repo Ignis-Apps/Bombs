@@ -7,17 +7,17 @@ using UnityEngine.UI;
 public class GameMenuSwitcher : MonoBehaviour
 {
     public GameMenu targetMenu;
-    private GameMenuManager menuManager;
+    private GameStateManager stateManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        menuManager = GameMenuManager.GetInstance();
+        stateManager = GameStateManager.GetInstance();
         GetComponent<Button>().onClick.AddListener(OnButtonPressed);
     }
 
     void OnButtonPressed()
     {
-        menuManager.SwitchController(targetMenu);
+        stateManager.SwitchController(targetMenu);
     }
 }
