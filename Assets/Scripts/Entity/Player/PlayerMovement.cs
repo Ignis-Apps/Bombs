@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         playerMovementSpeed = gameManager.PlayerSpeedFactor * playerDefaultSpeed;
 
         // FOR PC KEY_BINDING
@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
                 playerTargetPosition = new Vector2(1000, 0);
                 StartMoving();
             }
+
             else
             {
                 StopMoving();
