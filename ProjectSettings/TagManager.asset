@@ -22,7 +22,7 @@ TagManager:
   - 
   - Projectile
   - World
-  - 
+  - World/Border
   - Player
   - Bombs
   - Explosion

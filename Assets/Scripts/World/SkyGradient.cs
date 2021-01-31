@@ -9,11 +9,16 @@ public class SkyGradient : MonoBehaviour
 {
 
     public Gradient gradient = null;
-    
+            
+    public bool overrideAlpha;
+    [Range(0,1)] public float forcedAlphaValue;
+
     [HideInInspector][SerializeField]
     private MeshFilter meshFilter;
-    [HideInInspector] [SerializeField]
+    [HideInInspector][SerializeField]
     private Gradient currentGradient = null;
+    [HideInInspector][SerializeField]
+    private float currentForcedAlphaValue;
 
     private void Reset()
     {
@@ -26,6 +31,13 @@ public class SkyGradient : MonoBehaviour
 
     private void Update()
     {
+        
+        if(overrideAlpha && currentForcedAlphaValue != forcedAlphaValue)
+        {
+            meshFilter.sharedMesh = CreateMesh();
+            return;
+        }
+        
         if(gradient.colorKeys.Length != currentGradient.alphaKeys.Length)
         {
             meshFilter.sharedMesh = CreateMesh();
@@ -85,7 +97,16 @@ public class SkyGradient : MonoBehaviour
             uvs[i * 2 + 1 ] = new Vector3(0, gradient.colorKeys[i].time);
 
             color[i * 2]        = gradient.colorKeys[i].color;
-            color[i * 2+ 1 ]    = gradient.colorKeys[i].color;
+            color[i * 2].a      = gradient.Evaluate(gradient.colorKeys[i].time).a;
+            
+            color[i * 2 + 1 ]    = gradient.colorKeys[i].color;
+            color[i * 2 + 1].a   = gradient.Evaluate(gradient.colorKeys[i].time).a;           
+        }
+
+        if (overrideAlpha)
+        {
+            for(int i=0; i< color.Length; i++) { color[i].a = forcedAlphaValue; }
+            currentForcedAlphaValue = forcedAlphaValue;
         }
 
         mesh.vertices = vertecies;
@@ -138,7 +159,7 @@ public class SkyGradient : MonoBehaviour
 
     void CreateMeshRenderer()
     {
-        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();        
         Material material = new Material(Shader.Find("Unlit/SimpleVertexShader"));
         meshRenderer.allowOcclusionWhenDynamic = false;
         meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
@@ -146,6 +167,7 @@ public class SkyGradient : MonoBehaviour
         meshRenderer.lightProbeUsage = UnityEngine.Rendering.LightProbeUsage.Off;
         meshRenderer.reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.Off;
         meshRenderer.sharedMaterial = material;
+        
     }
 
 }

@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 public class PlayerMovement : MonoBehaviour
 {
 
-    [SerializeField] private Animator animator; 
+    [SerializeField] private Animator animator;
+    [SerializeField] private GameObject sprite;
     [SerializeField] private float playerDefaultSpeed;
 
     private float playerMovementSpeed;
@@ -143,6 +144,6 @@ public class PlayerMovement : MonoBehaviour
     {
         // Switch the way the player is labelled as facing.
         m_FacingRight = !m_FacingRight;
-        transform.Rotate(0f, 180f, 0f);
+        sprite.transform.Rotate(0f, 180f, 0f);
     }
 }

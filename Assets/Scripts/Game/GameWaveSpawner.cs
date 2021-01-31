@@ -7,19 +7,25 @@ namespace Assets.Scripts.Game
     [ExecuteInEditMode]
     public class GameWaveSpawner : MonoBehaviour
     {
+        [Header("Spawn Field Settings")]
         [SerializeField] private float spawnFieldWidth;
         [SerializeField] private int spawnColums;
-        [SerializeField] private float spawnRowOffset;
+        [SerializeField] private float spawnRowOffset;      
         [SerializeField] private float screenEdgeMargin;
         [SerializeField] private float verticalSpawnSalt;
+
+        [Header("Dev/Test Settings")]
         [SerializeField] private int debugSpawnBombAtPosition;
+        [SerializeField] private bool repeatWave;
+
+        [Header("Spawn Wave Settings")]
+        [SerializeField] private GameWaveSettings gameWaveSettings;
 
         private Vector3[] spawnPoints;
 
-        private GameStateManager gameMenuManager;
-        private GameManager gameManager;
+        private GameStateManager gameMenuManager = null;
+        private GameManager gameManager = null;
 
-        [SerializeField] private GameWaveSettings gameWaveSettings;
         
         private GameWave currentWave;
         private int currentWaveIndex;
@@ -29,7 +35,8 @@ namespace Assets.Scripts.Game
         private GameTimer waveTimer;
         private GameTimer spawnTimer;
 
-        // Spawnable game objects
+        
+        [Header("Spawnable Gameobjects")]
         [SerializeField] private GameObject defaultBomb;
         [SerializeField] private GameObject homingRocket;
         [SerializeField] private GameObject smallBomb;
@@ -71,6 +78,9 @@ namespace Assets.Scripts.Game
             if (waveTimer.IsDone() || waveTimer.GetRemainingTime() < spawnTimer.GetRemainingTime())
             {
                 int nextWave = Mathf.Min(currentWaveIndex + 1, gameWaveSettings.waves.Length - 1);
+
+                if (repeatWave){ nextWave = currentWaveIndex;}
+
                 StartCoroutine(LoadWaveDelayed(2f,nextWave));
                 if (currentWave.SpawnCrateAtEnd())
                 {
@@ -87,7 +97,7 @@ namespace Assets.Scripts.Game
                 spawnTimer.SetTargetTime(gameWaveSettings.waves[currentWaveIndex].GetSpawnInterval(waveTimer.getProgress()));                
                 SpawnBombs();
                 spawnTimer.Reset();
-                Debug.Log("SPAWNING !!!");
+                
             }
 
             // Timer
