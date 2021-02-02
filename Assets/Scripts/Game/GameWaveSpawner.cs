@@ -72,6 +72,7 @@ namespace Assets.Scripts.Game
 
             waveTimer.Tick(Time.deltaTime);
             spawnTimer.Tick(Time.deltaTime);
+            
             gameManager.CurrentWaveProgress = waveTimer.getProgress();
 
             // Load next wave

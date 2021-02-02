@@ -32,21 +32,26 @@ public class JoyStickBase : MonoBehaviour
     private bool readInput;
 
     private List<SpriteRenderer> spriteRenderers;
+
+    private GameStateManager gameStateManager;
     
     
     private void Awake()
     {
+        gameStateManager = GameStateManager.GetInstance();
+        
         baseRadius = transform.lossyScale.x / 2f;
         handleRadius = handle.transform.lossyScale.x / 2f;
         handleSize = transform.localScale.x / 2f;
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList();
+        
         SetVisibility(false);
     }
 
     public void Update()
     {
       
-        if (Input.GetMouseButtonDown(0)) { OnTouchDown(); }
+        if (Input.GetMouseButtonDown(0) && gameStateManager.CanPlayerMove()) { OnTouchDown(); }
 
         if (!readInput) { return; }
 
