@@ -1,13 +1,15 @@
+using Assets.Scripts.Control;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementController : MonoBehaviour
+public class MovementController : MonoBehaviour 
 {
     [SerializeField] private float baseMovementSpeed;
     [SerializeField] private float breakDamping;
     [SerializeField] private float accelerationDamping;
 
+    private ControllerState controllerState;
     private GameManager gameManager;
     private Rigidbody2D body;
     private Animator animator;
@@ -39,11 +41,16 @@ public class MovementController : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         gameManager = GameManager.GetInstance();
+        controllerState = ControllerState.GetInstance();       
     
     }
     public void Update()
     {
-
+        if(controllerState.currentMode == ControllerMode.PLAYER)
+        {
+            Move(new Vector2(controllerState.stickPositionX, controllerState.stickPositionY));
+        }
+        
         totalMovementSpeed = baseMovementSpeed * gameManager.PlayerSpeedFactor;
         
         animator.SetFloat("playerSpeed", virtualVelocity);        
@@ -120,5 +127,10 @@ public class MovementController : MonoBehaviour
         // Switch the way the player is labelled as facing.
         facingRight = !facingRight;
         transform.Rotate(0f, 180f, 0f);
+    }
+
+    public void onStickInput(float x, float y)
+    {
+        
     }
 }

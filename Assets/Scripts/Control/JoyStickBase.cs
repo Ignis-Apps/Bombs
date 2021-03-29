@@ -1,3 +1,4 @@
+using Assets.Scripts.Control;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,11 +35,13 @@ public class JoyStickBase : MonoBehaviour
     private List<SpriteRenderer> spriteRenderers;
 
     private GameStateManager gameStateManager;
+    private ControllerState controllerState;
     
     
     private void Awake()
     {
         gameStateManager = GameStateManager.GetInstance();
+        controllerState = ControllerState.GetInstance();
         
         baseRadius = transform.lossyScale.x / 2f;
         handleRadius = handle.transform.lossyScale.x / 2f;
@@ -57,6 +60,12 @@ public class JoyStickBase : MonoBehaviour
 
         if (Input.GetMouseButton(0)) { OnTouchMove(); }
         else { OnTouchUp(); }
+
+        controllerState.stickPositionX = GetHorizontal();
+        controllerState.stickPositionY = GetVertical();
+        
+        controllerState.stickPositionXRaw = horizontal;
+        controllerState.stickPositionYRaw = vertical;
 
     }
 
@@ -85,7 +94,7 @@ public class JoyStickBase : MonoBehaviour
         
         Vector2 handleDirectionNom = handleDirection.normalized;
         horizontal = handleDirection.x * (1/baseRadius);
-        vertical = handleDirection.y*(1/baseRadius) ;
+        vertical = handleDirection.y * (1/baseRadius) ;
         
         //handle.position = transform.position + (Vector3) (handleDirection * handleSize * handleScale);
         handle.position = transform.position + (Vector3) (handleDirection * maxHandlePosition);
@@ -120,6 +129,11 @@ public class JoyStickBase : MonoBehaviour
 
     public float GetVertical()
     {
-        return Mathf.Abs(vertical) <= threshold ||disableVerticalOutput ? 0 : vertical;
+        if (disableVerticalOutput)
+        {
+            return 0;
+        }
+
+        return ( Mathf.Abs(vertical) >= threshold ) ? vertical : 0;
     }
 }
