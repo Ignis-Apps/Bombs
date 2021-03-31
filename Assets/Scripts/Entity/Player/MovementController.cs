@@ -50,6 +50,10 @@ public class MovementController : MonoBehaviour
         {
             Move(new Vector2(controllerState.stickPositionX, controllerState.stickPositionY));
         }
+        else
+        {
+            Move(Vector2.zero);
+        }
         
         totalMovementSpeed = baseMovementSpeed * gameManager.PlayerSpeedFactor;
         
@@ -129,8 +133,4 @@ public class MovementController : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
-    public void onStickInput(float x, float y)
-    {
-        
-    }
 }

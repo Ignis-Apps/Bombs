@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5652639920555461985}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Pipe_Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3106101370027864719}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Pipe_Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3442239890365627431}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.171, z: 0}
+  m_LocalPosition: {x: 0, y: -0.377, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1319387345894136139}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1319387345894136139}
   - component: {fileID: 2726218690456804000}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Turret_Pipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4986873668810266320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.435, z: 0}
+  m_LocalPosition: {x: 0, y: 0.466, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5652639920555461985}
@@ -155,7 +155,9 @@ GameObject:
   - component: {fileID: 394697508320037578}
   - component: {fileID: 4927921280686994798}
   - component: {fileID: 9088799620221294176}
-  m_Layer: 0
+  - component: {fileID: 2835498737227844800}
+  - component: {fileID: -936776166226893570}
+  m_Layer: 17
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +173,7 @@ Transform:
   m_GameObject: {fileID: 6281683116522795677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.51853, y: 0.51853, z: 0.51853}
   m_Children:
   - {fileID: 1319387345894136139}
   m_Father: {fileID: 0}
@@ -216,7 +218,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 3667941d209b0764ea906d17293be51e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -240,6 +242,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 827819aaab3d5854aa63449b9d11e0fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretAngle: 0
+  turretTurnAngle: 80
+  projectile: {fileID: 27965386750324560, guid: 9b1ab019ac48b6d49b6fe8189e171f04,
+    type: 3}
+  initialVelocity: 4
+  projectileRPS: 3
+  spread: 0.02
   pipe: {fileID: 4986873668810266320}
-  pipe_base: {fileID: 3106101370027864719}
+  pipeBase: {fileID: 3106101370027864719}
+  pipeEnd: {fileID: 5652639920555461985}
+--- !u!50 &2835498737227844800
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6281683116522795677}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0.3
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &-936776166226893570
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6281683116522795677}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.026104271, y: -0.17256898}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.81758237, y: 0.934862}
+  m_EdgeRadius: 0

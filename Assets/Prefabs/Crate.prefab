@@ -222,6 +222,7 @@ MonoBehaviour:
   dropVelocity: 2
   collapseAnimation: {fileID: 7400000, guid: 6a95f640f75e9cb4ab9ff02ca22cb83c, type: 2}
   requiredOpeningTime: 2
+  crateSettings: {fileID: 11400000, guid: 1f2a1e2682c3cd1409403ff432b53180, type: 2}
 --- !u!50 &6770832582324673332
 Rigidbody2D:
   serializedVersion: 4

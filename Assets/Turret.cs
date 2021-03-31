@@ -80,4 +80,15 @@ public class Turret : MonoBehaviour
 
         pt.GetComponent<Rigidbody2D>().velocity = direction.normalized * initialVelocity;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ground"))
+        {
+            GetComponent<BoxCollider2D>().isTrigger = true;
+            Rigidbody2D body = GetComponent<Rigidbody2D>();
+            body.velocity = Vector2.zero;
+            body.bodyType = RigidbodyType2D.Static;
+        }
+    }
 }

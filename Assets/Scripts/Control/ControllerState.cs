@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Control
 {    
-    class ControllerState : Singleton<ControllerState>
+    public class ControllerState : Singleton<ControllerState>
     {
         // Includes threshold
         public float stickPositionX;
         public float stickPositionY;
         
-
         public float stickPositionXRaw;
         public float stickPositionYRaw;
         
@@ -20,7 +19,7 @@ namespace Assets.Scripts.Control
         
     }
 
-    enum ControllerMode
+    public enum ControllerMode
     {
         PLAYER,
         TURRET

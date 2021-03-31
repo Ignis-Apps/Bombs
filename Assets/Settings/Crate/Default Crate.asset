@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65e18d3d159868d41b27ba9172a5b066, type: 3}
+  m_Name: Default Crate
+  m_EditorClassIdentifier: 
+  crateDrops:
+  - dropedObjectPrefab: {fileID: 8751246911764986020, guid: a6de12db80ec5ea48973872aea9168c8,
+      type: 3}
+    weight: 1

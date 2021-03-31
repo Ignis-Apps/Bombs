@@ -1,3 +1,4 @@
+using Assets.Scriptable;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,10 +17,13 @@ public class Crate : MonoBehaviour
 
     [SerializeField] private float requiredOpeningTime;
     private float openingProgress;
+
+    [SerializeField] private CrateSettings crateSettings;
     
     private Animator animator;
     private Rigidbody2D body;
     private BoxCollider2D boxColider;
+    private Transform crateTransform;
 
     private bool hasLanded;
     private bool isPlayerNear;
@@ -30,6 +34,7 @@ public class Crate : MonoBehaviour
         animator   = GetComponent<Animator>();
         body       = GetComponent<Rigidbody2D>();
         boxColider = GetComponent<BoxCollider2D>();
+        crateTransform = GetComponent<Transform>();
 
         body.velocity = new Vector2(0, -dropVelocity);
         progressIndicator.SetActive(false);
@@ -68,12 +73,12 @@ public class Crate : MonoBehaviour
             }
 
         }
-
      
     }
 
     private void OpenCrate()
     {
+        Instantiate(crateSettings.GetCrateDrop(), transform.position, transform.rotation);
         Destroy(this.gameObject);
     }
 

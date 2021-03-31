@@ -29,6 +29,8 @@ public class GameManager : Singleton<GameManager>
     public GameWave CurrentWave;
     public float CurrentWaveProgress;
 
+    public Powerup CurrentPowerup;
+
     public GameObject Player { get; set; }
     public int CollectedCoins { get => collectedCoins; set { collectedCoins = value; } }
     public int CollectedPoints { get => collectedScorePoints; set { collectedScorePoints = value; } }
@@ -58,14 +60,6 @@ public class GameManager : Singleton<GameManager>
 
     public void ResetStats()
     {
-        collectedCoins = 0;
-        collectedScorePoints = 0;
-        survivedSecounds = 0;
-        dodgedBombs = 0;
-        survivedWaves = 0;
-        playerSpeedMultiplier = 1f;
-        remainingLives = 3;
-
         // Delete all old objects
         List<GameObject> deleteList = new List<GameObject>();
         deleteList.AddRange(GameObject.FindGameObjectsWithTag("Coin"));
@@ -81,11 +75,21 @@ public class GameManager : Singleton<GameManager>
         Player.SetActive(true);
         Player.transform.position = new Vector2(0, Player.transform.position.y);
 
+        // Reset powerups
+        Powerup.CurrentActivePowerup?.DeactivatePowerup();
+
         // Reset waves
         GameObject spawner = GameObject.FindGameObjectWithTag("Spawner");
         GameWaveSpawner waveSpawner = spawner.GetComponent<GameWaveSpawner>();
         waveSpawner.Reset();
 
+        collectedCoins = 0;
+        collectedScorePoints = 0;
+        survivedSecounds = 0;
+        dodgedBombs = 0;
+        survivedWaves = 0;
+        playerSpeedMultiplier = 1f;
+        remainingLives = 3;
 
     }
 
