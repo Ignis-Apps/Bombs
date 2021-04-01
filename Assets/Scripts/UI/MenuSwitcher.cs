@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.UI;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class GameMenuSwitcher : MonoBehaviour
+public class MenuSwitcher : MonoBehaviour
 {
-    public GameMenu targetMenu;
+    public Menu targetMenu;
     private GameStateManager stateManager;
 
     // Start is called before the first frame update
@@ -19,11 +20,11 @@ public class GameMenuSwitcher : MonoBehaviour
 
     void OnButtonPressed()
     {
-        if(gameObject.name == "Shop")
-        {
-            SceneManager.LoadScene("ShopScene");
-        }
-        
         stateManager.SwitchController(targetMenu);
+    }
+
+    private void Update()
+    {
+        
     }
 }

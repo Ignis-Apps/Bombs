@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Game;
+using Assets.Scripts.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +29,7 @@ public class AndroidHandler : MonoBehaviour
 
     public void Pause()
     {
-        gameMenuManager.SwitchController(GameMenu.PAUSE_SCREEN);
+        gameMenuManager.SwitchController(Menu.PAUSE_SCREEN);
         previousTimeScale = Time.timeScale;
         Time.timeScale = 0;
     }

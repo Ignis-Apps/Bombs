@@ -1,5 +1,6 @@
 ﻿using Assets.Scriptable;
 using Assets.Scripts.Game;
+using Assets.Scripts.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,7 +54,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void OnPlayerHit() { remainingLives--; }
     public void OnPlayerDied() {
-        GameStateManager.GetInstance().SwitchController(GameMenu.GAME_OVER_SCREEN);
+        GameStateManager.GetInstance().SwitchController(Menu.GAME_OVER_SCREEN);
         Player.SetActive(false);
         GameData.GetInstance().HighScore = Score; }
     public void Tick(){ survivedSecounds += Time.deltaTime; }
