@@ -3,40 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Assets.Scripts.Game;
+using Assets.Scripts.UI;
 
-public enum GameMenu
-{
-    TITLE_SCREEN,
-    INGAME_OVERLAY,
-    PAUSE_SCREEN,
-    GAME_OVER_SCREEN
-};
 public class GameStateManager : Singleton<GameStateManager>
 {
-    public GameMenu initialGameMenu;
+    public Menu initialGameMenu;
 
-    private List<GameMenuController> gameMenuControllerList;
-    private GameMenuController currentActiveController;
+    private List<MenuController> gameMenuControllerList;
+    private MenuController currentActiveController;
    
 
     protected override void Awake()
     {
        
-        gameMenuControllerList = GetComponentsInChildren<GameMenuController>().ToList();       
+        gameMenuControllerList = GetComponentsInChildren<MenuController>().ToList();       
         gameMenuControllerList.ForEach(controler => controler.gameObject.SetActive(false));        
         gameMenuControllerList.ForEach(controler => controler.gameObject.GetComponent<RectTransform>().position = transform.position);        
         SwitchController(initialGameMenu);
         
     }
 
-    public void SwitchController(GameMenu nextGameMenu)
+    public void SwitchController(Menu nextGameMenu)
     {
         if(currentActiveController != null)
         {
             currentActiveController.gameObject.SetActive(false);
         }
 
-        GameMenuController nextController = gameMenuControllerList.Find(controller => controller.menuType == nextGameMenu);
+        MenuController nextController = gameMenuControllerList.Find(controller => controller.menuType == nextGameMenu);
         if(nextController == null)
         {
             return;

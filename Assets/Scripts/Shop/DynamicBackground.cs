@@ -41,18 +41,18 @@ public class DynamicBackground : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(currentTime);
-
+        
         if(Input.touchCount > 0)
         {
+            //Debug.Log(currentTime);
             if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                Debug.Log("Began");
+                //Debug.Log("Began");
                 lastTouchPos = Input.GetTouch(0).position;
             }
             else if (Input.GetTouch(0).phase == TouchPhase.Moved)
             {
-                Debug.Log("Moved");
+                //Debug.Log("Moved");
                 float diff = (Input.GetTouch(0).position.x - lastTouchPos.x) / (float) Screen.width;
                 currentTime += diff;
                 lastTouchPos = Input.GetTouch(0).position;
@@ -62,12 +62,12 @@ public class DynamicBackground : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("Began");
+                //Debug.Log("Began");
                 lastTouchPos = Input.mousePosition;
             }
             else
             {
-                Debug.Log("Moved");
+                //Debug.Log("Moved");
                 float diff = (Input.mousePosition.x - lastTouchPos.x) / (float)Screen.width;
                 currentTime -= diff;
                 if(currentTime < 0)
@@ -92,7 +92,7 @@ public class DynamicBackground : MonoBehaviour
         }
             
 
-
+        
         if(((int)currentTime) - ((int)lastTime) != 0)
         {
             if(((int)currentTime) - ((int)lastTime) > 0)
@@ -128,7 +128,8 @@ public class DynamicBackground : MonoBehaviour
 
         lastTime = currentTime;
 
-        //currentTime += 0.001f;
+        
+        currentTime += 0.0001f;
         
         // Nicht optimal, man könnte es auch nur machen wenn sich tatsächlich was ändert
         sky.manuellUpdate();

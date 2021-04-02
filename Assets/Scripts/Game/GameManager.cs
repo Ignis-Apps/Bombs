@@ -1,5 +1,6 @@
 ﻿using Assets.Scriptable;
 using Assets.Scripts.Game;
+using Assets.Scripts.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,8 +58,8 @@ public class GameManager : Singleton<GameManager>
     }
     public void OnPlayerHit() { if (!PlayerHasShield) remainingLives--; }
     public void OnPlayerDied() {
-        GameStateManager.GetInstance().SwitchController(GameMenu.GAME_OVER_SCREEN);
-        //Player.SetActive(false);
+        
+        GameStateManager.GetInstance().SwitchController(Menu.GAME_OVER_SCREEN);
         Player.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = false);
         Player.GetComponent<MovementController>().enabled = false;
         GameData.GetInstance().HighScore = Score; }
