@@ -11,6 +11,10 @@ public class TabGroup : MonoBehaviour
     public Color hoverColor;
     public Color activeColor;
 
+    public float orthograficCameraSize;
+    public float cameraYPosition;
+    public Camera cam;
+
 
     public void Subscribe(TabButton tabButton)
     {
@@ -38,6 +42,14 @@ public class TabGroup : MonoBehaviour
 
     public void OnTabSelected(TabButton button)
     {
+        if(selectedTab != null && selectedTab != button)
+        {
+            selectedTab.OnDeselected();
+        }
+        if(selectedTab != button)
+        {
+            button.OnSelected();
+        }
         selectedTab = button;
         ResetTabs();
         button.image.color = activeColor;
@@ -47,9 +59,41 @@ public class TabGroup : MonoBehaviour
     {
         foreach(TabButton button in tabButtons)
         {
-            if(selectedTab != null && selectedTab == button) {
-                Debug.Log("Test");  continue; }
+            if(selectedTab != null && selectedTab == button) { continue; }
             button.image.color = idleColor;
+        }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        orthograficCameraSize = cam.orthographicSize;
+        cameraYPosition = cam.transform.position.y;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Mathf.Abs(cam.orthographicSize - orthograficCameraSize) < 0.005f)
+        {
+            cam.orthographicSize = orthograficCameraSize;
+        }
+        else
+        {
+            cam.orthographicSize += (orthograficCameraSize - cam.orthographicSize) / 40;
+        }
+
+        if (Mathf.Abs(cam.transform.position.y - cameraYPosition) < 0.005f)
+        {
+            Vector3 camPos = cam.transform.position;
+            camPos.y = cameraYPosition;
+            cam.transform.position = camPos;
+        }
+        else
+        {
+            Vector3 camPos = cam.transform.position;
+            camPos.y += (cameraYPosition - camPos.y) / 40;
+            cam.transform.position = camPos;
         }
     }
 }

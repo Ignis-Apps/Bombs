@@ -129,7 +129,7 @@ public class DynamicBackground : MonoBehaviour
         lastTime = currentTime;
 
         
-        currentTime += 0.0001f;
+        //currentTime += 0.0001f;
         
         // Nicht optimal, man könnte es auch nur machen wenn sich tatsächlich was ändert
         sky.manuellUpdate();

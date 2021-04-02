@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "326066254754",
+    "firebase_url": "https://bombs-24fe8.firebaseio.com",
+    "project_id": "bombs-24fe8",
+    "storage_bucket": "bombs-24fe8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326066254754:android:766ce48356dc64533f78fb",
+        "android_client_info": {
+          "package_name": "com.ignis_apps.bombs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "326066254754-h22gr5mts90k943mbbnoq2fe9hhaje36.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC52pnpJ4ycvRtu35HRrdzSa-U8Bn6N3CY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "326066254754-h22gr5mts90k943mbbnoq2fe9hhaje36.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
