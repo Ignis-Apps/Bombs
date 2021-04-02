@@ -1,64 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class HomingBomb : MonoBehaviour
+namespace Assets.Scripts.Entity.Bomb
 {
-    [SerializeField] private float startSpeed;
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float acceleration;
-
-    public float shakeAngle;
-    
-    [SerializeField] private GameObject explosionPrefab;
-    [SerializeField] private GameObject scoreOrbPrefab;
-    [SerializeField] private GameObject coinPrefab;
-
-    [SerializeField] private LootTableSettings lootTableSettings;
- 
-    private Rigidbody2D bombRigidBody;
-
-    // Start is called before the first frame update
-    void Start()
+    public class HomingBomb : Bomb
     {
-        bombRigidBody = GetComponent<Rigidbody2D>();
+        [SerializeField] private float rotationSpeed;
 
-        GameManager gameManager = GameManager.GetInstance();
-        float waveStartSpeed = gameManager.CurrentWave.GetHomingBombInitialSpeed(gameManager.CurrentWaveProgress);
-        bombRigidBody.velocity = transform.up * -waveStartSpeed;
-        
-    }
+        private Transform targetTransform;        
+        private float targetAngle;
 
-    // Update is called once per frame
-    void Update()
-    {
-        bombRigidBody.velocity *= 1 + (acceleration * Time.deltaTime);
-        bombRigidBody.velocity = -transform.up * bombRigidBody.velocity.magnitude;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        GameObject explosion = Instantiate(explosionPrefab, bombRigidBody.transform.position, bombRigidBody.transform.rotation);
-        explosion.transform.localScale = new Vector2(0.3f, 0.3f);
-
-        SpawnPrefabs(coinPrefab, lootTableSettings.GetRandomCoinAmount());
-        SpawnPrefabs(scoreOrbPrefab, lootTableSettings.GetRandomScoreAmount());
-        SpawnPrefabs(coinPrefab, lootTableSettings.GetRandomSpecialCoinAmount());
-
-        if (!collision.gameObject.name.Contains("Player"))
+        public override float GetStartSpeed()
         {
-            GameManager.GetInstance().OnBombDodged();
+            return gameManager.CurrentWave.GetHomingBombInitialSpeed(gameManager.CurrentWaveProgress);
         }
 
-        transform.position = new Vector2(0, -1000);        
-        Destroy(this.gameObject,0.5f);
-    }
-
-    private void SpawnPrefabs(GameObject prefab, int amount)
-    {
-        for (int i = 0; i < amount; i++)
+        protected override void Start()
         {
-            Instantiate(prefab, bombRigidBody.transform.position, bombRigidBody.transform.rotation);
+            base.Start();
+            targetTransform = gameManager.getPlayer().transform;
+
+        }
+
+
+        protected override void FixedUpdate()
+        {
+            base.FixedUpdate();
+            
+            bombBody.velocity = -transform.up * bombBody.velocity.magnitude;
+
+            Vector3 startPosition = transform.position;
+            Vector3 endPosition = targetTransform.position;
+            targetAngle = Vector3.Angle(endPosition - startPosition, new Vector3(0, -1f, 0));
+
+            if (Vector3.Cross(endPosition - startPosition, new Vector3(0, -1f, 0)).z > 0)
+            {
+                targetAngle = -targetAngle;
+            }
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, targetAngle), Time.deltaTime * rotationSpeed);
+
+
         }
     }
 }

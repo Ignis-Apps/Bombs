@@ -2,6 +2,7 @@
 using Assets.Scripts.Game;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum GameEvent
@@ -20,7 +21,8 @@ public class GameManager : Singleton<GameManager>
     private int remainingLives = 3;
     
     private float survivedSecounds;
-    private float daytime =0.1f;
+    private float daytime = 0.1f;
+
     private float playerSpeedMultiplier = 1f;
 
     private int dodgedBombs;
@@ -29,7 +31,9 @@ public class GameManager : Singleton<GameManager>
     public GameWave CurrentWave;
     public float CurrentWaveProgress;
 
-    public Powerup CurrentPowerup;
+    public bool PlayerHasShield;
+    public bool IsPlayerMoving;
+    public bool IsPlayerNearCrate;
 
     public GameObject Player { get; set; }
     public int CollectedCoins { get => collectedCoins; set { collectedCoins = value; } }
@@ -51,10 +55,12 @@ public class GameManager : Singleton<GameManager>
         survivedWaves++;
         getPlayer().OnWaveSurvived();
     }
-    public void OnPlayerHit() { remainingLives--; }
+    public void OnPlayerHit() { if (!PlayerHasShield) remainingLives--; }
     public void OnPlayerDied() {
         GameStateManager.GetInstance().SwitchController(GameMenu.GAME_OVER_SCREEN);
-        Player.SetActive(false);
+        //Player.SetActive(false);
+        Player.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = false);
+        Player.GetComponent<MovementController>().enabled = false;
         GameData.GetInstance().HighScore = Score; }
     public void Tick(){ survivedSecounds += Time.deltaTime; }
 
@@ -72,7 +78,9 @@ public class GameManager : Singleton<GameManager>
         currentMessage = GameUIMessageTypes.NONE;
 
         // Reset player position        
-        Player.SetActive(true);
+        //Player.SetActive(true);
+        Player.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = true);
+        Player.GetComponent<MovementController>().enabled = true;
         Player.transform.position = new Vector2(0, Player.transform.position.y);
 
         // Reset powerups
@@ -90,6 +98,9 @@ public class GameManager : Singleton<GameManager>
         survivedWaves = 0;
         playerSpeedMultiplier = 1f;
         remainingLives = 3;
+
+        IsPlayerNearCrate = false;
+        IsPlayerMoving = false;
 
     }
 

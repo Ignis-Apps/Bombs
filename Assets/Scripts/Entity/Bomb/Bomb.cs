@@ -1,79 +1,104 @@
 ﻿using UnityEngine;
 
-public class Bomb : MonoBehaviour
+namespace Assets.Scripts.Entity.Bomb
 {
-
-    [SerializeField] private float startSpeed;
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float acceleration;
-    [SerializeField] private float shakeAngle;
-    
-    [SerializeField] private LootTableSettings lootTableSettings;
-    
-    [SerializeField] private GameObject explosionPrefab;
-    [SerializeField] private GameObject scoreOrbPrefab;
-    [SerializeField] private GameObject coinPrefab;
-    
-    private Rigidbody2D bombRigidBody;
-    private float angularAcceleration = 30f;
-
-    // Start is called before the first frame update
-    public void Start()
+    public abstract class Bomb : MonoBehaviour
     {
-        bombRigidBody = GetComponent<Rigidbody2D>();
 
-        Animator animationControlelr = GetComponent<Animator>();
-        AnimatorStateInfo currentState = animationControlelr.GetCurrentAnimatorStateInfo(0);
-        animationControlelr.Play(currentState.fullPathHash, -1, Random.Range(0f, 1f));
+        [SerializeField] private GameObject explosionPrefab;
+        [SerializeField] private GameObject scoreOrbPrefab;
+        [SerializeField] private GameObject coinPrefab;
 
-        GameManager gameManager = GameManager.GetInstance();
+        [SerializeField] private float explosionSize;
+
+        // [SerializeField] private float startSpeed;
+        [SerializeField] private float maxSpeed;
+        [SerializeField] private float acceleration;
+
+        [SerializeField] private float angularAcceleration;     // Acceleration of the rotation on the z-axis
+        [SerializeField] private float shakeAngle;              // Angle at which the acceleration pulls in the opposite direction
+
+        [SerializeField] private LootTableSettings lootTableSettings;
+
+        protected GameManager gameManager;
         
-        float waveStartSpeed = gameManager.CurrentWave.GetDefaultBombInitialSpeed(gameManager.CurrentWaveProgress);
+        protected Rigidbody2D bombBody;
+        
 
-        bombRigidBody.velocity = transform.up * - waveStartSpeed;
-        bombRigidBody.angularVelocity = angularAcceleration;
-    }
-
-    // Update is called once per frame
-    public void Update()
-    {
-  
-        if(bombRigidBody.rotation >= shakeAngle)
+        private void Awake()
         {
-            bombRigidBody.angularVelocity = -angularAcceleration;
-        }
-        if(bombRigidBody.rotation <= -shakeAngle)
-        {
-            bombRigidBody.angularVelocity = +angularAcceleration;
-        }
-        if(bombRigidBody.velocity.y < -maxSpeed) 
-        {
-            bombRigidBody.velocity = new Vector2(0,bombRigidBody.velocity.y - acceleration);
+            gameManager = GameManager.GetInstance();
         }
 
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Instantiate(explosionPrefab, bombRigidBody.transform.position, bombRigidBody.transform.rotation);
-
-        SpawnPrefabs(coinPrefab, lootTableSettings.GetRandomCoinAmount());
-        SpawnPrefabs(scoreOrbPrefab, lootTableSettings.GetRandomScoreAmount());
-        SpawnPrefabs(coinPrefab, lootTableSettings.GetRandomSpecialCoinAmount());
-
-        if (!collision.gameObject.name.Contains("Player"))
+        protected virtual void Start()
         {
-            GameManager.GetInstance().OnBombDodged();
+            // Load Components
+            Animator animController = GetComponent<Animator>();
+            bombBody = GetComponent<Rigidbody2D>();
+            
+            // Choose random animation start
+            AnimatorStateInfo currentState = animController.GetCurrentAnimatorStateInfo(0);
+            animController.Play(currentState.fullPathHash, -1, Random.Range(0f, 1f));
+
+            // Apply start speed
+            float waveStartSpeed = GetStartSpeed();
+            bombBody.velocity = transform.up * -waveStartSpeed;
+            bombBody.angularVelocity = angularAcceleration;
+
         }
 
-        Destroy(gameObject);
-    }
 
-    private void SpawnPrefabs(GameObject prefab, int amount)
-    {
-        for(int i=0; i<amount; i++)
+
+        protected virtual void FixedUpdate()
         {
-            Instantiate(prefab, bombRigidBody.transform.position, bombRigidBody.transform.rotation);
+
+            // Turn left
+            if (bombBody.rotation >= shakeAngle)
+            {
+                bombBody.angularVelocity = -angularAcceleration;
+            }
+
+            // Turn right
+            if (bombBody.rotation <= -shakeAngle)
+            {
+                bombBody.angularVelocity = +angularAcceleration;
+            }
+
+            // Accelerate to max speed
+            if (bombBody.velocity.magnitude <= maxSpeed)
+            {
+                bombBody.velocity *= 1 + (acceleration * Time.deltaTime);
+            }
+
+        }
+
+        public abstract float GetStartSpeed();
+
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+
+            GameObject explosion = Instantiate(explosionPrefab, bombBody.transform.position, bombBody.transform.rotation);
+            explosion.transform.localScale = new Vector2(explosionSize, explosionSize);
+
+            SpawnPrefabs(coinPrefab, lootTableSettings.GetRandomCoinAmount());
+            SpawnPrefabs(scoreOrbPrefab, lootTableSettings.GetRandomScoreAmount());
+            SpawnPrefabs(coinPrefab, lootTableSettings.GetRandomSpecialCoinAmount());
+
+            if (!collision.gameObject.name.Contains("Player"))
+            {
+                GameManager.GetInstance().OnBombDodged();
+            }
+
+            Destroy(gameObject);
+        }
+
+        private void SpawnPrefabs(GameObject prefab, int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                Instantiate(prefab, bombBody.transform.position, bombBody.transform.rotation);
+            }
         }
     }
 }

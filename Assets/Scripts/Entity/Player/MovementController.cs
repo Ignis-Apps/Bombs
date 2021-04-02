@@ -57,7 +57,9 @@ public class MovementController : MonoBehaviour
         
         totalMovementSpeed = baseMovementSpeed * gameManager.PlayerSpeedFactor;
         
-        animator.SetFloat("playerSpeed", virtualVelocity);        
+        animator.SetFloat("playerSpeed", virtualVelocity);
+        animator.SetBool("playerInFrontOfCrate", gameManager.IsPlayerNearCrate);
+        gameManager.IsPlayerMoving = (virtualVelocity > 0);
     }
 
     public void FixedUpdate()

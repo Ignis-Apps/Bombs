@@ -16,19 +16,13 @@ namespace Assets.Scripts.Entity.Powerups
 
         public override void OnPowerupActivate()
         {
-            //turret = Instantiate(turretPrefab, gameManager.getPlayer().transform.position, Quaternion.identity);
+            
             turret = Instantiate(turretPrefab);
             
             Transform playerTransform = gameManager.getPlayer().transform;           
-            float playerRect = gameManager.getPlayer().GetComponent<Collider2D>().bounds.size.x;
-            float turretRec  = turret.GetComponent<Collider2D>().bounds.size.x;
-            
-            float offset = (playerRect - turretRec) /2f;
-            
-            Vector3 spawnPosition = new Vector3(playerTransform.position.x + offset, 5, 0);
+            Vector3 spawnPosition = new Vector3(playerTransform.position.x, 5, 0);
                        
-            turret.transform.position = spawnPosition;
-            
+            turret.transform.position = spawnPosition;       
             controllerState.currentMode = Control.ControllerMode.TURRET;
             
         }

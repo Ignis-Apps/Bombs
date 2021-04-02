@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1458646473550349653}
   - component: {fileID: 1458646473550349654}
   - component: {fileID: 1458646473550349655}
-  - component: {fileID: 1458646473550349648}
+  - component: {fileID: -9170990946622174858}
   m_Layer: 13
   m_Name: SmallBomb
   m_TagString: Bomb
@@ -152,7 +152,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1458646473550349648
+--- !u!114 &-9170990946622174858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,17 +161,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1458646473550349649}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15837ab4688bdd141831e82d84a8d8cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 43d30dc2e51a6af4d84518b2b3e3d97e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSpeed: 4
-  maxSpeed: 15
-  acceleration: 0.2
-  shakeAngle: 0
   explosionPrefab: {fileID: 3811380740657919097, guid: 06f3c3d68fb388a4f9919602eab20244,
     type: 3}
   scoreOrbPrefab: {fileID: 8059208126762768387, guid: fffc950aaba18354589060c017218a24,
     type: 3}
   coinPrefab: {fileID: 6376339539627395642, guid: 02962b1e87578474aac123ac6648ca72,
     type: 3}
+  explosionSize: 0.3
+  startSpeed: 4
+  maxSpeed: 15
+  acceleration: 0.2
+  angularAcceleration: 0
+  shakeAngle: 3
   lootTableSettings: {fileID: 11400000, guid: 596dd399864820c4f969ef8a8c364d2f, type: 2}

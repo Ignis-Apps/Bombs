@@ -15,4 +15,10 @@ MonoBehaviour:
   crateDrops:
   - dropedObjectPrefab: {fileID: 8751246911764986020, guid: a6de12db80ec5ea48973872aea9168c8,
       type: 3}
-    weight: 1
+    weight: 10
+  - dropedObjectPrefab: {fileID: 6061227711127739038, guid: c2576b9a71e7f3f4fa81162ef856f721,
+      type: 3}
+    weight: 10
+  - dropedObjectPrefab: {fileID: 5145584615064507123, guid: 184dad57d2bc11e4f89c682c34fbbf92,
+      type: 3}
+    weight: 10

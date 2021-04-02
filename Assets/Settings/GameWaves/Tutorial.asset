@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - waveName: Homing Bombs
-    waveDuration: 15
+    waveDuration: 45
     spawnIntervall:
       serializedVersion: 2
       m_Curve:
@@ -119,7 +119,7 @@ MonoBehaviour:
     spawnWeightSmallBomb: 0
     endWaveWithCrate: 1
   - waveName: Normal Bombs
-    waveDuration: 15
+    waveDuration: 45
     spawnIntervall:
       serializedVersion: 2
       m_Curve:
@@ -222,9 +222,9 @@ MonoBehaviour:
     spawnWeightDefaultBomb: 1
     spawnWeightHomingBomb: 0
     spawnWeightSmallBomb: 0
-    endWaveWithCrate: 0
+    endWaveWithCrate: 1
   - waveName: Small Bombs
-    waveDuration: 15
+    waveDuration: 45
     spawnIntervall:
       serializedVersion: 2
       m_Curve:
@@ -327,9 +327,9 @@ MonoBehaviour:
     spawnWeightDefaultBomb: 0
     spawnWeightHomingBomb: 0
     spawnWeightSmallBomb: 1
-    endWaveWithCrate: 0
+    endWaveWithCrate: 1
   - waveName: Normal Bombs - Small Bombs
-    waveDuration: 30
+    waveDuration: 45
     spawnIntervall:
       serializedVersion: 2
       m_Curve:
@@ -434,7 +434,7 @@ MonoBehaviour:
     spawnWeightSmallBomb: 1
     endWaveWithCrate: 0
   - waveName: Normal Bombs - Small Bombs - homing Bombs
-    waveDuration: 30
+    waveDuration: 45
     spawnIntervall:
       serializedVersion: 2
       m_Curve:

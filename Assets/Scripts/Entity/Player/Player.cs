@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField] private bool isInvincible;
     [SerializeField] private ParticleSystem particles;
 
+    
+    
     private GameManager gameManager;
 
     // Start is called before the first frame update
@@ -26,8 +28,7 @@ public class Player : MonoBehaviour
         {
            // Destroy(collision.gameObject);
             GameManager.GetInstance().OnCoinCollected(1);
-            
-    
+                
         }
 
         if (collision.name.Contains("ScoreOrb"))
@@ -40,13 +41,15 @@ public class Player : MonoBehaviour
         {
             Destroy(collision.gameObject);
             if (isInvincible) { return; }
-            if(gameManager.PlayerLifes > 1)
+
+            gameManager.OnPlayerHit();
+            if(gameManager.PlayerLifes == 0)
             {
-                gameManager.OnPlayerHit();
-                return;
+                gameManager.OnPlayerDied();
             }
             
-            gameManager.OnPlayerDied();
+                   
+            
         }
 
         Debug.Log(collision.name);
@@ -57,6 +60,11 @@ public class Player : MonoBehaviour
     public void OnWaveSurvived()
     {
         particles.Play();
+    }
+
+    public void ResetPose()
+    {
+
     }
 
 

@@ -13,7 +13,7 @@ namespace Assets.Scriptable
             foreach (CrateDrop c in crateDrops) { sumOfWeights += c.getWeight(); }
                         
             int index = 0;
-            for (int i = Random.Range(0, sumOfWeights); i < crateDrops.Length-1; ++index)
+            for (int i = Random.Range(0, sumOfWeights); index < crateDrops.Length-1; ++index)
             {
                 i -= crateDrops[index].getWeight();
                 if (i <= 0) { break; }          

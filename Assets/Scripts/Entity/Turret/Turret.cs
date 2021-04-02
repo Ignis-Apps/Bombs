@@ -25,6 +25,8 @@ public class Turret : MonoBehaviour
 
     private float timeToShoot = 0;
 
+    private bool isDeployed;
+
     
     // Start is called before the first frame update
     void Start()
@@ -55,7 +57,7 @@ public class Turret : MonoBehaviour
     private void FixedUpdate()
     {
         timeToShoot -= Time.deltaTime;
-        if(timeToShoot < 0)
+        if(timeToShoot < 0 && isDeployed    )
         {
             Shoot();
             timeToShoot = 1 / projectileRPS;
@@ -89,6 +91,7 @@ public class Turret : MonoBehaviour
             Rigidbody2D body = GetComponent<Rigidbody2D>();
             body.velocity = Vector2.zero;
             body.bodyType = RigidbodyType2D.Static;
+            isDeployed = true;
         }
     }
 }

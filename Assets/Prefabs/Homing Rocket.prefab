@@ -4945,10 +4945,8 @@ GameObject:
   - component: {fileID: 6695054773781400453}
   - component: {fileID: 3100298996894366143}
   - component: {fileID: 4352265985643330581}
-  - component: {fileID: 734721428404244095}
-  - component: {fileID: 5031220203544326144}
+  - component: {fileID: 5744313461614714892}
   - component: {fileID: 1897785822213981259}
-  - component: {fileID: -7982438943064246857}
   m_Layer: 13
   m_Name: Homing Rocket
   m_TagString: Bomb
@@ -5070,7 +5068,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.35648516, y: 1.28}
   m_EdgeRadius: 0
---- !u!114 &734721428404244095
+--- !u!114 &5744313461614714892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5079,34 +5077,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 5198068931683851065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15837ab4688bdd141831e82d84a8d8cb, type: 3}
+  m_Script: {fileID: 11500000, guid: eeb7b42872c1d47468ad8f200b572941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSpeed: 2
-  maxSpeed: 15
-  acceleration: 0.3
-  shakeAngle: 2
   explosionPrefab: {fileID: 3811380740657919097, guid: 06f3c3d68fb388a4f9919602eab20244,
     type: 3}
   scoreOrbPrefab: {fileID: 8059208126762768387, guid: fffc950aaba18354589060c017218a24,
     type: 3}
   coinPrefab: {fileID: 6376339539627395642, guid: 02962b1e87578474aac123ac6648ca72,
     type: 3}
+  explosionSize: 0.3
+  startSpeed: 2
+  maxSpeed: 15
+  acceleration: 0.5
+  angularAcceleration: 0
+  shakeAngle: 0
   lootTableSettings: {fileID: 11400000, guid: 6124c79d54ce42243aa8455ccb8072b7, type: 2}
---- !u!114 &5031220203544326144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5198068931683851065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 610a159caf494c845848757290aa5c27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laser: {fileID: 4324697514144547252}
-  showLaser: 0
   rotationSpeed: 3
 --- !u!95 &1897785822213981259
 Animator:
@@ -5127,26 +5113,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-7982438943064246857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5198068931683851065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 096ad66f37cb0c54d998c134bdb3102c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startSpeed: 2
-  maxSpeed: 15
-  acceleration: 0.3
-  shakeAngle: 2
-  explosionPrefab: {fileID: 3811380740657919097, guid: 06f3c3d68fb388a4f9919602eab20244,
-    type: 3}
-  scoreOrbPrefab: {fileID: 8059208126762768387, guid: fffc950aaba18354589060c017218a24,
-    type: 3}
-  coinPrefab: {fileID: 6376339539627395642, guid: 02962b1e87578474aac123ac6648ca72,
-    type: 3}
-  lootTableSettings: {fileID: 11400000, guid: 6124c79d54ce42243aa8455ccb8072b7, type: 2}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5347834380977207290}
   - component: {fileID: 5347834380977207289}
   - component: {fileID: 5347834380977207288}
-  - component: {fileID: 5347834380977207268}
+  - component: {fileID: 4868223661729293951}
   - component: {fileID: 5347834380977207269}
   - component: {fileID: 8722229701057980935}
   m_Layer: 13
@@ -127,7 +127,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &5347834380977207268
+--- !u!114 &4868223661729293951
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,20 +136,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 5347834380977207295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3870db123b38db49b198829c802c6f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 782e36756ada64f46ae237215fc51bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSpeed: 3
-  maxSpeed: 15
-  acceleration: 0.1
-  shakeAngle: 7
-  lootTableSettings: {fileID: 11400000, guid: f48cc93f1dd60fd4289ccce82689ff88, type: 2}
   explosionPrefab: {fileID: 3811380740657919097, guid: 06f3c3d68fb388a4f9919602eab20244,
     type: 3}
   scoreOrbPrefab: {fileID: 8059208126762768387, guid: fffc950aaba18354589060c017218a24,
     type: 3}
   coinPrefab: {fileID: 6376339539627395642, guid: 02962b1e87578474aac123ac6648ca72,
     type: 3}
+  explosionSize: 0.5
+  startSpeed: 3
+  maxSpeed: 15
+  acceleration: 0.1
+  angularAcceleration: 35
+  shakeAngle: 7
+  lootTableSettings: {fileID: 11400000, guid: f48cc93f1dd60fd4289ccce82689ff88, type: 2}
 --- !u!61 &5347834380977207269
 BoxCollider2D:
   m_ObjectHideFlags: 0

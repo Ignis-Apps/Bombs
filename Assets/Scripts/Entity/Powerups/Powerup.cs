@@ -7,14 +7,16 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class Powerup : MonoBehaviour
 {
+    [HideInInspector] public static Powerup CurrentActivePowerup;    
+    [HideInInspector] protected GameManager gameManager;
+    [HideInInspector] protected ControllerState controllerState;
+
     [SerializeField] private float powerupDurationSecounds;
+    [Tooltip("Remaining time after deactivation till the destroyment")]
+    [SerializeField] private float cleanUpTime;
 
-    private float remaingTime;
+    protected float remaingTime;
     private bool powerupActive;
-
-    [HideInInspector] public static Powerup CurrentActivePowerup;
-    [HideInInspector] public GameManager gameManager;
-    [HideInInspector] public ControllerState controllerState;
 
     void Awake()
     {
@@ -24,9 +26,8 @@ public abstract class Powerup : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!powerupActive) { return; }
-        remaingTime -= Time.deltaTime;
-        if(remaingTime < 0)
+        
+        if(powerupActive && (remaingTime -= Time.deltaTime) < 0)
         {
             DeactivatePowerup();
         }
@@ -49,10 +50,20 @@ public abstract class Powerup : MonoBehaviour
         powerupActive = false;
         CurrentActivePowerup = null;
         OnPowerupDeactivate();
-        Destroy(gameObject);
+        Destroy(gameObject, cleanUpTime);
     }
+/*
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if (powerupActive) { return; }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+        if (collision.CompareTag("Player"))
+        {
+            ActivatePowerup();
+        }
+    }
+*/
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (powerupActive) { return; }
 

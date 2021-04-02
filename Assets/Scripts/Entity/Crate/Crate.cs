@@ -25,6 +25,8 @@ public class Crate : MonoBehaviour
     private BoxCollider2D boxColider;
     private Transform crateTransform;
 
+    private GameManager gameManager;
+
     private bool hasLanded;
     private bool isPlayerNear;
 
@@ -36,15 +38,13 @@ public class Crate : MonoBehaviour
         boxColider = GetComponent<BoxCollider2D>();
         crateTransform = GetComponent<Transform>();
 
+        gameManager = GameManager.GetInstance();
+
         body.velocity = new Vector2(0, -dropVelocity);
         progressIndicator.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+      
 
     private void FixedUpdate()
     {
@@ -61,7 +61,7 @@ public class Crate : MonoBehaviour
             }
         }
 
-        if (isPlayerNear)
+        if (isPlayerNear && !gameManager.IsPlayerMoving)
         {
             openingProgress += Time.deltaTime;
 
@@ -79,6 +79,7 @@ public class Crate : MonoBehaviour
     private void OpenCrate()
     {
         Instantiate(crateSettings.GetCrateDrop(), transform.position, transform.rotation);
+        gameManager.IsPlayerNearCrate = false;
         Destroy(this.gameObject);
     }
 
@@ -102,6 +103,7 @@ public class Crate : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerNear = true;
+            gameManager.IsPlayerNearCrate = true;
             progressIndicator.SetActive(true);
         }
 
@@ -113,6 +115,7 @@ public class Crate : MonoBehaviour
         {
            // progressIndicator.SetActive(false);
             isPlayerNear = false;
+            gameManager.IsPlayerNearCrate = false;
         }
 
     }

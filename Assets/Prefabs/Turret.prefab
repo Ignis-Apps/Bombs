@@ -245,8 +245,8 @@ MonoBehaviour:
   turretTurnAngle: 80
   projectile: {fileID: 27965386750324560, guid: 9b1ab019ac48b6d49b6fe8189e171f04,
     type: 3}
-  initialVelocity: 4
-  projectileRPS: 3
+  initialVelocity: 5
+  projectileRPS: 10
   spread: 0.02
   pipe: {fileID: 4986873668810266320}
   pipeBase: {fileID: 3106101370027864719}
