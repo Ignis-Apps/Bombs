@@ -13,111 +13,6 @@ MonoBehaviour:
   m_Name: Tutorial
   m_EditorClassIdentifier: 
   waves:
-  - waveName: Homing Bombs
-    waveDuration: 45
-    spawnIntervall:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0.030110836
-        value: 2.9831686
-        inSlope: -1
-        outSlope: -1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1.0301108
-        value: 1.9831686
-        inSlope: -1
-        outSlope: -1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 0
-    defaultBombInitialSpeed:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0.0044938233
-        value: 2.5560122
-        inSlope: 0.43245015
-        outSlope: 0.43245015
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1.0211871
-        value: 2.9956813
-        inSlope: 0.43245015
-        outSlope: 0.43245015
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 0
-    homingBombInitialSpeed:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0.019402474
-        value: 0.53344625
-        inSlope: 0.5000002
-        outSlope: 0.5000002
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1.0194023
-        value: 1.0334463
-        inSlope: 0.5000002
-        outSlope: 0.5000002
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 0
-    smallBombInitialSpeed:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 3.5
-        inSlope: 0.5
-        outSlope: 0.5
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 4
-        inSlope: 0.5
-        outSlope: 0.5
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 0
-    spawnGroupSizeMin: 1
-    spawnGroupSizeMax: 1
-    playerSpeedMultiplier: 1.05
-    spawnWeightDefaultBomb: 0
-    spawnWeightHomingBomb: 1
-    spawnWeightSmallBomb: 0
-    endWaveWithCrate: 1
   - waveName: Normal Bombs
     waveDuration: 45
     spawnIntervall:
@@ -327,6 +222,111 @@ MonoBehaviour:
     spawnWeightDefaultBomb: 0
     spawnWeightHomingBomb: 0
     spawnWeightSmallBomb: 1
+    endWaveWithCrate: 1
+  - waveName: Homing Bombs
+    waveDuration: 45
+    spawnIntervall:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.030110836
+        value: 2.9831686
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.0301108
+        value: 1.9831686
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    defaultBombInitialSpeed:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0044938233
+        value: 2.5560122
+        inSlope: 0.43245015
+        outSlope: 0.43245015
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.0211871
+        value: 2.9956813
+        inSlope: 0.43245015
+        outSlope: 0.43245015
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    homingBombInitialSpeed:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.019402474
+        value: 0.53344625
+        inSlope: 0.5000002
+        outSlope: 0.5000002
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.0194023
+        value: 1.0334463
+        inSlope: 0.5000002
+        outSlope: 0.5000002
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    smallBombInitialSpeed:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 3.5
+        inSlope: 0.5
+        outSlope: 0.5
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 4
+        inSlope: 0.5
+        outSlope: 0.5
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    spawnGroupSizeMin: 1
+    spawnGroupSizeMax: 1
+    playerSpeedMultiplier: 1.05
+    spawnWeightDefaultBomb: 0
+    spawnWeightHomingBomb: 1
+    spawnWeightSmallBomb: 0
     endWaveWithCrate: 1
   - waveName: Normal Bombs - Small Bombs
     waveDuration: 45

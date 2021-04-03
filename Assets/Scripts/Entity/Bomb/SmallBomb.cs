@@ -1,6 +1,6 @@
 using Assets.Scripts.Entity.Bomb;
 
-public class Bomb_Small : Bomb
+public class SmallBomb : Bomb
 
 {
     public override float GetStartSpeed()

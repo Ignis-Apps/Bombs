@@ -22,7 +22,7 @@ public class GameManager : Singleton<GameManager>
     private int remainingLives = 3;
     
     private float survivedSecounds;
-    private float daytime = 0.1f;
+    private float daytime = 0;
 
     private float playerSpeedMultiplier = 1f;
 
@@ -42,7 +42,7 @@ public class GameManager : Singleton<GameManager>
     public float PlayerSpeedFactor { get => playerSpeedMultiplier; set { playerSpeedMultiplier = value; } }
     public int SurvivedSecounds { get => (int)survivedSecounds; }
     public int SurvivedWaves { get => survivedWaves; }
-    public float DayTime { get => daytime; }
+    public float DayTime { get => CurrentWaveProgress + survivedWaves; }
     public int PlayerLifes { get => remainingLives; }
 
     public int Score { get => (1 + survivedWaves) * (int) survivedSecounds; }

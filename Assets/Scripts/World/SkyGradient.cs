@@ -170,4 +170,9 @@ public class SkyGradient : MonoBehaviour
         
     }
 
+    public void SetGradient(Gradient gradient)
+    {
+        this.gradient.SetKeys(gradient.colorKeys, gradient.alphaKeys);
+    }
+
 }

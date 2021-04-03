@@ -68,12 +68,13 @@ namespace Assets.Scripts.Game
 
             if (gameMenuManager == null || gameManager == null) { return; }
             running = gameMenuManager.CanPlayerMove();
+            
+            gameManager.CurrentWaveProgress = waveTimer.getProgress();
             if (!running || onTimeout) return;
 
             waveTimer.Tick(Time.deltaTime);
             spawnTimer.Tick(Time.deltaTime);
             
-            gameManager.CurrentWaveProgress = waveTimer.getProgress();
 
             // Load next wave
             if (waveTimer.IsDone() || waveTimer.GetRemainingTime() < spawnTimer.GetRemainingTime())
@@ -122,7 +123,7 @@ namespace Assets.Scripts.Game
         {
 
             int spawnAmount = currentWave.GetSpawnGroupSize();
-            Debug.Log("Spawning " + spawnAmount + "bombs ");
+            //Debug.Log("Spawning " + spawnAmount + "bombs ");
             List<int> spawnPositions = CreateUniqueNumbers(0, spawnColums, spawnAmount);
 
             foreach (int position in spawnPositions)
@@ -179,7 +180,7 @@ namespace Assets.Scripts.Game
                 gameManager.SetCurrentGameMessage(GameUIMessageTypes.WAVE_COMPLETE);
             }
 
-            Debug.Log("LOADING NEXT WAVE");
+            //Debug.Log("LOADING NEXT WAVE");
             GameWave wave = gameWaveSettings.waves[waveIndex];
             currentWaveIndex = waveIndex;
             currentWave = wave;
@@ -242,7 +243,7 @@ namespace Assets.Scripts.Game
             Vector3 spawnPoint = spawnPoints[spawnPosition];
             spawnPoint.y += spawnHeight;
 
-            return spawnPoint;
+            return spawnPoint + transform.position;
         }
 
 

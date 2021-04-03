@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Entity.Bomb
 {
-    class DefaultBomb : Bomb
+    public class DefaultBomb : Bomb
     {
         public override float GetStartSpeed()
         {

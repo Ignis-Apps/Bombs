@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
             
         }
 
-        Debug.Log(collision.name);
+        //Debug.Log(collision.name);
        
       
     }
