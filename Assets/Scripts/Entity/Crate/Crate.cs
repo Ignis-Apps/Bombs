@@ -14,6 +14,7 @@ public class Crate : MonoBehaviour
 
     [SerializeField] private float dropVelocity;
     [SerializeField] private AnimationClip collapseAnimation;
+    [SerializeField] private AnimationClip openCrateAnimation;
 
     [SerializeField] private float requiredOpeningTime;
     private float openingProgress;
@@ -69,24 +70,35 @@ public class Crate : MonoBehaviour
 
             if(openingProgress >= requiredOpeningTime) {
                 isPlayerNear = false;
-                OpenCrate();
+                //OpenCrate();
+                
+                StartCoroutine(OpenCrate());
             }
 
         }
      
     }
 
-    private void OpenCrate()
-    {
-        Instantiate(crateSettings.GetCrateDrop(), transform.position, transform.rotation);
+    IEnumerator OpenCrate()
+    {   
+        animator.Play(openCrateAnimation.name);
+
         gameManager.IsPlayerNearCrate = false;
+        yield return new WaitForSeconds(openCrateAnimation.length);
+
+        GameObject drop = Instantiate(crateSettings.GetCrateDrop(), transform.position, transform.rotation);
+        drop.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0f, 250f));
+
+
         Destroy(this.gameObject);
+
     }
 
     private void DetatchParachute()
     {
         animator.Play(collapseAnimation.name);
-        Destroy(parachute,2f);
+        
+        Destroy(parachute,collapseAnimation.length);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

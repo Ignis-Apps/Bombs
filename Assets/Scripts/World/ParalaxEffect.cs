@@ -45,7 +45,7 @@ public class ParalaxEffect : MonoBehaviour
 
         
 
-        Debug.Log(spriteWidth);
+        //Debug.Log(spriteWidth);
 
         /*
         float temp = (cameraTransform.position.x * (1f - effectStrength.x));

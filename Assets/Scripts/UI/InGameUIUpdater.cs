@@ -16,7 +16,7 @@ public class InGameUIUpdater : MonoBehaviour
     {
         gameManager = GameManager.GetInstance();
     }
-    // Update is called once per frame
+    // TODO : Stop wasting ressources. Maybe we could use event based updates
     void Update()
     {
         CoinText.text = gameManager.CollectedCoins.ToString();

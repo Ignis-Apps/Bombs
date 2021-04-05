@@ -24,11 +24,18 @@ namespace Assets.Scripts.Entity.Powerups
                        
             turret.transform.position = spawnPosition;       
             controllerState.currentMode = Control.ControllerMode.TURRET;
+
+            CameraFollow followScript = Camera.main.GetComponent<CameraFollow>();
+            followScript.SetTarget(turret.transform);
+
             
         }
 
         public override void OnPowerupDeactivate()
         {
+            CameraFollow followScript = Camera.main.GetComponent<CameraFollow>();
+            followScript.SetTarget(gameManager.getPlayer().transform);
+
             controllerState.currentMode = Control.ControllerMode.PLAYER;
             Destroy(turret);
         }

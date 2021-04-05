@@ -10,6 +10,8 @@ namespace Assets.Scripts.Entity.Shield
     class Shield : MonoBehaviour
     {
         [SerializeField] private int hitpoints;
+        [SerializeField] private SpriteRenderer shieldSprite;
+        [SerializeField] Sprite[] ShieldStates;
         
         private GameObject shieldTarget;
 
@@ -17,17 +19,25 @@ namespace Assets.Scripts.Entity.Shield
         {
             shieldTarget = GameManager.GetInstance().Player;
             transform.position = shieldTarget.transform.position;
+            shieldSprite.sprite = ShieldStates[Mathf.Min(hitpoints-1, ShieldStates.Length-1)];
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Bomb"))
             {
-                if(--hitpoints == 0)
-                {
-                    Powerup.CurrentActivePowerup.DeactivatePowerup();
-                    
-                }                    
+                OnShieldHit();
             }
+        }
+
+        private void OnShieldHit()
+        {
+            
+            if (--hitpoints == 0)
+            {
+                Powerup.CurrentActivePowerup.DeactivatePowerup();
+                return;
+            }
+            shieldSprite.sprite = ShieldStates[Mathf.Min(hitpoints - 1, ShieldStates.Length - 1)];
         }
 
         private void FixedUpdate()
