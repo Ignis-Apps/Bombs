@@ -4,6 +4,8 @@ using UnityEngine;
 
 // Import Firebase
 using Firebase;
+using Firebase.Crashlytics;
+using Firebase.Analytics;
 
 public class FirebaseController : MonoBehaviour
 {
@@ -14,7 +16,32 @@ public class FirebaseController : MonoBehaviour
     void Start()
     {
         // Initialize Firebase
-        // Firebase.FirebaseApp.LogLevel = Firebase.LogLevel.Debug;
+
+        Firebase.FirebaseApp.LogLevel = Firebase.LogLevel.Debug;
+
+        Debug.LogWarning("Begin");
+
+        if (PlayerPrefs.GetInt("consent_crashreporting", 0) == 0)
+        {
+            //Crashlytics.IsCrashlyticsCollectionEnabled = false;
+        } else
+        {
+            Crashlytics.IsCrashlyticsCollectionEnabled = true;
+        }
+
+        Debug.LogWarning("Middle");
+
+        if (PlayerPrefs.GetInt("consent_analytics", 0) == 0)
+        {
+            //FirebaseAnalytics.SetAnalyticsCollectionEnabled(false);
+        }
+        else
+        {
+            FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
+        }
+
+        Debug.LogWarning("END");
+
         Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
@@ -35,6 +62,7 @@ public class FirebaseController : MonoBehaviour
                 // Firebase Unity SDK is not safe to use here.
             }
         });
+
     }
 
     // Update is called once per frame

@@ -21,8 +21,8 @@ namespace Assets.Scripts.Game
 
         public void LoadData() {
 
-            highScore = PlayerPrefs.GetInt("highScore");
-            coinBalance = PlayerPrefs.GetInt("coinBalance");
+            highScore = PlayerPrefs.GetInt("highScore", 0);
+            coinBalance = PlayerPrefs.GetInt("coinBalance", 0);
         
         }
         public void SaveData() {

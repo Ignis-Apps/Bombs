@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "326066254754",
-    "firebase_url": "https://bombs-24fe8.firebaseio.com",
-    "project_id": "bombs-24fe8",
-    "storage_bucket": "bombs-24fe8.appspot.com"
+    "project_number": "489733808473",
+    "project_id": "bombs-game",
+    "storage_bucket": "bombs-game.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:326066254754:android:766ce48356dc64533f78fb",
+        "mobilesdk_app_id": "1:489733808473:android:29acbd1d7f6e0936b02c48",
         "android_client_info": {
-          "package_name": "com.ignis_apps.bombs"
+          "package_name": "de.ignis_apps.bombs"
         }
       },
       "oauth_client": [
         {
-          "client_id": "326066254754-h22gr5mts90k943mbbnoq2fe9hhaje36.apps.googleusercontent.com",
+          "client_id": "489733808473-56u6rmu0d3slpo4u3cfhv9tq0ahl3v6q.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC52pnpJ4ycvRtu35HRrdzSa-U8Bn6N3CY"
+          "current_key": "AIzaSyDwCnisLw-UVGdtucO97BGrQe-Js9-ePh8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "326066254754-h22gr5mts90k943mbbnoq2fe9hhaje36.apps.googleusercontent.com",
+              "client_id": "489733808473-56u6rmu0d3slpo4u3cfhv9tq0ahl3v6q.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

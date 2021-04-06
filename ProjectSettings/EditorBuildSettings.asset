@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Appodeal/Demo/Scenes/AppodealDemoScene.unity
-    guid: 4fd3ad1aa0f0b4c289e1cec937388f5a
-  - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 1e91ca60e763e71498b49c09b619d606
   - enabled: 1
     path: Assets/Scenes/ShopScene.unity
     guid: c665a7febf5338542be02209c77c4487
+  - enabled: 1
+    path: Assets/Appodeal/Demo/Scenes/AppodealDemoScene.unity
+    guid: 4fd3ad1aa0f0b4c289e1cec937388f5a
   m_configObjects: {}

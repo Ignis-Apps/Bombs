@@ -39,7 +39,7 @@ namespace ConsentManager.ConsentManagerDemo.Scripts
 #if UNITY_EDITOR && !UNITY_ANDROID && !UNITY_IPHONE
         public static string appKey = "";
 #elif UNITY_ANDROID
-       public static string appKey = "3145afac2d5400d07b03758c380ecb2e441688545a87681f";
+       public static string appKey = "4a4905ed78aa13c35c3ac027a32c7738c0c383fafd6b029d";
 #elif UNITY_IPHONE
        public static string appKey = "466de0d625e01e8811c588588a42a55970bc7c132649eede";
 #else
