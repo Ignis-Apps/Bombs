@@ -88,6 +88,8 @@ public class GameManager : Singleton<GameManager>
         dodgedBombs = 0;
         survivedWaves = 0;
 
+        Time.timeScale = 1f;        
+
         playerStats.Reset();
 
     }
@@ -96,7 +98,6 @@ public class GameManager : Singleton<GameManager>
 
     public void OnGamePaused()
     {
-     //  GameStateManager.GetInstance().SwitchController(Menu.PAUSE_SCREEN);
        previousTimeScale = Time.timeScale;
        Time.timeScale = 0f;
     }

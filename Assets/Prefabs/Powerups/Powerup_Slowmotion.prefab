@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e41bccef6eb93428d47fe5f4966784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupDurationSecounds: 5
+  powerupDurationSecounds: 10
   cleanUpTime: 0.8
   pickupProtectionTime: 0.2
   slowMotionFactor: 2
