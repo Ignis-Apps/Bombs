@@ -1,4 +1,5 @@
 using Assets.Scripts.Control;
+using Assets.Scripts.Game;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,12 +55,14 @@ public class MovementController : MonoBehaviour
         {
             Move(Vector2.zero);
         }
+
+        PlayerStats playerStats = gameManager.playerStats;
         
-        totalMovementSpeed = baseMovementSpeed * gameManager.PlayerSpeedFactor;
+        totalMovementSpeed = playerStats.Speed;
         
         animator.SetFloat("playerSpeed", virtualVelocity);
-        animator.SetBool("playerInFrontOfCrate", gameManager.IsPlayerNearCrate);
-        gameManager.IsPlayerMoving = (virtualVelocity > 0);
+        animator.SetBool("playerInFrontOfCrate", playerStats.IsNearCrate);
+        playerStats.IsMoving = (virtualVelocity > 0);
     }
 
     public void FixedUpdate()

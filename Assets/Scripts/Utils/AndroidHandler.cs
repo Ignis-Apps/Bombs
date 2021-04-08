@@ -34,7 +34,7 @@ public class AndroidHandler : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    public void restore()
+    public void Restore()
     {
         if (previousTimeScale > -1f)
         {

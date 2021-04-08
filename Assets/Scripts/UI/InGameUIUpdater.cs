@@ -19,8 +19,8 @@ public class InGameUIUpdater : MonoBehaviour
     // TODO : Stop wasting ressources. Maybe we could use event based updates
     void Update()
     {
-        CoinText.text = gameManager.CollectedCoins.ToString();
-        ScoreText.text = gameManager.CollectedPoints.ToString();
-        LiveText.text = gameManager.PlayerLifes.ToString();
+        CoinText.text = gameManager.playerStats.Coins.ToString();
+        ScoreText.text = gameManager.playerStats.Score.ToString();
+        LiveText.text = gameManager.playerStats.Lifes.ToString();
     }
 }

@@ -62,7 +62,7 @@ public class Crate : MonoBehaviour
             }
         }
 
-        if (isPlayerNear && !gameManager.IsPlayerMoving)
+        if (isPlayerNear && !gameManager.playerStats.IsMoving)
         {
             openingProgress += Time.deltaTime;
 
@@ -83,7 +83,7 @@ public class Crate : MonoBehaviour
     {   
         animator.Play(openCrateAnimation.name);
 
-        gameManager.IsPlayerNearCrate = false;
+        gameManager.playerStats.IsNearCrate = false;
         yield return new WaitForSeconds(openCrateAnimation.length);
 
         GameObject drop = Instantiate(crateSettings.GetCrateDrop(), transform.position, transform.rotation);
@@ -115,7 +115,7 @@ public class Crate : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerNear = true;
-            gameManager.IsPlayerNearCrate = true;
+            gameManager.playerStats.IsNearCrate = true;
             progressIndicator.SetActive(true);
         }
 
@@ -127,7 +127,7 @@ public class Crate : MonoBehaviour
         {
            // progressIndicator.SetActive(false);
             isPlayerNear = false;
-            gameManager.IsPlayerNearCrate = false;
+            gameManager.playerStats.IsNearCrate = false;
         }
 
     }

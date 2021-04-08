@@ -7,6 +7,7 @@ using Assets.Scripts.UI;
 
 public class GameStateManager : Singleton<GameStateManager>
 {
+    public List<GameObject> menuPrefabs;
     public Menu initialGameMenu;
 
     private List<MenuController> gameMenuControllerList;
@@ -15,12 +16,12 @@ public class GameStateManager : Singleton<GameStateManager>
 
     protected override void Awake()
     {
-       
+        menuPrefabs.ForEach(menu => Instantiate(menu, this.gameObject.transform));
+
         gameMenuControllerList = GetComponentsInChildren<MenuController>().ToList();       
         gameMenuControllerList.ForEach(controler => controler.gameObject.SetActive(false));        
         gameMenuControllerList.ForEach(controler => controler.gameObject.GetComponent<RectTransform>().position = transform.position);        
-        SwitchController(initialGameMenu);
-        
+        SwitchController(initialGameMenu);        
     }
 
     public void SwitchController(Menu nextGameMenu)

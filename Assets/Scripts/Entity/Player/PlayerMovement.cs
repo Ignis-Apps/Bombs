@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         
-        playerMovementSpeed = gameManager.PlayerSpeedFactor * playerDefaultSpeed;
+        playerMovementSpeed = gameManager.playerStats.Speed;
 
         // FOR PC KEY_BINDING
         if (!Application.isMobilePlatform)

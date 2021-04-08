@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
             if (isInvincible) { return; }
 
             gameManager.OnPlayerHit();
-            if(gameManager.PlayerLifes == 0)
+            if(gameManager.playerStats.Lifes == 0)
             {
                 gameManager.OnPlayerDied();
             }

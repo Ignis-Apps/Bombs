@@ -192,7 +192,7 @@ namespace Assets.Scripts.Game
             waveTimer.SetTargetTime(wave.GetWaveDuration());
             spawnTimer.SetTargetTime(wave.GetSpawnInterval(0f));
 
-            gameManager.PlayerSpeedFactor = wave.GetPlayerSpeedMultiplier();
+            gameManager.playerStats.SpeedWave = wave.GetPlayerSpeedMultiplier();
 
         }
 

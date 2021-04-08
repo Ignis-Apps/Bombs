@@ -67,6 +67,7 @@ public class TabGroup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cam = Camera.main;
         orthograficCameraSize = cam.orthographicSize;
         cameraYPosition = cam.transform.position.y;
     }

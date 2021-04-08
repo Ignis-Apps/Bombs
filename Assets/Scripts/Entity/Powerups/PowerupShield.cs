@@ -15,12 +15,12 @@ namespace Assets.Scripts.Entity.Powerups
         public override void OnPowerupActivate()
         {
             shieldInstance = Instantiate(shieldPrefab);
-            gameManager.PlayerHasShield = true;
+            gameManager.playerStats.IsProtected = true;
         }
 
         public override void OnPowerupDeactivate()
         {
-            gameManager.PlayerHasShield = false;
+            gameManager.playerStats.IsProtected = false;
             shieldInstance.GetComponent<Animator>().SetTrigger("Shield_Tear_Down_Trigger");
             Destroy(shieldInstance, 1);
         }
