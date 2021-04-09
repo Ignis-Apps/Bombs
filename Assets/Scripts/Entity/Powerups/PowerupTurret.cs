@@ -1,34 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Entity.Powerups
 {
     class PowerupTurret : Powerup
-    {
-        public GameObject turretPrefab;
+    {       
+        [SerializeField] private GameObject turretPrefab;
+        
+        private GameObject turretInstance;
+        private TurretConfiguration turretConfiguration;
 
-        [SerializeField] private Transform spawnHeight;
-        private GameObject turret;
+        private float SPAWN_HEIGHT = 5f;    
+        
+        [SerializeField] private TurretConfiguration DUMMY_CONFIG;
+
+        public override PowerUpConfiguration LoadConfiguration()
+        {
+            // TODO
+            //-------------------------------------
+                turretConfiguration = DUMMY_CONFIG;
+            //-------------------------------------
+
+            return turretConfiguration;
+        }
 
         public override void OnPowerupActivate()
         {
             
-            turret = Instantiate(turretPrefab);
+            turretInstance = Instantiate(turretPrefab);
+            turretInstance.GetComponent<Turret>().SetConfiguration(turretConfiguration);
             
             Transform playerTransform = gameManager.getPlayer().transform;           
-            Vector3 spawnPosition = new Vector3(playerTransform.position.x, 5, 0);
+            Vector3 spawnPosition = new Vector3(playerTransform.position.x, SPAWN_HEIGHT, 0);
                        
-            turret.transform.position = spawnPosition;       
+            turretInstance.transform.position = spawnPosition;       
             controllerState.currentMode = Control.ControllerMode.TURRET;
 
             CameraFollow followScript = Camera.main.GetComponent<CameraFollow>();
-            followScript.SetTarget(turret.transform);
-
-            
+            followScript.SetTarget(turretInstance.transform);
+       
         }
 
         public override void OnPowerupDeactivate()
@@ -37,7 +46,7 @@ namespace Assets.Scripts.Entity.Powerups
             followScript.SetTarget(gameManager.getPlayer().transform);
 
             controllerState.currentMode = Control.ControllerMode.PLAYER;
-            Destroy(turret);
+            Destroy(turretInstance);
         }
     }
 }

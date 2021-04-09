@@ -47,12 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43694a5198568e8478e6063528667be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupDurationSecounds: 20
   cleanUpTime: 0
   pickupProtectionTime: 0.2
   turretPrefab: {fileID: 6281683116522795677, guid: 39de7ba11f17d6e49ba211084d0e7dc4,
     type: 3}
-  spawnHeight: {fileID: 0}
+  DUMMY_CONFIG: {fileID: 11400000, guid: ea2150f234e754d47b4d8ac5b73c970c, type: 2}
 --- !u!212 &8751246911764986023
 SpriteRenderer:
   m_ObjectHideFlags: 0

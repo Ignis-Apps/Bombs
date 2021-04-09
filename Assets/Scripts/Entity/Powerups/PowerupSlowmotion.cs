@@ -1,26 +1,34 @@
-﻿using System;
+﻿using Assets.Scriptable.powerups;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Entity.Powerups
 {
     class PowerupSlowmotion : Powerup
     {
-        [SerializeField] private float slowMotionFactor;
+        // [SerializeField] private float slowMotionFactor;
         [SerializeField] private float transitionTime;
         
         private float timeScaleBefore;
         private float fixedDeltaTimeBefore;
 
+        private SlowMotionConfiguration configuration;
+        [SerializeField] private SlowMotionConfiguration DUMMY_CONFIG;
+
+        public override PowerUpConfiguration LoadConfiguration()
+        {
+            // TODO
+            //-------------------------------------
+            configuration = DUMMY_CONFIG;
+            //-------------------------------------
+            return configuration;
+        }
+
         public override void OnPowerupActivate()
         {
             timeScaleBefore = Time.timeScale;
             fixedDeltaTimeBefore = Time.fixedDeltaTime;    
-            remaingTime /= slowMotionFactor;
+            remaingTime /= configuration.SlowMotionFactor;
 
             StartCoroutine(SlowDownTime());
             
@@ -33,8 +41,8 @@ namespace Assets.Scripts.Entity.Powerups
 
         private IEnumerator SlowDownTime()
         {
-            float targetTimeScale = Time.timeScale / slowMotionFactor;
-            float targetFixedDeltaTime = Time.fixedDeltaTime / slowMotionFactor;
+            float targetTimeScale = Time.timeScale / configuration.SlowMotionFactor;
+            float targetFixedDeltaTime = Time.fixedDeltaTime / configuration.SlowMotionFactor;
 
             float passedTime = 0;
             float progress;

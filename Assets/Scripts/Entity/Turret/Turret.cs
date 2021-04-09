@@ -1,19 +1,13 @@
 using Assets.Scripts.Control;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    // Turret
-    [SerializeField] private float turretTurnAngle;    
+    [SerializeField] private TurretConfiguration defaultTurretConfiguration;
     
     // Projectile
     [SerializeField] private GameObject projectile; 
-    [SerializeField] private float initialVelocity; // Velocity of projectiles
-    [SerializeField] private float projectileRPS;   // Rounds per secound
-    [SerializeField] private float spread;
-
+ 
     // Pipe
     [SerializeField] private GameObject pipe;       // Pipe object
     [SerializeField] private Transform pipeBase;   // Rotation pivot
@@ -21,16 +15,20 @@ public class Turret : MonoBehaviour
     private Vector3 pipeLocalPosition;
     private Quaternion pipeLocalRotation;
 
+    private TurretConfiguration configuration;
     private ControllerState controllerState;
 
     private float timeToShoot = 0;
-
     private bool isDeployed;
 
-    
     // Start is called before the first frame update
     void Start()
     {
+        if(configuration == null)
+        {
+            configuration = defaultTurretConfiguration;
+        }
+
         controllerState = ControllerState.GetInstance();
         controllerState.currentMode = ControllerMode.TURRET;
         pipeLocalPosition = pipe.transform.localPosition;
@@ -60,13 +58,13 @@ public class Turret : MonoBehaviour
         if(timeToShoot < 0 && isDeployed    )
         {
             Shoot();
-            timeToShoot = 1 / projectileRPS;
+            timeToShoot = 1 / configuration.RoundsPerSecound;
         }
     }
 
     void SetAngle(float value)
     {
-        if(Mathf.Abs(value) > turretTurnAngle) { return; }
+        if(Mathf.Abs(value) > configuration.TurnAngle) { return; }
         pipe.transform.localPosition = pipeLocalPosition;
         pipe.transform.localRotation = pipeLocalRotation;
         pipe.transform.RotateAround(pipeBase.position, new Vector3(0, 0, 1), value);
@@ -77,10 +75,16 @@ public class Turret : MonoBehaviour
         GameObject pt = Instantiate(projectile, pipeEnd.position, pipe.transform.rotation);
         Vector2 direction = pipeEnd.position - pipeBase.position;
 
+        float spread = configuration.BulletSpread;
         direction.x += Random.Range(-spread, spread);
         direction.y += Random.Range(-spread, spread);
 
-        pt.GetComponent<Rigidbody2D>().velocity = direction.normalized * initialVelocity;
+        pt.GetComponent<Rigidbody2D>().velocity = direction.normalized * configuration.BulletStartSpeed;
+    }
+
+    public void SetConfiguration(TurretConfiguration configuration)
+    {
+        this.configuration = configuration;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

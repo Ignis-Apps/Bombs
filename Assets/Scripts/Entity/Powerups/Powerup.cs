@@ -12,9 +12,11 @@ public abstract class Powerup : MonoBehaviour
     [HideInInspector] protected GameManager gameManager;
     [HideInInspector] protected ControllerState controllerState;
 
-    [SerializeField] private float powerupDurationSecounds;
+    //[SerializeField] private float powerupDurationSecounds;
     [Tooltip("Remaining time after deactivation till the destroyment")]
     [SerializeField] private float cleanUpTime;
+
+    private PowerUpConfiguration powerUpConfiguration;
 
     protected float remaingTime;
     private bool powerupActive;
@@ -26,6 +28,7 @@ public abstract class Powerup : MonoBehaviour
     {
         gameManager = GameManager.GetInstance();
         controllerState = ControllerState.GetInstance();
+        powerUpConfiguration = LoadConfiguration();
         StartCoroutine(PreventPickup());
     }
 
@@ -51,7 +54,7 @@ public abstract class Powerup : MonoBehaviour
         if (CurrentActivePowerup != null) { return; }
 
         powerupActive = true;
-        remaingTime = powerupDurationSecounds;
+        remaingTime = powerUpConfiguration.GetDuration;
         GetComponent<Collider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
         CurrentActivePowerup = this;
@@ -79,9 +82,10 @@ public abstract class Powerup : MonoBehaviour
     
     public float GetNormalisedProgress()
     {
-        return 1f - (remaingTime / powerupDurationSecounds);
+        return 1f - (remaingTime / powerUpConfiguration.GetDuration);
     }
 
+    public abstract PowerUpConfiguration LoadConfiguration();
     public abstract void OnPowerupActivate();
     public abstract void OnPowerupDeactivate();
 }

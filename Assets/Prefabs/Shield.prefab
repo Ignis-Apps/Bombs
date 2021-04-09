@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f8d3203a05e3f4b9bbe3089c249e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultConfiguration: {fileID: 11400000, guid: 600cbfb2f4cd8df4c8d4da5d414a47dc,
+    type: 2}
   hitpoints: 3
   shieldSprite: {fileID: 3713018410367895242}
   ShieldStates:

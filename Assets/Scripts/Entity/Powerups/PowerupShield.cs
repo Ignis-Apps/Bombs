@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Scriptable.powerups;
 using UnityEngine;
 
 namespace Assets.Scripts.Entity.Powerups
@@ -11,6 +7,19 @@ namespace Assets.Scripts.Entity.Powerups
     {
         [SerializeField] private GameObject shieldPrefab;
         private GameObject shieldInstance;
+
+        private ShieldConfiguration configuration;
+
+        [SerializeField ]private ShieldConfiguration DUMMY_CONFIG;
+
+        public override PowerUpConfiguration LoadConfiguration()
+        {
+            // TODO
+            //-------------------------------------
+            configuration = DUMMY_CONFIG;
+            //-------------------------------------
+            return configuration;
+        }
 
         public override void OnPowerupActivate()
         {
