@@ -5,7 +5,7 @@ using UnityEngine;
 public class ParalaxEffect : MonoBehaviour
 {
     [SerializeField] Vector2 effectStrength;
-
+    [SerializeField] bool repeat;
     private Transform cameraTransform;
     private Vector3 lastCameraPosition;
 
@@ -37,10 +37,11 @@ public class ParalaxEffect : MonoBehaviour
         transform.position += new Vector3(deltaPosition.x * effectStrength.x, deltaPosition.y * effectStrength.y, 0f);
         lastCameraPosition = cameraTransform.position;
 
-        // UNCOMMENT TO ENABLE INFINITE WORLD
 
-        
-        /*
+
+        if (!repeat) { return; }
+
+        // INFINITE WORLD CURRENTLY A BIT BUGGY
         if (cameraTransform.position.x - transform.position.x > spriteWidth )
         {
             transform.position += new Vector3(spriteWidth*3, 0, 0);
@@ -50,7 +51,7 @@ public class ParalaxEffect : MonoBehaviour
         {
             transform.position -= new Vector3(spriteWidth*3, 0, 0);
         }
-        */
+        
        
 
     }
