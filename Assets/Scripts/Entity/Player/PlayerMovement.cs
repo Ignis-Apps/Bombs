@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private bool playerIsMoving;
     private Vector2 playerTargetPosition;
 
-    private GameScreenManager gameScreenManager;
+    private ScreenManager screenManager;
     private GameManager gameManager;
 
     private Rigidbody2D playerBody;
@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        gameScreenManager = GameScreenManager.GetInstance();
+        screenManager = ScreenManager.GetInstance();
         gameManager = GameManager.GetInstance();
         playerBody = GetComponent<Rigidbody2D>();
     }
@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (!gameScreenManager.CanPlayerMove() || Input.touchCount <= 0) { StopMoving(); return; }
+        if (!screenManager.CanPlayerMove() || Input.touchCount <= 0) { StopMoving(); return; }
         Touch touch = Input.GetTouch(0);
         playerTargetPosition = Camera.main.ScreenToWorldPoint(touch.position);
 

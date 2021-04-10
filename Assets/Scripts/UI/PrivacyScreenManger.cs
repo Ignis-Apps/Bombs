@@ -1,61 +1,55 @@
 using Assets.Scripts.Game;
-using Assets.Scripts.UI;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ConsentManger : MonoBehaviour
+public class PrivacyScreenManger: MonoBehaviour
 {
     private GameData gameData;
-    private GameScreenManager gameScreenManager;
+    private ScreenManager screenManager;
 
     private Transform mainDialog;
     private Transform settingsDialog;
     private Transform warningDialog;
 
     //Main Dialog
-    public Button AcceptAllMainButton;
-    public Button SettingsButton;
+    [SerializeField] Button acceptAllMainButton;
+    [SerializeField] Button settingsButton;
 
     //Settings Dialog
-    public Toggle personalizedAdsToggle;
-    public Toggle analyticsToggle;
-    public Toggle crashReportingToggle;
-    public Button AcceptAllSettingsButton;
-    public Button AcceptSelectedButton;
+    [SerializeField] Toggle personalizedAdsToggle;
+    [SerializeField] Toggle analyticsToggle;
+    [SerializeField] Toggle crashReportingToggle;
+    [SerializeField] Button AcceptAllSettingsButton;
+    [SerializeField] Button AcceptSelectedButton;
 
     //Warning Dialog
-    public Button ContinueAnywayButton;
-    public Button CancelButton;
+    [SerializeField] Button continueAnywayButton;
+    [SerializeField] Button backButton;
 
 
     // Start is called before the first frame update
     void Start()
     {
         gameData = GameData.GetInstance();
-        gameScreenManager = GameScreenManager.GetInstance();
+        screenManager = ScreenManager.GetInstance();
+
+        mainDialog = transform.Find("MainDialog");
+        settingsDialog = transform.Find("SettingsDialog");
+        warningDialog = transform.Find("WarningDialog");
+
+        acceptAllMainButton.onClick.AddListener(AcceptAll);
+        settingsButton.onClick.AddListener(ShowSettingsDialog);
+
+        AcceptAllSettingsButton.onClick.AddListener(AcceptAll);
+        AcceptSelectedButton.onClick.AddListener(ShowWarningDialog);
+
+        continueAnywayButton.onClick.AddListener(AcceptSelected);
+        backButton.onClick.AddListener(ShowSettingsDialog);
 
         if (gameData.ConsentIsSet)
         {
             Debug.Log("Consent is set!");
-            gameScreenManager.SwitchScreen(ScreenType.TITLE_SCREEN);
-        } else
-        {
-            mainDialog = transform.Find("MainDialog");
-            settingsDialog = transform.Find("SettingsDialog");
-            warningDialog = transform.Find("WarningDialog");
-
-            ShowMainDialog();
-
-            AcceptAllMainButton.onClick.AddListener(AcceptAll);
-            SettingsButton.onClick.AddListener(ShowSettingsDialog);
-
-            AcceptAllSettingsButton.onClick.AddListener(AcceptAll);
-            AcceptSelectedButton.onClick.AddListener(ShowWarningDialog);
-
-            ContinueAnywayButton.onClick.AddListener(AcceptSelected);
-            CancelButton.onClick.AddListener(ShowSettingsDialog);
+            screenManager.SwitchScreen(ScreenType.TITLE_SCREEN);
         }
     }
 
@@ -66,7 +60,7 @@ public class ConsentManger : MonoBehaviour
         gameData.ConsentCrashlytics = true;
         gameData.ConsentPersonalisedAds = true;
         gameData.SaveConsent();
-        gameScreenManager.SwitchScreen(ScreenType.TITLE_SCREEN);
+        screenManager.SwitchScreen(ScreenType.TITLE_SCREEN);
     }
 
     private void AcceptSelected()
@@ -76,7 +70,7 @@ public class ConsentManger : MonoBehaviour
         gameData.ConsentCrashlytics = crashReportingToggle.isOn;
         gameData.ConsentPersonalisedAds = personalizedAdsToggle.isOn;
         gameData.SaveConsent();
-        gameScreenManager.SwitchScreen(ScreenType.TITLE_SCREEN);
+        screenManager.SwitchScreen(ScreenType.TITLE_SCREEN);
     }
 
     private void ShowMainDialog()
@@ -97,7 +91,6 @@ public class ConsentManger : MonoBehaviour
 
     private void ShowWarningDialog()
     {
-        
         if (!analyticsToggle.isOn || !crashReportingToggle.isOn || !personalizedAdsToggle.isOn)
         {
             Debug.Log("Show Warning Consent Dialog...");
@@ -110,7 +103,6 @@ public class ConsentManger : MonoBehaviour
             Debug.Log("Skip Warning Consent Dialog...");
             AcceptSelected();
         }
-        
     }
 
 }

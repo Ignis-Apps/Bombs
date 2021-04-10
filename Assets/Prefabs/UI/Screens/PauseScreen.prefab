@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 4963941913569863134}
   - component: {fileID: 7926074372068661638}
   - component: {fileID: 7921863156460874532}
-  - component: {fileID: 4289039679066837969}
-  - component: {fileID: 7497216670700184342}
   m_Layer: 5
   m_Name: HomeButton
   m_TagString: Untagged
@@ -122,32 +120,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4289039679066837969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 62485125860116797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8c0ad22f8ac8c4198077eefb58d19f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetMenu: 0
---- !u!114 &7497216670700184342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 62485125860116797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aa749070e108af49b7012d64c96e4e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetEvent: 0
 --- !u!1 &3286351346347021939
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +132,7 @@ GameObject:
   - component: {fileID: 3286351346347021940}
   - component: {fileID: 3286351346347021941}
   - component: {fileID: 3286351346347021943}
+  - component: {fileID: 6568739363692678188}
   m_Layer: 5
   m_Name: PauseScreen
   m_TagString: Untagged
@@ -242,6 +215,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenType: 2
   allowPlayerMovement: 0
+--- !u!114 &6568739363692678188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3286351346347021939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ff772ff855458429c97679615c42fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resumeButton: {fileID: 3286351346788211777}
+  homeButton: {fileID: 7921863156460874532}
 --- !u!1 &3286351346788211788
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,8 +241,6 @@ GameObject:
   - component: {fileID: 3286351346788211779}
   - component: {fileID: 3286351346788211776}
   - component: {fileID: 3286351346788211777}
-  - component: {fileID: 3286351346788211790}
-  - component: {fileID: 5722983880866752709}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -363,45 +348,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3286351346788211776}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AndroidHandler, Assembly-CSharp
-        m_MethodName: restore
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &3286351346788211790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3286351346788211788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8c0ad22f8ac8c4198077eefb58d19f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetMenu: 1
---- !u!114 &5722983880866752709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3286351346788211788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aa749070e108af49b7012d64c96e4e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetEvent: 3
+      m_Calls: []
 --- !u!1 &3286351347220401936
 GameObject:
   m_ObjectHideFlags: 0

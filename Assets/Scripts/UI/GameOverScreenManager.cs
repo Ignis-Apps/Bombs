@@ -2,8 +2,9 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using Assets.Scripts.Game;
+using UnityEngine.UI;
 
-public class GameResultUpdater : MonoBehaviour
+public class GameOverScreenManager: MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI bestScoreText;
@@ -11,15 +12,29 @@ public class GameResultUpdater : MonoBehaviour
     [SerializeField] TextMeshProUGUI survivedWavesText;
     [SerializeField] TextMeshProUGUI revivePriceText;
 
+    [SerializeField] Button buyReviveButton;
+    [SerializeField] Button adReviveButton;
+    [SerializeField] Button homeButton;
+    [SerializeField] Button retryButton;
+    [SerializeField] Button shareButton;
+
+    private ScreenManager screenManager;
     private GameManager gameManager;
     private GameData gameData;
     private Animator animator;
 
     void Awake()
     {
+        screenManager = ScreenManager.GetInstance();
         gameManager = GameManager.GetInstance();
         gameData = GameData.GetInstance();
         animator = GetComponent<Animator>();
+
+        buyReviveButton.onClick.AddListener(BuyRevive);
+        adReviveButton.onClick.AddListener(AdRevive);
+        homeButton.onClick.AddListener(Home);
+        retryButton.onClick.AddListener(Retry);
+        shareButton.onClick.AddListener(Share);
     }
 
     private void OnEnable()
@@ -71,5 +86,32 @@ public class GameResultUpdater : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    private void BuyRevive()
+    {
+        Debug.Log("Buy Revive ...");
+    }
+
+    private void AdRevive()
+    {
+        Debug.Log("Rewarded Video for Revive ...");
+    }
+
+    private void Home()
+    {
+        screenManager.SwitchScreen(ScreenType.TITLE_SCREEN);
+        gameManager.handleGameEvent(GameEvent.RESET_GAME);
+    }
+
+    private void Retry()
+    {
+        screenManager.SwitchScreen(ScreenType.INGAME_OVERLAY);
+        gameManager.handleGameEvent(GameEvent.RESET_GAME);
+    }
+
+    private void Share()
+    {
+        Debug.Log("Sharing ...");
     }
 }

@@ -1,17 +1,14 @@
 ﻿using Assets.Scripts.Game;
-using Assets.Scripts.UI;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseDetector : MonoBehaviour
 {
-    private GameScreenManager gameScreenManager;
+    private ScreenManager screenManager;
     private GameData gameData;
     private float previousTimeScale = 1f;
     void Start()
     {
-        gameScreenManager = GameScreenManager.GetInstance();
+        screenManager = ScreenManager.GetInstance();
         gameData = GameData.GetInstance();
         
         gameData.LoadData();    // Passt bisher nirgends richtig hin
@@ -20,7 +17,7 @@ public class PauseDetector : MonoBehaviour
 
     private void OnApplicationPause(bool pause)
     {
-        if (pause && gameScreenManager.CanPlayerMove())
+        if (pause && screenManager.CanPlayerMove())
         {
             Pause();
             gameData.SaveData();
@@ -29,7 +26,7 @@ public class PauseDetector : MonoBehaviour
 
     public void Pause()
     {
-        gameScreenManager.SwitchScreen(Assets.Scripts.UI.ScreenType.PAUSE_SCREEN);
+        screenManager.SwitchScreen(ScreenType.PAUSE_SCREEN);
         previousTimeScale = Time.timeScale;
         Time.timeScale = 0;
     }

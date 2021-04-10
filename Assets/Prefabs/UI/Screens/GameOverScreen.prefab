@@ -795,10 +795,8 @@ GameObject:
   - component: {fileID: 7014177047788559197}
   - component: {fileID: 7014177047788559196}
   - component: {fileID: 7014177047788559171}
-  - component: {fileID: 7014177047788559170}
-  - component: {fileID: 7014177047788559198}
   m_Layer: 5
-  m_Name: MenuButton
+  m_Name: HomeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -905,32 +903,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7014177047788559170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7014177047788559168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8c0ad22f8ac8c4198077eefb58d19f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetMenu: 0
---- !u!114 &7014177047788559198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7014177047788559168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aa749070e108af49b7012d64c96e4e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetEvent: 0
 --- !u!1 &7014177047855167684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,6 +1093,11 @@ MonoBehaviour:
   survivedSecoundsText: {fileID: 7014177048036323275}
   survivedWavesText: {fileID: 7014177048397271941}
   revivePriceText: {fileID: 7014177048025032011}
+  buyReviveButton: {fileID: 7014177048397116480}
+  adReviveButton: {fileID: 7014177047918595512}
+  homeButton: {fileID: 7014177047788559171}
+  retryButton: {fileID: 7014177047985874940}
+  shareButton: {fileID: 7014177048680015769}
 --- !u!95 &7014177047856862837
 Animator:
   serializedVersion: 3
@@ -1271,8 +1248,6 @@ GameObject:
   - component: {fileID: 7014177047985874942}
   - component: {fileID: 7014177047985874941}
   - component: {fileID: 7014177047985874940}
-  - component: {fileID: 7014177047985874915}
-  - component: {fileID: 7014177047985874943}
   m_Layer: 5
   m_Name: RetryButton
   m_TagString: Untagged
@@ -1381,32 +1356,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7014177047985874915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7014177047985874913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8c0ad22f8ac8c4198077eefb58d19f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetMenu: 1
---- !u!114 &7014177047985874943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7014177047985874913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aa749070e108af49b7012d64c96e4e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetEvent: 0
 --- !u!1 &7014177048025032009
 GameObject:
   m_ObjectHideFlags: 0
@@ -2190,8 +2139,6 @@ GameObject:
   - component: {fileID: 7014177048680015771}
   - component: {fileID: 7014177048680015770}
   - component: {fileID: 7014177048680015769}
-  - component: {fileID: 7014177048680015768}
-  - component: {fileID: 7014177048680015775}
   m_Layer: 5
   m_Name: ShareButton
   m_TagString: Untagged
@@ -2300,32 +2247,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7014177048680015768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7014177048680015773}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8c0ad22f8ac8c4198077eefb58d19f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetMenu: 1
---- !u!114 &7014177048680015775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7014177048680015773}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aa749070e108af49b7012d64c96e4e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetEvent: 0
 --- !u!1 &7014177048782732457
 GameObject:
   m_ObjectHideFlags: 0

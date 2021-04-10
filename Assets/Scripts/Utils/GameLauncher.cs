@@ -1,9 +1,4 @@
 ﻿using Assets.Scripts.Game;
-using Assets.Scripts.UI;
-using Firebase.Analytics;
-using Firebase.Crashlytics;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameLauncher : MonoBehaviour
@@ -12,7 +7,6 @@ public class GameLauncher : MonoBehaviour
     private FirebaseController firebaseController;
     private AppodealController appodealController;
 
-    private float previousTimeScale = 1f;
     void Start()
     {
         Debug.Log("Initializing...");

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1392456760189393512}
   - component: {fileID: 1392456760189393513}
   - component: {fileID: 1392456760189393514}
-  - component: {fileID: 1392456760189393517}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -153,19 +152,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1392456760189393517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1392456760189393511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8c0ad22f8ac8c4198077eefb58d19f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetMenu: 1
 --- !u!1 &1392456760442694934
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +164,7 @@ GameObject:
   - component: {fileID: 1392456760442694939}
   - component: {fileID: 1392456760442694936}
   - component: {fileID: 1392456760442694938}
+  - component: {fileID: 6602545872233519558}
   m_Layer: 5
   m_Name: TitleScreen
   m_TagString: Untagged
@@ -257,8 +244,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d06cd37f0e7ec448b55fce052f34f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuType: 0
+  screenType: 0
   allowPlayerMovement: 0
+--- !u!114 &6602545872233519558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392456760442694934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d43d0a4dc772a54aaa79c086f813b7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playButton: {fileID: 1392456760189393513}
+  leaderboardButton: {fileID: 6407144169490339297}
+  shopButton: {fileID: 3397520891302909334}
+  settingsButton: {fileID: 7175130509453575096}
 --- !u!1 &1392456761151579554
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +388,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7583473943734760533}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.666, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -501,9 +504,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 146547467360155140}
-  - {fileID: 5625679620409218918}
   - {fileID: 4118981795423207249}
+  - {fileID: 5625679620409218918}
+  - {fileID: 146547467360155140}
   m_Father: {fileID: 1392456760442694937}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -524,7 +527,6 @@ GameObject:
   - component: {fileID: 5349675506394744136}
   - component: {fileID: 2586512432794127911}
   - component: {fileID: 3397520891302909334}
-  - component: {fileID: 4695236070424452357}
   m_Layer: 0
   m_Name: ShopButton
   m_TagString: Untagged
@@ -633,19 +635,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4695236070424452357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6143932918309547204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8c0ad22f8ac8c4198077eefb58d19f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetMenu: 4
 --- !u!1 &7757536687589195424
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,7 +648,7 @@ GameObject:
   - component: {fileID: 6677746550413183336}
   - component: {fileID: 6407144169490339297}
   m_Layer: 0
-  m_Name: LeaderbpardButton
+  m_Name: LeaderboardButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -677,7 +666,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7583473943734760533}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.3333, y: 1}
