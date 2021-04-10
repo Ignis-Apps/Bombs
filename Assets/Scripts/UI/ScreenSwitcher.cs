@@ -6,21 +6,21 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class MenuSwitcher : MonoBehaviour
+public class ScreenSwitcher : MonoBehaviour
 {
-    public Menu targetMenu;
-    private GameStateManager stateManager;
+    public Assets.Scripts.UI.ScreenType targetMenu;
+    private GameScreenManager stateManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        stateManager = GameStateManager.GetInstance();
+        stateManager = GameScreenManager.GetInstance();
         GetComponent<Button>().onClick.AddListener(OnButtonPressed);
     }
 
     void OnButtonPressed()
     {
-        stateManager.SwitchController(targetMenu);
+        stateManager.SwitchScreen(targetMenu);
     }
 
     private void Update()

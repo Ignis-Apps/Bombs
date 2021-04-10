@@ -50,8 +50,8 @@ public class GameManager : Singleton<GameManager>
     }
     public void OnPlayerHit() { if (!playerStats.IsProtected) playerStats.Lifes--; }
     public void OnPlayerDied() {
-        
-        GameStateManager.GetInstance().SwitchController(Menu.GAME_OVER_SCREEN);
+
+        GameScreenManager.GetInstance().SwitchScreen(ScreenType.GAME_OVER_SCREEN);
         Player.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = false);
         Player.GetComponent<MovementController>().enabled = false;
         GameData.GetInstance().HighScore = Score; }

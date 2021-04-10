@@ -4,14 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AndroidHandler : MonoBehaviour
+public class PauseDetector : MonoBehaviour
 {
-    private GameStateManager gameMenuManager;
+    private GameScreenManager gameScreenManager;
     private GameData gameData;
     private float previousTimeScale = 1f;
     void Start()
     {
-        gameMenuManager = GameStateManager.GetInstance();
+        gameScreenManager = GameScreenManager.GetInstance();
         gameData = GameData.GetInstance();
         
         gameData.LoadData();    // Passt bisher nirgends richtig hin
@@ -20,7 +20,7 @@ public class AndroidHandler : MonoBehaviour
 
     private void OnApplicationPause(bool pause)
     {
-        if (pause && gameMenuManager.CanPlayerMove())
+        if (pause && gameScreenManager.CanPlayerMove())
         {
             Pause();
             gameData.SaveData();
@@ -29,7 +29,7 @@ public class AndroidHandler : MonoBehaviour
 
     public void Pause()
     {
-        gameMenuManager.SwitchController(Menu.PAUSE_SCREEN);
+        gameScreenManager.SwitchScreen(Assets.Scripts.UI.ScreenType.PAUSE_SCREEN);
         previousTimeScale = Time.timeScale;
         Time.timeScale = 0;
     }
