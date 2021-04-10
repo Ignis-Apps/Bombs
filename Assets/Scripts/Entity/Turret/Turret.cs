@@ -1,4 +1,5 @@
 using Assets.Scripts.Control;
+using System.Collections;
 using UnityEngine;
 
 public class Turret : MonoBehaviour
@@ -89,13 +90,14 @@ public class Turret : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ground"))
+        if (collision.CompareTag("Ground") && !isDeployed)
         {
             GetComponent<BoxCollider2D>().isTrigger = true;
             Rigidbody2D body = GetComponent<Rigidbody2D>();
             body.velocity = Vector2.zero;
-            body.bodyType = RigidbodyType2D.Static;
+            body.bodyType = RigidbodyType2D.Static;            
             isDeployed = true;
         }
     }
+
 }
