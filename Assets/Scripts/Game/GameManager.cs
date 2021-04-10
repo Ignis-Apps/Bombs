@@ -17,9 +17,7 @@ public class GameManager : Singleton<GameManager>
 {
 
     public PlayerStats playerStats = new PlayerStats();
-
-    public bool IsGameRunning;
-
+    
     private float survivedSecounds;
     private float daytime = 0;
 
@@ -48,10 +46,9 @@ public class GameManager : Singleton<GameManager>
     }
     public void OnPlayerHit() { if (!playerStats.IsProtected) playerStats.Lifes--; }
     public void OnPlayerDied() {
-
         ScreenManager.GetInstance().SwitchScreen(ScreenType.GAME_OVER_SCREEN);
-        Player.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = false);
-        Player.GetComponent<MovementController>().enabled = false;
+        Player.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = false);        
+        Player.GetComponent<MovementController>().Stop();      
         GameData.GetInstance().HighScore = Score; }
     public void Tick(){ survivedSecounds += Time.deltaTime; }
 

@@ -105,7 +105,7 @@ public class JoyStickBase : MonoBehaviour
     {
         if (!readInput) { return; }
 
-        if (hideIfNotInUse)
+        if (hideIfNotInUse || !screenManager.CanPlayerMove())
         {
             SetVisibility(false);
         }

@@ -12,6 +12,9 @@ public class ParalaxEffect : MonoBehaviour
     private float startPosition;
     private float spriteWidth;
 
+    private int indexPosition;
+    private Vector3 worldStartPosition;
+
     private void Awake()
     {
         cameraTransform = Camera.main.transform;
@@ -21,11 +24,14 @@ public class ParalaxEffect : MonoBehaviour
     private void Start()
     {
         startPosition = transform.position.x;
+        worldStartPosition = transform.position;
         
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
         if (renderer != null)
         {
             spriteWidth = renderer.bounds.size.x;
+            
+            Debug.Log(spriteWidth);
         }
     }
 
@@ -42,15 +48,18 @@ public class ParalaxEffect : MonoBehaviour
         if (!repeat) { return; }
 
         // INFINITE WORLD CURRENTLY A BIT BUGGY
-        if (cameraTransform.position.x - transform.position.x > spriteWidth )
+        if (cameraTransform.position.x - transform.position.x >= spriteWidth*2 )
         {
-            transform.position += new Vector3(spriteWidth*3, 0, 0);
+            indexPosition+=3;            
+            transform.position = new Vector3((indexPosition * spriteWidth) + worldStartPosition.x, worldStartPosition.y, worldStartPosition.z);
+        }
+        else if (transform.position.x - cameraTransform.position.x > spriteWidth*2 )
+        {
+            indexPosition-=3;            
+            transform.position = new Vector3((indexPosition * spriteWidth) + worldStartPosition.x, worldStartPosition.y, worldStartPosition.z);
         }
 
-        if (cameraTransform.position.x - transform.position.x < -spriteWidth )
-        {
-            transform.position -= new Vector3(spriteWidth*3, 0, 0);
-        }
+        
         
        
 

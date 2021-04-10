@@ -12,6 +12,7 @@ public class MovementController : MonoBehaviour
 
     private ControllerState controllerState;
     private GameManager gameManager;
+    private ScreenManager screenManager;
     private Rigidbody2D body;
     private Animator animator;
     
@@ -42,12 +43,13 @@ public class MovementController : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         gameManager = GameManager.GetInstance();
+        screenManager = ScreenManager.GetInstance();
         controllerState = ControllerState.GetInstance();       
     
     }
     public void Update()
     {
-        if(controllerState.currentMode == ControllerMode.PLAYER)
+        if(controllerState.currentMode == ControllerMode.PLAYER && screenManager.CanPlayerMove())
         {
             Move(new Vector2(controllerState.stickPositionX, controllerState.stickPositionY));
         }
