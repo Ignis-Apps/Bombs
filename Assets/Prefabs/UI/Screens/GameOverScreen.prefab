@@ -1074,7 +1074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d06cd37f0e7ec448b55fce052f34f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenType: 3
+  screenType: 4
   allowPlayerMovement: 0
 --- !u!114 &7014177047856862836
 MonoBehaviour:

@@ -9,7 +9,8 @@ public enum GameEvent
     RESET_GAME,
     CHANGE_TIME,
     PAUSE_GAME,
-    RESUME_GAME
+    RESUME_GAME,
+    REVIVE_PLAYER
 }
 
 
@@ -46,10 +47,23 @@ public class GameManager : Singleton<GameManager>
     }
     public void OnPlayerHit() { if (!playerStats.IsProtected) playerStats.Lifes--; }
     public void OnPlayerDied() {
-        ScreenManager.GetInstance().SwitchScreen(ScreenType.GAME_OVER_SCREEN);
+    
+        if(playerStats.AmountOfRevives < 1)
+        {
+            ScreenManager.GetInstance().SwitchScreen(ScreenType.REVIVE_SCREEN);
+            playerStats.IsProtected = true;
+        }
+        else
+        {
+            ScreenManager.GetInstance().SwitchScreen(ScreenType.GAME_OVER_SCREEN);
+        }
+
+
         Player.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = false);        
         Player.GetComponent<MovementController>().Stop();      
-        GameData.GetInstance().HighScore = Score; }
+        GameData.GetInstance().HighScore = Score; 
+
+    }
     public void Tick(){ survivedSecounds += Time.deltaTime; }
 
     public void ResetStats()
@@ -132,6 +146,14 @@ public class GameManager : Singleton<GameManager>
 
             case GameEvent.RESUME_GAME:
                 OnGameResumed();
+                break;
+
+            case GameEvent.REVIVE_PLAYER:
+                playerStats.Lifes += 1;
+                playerStats.AmountOfRevives += 1;
+                playerStats.IsProtected = false;
+                Player.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = true);
+                Player.GetComponent<MovementController>().enabled = true;
                 break;
 
             default:

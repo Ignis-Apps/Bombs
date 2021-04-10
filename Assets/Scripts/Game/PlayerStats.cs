@@ -19,6 +19,8 @@ namespace Assets.Scripts.Game
         private float playerSpeedPowerup;       // Speed multiplier of the current powerup
         private float playerSpeedWave;          // Speed multiplier of the current wave
 
+        private int revied;                     // Amount of revives this player has received
+
         public PlayerStats()
         {
             Init();
@@ -34,6 +36,7 @@ namespace Assets.Scripts.Game
             remainingLives = 3;
             collectedCoins = 0;
             collectedScorePoints = 0;
+            revied = 0;
 
             isPlayerProtected = false;
             isPlayerMoving = false;
@@ -48,6 +51,9 @@ namespace Assets.Scripts.Game
         public int Lifes { get => remainingLives; set { remainingLives = value; } }
         public int Coins { get => collectedCoins; set { collectedCoins = value; } }
         public int Score { get => collectedScorePoints; set { collectedScorePoints = value; } }
+        
+        public int AmountOfRevives { get => revied; set { revied = value; } }
+
         public float Speed { get => playerSpeedBase * playerSpeedWave * playerSpeedPowerup; }
         public float SpeedBase { get => playerSpeedBase; set { playerSpeedBase = value; } }
         public float SpeedPowerup { get => playerSpeedPowerup; set { playerSpeedPowerup = value; } }

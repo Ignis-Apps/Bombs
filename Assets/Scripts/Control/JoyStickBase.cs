@@ -53,6 +53,7 @@ public class JoyStickBase : MonoBehaviour
 
     public void Update()
     {
+        if (!screenManager.CanPlayerMove()) { SetVisibility(false); }
       
         if (Input.GetMouseButtonDown(0) && screenManager.CanPlayerMove()) { OnTouchDown(); }
 
@@ -66,6 +67,7 @@ public class JoyStickBase : MonoBehaviour
         
         controllerState.stickPositionXRaw = horizontal;
         controllerState.stickPositionYRaw = vertical;
+
 
     }
 
@@ -105,7 +107,7 @@ public class JoyStickBase : MonoBehaviour
     {
         if (!readInput) { return; }
 
-        if (hideIfNotInUse || !screenManager.CanPlayerMove())
+        if (hideIfNotInUse)
         {
             SetVisibility(false);
         }

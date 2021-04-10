@@ -41,6 +41,7 @@ public class GameOverScreenManager: MonoBehaviour
     {
         StartCoroutine(AnimateUI());
         bestScoreText.SetText("Best " + gameData.HighScore);
+        if (gameManager.Score > gameData.HighScore) { bestScoreText.SetText("New Highscore"); }
         revivePriceText.SetText("50");
     }
 
