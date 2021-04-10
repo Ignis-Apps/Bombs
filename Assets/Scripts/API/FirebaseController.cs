@@ -44,7 +44,7 @@ public class FirebaseController : Singleton<FirebaseController>
 
 
     public void LogEvent(String name) {
-        if(PlayerPrefs.GetInt("consentAnalytics", 0) != 0)
+        if(gameData.ConsentAnalytics)
         {
             UnityEngine.Analytics.Analytics.CustomEvent(name);
             

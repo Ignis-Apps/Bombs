@@ -1,7 +1,5 @@
 ﻿using Assets.Scriptable;
 using Assets.Scripts.Game;
-using Assets.Scripts.UI;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -51,7 +49,7 @@ public class GameManager : Singleton<GameManager>
     public void OnPlayerHit() { if (!playerStats.IsProtected) playerStats.Lifes--; }
     public void OnPlayerDied() {
 
-        GameScreenManager.GetInstance().SwitchScreen(ScreenType.GAME_OVER_SCREEN);
+        ScreenManager.GetInstance().SwitchScreen(ScreenType.GAME_OVER_SCREEN);
         Player.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = false);
         Player.GetComponent<MovementController>().enabled = false;
         GameData.GetInstance().HighScore = Score; }

@@ -1055,7 +1055,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cancel
+  m_text: Back
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2062,15 +2062,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2701da53a19f51a4eb80b542773cb4a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AcceptAllMainButton: {fileID: 9141534262799943347}
-  SettingsButton: {fileID: 414814577551398808}
+  acceptAllMainButton: {fileID: 9141534262799943347}
+  settingsButton: {fileID: 414814577551398808}
   personalizedAdsToggle: {fileID: 3115239061604423212}
   analyticsToggle: {fileID: 7355110582969717914}
   crashReportingToggle: {fileID: 187295964573734030}
   AcceptAllSettingsButton: {fileID: 5062291555369816172}
   AcceptSelectedButton: {fileID: 4484761406605534573}
-  ContinueAnywayButton: {fileID: 5330463745193324554}
-  CancelButton: {fileID: 8245211615514274497}
+  continueAnywayButton: {fileID: 5330463745193324554}
+  backButton: {fileID: 8245211615514274497}
 --- !u!114 &1891712787069708158
 MonoBehaviour:
   m_ObjectHideFlags: 0

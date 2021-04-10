@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using Assets.Scripts.Game;
-using Assets.Scripts.UI;
 
-public class GameScreenManager : Singleton<GameScreenManager>
+public class ScreenManager : Singleton<ScreenManager>
 {
-    public List<GameObject> screenPrefabs;
-    public Assets.Scripts.UI.ScreenType initialScreen;
+    [SerializeField] List<GameObject> screenPrefabs;
+    [SerializeField] ScreenType initialScreen;
 
     private List<ScreenController> gameScreenControllerList;
     private ScreenController currentActiveController;

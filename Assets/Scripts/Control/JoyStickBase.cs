@@ -34,13 +34,13 @@ public class JoyStickBase : MonoBehaviour
 
     private List<SpriteRenderer> spriteRenderers;
 
-    private GameScreenManager gameScreenManager;
+    private ScreenManager screenManager;
     private ControllerState controllerState;
     
     
     private void Awake()
     {
-        gameScreenManager = GameScreenManager.GetInstance();
+        screenManager = ScreenManager.GetInstance();
         controllerState = ControllerState.GetInstance();
         
         baseRadius = transform.lossyScale.x / 2f;
@@ -54,7 +54,7 @@ public class JoyStickBase : MonoBehaviour
     public void Update()
     {
       
-        if (Input.GetMouseButtonDown(0) && gameScreenManager.CanPlayerMove()) { OnTouchDown(); }
+        if (Input.GetMouseButtonDown(0) && screenManager.CanPlayerMove()) { OnTouchDown(); }
 
         if (!readInput) { return; }
 
