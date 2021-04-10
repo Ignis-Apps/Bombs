@@ -26,9 +26,11 @@ namespace Assets.Scripts.Game
         //Settings
         private float volumeMusic;
         private float volumeSFX;
-        private int consentAnalytics;
-        private int consentCrashlytics;
-        private int consentPersonalisedAds;
+
+        private bool consentIsSet;
+        private bool consentAnalytics;
+        private bool consentCrashlytics;
+        private bool consentPersonalisedAds;
 
         // Conatins the Skins/Scences/Upgrades a user owns
         private Dictionary<int, bool> skinInventory = new Dictionary<int, bool>();
@@ -42,9 +44,10 @@ namespace Assets.Scripts.Game
         public Scene SelectedScene { get => selectedScene; set { selectedScene = value; } }
         public float VolumeMusic { get => volumeMusic; set { volumeMusic = value; } }
         public float VolumeSFX { get => volumeSFX; set { volumeSFX = value; } }
-        public int ConsentAnalytics { get => consentAnalytics; set { consentAnalytics = value; } }
-        public int ConsentCrashlytics { get => consentCrashlytics; set { consentCrashlytics = value; } }
-        public int ConsentPersonalisedAds { get => consentPersonalisedAds; set { consentPersonalisedAds = value; } }
+        public bool ConsentIsSet { get => consentIsSet; set { consentIsSet = value; } }
+        public bool ConsentAnalytics { get => consentAnalytics; set { consentAnalytics = value; } }
+        public bool ConsentCrashlytics { get => consentCrashlytics; set { consentCrashlytics = value; } }
+        public bool ConsentPersonalisedAds { get => consentPersonalisedAds; set { consentPersonalisedAds = value; } }
 
         public bool getSkinInventory(int id)
         {
@@ -90,22 +93,34 @@ namespace Assets.Scripts.Game
 
             volumeMusic = PlayerPrefs.GetFloat("volumeMusic", 0);
             volumeSFX = PlayerPrefs.GetFloat("volumeSFX", 0);
-            consentAnalytics = PlayerPrefs.GetInt("consentAnalytics", 0);
-            consentCrashlytics = PlayerPrefs.GetInt("consentCrashlytics", 0);
-            consentPersonalisedAds = PlayerPrefs.GetInt("consentPersonalisedAds", 0);
+
+            consentIsSet = PlayerPrefs.GetInt("consentIsSet", 0) != 0;
+            consentAnalytics = PlayerPrefs.GetInt("consentAnalytics", 0) != 0;
+            consentCrashlytics = PlayerPrefs.GetInt("consentCrashlytics", 0) != 0;
+            consentPersonalisedAds = PlayerPrefs.GetInt("consentPersonalisedAds", 0) != 0;
         }
 
         public void SaveData()
         {
+            Debug.Log("Saving Data ...");
             PlayerPrefs.SetInt("highScore", highScore);
             PlayerPrefs.SetInt("coinBalance", coinBalance);
             PlayerPrefs.SetInt("crystalBalance", crystalBalance);
 
             PlayerPrefs.SetFloat("volumeMusic", volumeMusic);
             PlayerPrefs.SetFloat("volumeSFX", volumeSFX);
-            PlayerPrefs.SetInt("consentAnalytics", consentAnalytics);
-            PlayerPrefs.SetInt("consentCrashlytics", consentCrashlytics);
-            PlayerPrefs.SetInt("consentPersonalisedAds", consentPersonalisedAds);
+        }
+
+        public void SaveConsent()
+        {
+            Debug.Log("Saving Consent: " + consentPersonalisedAds + " / " + consentAnalytics + " / " + consentCrashlytics);
+            PlayerPrefs.SetInt("consentIsSet", 1);
+            PlayerPrefs.SetInt("consentAnalytics", consentAnalytics ? 1 : 0);
+            PlayerPrefs.SetInt("consentCrashlytics", consentCrashlytics ? 1 : 0);
+            PlayerPrefs.SetInt("consentPersonalisedAds", consentPersonalisedAds ? 1 : 0);
+
+            AppodealController.GetInstance().UpdateConsent(consentPersonalisedAds);
+            FirebaseController.GetInstance().UpdateConsent(consentCrashlytics, consentAnalytics);
         }
 
     }

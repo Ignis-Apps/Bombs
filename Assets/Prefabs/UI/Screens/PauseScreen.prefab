@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d06cd37f0e7ec448b55fce052f34f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuType: 2
+  screenType: 2
   allowPlayerMovement: 0
 --- !u!1 &3286351346788211788
 GameObject:

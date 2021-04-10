@@ -313,7 +313,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 31.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 4201224103631293083}
   - component: {fileID: 4201224103631293082}
   m_Layer: 5
-  m_Name: IngameUI
+  m_Name: IngameScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -523,7 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d06cd37f0e7ec448b55fce052f34f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuType: 1
+  screenType: 1
   allowPlayerMovement: 1
 --- !u!114 &4201224103631293082
 MonoBehaviour:

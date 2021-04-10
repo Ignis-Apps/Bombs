@@ -23,7 +23,7 @@ namespace Assets.Scripts.Game
 
         private Vector3[] spawnPoints;
 
-        private GameStateManager gameMenuManager = null;
+        private GameScreenManager gameScreenManager = null;
         private GameManager gameManager = null;
 
         
@@ -44,7 +44,7 @@ namespace Assets.Scripts.Game
 
         public void Awake()
         {   
-            gameMenuManager = GameStateManager.GetInstance();
+            gameScreenManager = GameScreenManager.GetInstance();
             gameManager = GameManager.GetInstance();
 
             waveTimer = new GameTimer();
@@ -66,8 +66,8 @@ namespace Assets.Scripts.Game
             #endif
             // END TEST CODE
 
-            if (gameMenuManager == null || gameManager == null) { return; }
-            running = gameMenuManager.CanPlayerMove();
+            if (gameScreenManager == null || gameManager == null) { return; }
+            running = gameScreenManager.CanPlayerMove();
             
             gameManager.CurrentWaveProgress = waveTimer.getProgress();
             if (!running || onTimeout) return;

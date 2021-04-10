@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuController : MonoBehaviour
+public class ScreenController : MonoBehaviour
 {
-    public Menu menuType;
+    public Assets.Scripts.UI.ScreenType screenType;
     public bool allowPlayerMovement;
 }
