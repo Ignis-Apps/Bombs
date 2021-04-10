@@ -1,4 +1,5 @@
 ﻿using Assets.Scriptable.powerups;
+using Assets.Scriptable.powerups.techtree;
 using System.Collections;
 using UnityEngine;
 
@@ -6,21 +7,17 @@ namespace Assets.Scripts.Entity.Powerups
 {
     class PowerupSlowmotion : Powerup
     {
-        // [SerializeField] private float slowMotionFactor;
+        [SerializeField] private SlowMotionUpgrade slowDownUpgradeTree;        
         [SerializeField] private float transitionTime;
         
         private float timeScaleBefore;
         private float fixedDeltaTimeBefore;
 
         private SlowMotionConfiguration configuration;
-        [SerializeField] private SlowMotionConfiguration DUMMY_CONFIG;
 
         public override PowerUpConfiguration LoadConfiguration()
-        {
-            // TODO
-            //-------------------------------------
-            configuration = DUMMY_CONFIG;
-            //-------------------------------------
+        {   
+            configuration = slowDownUpgradeTree.GetSlowMotionConfiguration();      
             return configuration;
         }
 

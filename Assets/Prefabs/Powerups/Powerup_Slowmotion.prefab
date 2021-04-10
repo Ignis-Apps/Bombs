@@ -100,8 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cleanUpTime: 0.8
   pickupProtectionTime: 0.2
+  slowDownUpgradeTree: {fileID: 11400000, guid: 7bf9b700f411eee4e92d4a85c8a3c80f,
+    type: 2}
   transitionTime: 0.7
-  DUMMY_CONFIG: {fileID: 11400000, guid: 3dc13786446e6f64abbb1d27c4e84221, type: 2}
 --- !u!50 &4520121023054950803
 Rigidbody2D:
   serializedVersion: 4

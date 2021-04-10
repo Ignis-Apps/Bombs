@@ -1,23 +1,21 @@
 ﻿using Assets.Scriptable.powerups;
+using Assets.Scriptable.powerups.techtree;
 using UnityEngine;
 
 namespace Assets.Scripts.Entity.Powerups
 {
-    class PowerupShield : Powerup
+    public class PowerupShield : Powerup
     {
+        [SerializeField] private ShieldUpgrade shieldUpgradeTree;
+        
         [SerializeField] private GameObject shieldPrefab;
         private GameObject shieldInstance;
 
         private ShieldConfiguration configuration;
 
-        [SerializeField ]private ShieldConfiguration DUMMY_CONFIG;
-
         public override PowerUpConfiguration LoadConfiguration()
-        {
-            // TODO
-            //-------------------------------------
-            configuration = DUMMY_CONFIG;
-            //-------------------------------------
+        {   
+            configuration = shieldUpgradeTree.GetShieldConfiguration();    
             return configuration;
         }
 

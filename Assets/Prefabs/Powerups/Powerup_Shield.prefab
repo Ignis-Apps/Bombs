@@ -100,9 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cleanUpTime: 1
   pickupProtectionTime: 0.2
+  shieldUpgradeTree: {fileID: 11400000, guid: a93d9b439e266754aa863572f1eb05f5, type: 2}
   shieldPrefab: {fileID: 1875407837483484560, guid: b8fc9c67489525e4e97707d4b00f7e4a,
     type: 3}
-  DUMMY_CONFIG: {fileID: 11400000, guid: 600cbfb2f4cd8df4c8d4da5d414a47dc, type: 2}
 --- !u!50 &6212283116821294852
 Rigidbody2D:
   serializedVersion: 4

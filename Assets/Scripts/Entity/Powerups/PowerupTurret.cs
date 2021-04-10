@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using Assets.Scriptable.powerups.techtree;
+using UnityEngine;
 
 namespace Assets.Scripts.Entity.Powerups
 {
     class PowerupTurret : Powerup
     {       
+        [SerializeField] private TurretUpgrade turretUpgradeTree;
         [SerializeField] private GameObject turretPrefab;
         
         private GameObject turretInstance;
@@ -11,15 +13,9 @@ namespace Assets.Scripts.Entity.Powerups
 
         private float SPAWN_HEIGHT = 5f;    
         
-        [SerializeField] private TurretConfiguration DUMMY_CONFIG;
-
         public override PowerUpConfiguration LoadConfiguration()
-        {
-            // TODO
-            //-------------------------------------
-                turretConfiguration = DUMMY_CONFIG;
-            //-------------------------------------
-
+        {            
+            turretConfiguration = turretUpgradeTree.GetTurretConfiguration();
             return turretConfiguration;
         }
 

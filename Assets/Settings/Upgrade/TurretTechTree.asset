@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e7f6047ba713084ea4946f7f17091e3, type: 3}
+  m_Name: TurretTechTree
+  m_EditorClassIdentifier: 
+  UPGRADE_ID: 0
+  configurations:
+  - {fileID: 11400000, guid: ea2150f234e754d47b4d8ac5b73c970c, type: 2}
+  - {fileID: 11400000, guid: c72393f5b175b094da9f9d1ed6dc8b12, type: 2}
+  - {fileID: 11400000, guid: 6346373f24e0fb24b950d7ce6ffb3fe2, type: 2}

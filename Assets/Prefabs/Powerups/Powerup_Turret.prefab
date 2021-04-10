@@ -49,9 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cleanUpTime: 0
   pickupProtectionTime: 0.2
+  turretUpgradeTree: {fileID: 11400000, guid: 6af1bab32956eb245933c04387905dd5, type: 2}
   turretPrefab: {fileID: 6281683116522795677, guid: 39de7ba11f17d6e49ba211084d0e7dc4,
     type: 3}
-  DUMMY_CONFIG: {fileID: 11400000, guid: ea2150f234e754d47b4d8ac5b73c970c, type: 2}
 --- !u!212 &8751246911764986023
 SpriteRenderer:
   m_ObjectHideFlags: 0
