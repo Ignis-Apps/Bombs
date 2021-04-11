@@ -2067,8 +2067,8 @@ MonoBehaviour:
   personalizedAdsToggle: {fileID: 3115239061604423212}
   analyticsToggle: {fileID: 7355110582969717914}
   crashReportingToggle: {fileID: 187295964573734030}
-  AcceptAllSettingsButton: {fileID: 5062291555369816172}
-  AcceptSelectedButton: {fileID: 4484761406605534573}
+  acceptAllSettingsButton: {fileID: 5062291555369816172}
+  acceptSelectedButton: {fileID: 4484761406605534573}
   continueAnywayButton: {fileID: 5330463745193324554}
   backButton: {fileID: 8245211615514274497}
 --- !u!114 &1891712787069708158
@@ -2083,7 +2083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d06cd37f0e7ec448b55fce052f34f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenType: 5
+  screenType: 6
   allowPlayerMovement: 0
 --- !u!1 &4201224104974400745
 GameObject:

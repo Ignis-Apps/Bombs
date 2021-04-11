@@ -2,15 +2,8 @@ using Assets.Scripts.Game;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PrivacyScreenManger: MonoBehaviour
+public class PrivacyScreenManager: AbstractScreenManager
 {
-    private GameData gameData;
-    private ScreenManager screenManager;
-
-    private Transform mainDialog;
-    private Transform settingsDialog;
-    private Transform warningDialog;
-
     //Main Dialog
     [SerializeField] Button acceptAllMainButton;
     [SerializeField] Button settingsButton;
@@ -19,38 +12,55 @@ public class PrivacyScreenManger: MonoBehaviour
     [SerializeField] Toggle personalizedAdsToggle;
     [SerializeField] Toggle analyticsToggle;
     [SerializeField] Toggle crashReportingToggle;
-    [SerializeField] Button AcceptAllSettingsButton;
-    [SerializeField] Button AcceptSelectedButton;
+    [SerializeField] Button acceptAllSettingsButton;
+    [SerializeField] Button acceptSelectedButton;
 
     //Warning Dialog
     [SerializeField] Button continueAnywayButton;
     [SerializeField] Button backButton;
 
+    private Transform mainDialog;
+    private Transform settingsDialog;
+    private Transform warningDialog;
 
-    // Start is called before the first frame update
-    void Start()
+    private ScreenType callbackScreen = ScreenType.TITLE_SCREEN;
+
+    // Init (like Awake) when the script is initialized
+    protected override void Init()
     {
-        gameData = GameData.GetInstance();
-        screenManager = ScreenManager.GetInstance();
-
         mainDialog = transform.Find("MainDialog");
         settingsDialog = transform.Find("SettingsDialog");
         warningDialog = transform.Find("WarningDialog");
+    }
 
+    public void Start()
+    {
         acceptAllMainButton.onClick.AddListener(AcceptAll);
-        settingsButton.onClick.AddListener(ShowSettingsDialog);
+        settingsButton.onClick.AddListener(() => ShowSettingsDialog(callbackScreen));
 
-        AcceptAllSettingsButton.onClick.AddListener(AcceptAll);
-        AcceptSelectedButton.onClick.AddListener(ShowWarningDialog);
+        acceptAllSettingsButton.onClick.AddListener(AcceptAll);
+        acceptSelectedButton.onClick.AddListener(ShowWarningDialog);
 
         continueAnywayButton.onClick.AddListener(AcceptSelected);
-        backButton.onClick.AddListener(ShowSettingsDialog);
+        backButton.onClick.AddListener(() => ShowSettingsDialog(callbackScreen));
+    }
 
-        if (gameData.ConsentIsSet)
-        {
-            Debug.Log("Consent is set!");
-            screenManager.SwitchScreen(ScreenType.TITLE_SCREEN);
-        }
+    public void ShowMainDialog(ScreenType callbackScreen)
+    {
+        Debug.Log("Show Main Consent Dialog...");
+        this.callbackScreen = callbackScreen;
+        mainDialog.gameObject.SetActive(true);
+        settingsDialog.gameObject.SetActive(false);
+        warningDialog.gameObject.SetActive(false);
+    }
+
+    public void ShowSettingsDialog(ScreenType callbackScreen)
+    {
+        Debug.Log("Show Settings Consent Dialog...");
+        this.callbackScreen = callbackScreen;
+        mainDialog.gameObject.SetActive(false);
+        settingsDialog.gameObject.SetActive(true);
+        warningDialog.gameObject.SetActive(false);
     }
 
     private void AcceptAll()
@@ -60,7 +70,12 @@ public class PrivacyScreenManger: MonoBehaviour
         gameData.ConsentCrashlytics = true;
         gameData.ConsentPersonalisedAds = true;
         gameData.SaveConsent();
-        screenManager.SwitchScreen(ScreenType.TITLE_SCREEN);
+
+        mainDialog.gameObject.SetActive(false);
+        settingsDialog.gameObject.SetActive(false);
+        warningDialog.gameObject.SetActive(false);
+
+        screenManager.SwitchScreen(callbackScreen);
     }
 
     private void AcceptSelected()
@@ -70,23 +85,12 @@ public class PrivacyScreenManger: MonoBehaviour
         gameData.ConsentCrashlytics = crashReportingToggle.isOn;
         gameData.ConsentPersonalisedAds = personalizedAdsToggle.isOn;
         gameData.SaveConsent();
-        screenManager.SwitchScreen(ScreenType.TITLE_SCREEN);
-    }
 
-    private void ShowMainDialog()
-    {
-        Debug.Log("Show Main Consent Dialog...");
-        mainDialog.gameObject.SetActive(true);
+        mainDialog.gameObject.SetActive(false);
         settingsDialog.gameObject.SetActive(false);
         warningDialog.gameObject.SetActive(false);
-    }
 
-    private void ShowSettingsDialog()
-    {
-        Debug.Log("Show Settings Consent Dialog...");
-        mainDialog.gameObject.SetActive(false);
-        settingsDialog.gameObject.SetActive(true);
-        warningDialog.gameObject.SetActive(false);
+        screenManager.SwitchScreen(callbackScreen);
     }
 
     private void ShowWarningDialog()

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ReviveScreenManager : MonoBehaviour
+public class ReviveScreenManager : AbstractScreenManager
 {    
     // Buttons
     [SerializeField] private Button reviveWithCrystalButton;
@@ -12,13 +12,11 @@ public class ReviveScreenManager : MonoBehaviour
     [SerializeField] private Transform progressBarFill;
     [SerializeField] private TextMeshProUGUI progressText;
 
-    private GameManager gameManager;
-    private ScreenManager screenManager;
+    // Init (like Awake) when the script is initialized
+    protected override void Init() {}
 
-    private void Awake()
+    private void Start()
     {
-        gameManager = GameManager.GetInstance();
-        screenManager = ScreenManager.GetInstance();
         reviveWithCrystalButton.onClick.AddListener(OnReviveWithCrystal);
         reviveWithAdButton.onClick.AddListener(OnReviveWithAd);
     }
@@ -41,6 +39,5 @@ public class ReviveScreenManager : MonoBehaviour
     {
         gameManager.handleGameEvent(GameEvent.REVIVE_PLAYER);
         screenManager.SwitchScreen(ScreenType.INGAME_OVERLAY);
-
     }
 }

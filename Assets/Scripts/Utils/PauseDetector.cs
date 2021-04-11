@@ -11,7 +11,6 @@ public class PauseDetector : MonoBehaviour
         screenManager = ScreenManager.GetInstance();
         gameData = GameData.GetInstance();
         
-        gameData.LoadData();    // Passt bisher nirgends richtig hin
         Application.targetFrameRate = 300;
     }
 
@@ -20,7 +19,6 @@ public class PauseDetector : MonoBehaviour
         if (pause && screenManager.CanPlayerMove())
         {
             Pause();
-            gameData.SaveData();
         }
     }
 

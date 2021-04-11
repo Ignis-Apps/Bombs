@@ -4,7 +4,7 @@ using TMPro;
 using Assets.Scripts.Game;
 using UnityEngine.UI;
 
-public class GameOverScreenManager: MonoBehaviour
+public class GameOverScreenManager: AbstractScreenManager
 {
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI bestScoreText;
@@ -17,17 +17,11 @@ public class GameOverScreenManager: MonoBehaviour
     [SerializeField] Button homeButton;
     [SerializeField] Button retryButton;
     [SerializeField] Button shareButton;
-
-    private ScreenManager screenManager;
-    private GameManager gameManager;
-    private GameData gameData;
     private Animator animator;
 
-    void Awake()
+    // Init (like Awake) when the script is initialized
+    protected override void Init()
     {
-        screenManager = ScreenManager.GetInstance();
-        gameManager = GameManager.GetInstance();
-        gameData = GameData.GetInstance();
         animator = GetComponent<Animator>();
 
         buyReviveButton.onClick.AddListener(BuyRevive);
