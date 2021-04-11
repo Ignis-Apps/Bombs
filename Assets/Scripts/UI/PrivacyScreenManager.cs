@@ -76,6 +76,12 @@ public class PrivacyScreenManager: AbstractScreenManager
         warningDialog.gameObject.SetActive(false);
 
         screenManager.SwitchScreen(callbackScreen);
+
+        if(callbackScreen == ScreenType.TITLE_SCREEN)
+        {
+            //gpgsController.SignInPromptOnce();
+            gpgsController.UnlockTextAchivment();
+        }
     }
 
     private void AcceptSelected()
@@ -91,6 +97,11 @@ public class PrivacyScreenManager: AbstractScreenManager
         warningDialog.gameObject.SetActive(false);
 
         screenManager.SwitchScreen(callbackScreen);
+
+        if (callbackScreen == ScreenType.TITLE_SCREEN)
+        {
+            //gpgsController.SignInPromptOnce();
+        }
     }
 
     private void ShowWarningDialog()

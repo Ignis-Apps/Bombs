@@ -19,6 +19,8 @@ public class TitleScreenManager : AbstractScreenManager
         shopButton.onClick.AddListener(ShowShop);
         settingsButton.onClick.AddListener(ShowSettings);
 
+        gpgsController.SignInPromptOnce();
+
         //Check for Consent
         if (!gameData.ConsentIsSet)
         {
@@ -26,6 +28,10 @@ public class TitleScreenManager : AbstractScreenManager
             screenManager.SwitchScreen(ScreenType.PRIVACY_SCREEN);
             PrivacyScreenManager privacyScreenManager = (PrivacyScreenManager) screenManager.getScreenManager(ScreenType.PRIVACY_SCREEN);
             privacyScreenManager.ShowMainDialog(ScreenType.TITLE_SCREEN);
+        }
+        else
+        {
+            //gpgsController.SignInPromptOnce();
         }
     }
 
@@ -36,12 +42,25 @@ public class TitleScreenManager : AbstractScreenManager
 
     private void ShowLeaderboard()
     {
-        Debug.Log("Starting Google Play Games Leaderboard ...");
+        gpgsController.ShowLeaderboadUI();
     }
 
     private void ShowShop()
     {
-        screenManager.SwitchScreen(ScreenType.SHOP_SCREEN);
+        //screenManager.SwitchScreen(ScreenType.SHOP_SCREEN);
+
+        AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        AndroidJavaObject unityActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+
+        if (unityActivity != null)
+        {
+            AndroidJavaClass toastClass = new AndroidJavaClass("android.widget.Toast");
+            unityActivity.Call("runOnUiThread", new AndroidJavaRunnable(() =>
+            {
+                AndroidJavaObject toastObject = toastClass.CallStatic<AndroidJavaObject>("makeText", unityActivity, "Coming Soon...", 0);
+                toastObject.Call("show");
+            }));
+        }
     }
 
     private void ShowSettings()

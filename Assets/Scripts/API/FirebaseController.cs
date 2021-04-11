@@ -11,7 +11,7 @@ public class FirebaseController : Singleton<FirebaseController>
 {
     private GameData gameData;
 
-    private bool firebaseEnabled = false;
+    private bool firebaseAvailable = false;
     private Firebase.FirebaseApp firebaseApp;
 
     public void Init()
@@ -31,7 +31,7 @@ public class FirebaseController : Singleton<FirebaseController>
                 firebaseApp = Firebase.FirebaseApp.DefaultInstance;
 
                 // Set a flag here for indicating that your project is ready to use Firebase.
-                firebaseEnabled = true;
+                firebaseAvailable = true;
             }
             else
             {
@@ -48,7 +48,7 @@ public class FirebaseController : Singleton<FirebaseController>
         {
             UnityEngine.Analytics.Analytics.CustomEvent(name);
             
-            if (firebaseEnabled)
+            if (firebaseAvailable)
             {
                 FirebaseAnalytics.LogEvent(name);
             }

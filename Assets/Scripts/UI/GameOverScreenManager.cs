@@ -30,7 +30,10 @@ public class GameOverScreenManager: AbstractScreenManager
     {
         StartCoroutine(AnimateUI());
         bestScoreText.SetText("Best " + gameData.HighScore);
-        if (gameManager.Score > gameData.HighScore) { bestScoreText.SetText("New Highscore"); }        
+        if (gameManager.SurvivedSecounds > gameData.HighScore) { 
+            bestScoreText.SetText("New Highscore");
+            gpgsController.UpdateScoreTestLeaderboard(gameData.HighScore * 1000);
+        }        
     }
 
 

@@ -68,7 +68,7 @@ public class GameManager : Singleton<GameManager>
 
         Player.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = false);        
         Player.GetComponent<MovementController>().Stop();      
-        GameData.GetInstance().HighScore = Score; 
+        GameData.GetInstance().HighScore = SurvivedSecounds; 
 
     }
     public void Tick(){ survivedSecounds += Time.deltaTime; }
