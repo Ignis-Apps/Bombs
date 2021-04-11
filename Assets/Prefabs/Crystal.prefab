@@ -215,8 +215,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5571191734759576400}
   - component: {fileID: 3986038250502959162}
-  - component: {fileID: 8590296854280569783}
   - component: {fileID: 4659718214046468628}
+  - component: {fileID: 8590296854280569783}
   - component: {fileID: 4631437111029535949}
   m_Layer: 15
   m_Name: Gem
@@ -261,22 +261,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &8590296854280569783
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4933730202248994730}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.8793269
 --- !u!58 &4659718214046468628
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -293,6 +277,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.3147018
+--- !u!58 &8590296854280569783
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4933730202248994730}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.8793269
 --- !u!114 &4631437111029535949
 MonoBehaviour:
   m_ObjectHideFlags: 0

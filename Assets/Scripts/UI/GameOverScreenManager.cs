@@ -10,10 +10,7 @@ public class GameOverScreenManager: AbstractScreenManager
     [SerializeField] TextMeshProUGUI bestScoreText;
     [SerializeField] TextMeshProUGUI survivedSecoundsText;
     [SerializeField] TextMeshProUGUI survivedWavesText;
-    [SerializeField] TextMeshProUGUI revivePriceText;
-
-    [SerializeField] Button buyReviveButton;
-    [SerializeField] Button adReviveButton;
+    
     [SerializeField] Button homeButton;
     [SerializeField] Button retryButton;
     [SerializeField] Button shareButton;
@@ -24,8 +21,6 @@ public class GameOverScreenManager: AbstractScreenManager
     {
         animator = GetComponent<Animator>();
 
-        buyReviveButton.onClick.AddListener(BuyRevive);
-        adReviveButton.onClick.AddListener(AdRevive);
         homeButton.onClick.AddListener(Home);
         retryButton.onClick.AddListener(Retry);
         shareButton.onClick.AddListener(Share);
@@ -35,8 +30,7 @@ public class GameOverScreenManager: AbstractScreenManager
     {
         StartCoroutine(AnimateUI());
         bestScoreText.SetText("Best " + gameData.HighScore);
-        if (gameManager.Score > gameData.HighScore) { bestScoreText.SetText("New Highscore"); }
-        revivePriceText.SetText("50");
+        if (gameManager.Score > gameData.HighScore) { bestScoreText.SetText("New Highscore"); }        
     }
 
 
@@ -81,16 +75,6 @@ public class GameOverScreenManager: AbstractScreenManager
             yield return null;
         }
 
-    }
-
-    private void BuyRevive()
-    {
-        Debug.Log("Buy Revive ...");
-    }
-
-    private void AdRevive()
-    {
-        Debug.Log("Rewarded Video for Revive ...");
     }
 
     private void Home()

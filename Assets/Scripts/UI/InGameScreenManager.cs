@@ -6,7 +6,7 @@ public class InGameScreenManager: AbstractScreenManager
 {
     [SerializeField] TextMeshProUGUI coinText;
     [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI liveText;
+    [SerializeField] TextMeshProUGUI liveText;    
 
     [SerializeField] Button pauseButton;
 

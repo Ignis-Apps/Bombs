@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ReviveScreenManager : AbstractScreenManager
 {
     // Configuration
-    [SerializeField] private float timeToDecide;
+    [SerializeField] private float timeToDecide;    
 
     // Buttons
     [SerializeField] private Button reviveWithCrystalButton;
@@ -32,10 +32,15 @@ public class ReviveScreenManager : AbstractScreenManager
     {
         float progress = gameManager.CurrentWaveProgress;
         progressBarFill.localScale = new Vector3 (progress,1f,1f);
+        
         timeBarFill.localScale = new Vector3(1f, timeBarFill.localScale.y, timeBarFill.localScale.z);
         timeBarRunning = true;
+        
         progressText.text = ((int)(progress * 100)) + "%";        
+        
         waveText.text = "( Wave " + (gameManager.SurvivedWaves + 1) + " )";
+
+        reviveWithCrystalButton.interactable = (gameManager.playerStats.Crystals > 0 || gameData.CrystalBalance > 0);
     }
 
     private void Update()
@@ -55,6 +60,10 @@ public class ReviveScreenManager : AbstractScreenManager
 
     private void OnReviveWithCrystal() {
         timeBarRunning = false;
+
+        if (gameData.CrystalBalance > 0) { gameData.CrystalBalance--; }
+        else { gameManager.playerStats.Crystals--; }
+
         Revive();
     }
     private void OnReviveWithAd() {
