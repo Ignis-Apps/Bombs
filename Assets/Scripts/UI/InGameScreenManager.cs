@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine.UI;
 
-public class InGameScreenManager: MonoBehaviour
+public class InGameScreenManager: AbstractScreenManager
 {
     [SerializeField] TextMeshProUGUI coinText;
     [SerializeField] TextMeshProUGUI scoreText;
@@ -10,17 +10,14 @@ public class InGameScreenManager: MonoBehaviour
 
     [SerializeField] Button pauseButton;
 
-    private ScreenManager screenManager;
-    private GameManager gameManager;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameManager = GameManager.GetInstance();
-        screenManager = ScreenManager.GetInstance();
+    // Init (like Awake) when the script is initialized
+    protected override void Init() {}
 
+    public void Start()
+    {
         pauseButton.onClick.AddListener(Pause);
     }
+
     // TODO : Stop wasting ressources. Maybe we could use event based updates
     void Update()
     {
@@ -34,4 +31,6 @@ public class InGameScreenManager: MonoBehaviour
         screenManager.SwitchScreen(ScreenType.PAUSE_SCREEN);
         gameManager.handleGameEvent(GameEvent.PAUSE_GAME);
     }
+
+    
 }

@@ -1,19 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseScreenManager : MonoBehaviour
+public class PauseScreenManager : AbstractScreenManager
 {
     [SerializeField] Button resumeButton;
     [SerializeField] Button homeButton;
 
-    private ScreenManager screenManager;
-    private GameManager gameManager;
+    // Init (like Awake) when the script is initialized
+    protected override void Init() {}
 
     void Start()
     {
-        screenManager = ScreenManager.GetInstance();
-        gameManager = GameManager.GetInstance();
-
         resumeButton.onClick.AddListener(ResumeGame);
         homeButton.onClick.AddListener(Home);
     }

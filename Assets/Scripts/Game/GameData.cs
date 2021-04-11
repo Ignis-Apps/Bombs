@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public enum Currency
@@ -13,7 +9,7 @@ public enum Currency
 
 namespace Assets.Scripts.Game
 {
-    class GameData : Singleton<GameData>
+    public class GameData : Singleton<GameData>
     {
         private int highScore;
         private int coinBalance;

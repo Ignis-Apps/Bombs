@@ -13,7 +13,7 @@ public class ScreenManager : Singleton<ScreenManager>
 
     protected override void Awake()
     {
-        screenPrefabs.ForEach(menu => Instantiate(menu, this.gameObject.transform));
+        screenPrefabs.ForEach(screen => Instantiate(screen, this.gameObject.transform));
 
         gameScreenControllerList = GetComponentsInChildren<ScreenController>().ToList();       
         gameScreenControllerList.ForEach(controler => controler.gameObject.SetActive(false));        
@@ -23,7 +23,6 @@ public class ScreenManager : Singleton<ScreenManager>
 
     public void SwitchScreen(ScreenType nextScreen)
     {
-        Debug.Log("SwitchScreen: " + nextScreen);
         if(currentActiveController != null)
         {
             currentActiveController.gameObject.SetActive(false);
@@ -37,8 +36,15 @@ public class ScreenManager : Singleton<ScreenManager>
 
         nextController.gameObject.SetActive(true);
         currentActiveController = nextController;
-        
     }
+
+    public AbstractScreenManager getScreenManager(ScreenType type)
+    {
+        ScreenController controller = gameScreenControllerList.Find(controller => controller.screenType == type);
+        AbstractScreenManager abstractScreenManager = controller.gameObject.GetComponent<AbstractScreenManager>();
+        return abstractScreenManager;
+    }
+
 
     public bool CanPlayerMove()
     {
