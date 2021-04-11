@@ -8,6 +8,7 @@ namespace Assets.Scripts.Game
         private int remainingLives;
         private int collectedCoins;
         private int collectedScorePoints;
+        private int collectedCrystals;
 
         // Player state
         private bool isPlayerProtected;
@@ -36,6 +37,7 @@ namespace Assets.Scripts.Game
             remainingLives = 3;
             collectedCoins = 0;
             collectedScorePoints = 0;
+            collectedCrystals = 0;
             revied = 0;
 
             isPlayerProtected = false;
@@ -51,6 +53,7 @@ namespace Assets.Scripts.Game
         public int Lifes { get => remainingLives; set { remainingLives = value; } }
         public int Coins { get => collectedCoins; set { collectedCoins = value; } }
         public int Score { get => collectedScorePoints; set { collectedScorePoints = value; } }
+        public int Crystals { get => collectedCrystals; set { collectedCrystals = value; } }
         
         public int AmountOfRevives { get => revied; set { revied = value; } }
 

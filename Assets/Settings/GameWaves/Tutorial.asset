@@ -439,8 +439,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.7
+        time: 0.01424852
+        value: 0.99679077
         inSlope: -0.19999999
         outSlope: -0.19999999
         tangentMode: 34
@@ -448,8 +448,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
-        value: 0.5
+        time: 1.0142485
+        value: 0.7967908
         inSlope: -0.19999999
         outSlope: -0.19999999
         tangentMode: 34
@@ -532,9 +532,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
     spawnGroupSizeMin: 3
-    spawnGroupSizeMax: 6
+    spawnGroupSizeMax: 5
     playerSpeedMultiplier: 1.01
-    spawnWeightDefaultBomb: 8
+    spawnWeightDefaultBomb: 48
     spawnWeightHomingBomb: 1
-    spawnWeightSmallBomb: 2
+    spawnWeightSmallBomb: 12
     endWaveWithCrate: 1

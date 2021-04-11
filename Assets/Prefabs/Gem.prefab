@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7774122926885061467}
   - component: {fileID: 5347209565616413859}
   - component: {fileID: 203338301304947638}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6392887370577795365}
   - component: {fileID: 1737184917764882430}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Spark1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,9 +214,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5571191734759576400}
-  m_Layer: 0
+  - component: {fileID: 3986038250502959162}
+  - component: {fileID: 8590296854280569783}
+  - component: {fileID: 4659718214046468628}
+  - component: {fileID: 4631437111029535949}
+  m_Layer: 15
   m_Name: Gem
-  m_TagString: Untagged
+  m_TagString: Crystal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,12 +234,78 @@ Transform:
   m_GameObject: {fileID: 4933730202248994730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.07, y: 0.07, z: 1}
   m_Children:
   - {fileID: 7669215999646742212}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &3986038250502959162
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4933730202248994730}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &8590296854280569783
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4933730202248994730}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.8793269
+--- !u!58 &4659718214046468628
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4933730202248994730}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.3147018
+--- !u!114 &4631437111029535949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4933730202248994730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a278848f36f0be345af6f17613b784c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToPickup: 0.2
 --- !u!1 &4996465810824873880
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +317,7 @@ GameObject:
   - component: {fileID: 1814527732901632131}
   - component: {fileID: 540848158877468903}
   - component: {fileID: 7893311022583279413}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Spark3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1906683706628302193}
   - component: {fileID: 5480286099431648166}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Spark2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

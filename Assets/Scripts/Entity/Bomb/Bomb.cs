@@ -8,6 +8,7 @@ namespace Assets.Scripts.Entity.Bomb
         [SerializeField] private GameObject explosionPrefab;
         [SerializeField] private GameObject scoreOrbPrefab;
         [SerializeField] private GameObject coinPrefab;
+        [SerializeField] private GameObject crystalPrefab;
 
         [SerializeField] private float explosionSize;
 
@@ -82,8 +83,8 @@ namespace Assets.Scripts.Entity.Bomb
             explosion.transform.localScale = new Vector2(explosionSize, explosionSize);
 
             SpawnPrefabs(coinPrefab, lootTableSettings.GetRandomCoinAmount());
-            SpawnPrefabs(scoreOrbPrefab, lootTableSettings.GetRandomScoreAmount());
-            SpawnPrefabs(coinPrefab, lootTableSettings.GetRandomSpecialCoinAmount());
+            //SpawnPrefabs(scoreOrbPrefab, lootTableSettings.GetRandomScoreAmount());           
+            SpawnPrefabs(crystalPrefab, lootTableSettings.GetRandomSpecialCoinAmount());
 
             if (!collision.gameObject.name.Contains("Player"))
             {

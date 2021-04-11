@@ -37,6 +37,12 @@ public class Player : MonoBehaviour
             GameManager.GetInstance().OnPointCollected(1);
         }
 
+        if (collision.name.Contains("Crystal"))
+        {
+            // Destroy(collision.gameObject);      
+            GameManager.GetInstance().OnCrystalCollected(1);
+        }
+
         if (collision.CompareTag("Bomb"))
         {
             Destroy(collision.gameObject);

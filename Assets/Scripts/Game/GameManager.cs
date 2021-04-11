@@ -42,6 +42,11 @@ public class GameManager : Singleton<GameManager>
 
     public void OnCoinCollected(int amount){ playerStats.Coins += amount; }
     public void OnPointCollected(int amount){ playerStats.Score += amount;}
+
+    public void OnCrystalCollected(int amount)
+    {
+        playerStats.Crystals += amount;
+    }
     public void OnBombDodged(){ dodgedBombs += 1; }
     public void OnWaveSurvived(){ 
         survivedWaves++;

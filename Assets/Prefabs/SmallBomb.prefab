@@ -170,8 +170,9 @@ MonoBehaviour:
     type: 3}
   coinPrefab: {fileID: 6376339539627395642, guid: 02962b1e87578474aac123ac6648ca72,
     type: 3}
+  crystalPrefab: {fileID: 4933730202248994730, guid: e5a1d2e7b44642b469d4e93bfa4cf4aa,
+    type: 3}
   explosionSize: 0.3
-  startSpeed: 4
   maxSpeed: 15
   acceleration: 0.2
   angularAcceleration: 0

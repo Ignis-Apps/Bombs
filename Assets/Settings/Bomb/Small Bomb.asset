@@ -26,4 +26,8 @@ MonoBehaviour:
     probability: 0.3
   - amount: 3
     probability: 0.2
-  specialCoinDrop: []
+  specialCoinDrop:
+  - amount: 0
+    probability: 0.996
+  - amount: 1
+    probability: 0.004
