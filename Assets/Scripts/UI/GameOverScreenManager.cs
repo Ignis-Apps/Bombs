@@ -35,7 +35,10 @@ public class GameOverScreenManager: AbstractScreenManager
     {
         StartCoroutine(AnimateUI());
         bestScoreText.SetText("Best " + gameData.HighScore);
-        if (gameManager.Score > gameData.HighScore) { bestScoreText.SetText("New Highscore"); }
+        if (gameManager.SurvivedSecounds > gameData.HighScore) { 
+            bestScoreText.SetText("New Highscore");
+            gpgsController.UpdateScoreTestLeaderboard(gameData.HighScore * 1000);
+        }
         revivePriceText.SetText("50");
     }
 
@@ -59,7 +62,7 @@ public class GameOverScreenManager: AbstractScreenManager
         yield return new WaitForSeconds(.5f);
         StartCoroutine(AnimateText(survivedWavesText, 0f, .5f, "", 0, gameManager.SurvivedWaves));
         yield return new WaitForSeconds(.5f);
-        StartCoroutine(AnimateText(scoreText, 0f, .5f, "", 0, gameManager.Score));
+        StartCoroutine(AnimateText(scoreText, 0f, .5f, "", 0, gameManager.SurvivedSecounds));
     }
 
     private IEnumerator AnimateText(TextMeshProUGUI target, float startDelay, float duration,string prefix, int startValue, int endValue)

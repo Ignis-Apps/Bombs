@@ -33,8 +33,6 @@ public class GameManager : Singleton<GameManager>
     public int SurvivedSecounds { get => (int)survivedSecounds; }
     public int SurvivedWaves { get => survivedWaves; }
     public float DayTime { get => CurrentWaveProgress + survivedWaves; }
-    
-    public int Score { get => (1 + survivedWaves) * (int) survivedSecounds; }
 
     private GameUIMessageTypes currentMessage;
 
@@ -61,7 +59,7 @@ public class GameManager : Singleton<GameManager>
 
         Player.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = false);        
         Player.GetComponent<MovementController>().Stop();      
-        GameData.GetInstance().HighScore = Score; 
+        GameData.GetInstance().HighScore = SurvivedSecounds; 
 
     }
     public void Tick(){ survivedSecounds += Time.deltaTime; }

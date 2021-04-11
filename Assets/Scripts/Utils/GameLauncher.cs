@@ -6,6 +6,7 @@ public class GameLauncher : MonoBehaviour
     private GameData gameData;
     private FirebaseController firebaseController;
     private AppodealController appodealController;
+    private GPGSController gpgsController;
 
     void Start()
     {
@@ -20,17 +21,13 @@ public class GameLauncher : MonoBehaviour
         // Initialize APIs (gameData is required for gdpr consent)
         firebaseController = FirebaseController.GetInstance();
         appodealController = AppodealController.GetInstance();
-        
+        gpgsController = GPGSController.GetInstance();
+
         firebaseController.Init();
         appodealController.Init();
+        gpgsController.Init();
 
         Debug.Log("Finished initializing!");
     }
 
-    private void InitIAP()
-    {
-
-    }
-
-    
 }
