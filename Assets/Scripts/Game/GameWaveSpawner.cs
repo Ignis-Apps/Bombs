@@ -13,6 +13,8 @@ namespace Assets.Scripts.Game
         [SerializeField] private float spawnRowOffset;      
         [SerializeField] private float screenEdgeMargin;
         [SerializeField] private float verticalSpawnSalt;
+        [SerializeField] private Transform LeftBorder;
+        [SerializeField] private Transform RightBorder;
 
         [Header("Dev/Test Settings")]
         [SerializeField] private int debugSpawnBombAtPosition;
@@ -26,7 +28,7 @@ namespace Assets.Scripts.Game
         private ScreenManager screenManager = null;
         private GameManager gameManager = null;
 
-        
+
         private GameWave currentWave;
         private int currentWaveIndex;
         private bool running;
@@ -206,8 +208,8 @@ namespace Assets.Scripts.Game
         {
             spawnPoints = new Vector3[spawnColums];
 
-            float startX = (transform.position.x - (spawnFieldWidth / 2f)) + screenEdgeMargin;
-            float endX = (transform.position.x + (spawnFieldWidth / 2f)) - screenEdgeMargin;
+            float startX = ((spawnFieldWidth / 2f)) + screenEdgeMargin;
+            float endX = ((-spawnFieldWidth / 2f)) - screenEdgeMargin;
             float spacing = ((endX - startX) / (spawnColums-1));
 
             for (int i = 0; i < spawnPoints.Length; i++)
@@ -241,9 +243,22 @@ namespace Assets.Scripts.Game
             float spawnHeight = (position / spawnColums) * spawnRowOffset;
 
             Vector3 spawnPoint = spawnPoints[spawnPosition];
-            spawnPoint.y += spawnHeight;
+            Vector3 spawnPointOffset = new Vector3(spawnPoint.x, spawnPoint.y, spawnPoint.z);
+            spawnPointOffset.y += spawnHeight;
+            spawnPointOffset.x += transform.position.x;
 
-            return spawnPoint + transform.position;
+            if (spawnPointOffset.x > RightBorder.transform.position.x)
+            {
+                spawnPointOffset.x -= spawnFieldWidth;
+            }
+
+            if(spawnPointOffset.x < LeftBorder.transform.position.x)
+            {
+                spawnPointOffset.x += spawnFieldWidth;
+            }
+
+
+            return spawnPointOffset;
         }
 
 

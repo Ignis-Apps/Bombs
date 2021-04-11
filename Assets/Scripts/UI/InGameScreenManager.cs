@@ -25,7 +25,7 @@ public class InGameScreenManager: MonoBehaviour
     void Update()
     {
         coinText.text = gameManager.playerStats.Coins.ToString();
-        scoreText.text = gameManager.playerStats.Score.ToString();
+        scoreText.text = gameManager.SurvivedSecounds.ToString();
         liveText.text = gameManager.playerStats.Lifes.ToString();
     }
 

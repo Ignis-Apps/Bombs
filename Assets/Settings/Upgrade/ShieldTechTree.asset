@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249b150594871f3419ae746b38b91bbb, type: 3}
   m_Name: ShieldTechTree
   m_EditorClassIdentifier: 
-  UPGRADE_ID: 0
+  UPGRADE_ID: 2
   configurations:
   - {fileID: 11400000, guid: 600cbfb2f4cd8df4c8d4da5d414a47dc, type: 2}
   - {fileID: 11400000, guid: bc1e1bf6504193847adf31b25c0ee560, type: 2}

@@ -32,11 +32,13 @@ public class GameManager : Singleton<GameManager>
 
     public int SurvivedSecounds { get => (int)survivedSecounds; }
     public int SurvivedWaves { get => survivedWaves; }
-    public float DayTime { get => CurrentWaveProgress + survivedWaves; }
+    public float DayTime { get => survivedSecounds / 45f; }
     
     public int Score { get => (1 + survivedWaves) * (int) survivedSecounds; }
 
     private GameUIMessageTypes currentMessage;
+
+    public Transform GroundTransform { get; set; }
 
     public void OnCoinCollected(int amount){ playerStats.Coins += amount; }
     public void OnPointCollected(int amount){ playerStats.Score += amount;}

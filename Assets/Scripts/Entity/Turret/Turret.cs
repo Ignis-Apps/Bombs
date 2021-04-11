@@ -94,6 +94,10 @@ public class Turret : MonoBehaviour
         {
             GetComponent<BoxCollider2D>().isTrigger = true;
             Rigidbody2D body = GetComponent<Rigidbody2D>();
+
+ 
+
+            transform.position = new Vector3(transform.position.x, GameManager.GetInstance().GroundTransform.position.y + GetComponent<SpriteRenderer>().bounds.size.y/2f, transform.position.z);
             body.velocity = Vector2.zero;
             body.bodyType = RigidbodyType2D.Static;            
             isDeployed = true;

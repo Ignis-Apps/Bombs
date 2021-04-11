@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6c1f907c27ca8428c0fd31a1d67a83, type: 3}
   m_Name: SlowMotionTechTree
   m_EditorClassIdentifier: 
-  UPGRADE_ID: 0
+  UPGRADE_ID: 3
   configurations:
   - {fileID: 11400000, guid: 3dc13786446e6f64abbb1d27c4e84221, type: 2}
   - {fileID: 11400000, guid: afcaa0c01fde6f146a784739942ff6ee, type: 2}

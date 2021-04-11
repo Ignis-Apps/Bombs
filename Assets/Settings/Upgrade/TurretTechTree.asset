@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e7f6047ba713084ea4946f7f17091e3, type: 3}
   m_Name: TurretTechTree
   m_EditorClassIdentifier: 
-  UPGRADE_ID: 0
+  UPGRADE_ID: 1
   configurations:
   - {fileID: 11400000, guid: ea2150f234e754d47b4d8ac5b73c970c, type: 2}
   - {fileID: 11400000, guid: c72393f5b175b094da9f9d1ed6dc8b12, type: 2}
