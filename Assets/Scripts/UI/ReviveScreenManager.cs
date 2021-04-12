@@ -45,6 +45,20 @@ public class ReviveScreenManager : AbstractScreenManager
 
     private void Update()
     {
+        reviveWithAdButton.interactable = appodealController.videoIsLoaded;
+
+        if (appodealController.videoFinished)
+        {
+            appodealController.videoFinished = false;
+            Revive();
+        }
+
+        if (appodealController.videoCanceled)
+        {
+            appodealController.videoCanceled = false;
+            Die();
+        }
+
         if (timeBarRunning)
         {
             Vector3 currentScale = timeBarFill.localScale;
@@ -68,7 +82,7 @@ public class ReviveScreenManager : AbstractScreenManager
     }
     private void OnReviveWithAd() {
         timeBarRunning = false;
-        Revive();
+        appodealController.ShowRewardedVideo();
     }
 
     private void Revive()

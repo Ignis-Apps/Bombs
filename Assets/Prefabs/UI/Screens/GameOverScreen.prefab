@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7014177046862975811}
   - component: {fileID: 7014177046862975810}
   m_Layer: 5
-  m_Name: TimeIcon
+  m_Name: CoinIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bc15fdbbcdaa7e041a5f458191eb7193, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2ab364a646fa107428d04f10400d29b3, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 200
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Best 214
+  m_text: Best 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -729,9 +729,6 @@ MonoBehaviour:
   bestScoreText: {fileID: 7014177047456349541}
   survivedSecoundsText: {fileID: 7014177048036323275}
   survivedWavesText: {fileID: 7014177048397271941}
-  revivePriceText: {fileID: 0}
-  buyReviveButton: {fileID: 0}
-  adReviveButton: {fileID: 0}
   homeButton: {fileID: 7014177047788559171}
   retryButton: {fileID: 7014177047985874940}
   shareButton: {fileID: 7014177048680015769}
@@ -886,7 +883,7 @@ GameObject:
   - component: {fileID: 7014177048036323268}
   - component: {fileID: 7014177048036323275}
   m_Layer: 5
-  m_Name: TimeText
+  m_Name: CoinText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -939,7 +936,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 125
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -1148,7 +1145,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '3
+  m_text: '0
 
 '
   m_isRightToLeft: 0

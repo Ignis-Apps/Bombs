@@ -1,6 +1,7 @@
 using AppodealAds.Unity.Api;
 using AppodealAds.Unity.Common;
 using Assets.Scripts.Game;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,10 +20,16 @@ public class AppodealController : Singleton<AppodealController>, IRewardedVideoA
 #else
     public static string appKey = "";
 #endif
+    public bool videoFinished;
+    public bool videoCanceled;
+    public bool videoIsLoaded;
 
     public void Init()
     {
         gameData = GameData.GetInstance();
+
+        // TEST BUILD
+        Appodeal.setTesting(true);
 
         Appodeal.disableLocationPermissionCheck();
         Appodeal.disableWriteExternalStoragePermissionCheck();
@@ -52,12 +59,30 @@ public class AppodealController : Singleton<AppodealController>, IRewardedVideoA
         return false;
     }
 
-    public void onRewardedVideoLoaded(bool isPrecache) { print("Video loaded"); } //Called when rewarded video was loaded (precache flag shows if the loaded ad is precache). 
-    public void onRewardedVideoFailedToLoad() { print("Video failed"); } // Called when rewarded video failed to load 
-    public void onRewardedVideoShowFailed() { print("Video show failed"); } // Called when rewarded video was loaded, but cannot be shown (internal network errors, placement settings, or incorrect creative) 
+    public void onRewardedVideoLoaded(bool isPrecache) {
+        videoIsLoaded = true;
+        print("Video loaded"); 
+    } //Called when rewarded video was loaded (precache flag shows if the loaded ad is precache). 
+    public void onRewardedVideoFailedToLoad() {
+        videoIsLoaded = false;
+        print("Video failed"); 
+    } // Called when rewarded video failed to load 
+    public void onRewardedVideoShowFailed() {
+        videoCanceled = true;
+        print("Video show failed"); 
+    } // Called when rewarded video was loaded, but cannot be shown (internal network errors, placement settings, or incorrect creative) 
     public void onRewardedVideoShown() { print("Video shown"); } // Called when rewarded video is shown 
     public void onRewardedVideoClicked() { print("Video clicked"); } // Called when reward video is clicked 
-    public void onRewardedVideoClosed(bool finished) { print("Video closed"); } // Called when rewarded video is closed 
-    public void onRewardedVideoFinished(double amount, string name) { print("Reward: " + amount + " " + name); } // Called when rewarded video is viewed until the end 
-    public void onRewardedVideoExpired() { print("Video expired"); } //Called when rewarded video is expired and can not be shown
+    public void onRewardedVideoClosed(bool finished) {
+        videoCanceled = !finished;
+        print("Video closed"); 
+    } // Called when rewarded video is closed 
+    public void onRewardedVideoFinished(double amount, string name) {
+        videoFinished = true;
+        print("Reward: " + amount + " " + name);
+    } // Called when rewarded video is viewed until the end 
+    public void onRewardedVideoExpired() {
+        videoIsLoaded = false;
+        print("Video expired"); 
+    } //Called when rewarded video is expired and can not be shown
 }

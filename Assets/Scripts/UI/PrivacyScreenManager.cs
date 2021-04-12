@@ -35,6 +35,10 @@ public class PrivacyScreenManager: AbstractScreenManager
 
     public void Start()
     {
+        personalizedAdsToggle.isOn = gameData.ConsentPersonalisedAds;
+        analyticsToggle.isOn = gameData.ConsentAnalytics;
+        crashReportingToggle.isOn = gameData.ConsentCrashlytics;
+
         acceptAllMainButton.onClick.AddListener(AcceptAll);
         settingsButton.onClick.AddListener(() => ShowSettingsDialog(callbackScreen));
 
@@ -44,6 +48,8 @@ public class PrivacyScreenManager: AbstractScreenManager
         continueAnywayButton.onClick.AddListener(AcceptSelected);
         backButton.onClick.AddListener(() => ShowSettingsDialog(callbackScreen));
     }
+
+
 
     public void ShowMainDialog(ScreenType callbackScreen)
     {
