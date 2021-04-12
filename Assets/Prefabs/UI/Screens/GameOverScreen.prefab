@@ -727,7 +727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 7014177046977958030}
   bestScoreText: {fileID: 7014177047456349541}
-  survivedSecoundsText: {fileID: 7014177048036323275}
+  CoinsText: {fileID: 7014177048036323275}
   survivedWavesText: {fileID: 7014177048397271941}
   homeButton: {fileID: 7014177047788559171}
   retryButton: {fileID: 7014177047985874940}

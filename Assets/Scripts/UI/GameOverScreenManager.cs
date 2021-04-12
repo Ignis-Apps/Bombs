@@ -31,28 +31,26 @@ public class GameOverScreenManager: AbstractScreenManager
         StartCoroutine(AnimateUI());
 
         // Provisorisch
-        if ((gameManager.SurvivedSecounds % 60) < 10)
-        {
-            scoreText.SetText((gameManager.SurvivedSecounds / 60) + ":0" + (gameManager.SurvivedSecounds % 60));
-        }
-        else
-        {
-            scoreText.SetText((gameManager.SurvivedSecounds / 60) + ":" + (gameManager.SurvivedSecounds % 60));
-        }
-
-        if ((gameManager.SurvivedSecounds % 60) < 10)
-        {
-            bestScoreText.SetText("Best " + (gameData.HighScore / 60) + ":0" + (gameData.HighScore % 60));
-        }
-        else
-        {
-            bestScoreText.SetText("Best " + (gameData.HighScore / 60) + ":" + (gameData.HighScore % 60));
-        }
+        scoreText.SetText(CreateTimeString(gameManager.SurvivedSecounds));
+        bestScoreText.SetText("Best " + CreateTimeString(gameData.HighScore));
 
         if (gameManager.SurvivedSecounds > gameData.HighScore) { 
             bestScoreText.SetText("New Highscore");
             gpgsController.UpdateScoreTestLeaderboard(gameData.HighScore * 1000);
         }        
+    }
+
+    private string CreateTimeString(int secouns)
+    {
+        string output;
+        int min = secouns / 60;
+        int sec = secouns % 60;
+
+        output = min + ":";
+        if (sec < 10) { output += "0"; }
+        output += sec;
+
+        return output;
     }
 
 
