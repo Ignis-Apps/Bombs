@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 5347834380977207289}
   - component: {fileID: 5347834380977207288}
   - component: {fileID: 4868223661729293951}
-  - component: {fileID: 5347834380977207269}
-  - component: {fileID: 8722229701057980935}
+  - component: {fileID: 462951322001967036}
   m_Layer: 13
   m_Name: Bomb
   m_TagString: Bomb
@@ -153,8 +152,8 @@ MonoBehaviour:
   angularAcceleration: 35
   shakeAngle: 7
   lootTableSettings: {fileID: 11400000, guid: f48cc93f1dd60fd4289ccce82689ff88, type: 2}
---- !u!61 &5347834380977207269
-BoxCollider2D:
+--- !u!70 &462951322001967036
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -166,32 +165,6 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.025465548, y: 0.21957612}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.98}
-    newSize: {x: 1.27, y: 2.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.9553412, y: 1.4138038}
-  m_EdgeRadius: 0
---- !u!58 &8722229701057980935
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5347834380977207295}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.026482074, y: -0.5200295}
-  serializedVersion: 2
-  m_Radius: 0.45331478
+  m_Offset: {x: 0.021622885, y: -0.013900519}
+  m_Size: {x: 0.9896338, y: 1.9521993}
+  m_Direction: 0

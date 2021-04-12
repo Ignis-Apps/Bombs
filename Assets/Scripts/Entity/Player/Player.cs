@@ -44,12 +44,12 @@ public class Player : MonoBehaviour
         }
 
         if (collision.CompareTag("Bomb"))
-        {
+        {            
             Destroy(collision.gameObject);
             if (isInvincible) { return; }
 
             gameManager.OnPlayerHit();
-            if(gameManager.playerStats.Lifes == 0)
+            if(gameManager.playerStats.Lifes == 0 && ScreenManager.GetInstance().CanPlayerMove())
             {
                 gameManager.OnPlayerDied();
             }
