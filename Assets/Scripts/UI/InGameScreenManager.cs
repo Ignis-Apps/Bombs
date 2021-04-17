@@ -22,7 +22,7 @@ public class InGameScreenManager: AbstractScreenManager
     void Update()
     {
         coinText.text = gameManager.playerStats.Coins.ToString();
-        scoreText.text = gameManager.SurvivedSecounds.ToString();
+        scoreText.text = CreateTimeString(gameManager.SurvivedSecounds);
         liveText.text = gameManager.playerStats.Lifes.ToString();
     }
 
@@ -32,5 +32,17 @@ public class InGameScreenManager: AbstractScreenManager
         gameManager.handleGameEvent(GameEvent.PAUSE_GAME);
     }
 
-    
+    private string CreateTimeString(int seconds)
+    {
+        string output;
+        int min = seconds / 60;
+        int sec = seconds % 60;
+
+        output = min + ":";
+        if (sec < 10) { output += "0"; }
+        output += sec;
+
+        return output;
+    }
+
 }

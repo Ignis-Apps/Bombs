@@ -75,8 +75,13 @@ public class ReviveScreenManager : AbstractScreenManager
     private void OnReviveWithCrystal() {
         timeBarRunning = false;
 
-        if (gameData.CrystalBalance > 0) { gameData.CrystalBalance--; }
-        else { gameManager.playerStats.Crystals--; }
+        if (gameData.CrystalBalance > 0) { 
+            gameData.CrystalBalance--;
+            gameData.SaveData();
+        }
+        else { 
+            gameManager.playerStats.Crystals--; 
+        }
 
         Revive();
     }

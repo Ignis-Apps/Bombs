@@ -32,19 +32,27 @@ public class GameOverScreenManager: AbstractScreenManager
 
         // Provisorisch
         scoreText.SetText(CreateTimeString(gameManager.SurvivedSecounds));
-        bestScoreText.SetText("Best " + CreateTimeString(gameData.HighScore));
+
+        gameData.CoinBalance += gameManager.playerStats.Coins;
+        gameData.CrystalBalance += gameManager.playerStats.Crystals;
 
         if (gameManager.SurvivedSecounds > gameData.HighScore) { 
             bestScoreText.SetText("New Highscore");
-            gpgsController.UpdateScoreTestLeaderboard(gameData.HighScore * 1000);
-        }        
+            gameData.HighScore = gameManager.SurvivedSecounds;
+        } else
+        {
+            bestScoreText.SetText("Best " + CreateTimeString(gameData.HighScore));
+        }
+
+        // Set allways for the case, that the user sign in is after the install
+        gpgsController.UpdateScoreTestLeaderboard(gameData.HighScore * 1000);
     }
 
-    private string CreateTimeString(int secouns)
+    private string CreateTimeString(int seconds)
     {
         string output;
-        int min = secouns / 60;
-        int sec = secouns % 60;
+        int min = seconds / 60;
+        int sec = seconds % 60;
 
         output = min + ":";
         if (sec < 10) { output += "0"; }
