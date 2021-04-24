@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 8590296854280569783}
   - component: {fileID: 4631437111029535949}
   m_Layer: 15
-  m_Name: Gem
+  m_Name: Crystal
   m_TagString: Crystal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,7 +316,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1814527732901632131}
   - component: {fileID: 540848158877468903}
-  - component: {fileID: 7893311022583279413}
   m_Layer: 15
   m_Name: Spark3
   m_TagString: Untagged
@@ -389,19 +388,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7893311022583279413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4996465810824873880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23e1e30c898005b42b6f08f31927b0de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationPool: []
 --- !u!1 &5888079006695682702
 GameObject:
   m_ObjectHideFlags: 0

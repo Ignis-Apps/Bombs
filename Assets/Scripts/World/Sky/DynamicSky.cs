@@ -11,6 +11,8 @@ public class DynamicSky : MonoBehaviour
     [SerializeField] private SkySettings skySettings;
     [SerializeField] private bool fetchIndexFromGamemanager;
 
+    [SerializeField] private float timeStep;
+
     public float SkyIndex { get => skyIndex; set { skyIndex = value; } }
 
     private float previousSkyIndex;
@@ -31,12 +33,12 @@ public class DynamicSky : MonoBehaviour
         
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (fetchIndexFromGamemanager && gameManaegr!= null)
         {
             skyIndex = gameManaegr.DayTime;
-        }
+        }        
 
         if(Mathf.Abs(skyIndex - previousSkyIndex) > 0)
         {

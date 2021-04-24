@@ -34,7 +34,7 @@ namespace Assets.Scripts.Game
 
         private void Init()
         {
-            remainingLives = 3;
+            remainingLives = 1;
             collectedCoins = 0;
             collectedScorePoints = 0;
             collectedCrystals = 0;

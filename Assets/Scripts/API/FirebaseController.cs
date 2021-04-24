@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Firebase;
 using Firebase.Crashlytics;
 using Firebase.Analytics;
 using System;

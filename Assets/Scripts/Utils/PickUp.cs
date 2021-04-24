@@ -39,7 +39,7 @@ public class PickUp : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             // Calculate the velocity to arive at destination in time
-            Vector2 dir = collision.gameObject.transform.position - transform.position;                            
+            Vector2 dir = collision.gameObject.transform.position - transform.position;                                        
             dir /= timeToPickup;
             
             // Move object to an non colission layer

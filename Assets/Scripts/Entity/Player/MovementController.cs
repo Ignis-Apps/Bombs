@@ -1,7 +1,5 @@
 using Assets.Scripts.Control;
 using Assets.Scripts.Game;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementController : MonoBehaviour 
@@ -49,6 +47,8 @@ public class MovementController : MonoBehaviour
     }
     public void Update()
     {
+        PlayerStats playerStats = gameManager.playerStats;
+
         if(controllerState.currentMode == ControllerMode.PLAYER && screenManager.CanPlayerMove())
         {
             Move(new Vector2(controllerState.stickPositionX, controllerState.stickPositionY));
@@ -58,13 +58,19 @@ public class MovementController : MonoBehaviour
             Move(Vector2.zero);
         }
 
-        PlayerStats playerStats = gameManager.playerStats;
+        
         
         totalMovementSpeed = playerStats.Speed;
         
         animator.SetFloat("playerSpeed", virtualVelocity);
         animator.SetBool("playerInFrontOfCrate", playerStats.IsNearCrate);
         playerStats.IsMoving = (virtualVelocity > 0);
+
+        if(playerStats.IsNearCrate && !playerStats.IsMoving)
+        {
+            FaceTorwardsNearestCrate();
+        }
+
     }
 
     public void FixedUpdate()
@@ -99,7 +105,13 @@ public class MovementController : MonoBehaviour
     public void ClearTargetPosition()
     {
         //Debug.Log("CLEARING");
+        targetPosition = body.position;
         shouldMoveTorwardsTarget = false;
+    }
+
+    public void StopMovement()
+    {
+        Move(Vector2.zero);
     }
 
     private void MoveTorwardsTargetPosition()
@@ -125,6 +137,30 @@ public class MovementController : MonoBehaviour
         targetVelocity = Vector2.zero;    
     }
 
+    private void FaceTorwardsNearestCrate()
+    {
+
+        GameObject[] crates = GameObject.FindGameObjectsWithTag("Crate");
+
+        if (crates.Length > 0)
+        {
+            GameObject currentClosestCrate = null;
+            float closestDistanceToPlayer = float.MaxValue;
+
+            foreach (GameObject g in crates)
+            {
+                float distanceToPlayer = (g.transform.position - transform.position).sqrMagnitude;
+                if (distanceToPlayer < closestDistanceToPlayer)
+                {
+                    closestDistanceToPlayer = distanceToPlayer;
+                    currentClosestCrate = g;
+                }
+            }
+
+            FlipIfRequired(currentClosestCrate.transform.position.x - transform.position.x);
+        }
+
+    }
     private void FlipIfRequired(float direction)
     {
         if (direction > 0 && !facingRight || direction < 0 && facingRight)

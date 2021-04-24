@@ -82,6 +82,14 @@ namespace Assets.Scripts.Entity.Bomb
             GameObject explosion = Instantiate(explosionPrefab, bombBody.transform.position, bombBody.transform.rotation);
             explosion.transform.localScale = new Vector2(explosionSize, explosionSize);
 
+            if (collision.tag.Contains("Ground"))
+            {
+                Vector3 explositionPoistion = explosion.transform.position;
+                float explosionHeight = explosion.GetComponent<SpriteRenderer>().bounds.size.y * explosionSize;
+                explositionPoistion.y = gameManager.GroundTransform.position.y + (explosionHeight / 2f);
+                explosion.transform.position = explositionPoistion;
+            }
+
             SpawnPrefabs(coinPrefab, lootTableSettings.GetRandomCoinAmount());
             //SpawnPrefabs(scoreOrbPrefab, lootTableSettings.GetRandomScoreAmount());           
             SpawnPrefabs(crystalPrefab, lootTableSettings.GetRandomSpecialCoinAmount());

@@ -75,7 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: df8db48f1abd54d4f96f779cd9edc3dd, type: 3}
+  m_Sprite: {fileID: 7255663717214199449, guid: 9949525e39035ce4f833e82184ebfa5f,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -146,7 +147,7 @@ MonoBehaviour:
     type: 3}
   crystalPrefab: {fileID: 4933730202248994730, guid: e5a1d2e7b44642b469d4e93bfa4cf4aa,
     type: 3}
-  explosionSize: 0.5
+  explosionSize: 0.45
   maxSpeed: 15
   acceleration: 0.1
   angularAcceleration: 35

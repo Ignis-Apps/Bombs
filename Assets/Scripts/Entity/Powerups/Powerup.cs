@@ -1,6 +1,5 @@
 using Assets.Scripts.Control;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -21,7 +20,7 @@ public abstract class Powerup : MonoBehaviour
     protected float remaingTime;
     private bool powerupActive;
 
-    // Usefull to prevent the player from picking up the powerup too early
+    // Usefull to prevent the player from picking up the powerup too early [Crate Opening]
     [SerializeField] private float pickupProtectionTime;    
 
     void Awake()
@@ -79,8 +78,24 @@ public abstract class Powerup : MonoBehaviour
         }
     }
 
-    
-    public float GetNormalisedProgress()
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ground"))
+        {            
+            foreach (Collider2D collider in GetComponents<Collider2D>())
+            {
+                collider.isTrigger = true;
+            }
+            
+            Rigidbody2D body = GetComponent<Rigidbody2D>();
+            transform.position = new Vector3(transform.position.x, GameManager.GetInstance().GroundTransform.position.y + GetComponent<SpriteRenderer>().bounds.size.y / 2f, transform.position.z);
+            body.velocity = Vector2.zero;
+            body.bodyType = RigidbodyType2D.Static;
+        }
+    }
+
+
+    public virtual float GetNormalisedProgress()
     {
         return 1f - (remaingTime / powerUpConfiguration.GetDuration);
     }

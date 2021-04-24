@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Assets.Scripts.Game
 {
-    [ExecuteInEditMode]
+    //[ExecuteInEditMode]
     public class GameWaveSpawner : MonoBehaviour
     {
         [Header("Spawn Field Settings")]
@@ -55,22 +55,21 @@ namespace Assets.Scripts.Game
             LoadWave(0);
         }
 
+  
         public void Update()
         {
-            // START TEST CODE
-            #if UNITY_EDITOR
-                if (debugSpawnBombAtPosition >= 0)
-                {
-                GameObject spawnedObject = Instantiate(defaultBomb);
-                spawnedObject.transform.position = GetSpawnPoint(debugSpawnBombAtPosition);
-                debugSpawnBombAtPosition = -1;                
-                }
-            #endif
-            // END TEST CODE
+            
+   
 
             if (screenManager == null || gameManager == null) { return; }
             running = screenManager.CanPlayerMove();
-            
+
+
+            if (running)
+            {
+                gameManager.Tick();
+            }
+
             gameManager.CurrentWaveProgress = waveTimer.getProgress();
             if (!running || onTimeout) return;
 
@@ -103,9 +102,7 @@ namespace Assets.Scripts.Game
                 spawnTimer.Reset();
                 
             }
-
-            // Timer
-            gameManager.Tick();
+           
 
         }
 

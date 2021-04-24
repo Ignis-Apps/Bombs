@@ -1,6 +1,5 @@
 using Assets.Scriptable;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Crate : MonoBehaviour
@@ -10,6 +9,7 @@ public class Crate : MonoBehaviour
     [SerializeField] private Transform groundCheck;
 
     [SerializeField] private GameObject parachute;
+    [SerializeField] private GameObject crate;
     [SerializeField] private GameObject progressIndicator;
 
     [SerializeField] private float dropVelocity;
@@ -107,6 +107,15 @@ public class Crate : MonoBehaviour
         // Ensures that the player can walk into the crate
         if (collision.CompareTag("Ground"))
         {
+            Rigidbody2D body = GetComponent<Rigidbody2D>();
+
+
+
+            // transform.position = new Vector3(transform.position.x, GameManager.GetInstance().GroundTransform.position.y + GetComponent<SpriteRenderer>().bounds.size.y / 2f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, GameManager.GetInstance().GroundTransform.position.y + GetComponent<SpriteRenderer>().bounds.size.y / 2f, transform.position.z);
+
+
+
             boxColider.isTrigger = true;
             body.velocity = Vector2.zero;
             body.bodyType = RigidbodyType2D.Static;

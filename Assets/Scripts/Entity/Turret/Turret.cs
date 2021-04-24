@@ -1,5 +1,4 @@
 using Assets.Scripts.Control;
-using System.Collections;
 using UnityEngine;
 
 public class Turret : MonoBehaviour

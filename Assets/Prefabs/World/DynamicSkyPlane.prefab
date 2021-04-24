@@ -100,16 +100,16 @@ MonoBehaviour:
     key1: {r: 0.92105144, g: 0.9590507, b: 0.98197186, a: 1}
     key2: {r: 0.22745098, g: 0.59607846, b: 0.78431374, a: 0}
     key3: {r: 0.10980392, g: 0.30588236, b: 0.40784314, a: 0}
-    key4: {r: 0.09019608, g: 0.14509805, b: 0.29803923, a: 0}
-    key5: {r: 0.078431375, g: 0.121568635, b: 0.20784315, a: 0}
+    key4: {r: 0.35686275, g: 0.1764706, b: 0.3137255, a: 0}
+    key5: {r: 0.35686275, g: 0.1764706, b: 0.3137255, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
     ctime1: 11328
     ctime2: 33215
     ctime3: 65535
-    ctime4: 33534
-    ctime5: 47714
+    ctime4: 42924
+    ctime5: 65535
     ctime6: 65535
     ctime7: 0
     atime0: 0
@@ -206,6 +206,7 @@ MonoBehaviour:
   skyIndex: 0
   skySettings: {fileID: 11400000, guid: 4bbf82d8ec94b9341a4d1b952aff4ef9, type: 2}
   fetchIndexFromGamemanager: 1
+  timeStep: 0
 --- !u!1 &4760318545100202468
 GameObject:
   m_ObjectHideFlags: 0

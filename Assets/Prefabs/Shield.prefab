@@ -71,7 +71,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 13
-  m_Sprite: {fileID: 21300000, guid: 0f3251e83ed218c42bb670ecbcfb8144, type: 3}
+  m_Sprite: {fileID: -6717884257390833292, guid: 45e7be1f35f6d8a4eb2e5041dd0d42ec,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -134,9 +135,9 @@ MonoBehaviour:
   hitpoints: 3
   shieldSprite: {fileID: 3713018410367895242}
   ShieldStates:
-  - {fileID: 21300000, guid: 13e20caf0c1fa654e84019db809a4581, type: 3}
-  - {fileID: 21300000, guid: 90e37e03f8e4c4a4a8f6646479309464, type: 3}
-  - {fileID: 21300000, guid: 0f3251e83ed218c42bb670ecbcfb8144, type: 3}
+  - {fileID: -4098029715399502762, guid: 45e7be1f35f6d8a4eb2e5041dd0d42ec, type: 3}
+  - {fileID: -7947067082740497745, guid: 45e7be1f35f6d8a4eb2e5041dd0d42ec, type: 3}
+  - {fileID: -6717884257390833292, guid: 45e7be1f35f6d8a4eb2e5041dd0d42ec, type: 3}
 --- !u!95 &6288508316634204816
 Animator:
   serializedVersion: 3

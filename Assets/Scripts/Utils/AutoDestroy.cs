@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AutoDestroy : MonoBehaviour
@@ -20,7 +19,7 @@ public class AutoDestroy : MonoBehaviour
 
         if(lifetime < 0)
         {
-            StartCoroutine(ScaleDown(1f));
+            StartCoroutine(ScaleDown(1f));        
             Destroy(gameObject, 1f);
         }
     }
@@ -31,11 +30,13 @@ public class AutoDestroy : MonoBehaviour
 
         float progress = 0;
 
+        GetComponent<Rigidbody2D>().gravityScale = 0f;
+
         while(progress <= duration)
         {
             progress = Mathf.Min(progress + Time.fixedDeltaTime, duration);
             transform.localScale = startScale * (duration - progress);
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForEndOfFrame();
         }
 
     }

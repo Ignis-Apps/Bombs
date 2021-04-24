@@ -338,7 +338,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6770832582324673334}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.297, y: 0.112, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.09, y: 0.09, z: 0.09}
   m_Children:
   - {fileID: 6770832582904936035}
@@ -386,7 +386,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 13
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 669a8057c34a51746b907f9b5e5e0155, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -415,6 +415,7 @@ MonoBehaviour:
     m_Bits: 1079
   groundCheck: {fileID: 6770832581673444857}
   parachute: {fileID: 6770832582904936037}
+  crate: {fileID: 0}
   progressIndicator: {fileID: 6770832583106906905}
   dropVelocity: 2
   collapseAnimation: {fileID: 7400000, guid: 6a95f640f75e9cb4ab9ff02ca22cb83c, type: 2}

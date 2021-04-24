@@ -36,6 +36,12 @@ namespace Assets.Scripts.Entity.Powerups
             StartCoroutine(SpeedUpTime());
         }
 
+        public override float GetNormalisedProgress()
+        {
+            //return base.GetNormalisedProgress() / configuration.SlowMotionFactor;
+            return 1f - (remaingTime / (configuration.GetDuration / configuration.SlowMotionFactor));
+        }
+
         private IEnumerator SlowDownTime()
         {
             float targetTimeScale = Time.timeScale / configuration.SlowMotionFactor;

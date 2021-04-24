@@ -1,10 +1,6 @@
 using AppodealAds.Unity.Api;
 using AppodealAds.Unity.Common;
 using Assets.Scripts.Game;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class AppodealController : Singleton<AppodealController>, IRewardedVideoAdListener
 {

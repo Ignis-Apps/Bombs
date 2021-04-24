@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: -6349621720476419753}
   - component: {fileID: 6212283116821294852}
   - component: {fileID: 59595131014598331}
-  - component: {fileID: 7196447666097712641}
   m_Layer: 15
   m_Name: Powerup_Shield
   m_TagString: Untagged
@@ -134,25 +133,9 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.2800001
---- !u!58 &7196447666097712641
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6061227711127739038}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.57
+  m_Radius: 1.2800001
