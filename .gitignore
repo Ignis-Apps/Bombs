@@ -52,3 +52,4 @@ crashlytics-build.properties
 UserSettings/
 
 Assets/Plugins/Android/FirebaseCrashlytics.androidlib/res/values/crashlytics_build_id.xml
+ProjectSettings/GvhProjectSettings.xml
