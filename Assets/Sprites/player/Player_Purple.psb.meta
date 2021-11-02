@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d11061f7f7152374c8d4b8a767e77d8b
+guid: ca921c1f96d54924aa69de014789e44f
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -3363,13 +3363,6 @@ ScriptedImporter:
     spriteID: 582414fbd9e930343b77a592a0d339ba
     layerID: 10
     mosaicPosition: {x: 538, y: 4}
-  - name: arm_left
-    spriteName: arm_left
-    isGroup: 0
-    parentIndex: 0
-    spriteID: 80a3231fc71805a498260e71c758db8f
-    layerID: 2
-    mosaicPosition: {x: 4, y: 530}
   - name: shoe_left
     spriteName: shoe_left
     isGroup: 0
@@ -3384,6 +3377,13 @@ ScriptedImporter:
     spriteID: 657a345b82f2ea94495e1b7e00cfdbe4
     layerID: 4
     mosaicPosition: {x: 731, y: 325}
+  - name: arm_left
+    spriteName: arm_left
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 80a3231fc71805a498260e71c758db8f
+    layerID: 2
+    mosaicPosition: {x: 4, y: 530}
   characterData:
     bones:
     - name: bone_1

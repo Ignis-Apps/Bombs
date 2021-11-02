@@ -4,6 +4,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private bool isInvincible;
     [SerializeField] private ParticleSystem particles;
+    [SerializeField] public PlayerSkinChanger PlayerSkinChanger;
 
 
     private MovementController controller;
