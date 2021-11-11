@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class ScreenManager : Singleton<ScreenManager>
 {
@@ -17,8 +18,17 @@ public class ScreenManager : Singleton<ScreenManager>
 
         gameScreenControllerList = GetComponentsInChildren<ScreenController>(true).ToList();       
         gameScreenControllerList.ForEach(controler => controler.gameObject.SetActive(false));        
-        gameScreenControllerList.ForEach(controler => controler.gameObject.GetComponent<RectTransform>().position = transform.position);        
+        gameScreenControllerList.ForEach(controler => controler.gameObject.GetComponent<RectTransform>().position = transform.position);
+        initUISound();
         SwitchScreen(initialScreen);        
+    }
+
+    private void initUISound()
+    {
+        foreach (Button b in GetComponentsInChildren<Button>(true))
+        {
+            b.onClick.AddListener(() => SoundManager.PlaySound(SoundManager.Sound.UI_BUTTON_CLICK));
+        }
     }
 
     public void SwitchScreen(ScreenType nextScreen)
