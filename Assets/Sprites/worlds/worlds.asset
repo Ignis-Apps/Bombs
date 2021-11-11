@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: worlds
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: ground
+    m_Hash: -1476426904
+    m_CategoryList:
+    - m_Name: default
+      m_Hash: -480378657
+      m_Sprite: {fileID: 651055463433117825, guid: 2c871254cd36181488683a76af3b89ef,
+        type: 3}
+    - m_Name: city
+      m_Hash: 760939060
+      m_Sprite: {fileID: 651055463433117825, guid: 2c871254cd36181488683a76af3b89ef,
+        type: 3}

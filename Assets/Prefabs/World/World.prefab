@@ -72,6 +72,8 @@ GameObject:
   - component: {fileID: 7399317321240625551}
   - component: {fileID: 7399317321240625550}
   - component: {fileID: 7399317321240625549}
+  - component: {fileID: 6139479314836379617}
+  - component: {fileID: 2018734015067379727}
   m_Layer: 10
   m_Name: Ground _Left
   m_TagString: Ground
@@ -184,6 +186,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectStrength: {x: 0, y: 0}
   repeat: 0
+--- !u!114 &6139479314836379617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7399317321240625547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CategoryHash: -7.091919e-15
+  m_labelHash: -4.09524e+21
+--- !u!114 &2018734015067379727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7399317321240625547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SpriteLibraryAsset: {fileID: 11400000, guid: 6ac80082547494788a0e36b5e9622e40,
+    type: 2}
 --- !u!1 &7399317321288928123
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,6 +618,8 @@ GameObject:
   - component: {fileID: 7399317321834172736}
   - component: {fileID: 7399317321834172751}
   - component: {fileID: 7399317321834172750}
+  - component: {fileID: 5407481336707050623}
+  - component: {fileID: 9096414544393444797}
   m_Layer: 10
   m_Name: Ground_Right
   m_TagString: Ground
@@ -700,6 +732,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectStrength: {x: 0, y: 0}
   repeat: 0
+--- !u!114 &5407481336707050623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7399317321834172748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CategoryHash: -7.091919e-15
+  m_labelHash: -4.09524e+21
+--- !u!114 &9096414544393444797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7399317321834172748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SpriteLibraryAsset: {fileID: 11400000, guid: 6ac80082547494788a0e36b5e9622e40,
+    type: 2}
 --- !u!1 &7399317321858733265
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,6 +937,8 @@ GameObject:
   - component: {fileID: 7399317322198248961}
   - component: {fileID: 7399317322198248960}
   - component: {fileID: 7399317322198248962}
+  - component: {fileID: 3159658623354599638}
+  - component: {fileID: 3732724708616174662}
   m_Layer: 10
   m_Name: Ground_Middle
   m_TagString: Ground
@@ -989,6 +1051,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectStrength: {x: 0, y: 0}
   repeat: 0
+--- !u!114 &3159658623354599638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7399317322198248974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CategoryHash: -7.091919e-15
+  m_labelHash: -4.09524e+21
+--- !u!114 &3732724708616174662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7399317322198248974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SpriteLibraryAsset: {fileID: 11400000, guid: 6ac80082547494788a0e36b5e9622e40,
+    type: 2}
 --- !u!1 &7399317322348299604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,7 +1500,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7399317322675806609}
   m_Layer: 10
-  m_Name: Default_World
+  m_Name: World
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

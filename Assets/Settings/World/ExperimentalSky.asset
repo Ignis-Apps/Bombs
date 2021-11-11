@@ -38,7 +38,7 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 1
+    m_Mode: 0
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
   - serializedVersion: 2

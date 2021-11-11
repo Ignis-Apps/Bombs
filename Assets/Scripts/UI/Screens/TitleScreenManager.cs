@@ -54,7 +54,7 @@ public class TitleScreenManager : AbstractScreenManager
 
     private void ShowShop()
     {
-        //screenManager.SwitchScreen(ScreenType.SHOP_SCREEN);
+        screenManager.SwitchScreen(ScreenType.SHOP_SCREEN);
 
         AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         AndroidJavaObject unityActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");

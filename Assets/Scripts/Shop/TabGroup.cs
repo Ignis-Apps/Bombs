@@ -69,6 +69,9 @@ public class TabGroup : MonoBehaviour
         cam = Camera.main;
         orthograficCameraSize = cam.orthographicSize;
         cameraYPosition = cam.transform.position.y;
+
+        ResetTabs();
+        selectedTab.OnSelected();
     }
 
     // Update is called once per frame

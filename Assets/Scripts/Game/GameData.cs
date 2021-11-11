@@ -16,8 +16,8 @@ namespace Assets.Scripts.Game
         private int crystalBalance;
 
         //Selected Skin/Scene
-        private Skin selectedSkin;
-        private Scene selectedScene;
+        private int selectedSkin;
+        private int selectedScene;
 
         //Settings
         private float volumeMusic;
@@ -38,8 +38,8 @@ namespace Assets.Scripts.Game
         public int HighScore { get => highScore; set { if (value > highScore) { highScore = value; } } }
         public int CoinBalance { get => coinBalance; set { coinBalance = value; } }
         public int CrystalBalance { get => crystalBalance; set { crystalBalance = value; } }
-        public Skin SelectedSkin { get => selectedSkin; set { selectedSkin = value; } }
-        public Scene SelectedScene { get => selectedScene; set { selectedScene = value; } }
+        public int SelectedSkin { get => selectedSkin; set { selectedSkin = value; } }
+        public int SelectedScene { get => selectedScene; set { selectedScene = value; } }
         public float VolumeMusic { get => volumeMusic; set { volumeMusic = value; } }
         public float VolumeSFX { get => volumeSFX; set { volumeSFX = value; } }
         public bool ConsentIsSet { get => consentIsSet; set { consentIsSet = value; } }
@@ -48,7 +48,7 @@ namespace Assets.Scripts.Game
         public bool ConsentPersonalisedAds { get => consentPersonalisedAds; set { consentPersonalisedAds = value; } }
         public bool TutorialWasPlayed { get => tutorialWasPlayed; set { tutorialWasPlayed = value; } }
 
-        public bool getSkinInventory(int id)
+        public bool GetSkinInventory(int id)
         {
             if (skinInventory.TryGetValue(id, out bool result))
             {
@@ -60,7 +60,7 @@ namespace Assets.Scripts.Game
             }
         }
 
-        public bool getSceneInventory(int id)
+        public bool GetSceneInventory(int id)
         {
             if (sceneInventory.TryGetValue(id, out bool result))
             {
@@ -72,7 +72,7 @@ namespace Assets.Scripts.Game
             }
         }
 
-        public int getUpgradeInventory(int id)
+        public int GetUpgradeInventory(int id)
         {
             if (upgradeInventory.TryGetValue(id, out int result))
             {
@@ -84,11 +84,29 @@ namespace Assets.Scripts.Game
             }
         }
 
+        public void SetSkinInventory(int id, bool value)
+        {
+            skinInventory.Add(id, value);
+        }
+
+        public void SetSceneInventory(int id, bool value)
+        {
+            sceneInventory.Add(id, value);
+        }
+
+        public void SetUpgradeInventory(int id, int value)
+        {
+            upgradeInventory.Add(id, value);
+        }
+
         public void LoadData()
         {
             highScore = PlayerPrefs.GetInt("highScore", 0);
-            coinBalance = PlayerPrefs.GetInt("coinBalance", 0);
+            coinBalance = PlayerPrefs.GetInt("coinBalance", 5000);
             crystalBalance = PlayerPrefs.GetInt("crystalBalance", 0);
+
+            selectedSkin = PlayerPrefs.GetInt("selectedSkin", 0);
+            selectedScene = PlayerPrefs.GetInt("selectedScene", 0);
 
             volumeMusic = PlayerPrefs.GetFloat("volumeMusic", 0);
             volumeSFX = PlayerPrefs.GetFloat("volumeSFX", 0);
@@ -99,6 +117,23 @@ namespace Assets.Scripts.Game
             consentPersonalisedAds = PlayerPrefs.GetInt("consentPersonalisedAds", 0) != 0;
 
             tutorialWasPlayed = PlayerPrefs.GetInt("tutorialFlag", 0) != 0;
+
+            skinInventory.Add(0, true);
+            for (int i = 1; i < PlayerPrefs.GetInt("skin_size", 0); i++)
+            {
+                skinInventory.Add(i, System.Convert.ToBoolean(PlayerPrefs.GetInt("skin_" + i)));
+            }
+
+            sceneInventory.Add(0, true);
+            for (int i = 1; i < PlayerPrefs.GetInt("scene_size", 0); i++)
+            {
+                sceneInventory.Add(i, System.Convert.ToBoolean(PlayerPrefs.GetInt("scene_" + i)));
+            }
+
+            for (int i = 0; i < PlayerPrefs.GetInt("upgrade_size", 0); i++)
+            {
+                upgradeInventory.Add(i, PlayerPrefs.GetInt("upgrade_" + i));
+            }
         }
 
         public void SaveData()
@@ -108,10 +143,31 @@ namespace Assets.Scripts.Game
             PlayerPrefs.SetInt("coinBalance", coinBalance);
             PlayerPrefs.SetInt("crystalBalance", crystalBalance);
 
+            PlayerPrefs.SetInt("selectedSkin", selectedSkin);
+            PlayerPrefs.SetInt("selectedScene", selectedScene);
+
             PlayerPrefs.SetFloat("volumeMusic", volumeMusic);
             PlayerPrefs.SetFloat("volumeSFX", volumeSFX);
 
             PlayerPrefs.SetInt("tutorialFlag", tutorialWasPlayed ? 1 : 0);
+
+            for (int i = 1; i < skinInventory.Count; i++)
+            {
+                if(skinInventory.TryGetValue(i, out bool result))
+                    PlayerPrefs.SetInt("skin_" + i, result ? 1 : 0);
+            }
+
+            for (int i = 1; i < sceneInventory.Count; i++)
+            {
+                if(sceneInventory.TryGetValue(i, out bool result))
+                    PlayerPrefs.SetInt("scene_" + i, result ? 1 : 0);
+            }
+
+            for (int i = 0; i < upgradeInventory.Count; i++)
+            {
+                if(upgradeInventory.TryGetValue(i, out int result))
+                    PlayerPrefs.SetInt("upgrade_" + i, result);
+            }
         }
 
         public void SaveConsent()

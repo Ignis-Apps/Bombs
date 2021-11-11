@@ -16,152 +16,184 @@ MonoBehaviour:
   - m_Name: Head
     m_Hash: 130111906
     m_CategoryList:
-    - m_Name: Orange
-      m_Hash: 443135054
+    - m_Name: Default
+      m_Hash: 753088835
       m_Sprite: {fileID: -965407027130141776, guid: d11061f7f7152374c8d4b8a767e77d8b,
-        type: 3}
-    - m_Name: Red
-      m_Hash: -1037297297
-      m_Sprite: {fileID: -965407027130141776, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
-        type: 3}
-    - m_Name: Green
-      m_Hash: 291225893
-      m_Sprite: {fileID: -965407027130141776, guid: a976864307a13a446974c78e8ad2203a,
         type: 3}
     - m_Name: Blue
       m_Hash: 1040475530
       m_Sprite: {fileID: -965407027130141776, guid: 5b71275420f5b15459a194bde0bc66c3,
         type: 3}
-  - m_Name: Body
-    m_Hash: 2073732236
-    m_CategoryList:
-    - m_Name: Orange
-      m_Hash: 443135054
-      m_Sprite: {fileID: -3073980659861514622, guid: d11061f7f7152374c8d4b8a767e77d8b,
+    - m_Name: Green
+      m_Hash: 291225893
+      m_Sprite: {fileID: -965407027130141776, guid: a976864307a13a446974c78e8ad2203a,
+        type: 3}
+    - m_Name: Purple
+      m_Hash: -316049456
+      m_Sprite: {fileID: -965407027130141776, guid: ca921c1f96d54924aa69de014789e44f,
         type: 3}
     - m_Name: Red
       m_Hash: -1037297297
-      m_Sprite: {fileID: -3073980659861514622, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
+      m_Sprite: {fileID: -965407027130141776, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
         type: 3}
-    - m_Name: Green
-      m_Hash: 291225893
-      m_Sprite: {fileID: -3073980659861514622, guid: a976864307a13a446974c78e8ad2203a,
+  - m_Name: Body
+    m_Hash: 2073732236
+    m_CategoryList:
+    - m_Name: Default
+      m_Hash: 753088835
+      m_Sprite: {fileID: -3073980659861514622, guid: d11061f7f7152374c8d4b8a767e77d8b,
         type: 3}
     - m_Name: Blue
       m_Hash: 1040475530
       m_Sprite: {fileID: -3073980659861514622, guid: 5b71275420f5b15459a194bde0bc66c3,
         type: 3}
-  - m_Name: L_Arm
-    m_Hash: -1759658809
-    m_CategoryList:
-    - m_Name: Orange
-      m_Hash: 443135054
-      m_Sprite: {fileID: 8533365035888788505, guid: d11061f7f7152374c8d4b8a767e77d8b,
+    - m_Name: Green
+      m_Hash: 291225893
+      m_Sprite: {fileID: -3073980659861514622, guid: a976864307a13a446974c78e8ad2203a,
+        type: 3}
+    - m_Name: Purple
+      m_Hash: -316049456
+      m_Sprite: {fileID: -3073980659861514622, guid: ca921c1f96d54924aa69de014789e44f,
         type: 3}
     - m_Name: Red
       m_Hash: -1037297297
-      m_Sprite: {fileID: 8533365035888788505, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
+      m_Sprite: {fileID: -3073980659861514622, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
         type: 3}
-    - m_Name: Green
-      m_Hash: 291225893
-      m_Sprite: {fileID: 8533365035888788505, guid: a976864307a13a446974c78e8ad2203a,
+  - m_Name: L_Arm
+    m_Hash: -1759658809
+    m_CategoryList:
+    - m_Name: Default
+      m_Hash: 753088835
+      m_Sprite: {fileID: 8533365035888788505, guid: d11061f7f7152374c8d4b8a767e77d8b,
         type: 3}
     - m_Name: Blue
       m_Hash: 1040475530
       m_Sprite: {fileID: 8533365035888788505, guid: 5b71275420f5b15459a194bde0bc66c3,
         type: 3}
-  - m_Name: R_Arm
-    m_Hash: 1221432612
-    m_CategoryList:
-    - m_Name: Orange
-      m_Hash: 443135054
-      m_Sprite: {fileID: 6472514042533826707, guid: d11061f7f7152374c8d4b8a767e77d8b,
+    - m_Name: Green
+      m_Hash: 291225893
+      m_Sprite: {fileID: 8533365035888788505, guid: a976864307a13a446974c78e8ad2203a,
+        type: 3}
+    - m_Name: Purple
+      m_Hash: -316049456
+      m_Sprite: {fileID: 8533365035888788505, guid: ca921c1f96d54924aa69de014789e44f,
         type: 3}
     - m_Name: Red
       m_Hash: -1037297297
-      m_Sprite: {fileID: 6472514042533826707, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
+      m_Sprite: {fileID: 8533365035888788505, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
         type: 3}
-    - m_Name: Green
-      m_Hash: 291225893
-      m_Sprite: {fileID: 6472514042533826707, guid: a976864307a13a446974c78e8ad2203a,
+  - m_Name: R_Arm
+    m_Hash: 1221432612
+    m_CategoryList:
+    - m_Name: Default
+      m_Hash: 753088835
+      m_Sprite: {fileID: 6472514042533826707, guid: d11061f7f7152374c8d4b8a767e77d8b,
         type: 3}
     - m_Name: Blue
       m_Hash: 1040475530
       m_Sprite: {fileID: 6472514042533826707, guid: 5b71275420f5b15459a194bde0bc66c3,
         type: 3}
-  - m_Name: L_Leg
-    m_Hash: 2056471068
-    m_CategoryList:
-    - m_Name: Orange
-      m_Hash: 443135054
-      m_Sprite: {fileID: 308447740283538059, guid: d11061f7f7152374c8d4b8a767e77d8b,
+    - m_Name: Green
+      m_Hash: 291225893
+      m_Sprite: {fileID: 6472514042533826707, guid: a976864307a13a446974c78e8ad2203a,
+        type: 3}
+    - m_Name: Purple
+      m_Hash: -316049456
+      m_Sprite: {fileID: 6472514042533826707, guid: ca921c1f96d54924aa69de014789e44f,
         type: 3}
     - m_Name: Red
       m_Hash: -1037297297
-      m_Sprite: {fileID: 308447740283538059, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
+      m_Sprite: {fileID: 6472514042533826707, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
         type: 3}
-    - m_Name: Green
-      m_Hash: 291225893
-      m_Sprite: {fileID: 308447740283538059, guid: a976864307a13a446974c78e8ad2203a,
+  - m_Name: L_Leg
+    m_Hash: 2056471068
+    m_CategoryList:
+    - m_Name: Default
+      m_Hash: 753088835
+      m_Sprite: {fileID: 308447740283538059, guid: d11061f7f7152374c8d4b8a767e77d8b,
         type: 3}
     - m_Name: Blue
       m_Hash: 1040475530
       m_Sprite: {fileID: 308447740283538059, guid: 5b71275420f5b15459a194bde0bc66c3,
         type: 3}
-  - m_Name: R_Leg
-    m_Hash: -1522308097
-    m_CategoryList:
-    - m_Name: Orange
-      m_Hash: 443135054
-      m_Sprite: {fileID: 6089470819321223609, guid: d11061f7f7152374c8d4b8a767e77d8b,
+    - m_Name: Green
+      m_Hash: 291225893
+      m_Sprite: {fileID: 308447740283538059, guid: a976864307a13a446974c78e8ad2203a,
+        type: 3}
+    - m_Name: Purple
+      m_Hash: -316049456
+      m_Sprite: {fileID: 308447740283538059, guid: ca921c1f96d54924aa69de014789e44f,
         type: 3}
     - m_Name: Red
       m_Hash: -1037297297
-      m_Sprite: {fileID: 6089470819321223609, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
+      m_Sprite: {fileID: 308447740283538059, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
         type: 3}
-    - m_Name: Green
-      m_Hash: 291225893
-      m_Sprite: {fileID: 6089470819321223609, guid: a976864307a13a446974c78e8ad2203a,
+  - m_Name: R_Leg
+    m_Hash: -1522308097
+    m_CategoryList:
+    - m_Name: Default
+      m_Hash: 753088835
+      m_Sprite: {fileID: 6089470819321223609, guid: d11061f7f7152374c8d4b8a767e77d8b,
         type: 3}
     - m_Name: Blue
       m_Hash: 1040475530
       m_Sprite: {fileID: 6089470819321223609, guid: 5b71275420f5b15459a194bde0bc66c3,
         type: 3}
-  - m_Name: L_Show
-    m_Hash: -1067214195
-    m_CategoryList:
-    - m_Name: Orange
-      m_Hash: 443135054
-      m_Sprite: {fileID: -8509731260911371435, guid: d11061f7f7152374c8d4b8a767e77d8b,
+    - m_Name: Green
+      m_Hash: 291225893
+      m_Sprite: {fileID: 6089470819321223609, guid: a976864307a13a446974c78e8ad2203a,
+        type: 3}
+    - m_Name: Purple
+      m_Hash: -316049456
+      m_Sprite: {fileID: 6089470819321223609, guid: ca921c1f96d54924aa69de014789e44f,
         type: 3}
     - m_Name: Red
       m_Hash: -1037297297
-      m_Sprite: {fileID: -8509731260911371435, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
+      m_Sprite: {fileID: 6089470819321223609, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
         type: 3}
-    - m_Name: Green
-      m_Hash: 291225893
-      m_Sprite: {fileID: -8509731260911371435, guid: a976864307a13a446974c78e8ad2203a,
+  - m_Name: L_Show
+    m_Hash: -1067214195
+    m_CategoryList:
+    - m_Name: Default
+      m_Hash: 753088835
+      m_Sprite: {fileID: -8509731260911371435, guid: d11061f7f7152374c8d4b8a767e77d8b,
         type: 3}
     - m_Name: Blue
       m_Hash: 1040475530
       m_Sprite: {fileID: -8509731260911371435, guid: 5b71275420f5b15459a194bde0bc66c3,
         type: 3}
-  - m_Name: R_Shoe
-    m_Hash: 168200238
-    m_CategoryList:
-    - m_Name: Orange
-      m_Hash: 443135054
-      m_Sprite: {fileID: 1291963135620090279, guid: d11061f7f7152374c8d4b8a767e77d8b,
+    - m_Name: Green
+      m_Hash: 291225893
+      m_Sprite: {fileID: -8509731260911371435, guid: a976864307a13a446974c78e8ad2203a,
+        type: 3}
+    - m_Name: Purple
+      m_Hash: -316049456
+      m_Sprite: {fileID: -8509731260911371435, guid: ca921c1f96d54924aa69de014789e44f,
         type: 3}
     - m_Name: Red
       m_Hash: -1037297297
-      m_Sprite: {fileID: 1291963135620090279, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
+      m_Sprite: {fileID: -8509731260911371435, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
+        type: 3}
+  - m_Name: R_Shoe
+    m_Hash: 168200238
+    m_CategoryList:
+    - m_Name: Default
+      m_Hash: 753088835
+      m_Sprite: {fileID: 1291963135620090279, guid: d11061f7f7152374c8d4b8a767e77d8b,
+        type: 3}
+    - m_Name: Blue
+      m_Hash: 1040475530
+      m_Sprite: {fileID: 1291963135620090279, guid: 5b71275420f5b15459a194bde0bc66c3,
         type: 3}
     - m_Name: Green
       m_Hash: 291225893
       m_Sprite: {fileID: 1291963135620090279, guid: a976864307a13a446974c78e8ad2203a,
         type: 3}
-    - m_Name: Blue
-      m_Hash: 1040475530
-      m_Sprite: {fileID: 1291963135620090279, guid: 5b71275420f5b15459a194bde0bc66c3,
+    - m_Name: Purple
+      m_Hash: -316049456
+      m_Sprite: {fileID: 1291963135620090279, guid: ca921c1f96d54924aa69de014789e44f,
+        type: 3}
+    - m_Name: Red
+      m_Hash: -1037297297
+      m_Sprite: {fileID: 1291963135620090279, guid: 49dea8fbeed1fbc40aaf72869fb0ec9f,
         type: 3}

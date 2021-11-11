@@ -15,14 +15,15 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameManager.GetInstance();
-        gameManager.PlayerObject = gameObject;
-        controller = GetComponent<MovementController>();
                 
     }
 
     private void OnEnable()
     {
+        gameManager = GameManager.GetInstance();
+        gameManager.PlayerObject = gameObject;
+        controller = GetComponent<MovementController>();
+
         GameSessionEventHandler.waveCompleteDelegate += OnWaveSurvived;
         GameSessionEventHandler.sessionResetDelegate += OnGameReset;
         GameSessionEventHandler.playerDiedDelegate += OnPlayerDied;
