@@ -16,8 +16,13 @@ namespace Assets.Scripts.Control
         public float stickPositionYRaw;
         
         public ControllerMode currentMode = ControllerMode.PLAYER;
-        
+
+        public bool IsInNeutralPosition()
+        {
+            return (Math.Abs(stickPositionXRaw) + Math.Abs(stickPositionYRaw)) < 0.00001f;
+        }
     }
+   
 
     public enum ControllerMode
     {

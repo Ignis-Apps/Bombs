@@ -47,7 +47,7 @@ public class MovementController : MonoBehaviour
     }
     public void Update()
     {
-        PlayerStats playerStats = gameManager.playerStats;
+        PlayerStats playerStats = gameManager.session.playerStats;
 
         if(controllerState.currentMode == ControllerMode.PLAYER && screenManager.CanPlayerMove())
         {

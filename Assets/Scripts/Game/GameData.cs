@@ -28,6 +28,8 @@ namespace Assets.Scripts.Game
         private bool consentCrashlytics;
         private bool consentPersonalisedAds;
 
+        private bool tutorialWasPlayed;
+
         // Conatins the Skins/Scences/Upgrades a user owns
         private Dictionary<int, bool> skinInventory = new Dictionary<int, bool>();
         private Dictionary<int, bool> sceneInventory = new Dictionary<int, bool>();
@@ -44,6 +46,7 @@ namespace Assets.Scripts.Game
         public bool ConsentAnalytics { get => consentAnalytics; set { consentAnalytics = value; } }
         public bool ConsentCrashlytics { get => consentCrashlytics; set { consentCrashlytics = value; } }
         public bool ConsentPersonalisedAds { get => consentPersonalisedAds; set { consentPersonalisedAds = value; } }
+        public bool TutorialWasPlayed { get => tutorialWasPlayed; set { tutorialWasPlayed = value; } }
 
         public bool getSkinInventory(int id)
         {
@@ -94,6 +97,8 @@ namespace Assets.Scripts.Game
             consentAnalytics = PlayerPrefs.GetInt("consentAnalytics", 0) != 0;
             consentCrashlytics = PlayerPrefs.GetInt("consentCrashlytics", 0) != 0;
             consentPersonalisedAds = PlayerPrefs.GetInt("consentPersonalisedAds", 0) != 0;
+
+            tutorialWasPlayed = PlayerPrefs.GetInt("tutorialFlag", 0) != 0;
         }
 
         public void SaveData()
@@ -105,6 +110,8 @@ namespace Assets.Scripts.Game
 
             PlayerPrefs.SetFloat("volumeMusic", volumeMusic);
             PlayerPrefs.SetFloat("volumeSFX", volumeSFX);
+
+            PlayerPrefs.SetInt("tutorialFlag", tutorialWasPlayed ? 1 : 0);
         }
 
         public void SaveConsent()

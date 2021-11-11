@@ -5,6 +5,6 @@ public class SmallBomb : Bomb
 {
     public override float GetStartSpeed()
     {
-        return gameManager.CurrentWave.GetSmallBombInitialSpeed(gameManager.CurrentWaveProgress);
+        return gameManager.CurrentWave.GetSmallBombInitialSpeed(gameManager.session.progressStats.currentWaveProgress);
     }
 }

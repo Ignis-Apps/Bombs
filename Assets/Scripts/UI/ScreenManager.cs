@@ -15,7 +15,7 @@ public class ScreenManager : Singleton<ScreenManager>
     {
         screenPrefabs.ForEach(screen => Instantiate(screen, this.gameObject.transform));
 
-        gameScreenControllerList = GetComponentsInChildren<ScreenController>().ToList();       
+        gameScreenControllerList = GetComponentsInChildren<ScreenController>(true).ToList();       
         gameScreenControllerList.ForEach(controler => controler.gameObject.SetActive(false));        
         gameScreenControllerList.ForEach(controler => controler.gameObject.GetComponent<RectTransform>().position = transform.position);        
         SwitchScreen(initialScreen);        
@@ -23,7 +23,8 @@ public class ScreenManager : Singleton<ScreenManager>
 
     public void SwitchScreen(ScreenType nextScreen)
     {
-        if(currentActiveController != null)
+        
+        if (currentActiveController != null)
         {
             currentActiveController.gameObject.SetActive(false);
         }
@@ -31,6 +32,7 @@ public class ScreenManager : Singleton<ScreenManager>
         ScreenController nextController = gameScreenControllerList.Find(controller => controller.screenType == nextScreen);
         if(nextController == null)
         {
+            Debug.LogError("Next screen is null");
             return;
         }
 

@@ -1,4 +1,5 @@
 ﻿using Assets.Scriptable;
+using Assets.Scripts.Game.Session;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,6 +50,8 @@ namespace Assets.Scripts.Game
             screenManager = ScreenManager.GetInstance();
             gameManager = GameManager.GetInstance();
 
+            gameManager.waveSpawner = this;
+
             waveTimer = new GameTimer();
             spawnTimer = new GameTimer();
             CreateSpawnPoints();
@@ -59,19 +62,20 @@ namespace Assets.Scripts.Game
         public void Update()
         {
             
-   
-
-            if (screenManager == null || gameManager == null) { return; }
+            if (screenManager == null || gameManager == null)
+                return;
+            
             running = screenManager.CanPlayerMove();
 
 
-            if (running)
-            {
+            if (running)            
                 gameManager.Tick();
-            }
+            
 
-            gameManager.CurrentWaveProgress = waveTimer.getProgress();
-            if (!running || onTimeout) return;
+            gameManager.session.progressStats.currentWaveProgress = waveTimer.getProgress();
+            
+            if (!running || onTimeout) 
+                return;
 
             waveTimer.Tick(Time.deltaTime);
             spawnTimer.Tick(Time.deltaTime);
@@ -109,8 +113,8 @@ namespace Assets.Scripts.Game
         IEnumerator LoadWaveDelayed(float time, int wave)
         {
             onTimeout = true;
-            yield return new WaitForSeconds(1.5f);            
-            gameManager.OnWaveSurvived();
+            yield return new WaitForSeconds(1.5f);                        
+            GameSessionEventHandler.waveCompleteDelegate();
             LoadWave(wave);
             yield return new WaitForSeconds(4f);
             onTimeout = false;
@@ -155,6 +159,13 @@ namespace Assets.Scripts.Game
 
         }
 
+        public void SpawnBombAtRandomPosititon()
+        {
+            Vector3 spawnPosition = GetSpawnPoint(Random.Range(0, spawnColums));
+            GameObject spawnedObject = Instantiate(defaultBomb);
+            spawnedObject.transform.position = spawnPosition;
+        }
+
         private void SpawnCrate()
         {
             int positionIndex = Random.Range(0, spawnColums);
@@ -191,7 +202,7 @@ namespace Assets.Scripts.Game
             waveTimer.SetTargetTime(wave.GetWaveDuration());
             spawnTimer.SetTargetTime(wave.GetSpawnInterval(0f));
 
-            gameManager.playerStats.SpeedWave = wave.GetPlayerSpeedMultiplier();
+            gameManager.session.playerStats.SpeedWave = wave.GetPlayerSpeedMultiplier();
 
         }
 

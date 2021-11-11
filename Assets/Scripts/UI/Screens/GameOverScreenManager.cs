@@ -32,8 +32,8 @@ public class GameOverScreenManager: AbstractScreenManager
         // Provisorisch
         scoreText.SetText(CreateTimeString(gameManager.SurvivedSecounds));
 
-        gameData.CoinBalance += gameManager.playerStats.Coins;
-        gameData.CrystalBalance += gameManager.playerStats.Crystals;
+        gameData.CoinBalance += gameManager.session.playerStats.Coins;
+        gameData.CrystalBalance += gameManager.session.playerStats.Crystals;
 
         if (gameManager.SurvivedSecounds > gameData.HighScore) { 
             bestScoreText.SetText("New Highscore");
@@ -76,9 +76,9 @@ public class GameOverScreenManager: AbstractScreenManager
         yield return new WaitForSeconds(.7f);
 
         // Sequenziell
-        StartCoroutine(AnimateText(CoinsText, 0f, .25f, "", 0, gameManager.playerStats.Coins));
+        StartCoroutine(AnimateText(CoinsText, 0f, .25f, "", 0, gameManager.session.playerStats.Coins));
         yield return new WaitForSeconds(.5f);
-        StartCoroutine(AnimateText(survivedWavesText, 0f, .5f, "", 0, gameManager.SurvivedWaves));
+        StartCoroutine(AnimateText(survivedWavesText, 0f, .5f, "", 0, gameManager.session.progressStats.SurvivedWaves));
         yield return new WaitForSeconds(.5f);
         //StartCoroutine(AnimateText(scoreText, 0f, .5f, "", 0, gameManager.SurvivedSecounds));
     }
@@ -106,14 +106,17 @@ public class GameOverScreenManager: AbstractScreenManager
 
     private void Home()
     {
-        screenManager.SwitchScreen(ScreenType.TITLE_SCREEN);
         gameManager.handleGameEvent(GameEvent.RESET_GAME);
+        screenManager.SwitchScreen(ScreenType.TITLE_SCREEN);
     }
 
     private void Retry()
     {
-        screenManager.SwitchScreen(ScreenType.INGAME_OVERLAY);
         gameManager.handleGameEvent(GameEvent.RESET_GAME);
+        if(gameData.TutorialWasPlayed)
+            screenManager.SwitchScreen(ScreenType.INGAME_OVERLAY);
+        else
+            screenManager.SwitchScreen(ScreenType.TUTORIAL_SCREEN);
     }
 
     private void Share()

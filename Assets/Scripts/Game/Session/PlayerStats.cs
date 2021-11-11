@@ -1,4 +1,6 @@
 ﻿
+using Assets.Scripts.Game.Session;
+
 namespace Assets.Scripts.Game
 {
     public class PlayerStats
@@ -25,9 +27,19 @@ namespace Assets.Scripts.Game
         public PlayerStats()
         {
             Init();
+            GameSessionEventHandler.coinColltedDelegate += OnCoinCollected;
+            GameSessionEventHandler.crystalColltedDelegate += OnCrystalCollected;
+            GameSessionEventHandler.sessionResetDelegate += OnSessionReset;
         }
 
-        public void Reset()
+        ~PlayerStats()
+        {
+            GameSessionEventHandler.coinColltedDelegate -= OnCoinCollected;
+            GameSessionEventHandler.crystalColltedDelegate -= OnCrystalCollected;
+            GameSessionEventHandler.sessionResetDelegate -= OnSessionReset;
+        }
+
+        private void OnSessionReset()
         {
             Init();
         }
@@ -65,6 +77,9 @@ namespace Assets.Scripts.Game
         public bool IsProtected { get => isPlayerProtected; set { isPlayerProtected = value; } }
         public bool IsMoving { get => isPlayerMoving; set { isPlayerMoving = value; } }
         public bool IsNearCrate { get => isPlayerNearCrate; set { isPlayerNearCrate = value; } }
+
+        private void OnCoinCollected() { collectedCoins++; }
+        private void OnCrystalCollected() { collectedCrystals++; }
 
     }
 }

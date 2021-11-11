@@ -31,7 +31,7 @@ namespace Assets.Scripts.Entity.Powerups
             turretInstance.transform.position = spawnPosition;       
             controllerState.currentMode = Control.ControllerMode.TURRET;
 
-            gameManager.playerStats.IsProtected = true;
+            gameManager.session.playerStats.IsProtected = true;
 
             CameraFollow followScript = Camera.main.GetComponent<CameraFollow>();
             followScript.SetTarget(turretInstance.transform);
@@ -43,7 +43,7 @@ namespace Assets.Scripts.Entity.Powerups
             CameraFollow followScript = Camera.main.GetComponent<CameraFollow>();
             followScript.SetTarget(gameManager.getPlayer().transform);
             
-            gameManager.playerStats.IsProtected = false;
+            gameManager.session.playerStats.IsProtected = false;
 
             controllerState.currentMode = Control.ControllerMode.PLAYER;
             Destroy(turretInstance);

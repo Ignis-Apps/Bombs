@@ -4,7 +4,7 @@
     {
         public override float GetStartSpeed()
         {
-           return gameManager.CurrentWave.GetDefaultBombInitialSpeed(gameManager.CurrentWaveProgress);
+           return gameManager.CurrentWave.GetDefaultBombInitialSpeed(gameManager.session.progressStats.currentWaveProgress);
         }
     }
 }

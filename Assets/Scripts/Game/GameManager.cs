@@ -1,7 +1,7 @@
 ﻿using Assets.Scriptable;
 using Assets.Scripts.Game;
+using Assets.Scripts.Game.Session;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public enum GameEvent
@@ -17,62 +17,45 @@ public enum GameEvent
 public class GameManager : Singleton<GameManager>
 {
 
-    public PlayerStats playerStats = new PlayerStats();
+    public GameSession session = new GameSession();    
     
-    private float survivedSecounds;
-    private float daytime = 0;
+    public GameManager()
+    {
+        GameSessionEventHandler.playerDiedDelegate += OnPlayerDied;
+    }
 
-    private int dodgedBombs;
-    private int survivedWaves;
+    ~GameManager()
+    {
+        GameSessionEventHandler.playerDiedDelegate -= OnPlayerDied;
+    }
 
     public GameWave CurrentWave;
-    public float CurrentWaveProgress;
 
-    public GameObject Player { get; set; }
-
-    public int SurvivedSecounds { get => (int)survivedSecounds; }
-    public int SurvivedWaves { get => survivedWaves; }
-    public float DayTime { get => survivedSecounds / 45f; }
-    
-    public int Score { get => (1 + survivedWaves) * (int) survivedSecounds; }
-
-    private GameUIMessageTypes currentMessage;
-
+    public GameWaveSpawner waveSpawner;
+    public GameObject PlayerObject { get; set; }
     public Transform GroundTransform { get; set; }
 
-    public void OnCoinCollected(int amount){ playerStats.Coins += amount; }
-    public void OnPointCollected(int amount){ playerStats.Score += amount;}
+    public int SurvivedSecounds { get => (int) session.progressStats.SecoundsSurvived; }
+    public float DayTime { get => session.progressStats.SecoundsSurvived / 45f; }
+    
+    private GameUIMessageTypes currentMessage;
 
-    public void OnCrystalCollected(int amount)
-    {        
-        playerStats.Crystals += amount;
-    }
-    public void OnBombDodged(){ dodgedBombs += 1; }
-    public void OnWaveSurvived(){ 
-        survivedWaves++;
-        getPlayer().OnWaveSurvived();
-    }
-    public void OnPlayerHit() { if (!playerStats.IsProtected) playerStats.Lifes--; }
     public void OnPlayerDied() {
     
-        if(playerStats.AmountOfRevives < 1)
+        if(session.playerStats.AmountOfRevives < 1)
         {
             ScreenManager.GetInstance().SwitchScreen(ScreenType.REVIVE_SCREEN);
-            playerStats.IsProtected = true;
+            session.playerStats.IsProtected = true;
         }
         else
         {
             ScreenManager.GetInstance().SwitchScreen(ScreenType.GAME_OVER_SCREEN);
         }
 
-
-        Player.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = false);        
-        Player.GetComponent<MovementController>().Stop();
-
         Powerup.CurrentActivePowerup?.DeactivatePowerup();
 
     }
-    public void Tick(){ survivedSecounds += Time.deltaTime; }
+    public void Tick(){ session.progressStats.SecoundsSurvived += Time.deltaTime; }
 
     public void ResetStats()
     {
@@ -86,13 +69,7 @@ public class GameManager : Singleton<GameManager>
 
         // Delete ingame message
         currentMessage = GameUIMessageTypes.NONE;
-
-        // Reset player position        
-        //Player.SetActive(true);
-        Player.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = true);
-        Player.GetComponent<MovementController>().enabled = true;
-        Player.transform.position = new Vector2(0, Player.transform.position.y);
-
+  
         // Reset powerups
         Powerup.CurrentActivePowerup?.DeactivatePowerup();
 
@@ -100,15 +77,9 @@ public class GameManager : Singleton<GameManager>
         GameObject spawner = GameObject.FindGameObjectWithTag("Spawner");
         GameWaveSpawner waveSpawner = spawner.GetComponent<GameWaveSpawner>();
         waveSpawner.Reset();
-
-        survivedSecounds = 0;
-        dodgedBombs = 0;
-        survivedWaves = 0;
-
+       
         Time.timeScale = 1f;        
-
-        playerStats.Reset();
-
+       
     }
 
     private float previousTimeScale = 1f;
@@ -120,15 +91,13 @@ public class GameManager : Singleton<GameManager>
     }
 
     public void OnGameResumed()
-    {
-      
+    {      
         if (previousTimeScale > -1f)
         {
             Time.timeScale = previousTimeScale;
             Time.timeScale = 1f;
             previousTimeScale = -1f;
-        }
-        
+        }   
     }
 
  
@@ -140,12 +109,13 @@ public class GameManager : Singleton<GameManager>
         {
             case GameEvent.RESET_GAME:
                 GameData.GetInstance().SaveData();
+                GameSessionEventHandler.sessionResetDelegate();
                 ResetStats();
                 break;
 
             case GameEvent.CHANGE_TIME:
-                daytime += 0.25f;
-                daytime %= 1f;
+              //  daytime += 0.25f;
+                //daytime %= 1f;
                 break;
 
             case GameEvent.PAUSE_GAME:
@@ -156,12 +126,8 @@ public class GameManager : Singleton<GameManager>
                 OnGameResumed();
                 break;
 
-            case GameEvent.REVIVE_PLAYER:
-                playerStats.Lifes += 1;
-                playerStats.AmountOfRevives += 1;
-                playerStats.IsProtected = false;
-                Player.GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = true);
-                Player.GetComponent<MovementController>().enabled = true;
+            case GameEvent.REVIVE_PLAYER:                             
+                GameSessionEventHandler.playerRevivedDelegate();              
                 break;
 
             default:
@@ -171,7 +137,12 @@ public class GameManager : Singleton<GameManager>
 
     public Player getPlayer()
     {
-        return Player.GetComponent<Player>();
+        if(PlayerObject == null)
+        {
+            Debug.LogError("Player IS NULL");
+        }
+
+        return PlayerObject.GetComponent<Player>();
     }    
 
     public void SetCurrentGameMessage(GameUIMessageTypes message)

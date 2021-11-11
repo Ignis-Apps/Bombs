@@ -30,7 +30,7 @@ public class ReviveScreenManager : AbstractScreenManager
 
     private void OnEnable()
     {
-        float progress = gameManager.CurrentWaveProgress;
+        float progress = gameManager.session.progressStats.currentWaveProgress;
         progressBarFill.localScale = new Vector3 (progress,1f,1f);
         
         timeBarFill.localScale = new Vector3(1f, timeBarFill.localScale.y, timeBarFill.localScale.z);
@@ -38,9 +38,9 @@ public class ReviveScreenManager : AbstractScreenManager
         
         progressText.text = ((int)(progress * 100)) + "%";        
         
-        waveText.text = "( Wave " + (gameManager.SurvivedWaves + 1) + " )";
+        waveText.text = "( Wave " + (gameManager.session.progressStats.SurvivedWaves + 1) + " )";
 
-        reviveWithCrystalButton.interactable = (gameManager.playerStats.Crystals > 0 || gameData.CrystalBalance > 0);
+        reviveWithCrystalButton.interactable = (gameManager.session.playerStats.Crystals > 0 || gameData.CrystalBalance > 0);
     }
 
     private void Update()
@@ -80,7 +80,7 @@ public class ReviveScreenManager : AbstractScreenManager
             gameData.SaveData();
         }
         else { 
-            gameManager.playerStats.Crystals--; 
+            gameManager.session.playerStats.Crystals--; 
         }
 
         Revive();

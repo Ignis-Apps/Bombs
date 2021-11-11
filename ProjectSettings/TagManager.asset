@@ -11,6 +11,7 @@ TagManager:
   - Spawner
   - Crate
   - Crystal
+  - Marker
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - Collectable/Coins
   - Collectable/ScoreOrbs
   - Collectable/Crate
-  - 
+  - Collectable/TutorialMarker
   - 
   - 
   - 

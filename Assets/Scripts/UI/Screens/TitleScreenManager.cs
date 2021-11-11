@@ -37,7 +37,14 @@ public class TitleScreenManager : AbstractScreenManager
 
     private void Play()
     {
-        screenManager.SwitchScreen(ScreenType.INGAME_OVERLAY);
+        if (gameData.TutorialWasPlayed)
+        {
+            screenManager.SwitchScreen(ScreenType.INGAME_OVERLAY);
+        }
+        else
+        {
+            screenManager.SwitchScreen(ScreenType.TUTORIAL_SCREEN);
+        }
     }
 
     private void ShowLeaderboard()

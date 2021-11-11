@@ -1,4 +1,5 @@
 using Assets.Scripts.Control;
+using Assets.Scripts.Game.Session;
 using System.Collections;
 using UnityEngine;
 
@@ -75,6 +76,9 @@ public abstract class Powerup : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             ActivatePowerup();
+
+            if (GameSessionEventHandler.powerUpCollected != null)
+                GameSessionEventHandler.powerUpCollected();
         }
     }
 

@@ -11,7 +11,7 @@ namespace Assets.Scripts.Entity.Bomb
 
         public override float GetStartSpeed()
         {
-            return gameManager.CurrentWave.GetHomingBombInitialSpeed(gameManager.CurrentWaveProgress);
+            return gameManager.CurrentWave.GetHomingBombInitialSpeed(gameManager.session.progressStats.currentWaveProgress);
         }
 
         protected override void Start()

@@ -1,4 +1,5 @@
 using Assets.Scriptable;
+using Assets.Scripts.Game.Session;
 using System.Collections;
 using UnityEngine;
 
@@ -31,6 +32,9 @@ public class Crate : MonoBehaviour
     private bool hasLanded;
     private bool isPlayerNear;
 
+    private bool hasFixedDrop;
+    private GameObject fixedDropPrefab;
+
     // Start is called before the first frame update
     void Start()
     {        
@@ -58,20 +62,22 @@ public class Crate : MonoBehaviour
                 {
                     hasLanded = true;
                     DetatchParachute();
+                    if (GameSessionEventHandler.crateLandedDelegate != null)
+                    {
+                        GameSessionEventHandler.crateLandedDelegate();
+                    }
                 }
             }
         }
 
-        if (isPlayerNear && !gameManager.playerStats.IsMoving)
+        if (isPlayerNear && !gameManager.session.playerStats.IsMoving)
         {
             openingProgress += Time.deltaTime;
 
             progressIndicator.transform.localScale = new Vector3(1 - (openingProgress / requiredOpeningTime), 1, 1);
 
             if(openingProgress >= requiredOpeningTime) {
-                isPlayerNear = false;
-                //OpenCrate();
-                
+                isPlayerNear = false;                            
                 StartCoroutine(OpenCrate());
             }
 
@@ -83,10 +89,19 @@ public class Crate : MonoBehaviour
     {   
         animator.Play(openCrateAnimation.name);
 
-        gameManager.playerStats.IsNearCrate = false;
+        gameManager.session.playerStats.IsNearCrate = false;
         yield return new WaitForSeconds(openCrateAnimation.length);
 
-        GameObject drop = Instantiate(crateSettings.GetCrateDrop(), transform.position, transform.rotation);
+        if (GameSessionEventHandler.crateOpenedDelegate != null)
+            GameSessionEventHandler.crateOpenedDelegate();
+        
+        GameObject drop;
+        
+        if(hasFixedDrop)
+            drop = Instantiate(fixedDropPrefab, transform.position, transform.rotation);
+        else    
+            drop = Instantiate(crateSettings.GetCrateDrop(), transform.position, transform.rotation);
+        
         drop.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0f, 250f));
 
 
@@ -124,7 +139,7 @@ public class Crate : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerNear = true;
-            gameManager.playerStats.IsNearCrate = true;
+            gameManager.session.playerStats.IsNearCrate = true;
             progressIndicator.SetActive(true);
         }
 
@@ -136,8 +151,14 @@ public class Crate : MonoBehaviour
         {
            // progressIndicator.SetActive(false);
             isPlayerNear = false;
-            gameManager.playerStats.IsNearCrate = false;
+            gameManager.session.playerStats.IsNearCrate = false;
         }
 
+    }
+
+    public void SetCrateDrop(GameObject prefab)
+    {
+        hasFixedDrop = true;
+        fixedDropPrefab = prefab;
     }
 }

@@ -21,7 +21,7 @@ namespace Assets.Scripts.Entity.Shield
 
             hitpoints = configuration.Hitpoints;
 
-            shieldTarget = GameManager.GetInstance().Player;
+            shieldTarget = GameManager.GetInstance().PlayerObject;
             transform.position = shieldTarget.transform.position;
             shieldSprite.sprite = ShieldStates[Mathf.Min(hitpoints-1, ShieldStates.Length-1)];
         }

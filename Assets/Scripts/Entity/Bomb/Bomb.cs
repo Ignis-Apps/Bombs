@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Game.Session;
+using UnityEngine;
 
 namespace Assets.Scripts.Entity.Bomb
 {
@@ -90,13 +91,12 @@ namespace Assets.Scripts.Entity.Bomb
                 explosion.transform.position = explositionPoistion;
             }
 
-            SpawnPrefabs(coinPrefab, lootTableSettings.GetRandomCoinAmount());
-            //SpawnPrefabs(scoreOrbPrefab, lootTableSettings.GetRandomScoreAmount());           
+            SpawnPrefabs(coinPrefab, lootTableSettings.GetRandomCoinAmount());               
             SpawnPrefabs(crystalPrefab, lootTableSettings.GetRandomSpecialCoinAmount());
 
             if (!collision.gameObject.name.Contains("Player"))
-            {
-                GameManager.GetInstance().OnBombDodged();
+            {                
+                GameSessionEventHandler.bombAvoidedDelegate();
             }
 
             Destroy(gameObject);

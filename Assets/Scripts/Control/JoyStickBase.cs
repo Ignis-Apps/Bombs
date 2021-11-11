@@ -1,4 +1,5 @@
 using Assets.Scripts.Control;
+using Assets.Scripts.Game.Session;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,6 +85,10 @@ public class JoyStickBase : MonoBehaviour
         
         
         readInput = true;
+        if (GameSessionEventHandler.inputStart != null)
+        {
+            GameSessionEventHandler.inputStart();
+        }
     }
 
     private void OnTouchMove()
@@ -116,6 +121,10 @@ public class JoyStickBase : MonoBehaviour
         handle.localPosition = Vector3.zero;
         horizontal = 0;
         vertical = 0;
+        
+        if (GameSessionEventHandler.inputStopped != null){
+            GameSessionEventHandler.inputStopped();
+        }
     }
 
  

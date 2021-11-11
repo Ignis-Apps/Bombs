@@ -72,6 +72,9 @@ public class Turret : MonoBehaviour
 
     void Shoot()
     {
+        if (controllerState.IsInNeutralPosition())
+            return;
+
         GameObject pt = Instantiate(projectile, pipeEnd.position, pipe.transform.rotation);
         Vector2 direction = pipeEnd.position - pipeBase.position;
 

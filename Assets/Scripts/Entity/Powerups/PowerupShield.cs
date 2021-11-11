@@ -22,12 +22,12 @@ namespace Assets.Scripts.Entity.Powerups
         public override void OnPowerupActivate()
         {
             shieldInstance = Instantiate(shieldPrefab);
-            gameManager.playerStats.IsProtected = true;
+            gameManager.session.playerStats.IsProtected = true;
         }
 
         public override void OnPowerupDeactivate()
         {
-            gameManager.playerStats.IsProtected = false;
+            gameManager.session.playerStats.IsProtected = false;
             shieldInstance.GetComponent<Animator>().SetTrigger("Shield_Tear_Down_Trigger");
             Destroy(shieldInstance, 1);
         }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Assets.Scripts.Game.Session;
 
 public class InGameScreenManager: AbstractScreenManager
 {
@@ -20,18 +21,28 @@ public class InGameScreenManager: AbstractScreenManager
     public void Start()
     {  
         pauseButton.onClick.AddListener(Pause);
+        UpdateUI();
     }
 
-    // TODO : Stop wasting ressources. Maybe we could use event based updates
-    void Update()
+    public void OnEnable()
     {
-        coinText.text = gameManager.playerStats.Coins.ToString();
-        scoreText.text = CreateTimeString(gameManager.SurvivedSecounds);
-        liveText.text = gameManager.playerStats.Lifes.ToString();
-        waveText.text = (gameManager.SurvivedWaves + 1).ToString(); 
+        GameSessionEventHandler.coinColltedDelegate += UpdateUI;
+    }
 
-        
-        if(Powerup.CurrentActivePowerup != null)
+    public void OnDisable()
+    {
+        GameSessionEventHandler.coinColltedDelegate -= UpdateUI;
+    }
+
+    private void UpdateUI()
+    {
+        coinText.text   = gameManager.session.playerStats.Coins.ToString();
+        scoreText.text  = CreateTimeString(gameManager.SurvivedSecounds);
+        liveText.text   = gameManager.session.playerStats.Lifes.ToString();
+        waveText.text   = (gameManager.session.progressStats.SurvivedWaves + 1).ToString();
+
+
+        if (Powerup.CurrentActivePowerup != null)
         {
             powerupProgressBarController.SetProgress(1f - Powerup.CurrentActivePowerup.GetNormalisedProgress());
         }
@@ -39,10 +50,13 @@ public class InGameScreenManager: AbstractScreenManager
         {
             powerupProgressBarController.SetProgress(0f);
         }
-        
-        
-
     }
+
+    public void Update()
+    {
+        UpdateUI();
+    }
+
     private void Pause()
     {
         screenManager.SwitchScreen(ScreenType.PAUSE_SCREEN);

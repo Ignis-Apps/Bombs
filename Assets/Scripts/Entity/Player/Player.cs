@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Game.Session;
+using System.Linq;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -14,59 +16,102 @@ public class Player : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.GetInstance();
-        gameManager.Player = gameObject;
+        gameManager.PlayerObject = gameObject;
         controller = GetComponent<MovementController>();
                 
+    }
+
+    private void OnEnable()
+    {
+        GameSessionEventHandler.waveCompleteDelegate += OnWaveSurvived;
+        GameSessionEventHandler.sessionResetDelegate += OnGameReset;
+        GameSessionEventHandler.playerDiedDelegate += OnPlayerDied;
+        GameSessionEventHandler.playerRevivedDelegate += OnPlayerRevived;
+    }
+
+    private void OnDisable()
+    {
+        GameSessionEventHandler.waveCompleteDelegate -= OnWaveSurvived;
+        GameSessionEventHandler.sessionResetDelegate -= OnGameReset;
+        GameSessionEventHandler.playerDiedDelegate -= OnPlayerDied;
+        GameSessionEventHandler.playerRevivedDelegate -= OnPlayerRevived;
     }
 
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.name.Contains("Coin"))
-        {           
-            GameManager.GetInstance().OnCoinCollected(1);                
-        }
-
-        if (collision.name.Contains("ScoreOrb"))
-        {                
-            GameManager.GetInstance().OnPointCollected(1);
-        }
-
+        if (collision.name.Contains("Coin"))                          
+            GameSessionEventHandler.coinColltedDelegate();
+        
         if (collision.name.Contains("Crystal"))
-        {            
-            GameManager.GetInstance().OnCrystalCollected(1);
+            GameSessionEventHandler.crystalColltedDelegate();
+
+        if (collision.name.Contains("Marker"))
+        {
+            if(GameSessionEventHandler.targetMarkerReachedDelegate != null)
+            {
+                GameSessionEventHandler.targetMarkerReachedDelegate();
+            }
+            else
+            {
+                Debug.LogWarning("DELEGATE IS NULL");
+            }
         }
+            
 
         if (collision.CompareTag("Bomb"))
         {            
             Destroy(collision.gameObject);
-            if (isInvincible) { return; }
-
-            gameManager.OnPlayerHit();
-            if(gameManager.playerStats.Lifes == 0 && ScreenManager.GetInstance().CanPlayerMove())
-            {
-                gameManager.OnPlayerDied();
-            }
             
-                   
+            if (isInvincible)  
+                return; 
+            
+            GameSessionEventHandler.playerHitDelegate();                                
             
         }
-
-        //Debug.Log(collision.name);
-       
       
     }
 
-    public void OnWaveSurvived()
+    private void OnWaveSurvived()
     {
         particles.Play();
     }
 
-    public void ResetPose()
+    private void OnPlayerDied()
     {
-
+        HideAndDisableMovement();
     }
 
+    private void OnPlayerRevived()
+    {
+        //----------
+        gameManager.session.playerStats.Lifes += 1;
+        gameManager.session.playerStats.AmountOfRevives += 1;
+        gameManager.session.playerStats.IsProtected = false;
+        //-----------
+
+        ShowAndEnableMovement();
+    }
+
+    private void OnGameReset()
+    {
+        // Set to center
+        transform.position = new Vector2(0, transform.position.y);
+
+        ShowAndEnableMovement();
+    }
+
+    private void HideAndDisableMovement()
+    {
+        GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = false);
+        GetComponent<MovementController>().Stop();
+    }
+
+    private void ShowAndEnableMovement()
+    {
+        GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = true);
+        GetComponent<MovementController>().enabled = true;
+    }
 
 }
