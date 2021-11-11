@@ -166,6 +166,12 @@ public class MovementController : MonoBehaviour
         if (direction > 0 && !facingRight || direction < 0 && facingRight)
         {
             Flip();
+
+            if(Mathf.Abs(virtualVelocity / totalMovementSpeed) > .5f)
+            {
+                SoundManager.PlaySound(SoundManager.Sound.PLAYER_TURN);
+            }
+
         }
     }
     

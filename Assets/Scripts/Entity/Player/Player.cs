@@ -41,8 +41,11 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.name.Contains("Coin"))                          
+        if (collision.name.Contains("Coin"))
+        {
+            SoundManager.PlaySound(SoundManager.Sound.COIN);
             GameSessionEventHandler.coinColltedDelegate();
+        }                          
         
         if (collision.name.Contains("Crystal"))
             GameSessionEventHandler.crystalColltedDelegate();
@@ -65,8 +68,9 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
             
             if (isInvincible)  
-                return; 
-            
+                return;
+
+            SoundManager.PlaySound(SoundManager.Sound.PLAYER_HIT);
             GameSessionEventHandler.playerHitDelegate();                                
             
         }
@@ -75,6 +79,7 @@ public class Player : MonoBehaviour
 
     private void OnWaveSurvived()
     {
+        SoundManager.PlaySound(SoundManager.Sound.LEVEL_COMPLETE);
         particles.Play();
     }
 
@@ -106,12 +111,16 @@ public class Player : MonoBehaviour
     {
         GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = false);
         GetComponent<MovementController>().Stop();
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
     private void ShowAndEnableMovement()
     {
         GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(renderer => renderer.enabled = true);
         GetComponent<MovementController>().enabled = true;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        GetComponent<CapsuleCollider2D>().enabled = true;
     }
 
 }

@@ -101,7 +101,8 @@ public class Crate : MonoBehaviour
             drop = Instantiate(fixedDropPrefab, transform.position, transform.rotation);
         else    
             drop = Instantiate(crateSettings.GetCrateDrop(), transform.position, transform.rotation);
-        
+
+        SoundManager.PlaySound(SoundManager.Sound.POWERUP_RELEASED);
         drop.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0f, 250f));
 
 
