@@ -1,25 +1,36 @@
 using Assets.Scripts.Game;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TitleScreenManager : AbstractScreenManager
 {
-    [SerializeField] Button playButton;
-    [SerializeField] Button leaderboardButton;
-    [SerializeField] Button shopButton;
-    [SerializeField] Button settingsButton;
+    [SerializeField] private Button PlayButton;
+    [SerializeField] private Button LeaderboardButton;
+    [SerializeField] private Button ShopButton;
+    [SerializeField] private Button SettingsButton;
+
+    [SerializeField] private TextMeshProUGUI HighScoreText;
+    [SerializeField] private GameObject HighScore;
 
     // Init (like Awake) when the script is initialized
     protected override void Init() {}
 
+    private void OnEnable()
+    {
+        UpdateHighScore();
+    }
+
     void Start()
     {
-        playButton.onClick.AddListener(Play);
-        leaderboardButton.onClick.AddListener(ShowLeaderboard);
-        shopButton.onClick.AddListener(ShowShop);
-        settingsButton.onClick.AddListener(ShowSettings);
+        PlayButton.onClick.AddListener(Play);
+        LeaderboardButton.onClick.AddListener(ShowLeaderboard);
+        ShopButton.onClick.AddListener(ShowShop);
+        SettingsButton.onClick.AddListener(ShowSettings);
 
-        gpgsController.SignInPromptOnce();
+        UpdateHighScore();
+
+        GpgsController.SignInPromptOnce();
 
         //Check for Consent
         if (!gameData.ConsentIsSet)
@@ -31,7 +42,7 @@ public class TitleScreenManager : AbstractScreenManager
         }
         else
         {
-            //gpgsController.SignInPromptOnce();
+            //GpgsController.SignInPromptOnce();
         }
     }
 
@@ -49,29 +60,30 @@ public class TitleScreenManager : AbstractScreenManager
 
     private void ShowLeaderboard()
     {
-        gpgsController.ShowLeaderboadUI();
+        GpgsController.ShowLeaderboadUI();
     }
 
     private void ShowShop()
     {
         screenManager.SwitchScreen(ScreenType.SHOP_SCREEN);
-
-        AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-        AndroidJavaObject unityActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-
-        if (unityActivity != null)
-        {
-            AndroidJavaClass toastClass = new AndroidJavaClass("android.widget.Toast");
-            unityActivity.Call("runOnUiThread", new AndroidJavaRunnable(() =>
-            {
-                AndroidJavaObject toastObject = toastClass.CallStatic<AndroidJavaObject>("makeText", unityActivity, "Coming Soon...", 0);
-                toastObject.Call("show");
-            }));
-        }
     }
 
     private void ShowSettings()
     {
         screenManager.SwitchScreen(ScreenType.SETTINGS_SCREEN);
+    }
+
+    private void UpdateHighScore()
+    {
+        if (gameData.HighScore > 0)
+        {
+            HighScoreText.text = "BEST - " + GameData.GetTimeString(gameData.HighScore);
+            HighScore.SetActive(true);
+        }
+        else
+        {
+            HighScore.SetActive(false);
+        }
+            
     }
 }

@@ -9,7 +9,7 @@ public abstract class AbstractScreenManager : MonoBehaviour
 
     protected FirebaseController firebaseController;
     protected AppodealController appodealController;
-    protected GPGSController gpgsController;
+    protected GPGSController GpgsController;
 
     public void Awake()
     {
@@ -19,7 +19,7 @@ public abstract class AbstractScreenManager : MonoBehaviour
 
         firebaseController = FirebaseController.GetInstance();
         appodealController = AppodealController.GetInstance();
-        gpgsController = GPGSController.GetInstance();
+        GpgsController = GPGSController.GetInstance();
 
         Init();
     }

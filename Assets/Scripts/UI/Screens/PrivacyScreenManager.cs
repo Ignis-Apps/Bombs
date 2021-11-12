@@ -85,7 +85,7 @@ public class PrivacyScreenManager: AbstractScreenManager
         if(callbackScreen == ScreenType.TITLE_SCREEN)
         {
             //gpgsController.SignInPromptOnce();
-            gpgsController.UnlockTextAchivment();
+            GpgsController.UnlockTextAchivment();
         }
     }
 

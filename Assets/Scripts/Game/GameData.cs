@@ -106,6 +106,19 @@ namespace Assets.Scripts.Game
             upgradeInventory.Add(id, value);
         }
 
+        public static string GetTimeString(int seconds)
+        {
+            string output;
+            int min = seconds / 60;
+            int sec = seconds % 60;
+
+            output = min + ":";
+            if (sec < 10) { output += "0"; }
+            output += sec;
+
+            return output;
+        }
+
         public void LoadData()
         {
             highScore = PlayerPrefs.GetInt("highScore", 0);

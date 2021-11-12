@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine.UI;
 using Assets.Scripts.Game.Session;
+using Assets.Scripts.Game;
 
 public class InGameScreenManager: AbstractScreenManager
 {
@@ -37,7 +38,7 @@ public class InGameScreenManager: AbstractScreenManager
     private void UpdateUI()
     {
         coinText.text   = gameManager.session.playerStats.Coins.ToString();
-        scoreText.text  = CreateTimeString(gameManager.SurvivedSecounds);
+        scoreText.text  = GameData.GetTimeString(gameManager.SurvivedSecounds);
         liveText.text   = gameManager.session.playerStats.Lifes.ToString();
         waveText.text   = (gameManager.session.progressStats.SurvivedWaves + 1).ToString();
 
@@ -61,19 +62,6 @@ public class InGameScreenManager: AbstractScreenManager
     {
         screenManager.SwitchScreen(ScreenType.PAUSE_SCREEN);
         gameManager.handleGameEvent(GameEvent.PAUSE_GAME);
-    }
-
-    private string CreateTimeString(int seconds)
-    {
-        string output;
-        int min = seconds / 60;
-        int sec = seconds % 60;
-
-        output = min + ":";
-        if (sec < 10) { output += "0"; }
-        output += sec;
-
-        return output;
     }
 
 }

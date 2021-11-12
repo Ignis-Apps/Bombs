@@ -44,7 +44,7 @@ public class GameOverScreenManager: AbstractScreenManager
         }
 
         // Set allways for the case, that the user sign in is after the install
-        gpgsController.UpdateScoreTestLeaderboard(gameData.HighScore * 1000);
+        GpgsController.UpdateScoreTestLeaderboard(gameData.HighScore * 1000);
     }
 
     private string CreateTimeString(int seconds)
