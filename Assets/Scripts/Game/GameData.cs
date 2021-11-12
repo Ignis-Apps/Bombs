@@ -30,6 +30,9 @@ namespace Assets.Scripts.Game
 
         private bool tutorialWasPlayed;
 
+        //
+        private PlayerSkinChanger.PlayerSkinConfiguration playerSkin;
+
         // Conatins the Skins/Scences/Upgrades a user owns
         private Dictionary<int, bool> skinInventory = new Dictionary<int, bool>();
         private Dictionary<int, bool> sceneInventory = new Dictionary<int, bool>();
@@ -47,8 +50,9 @@ namespace Assets.Scripts.Game
         public bool ConsentCrashlytics { get => consentCrashlytics; set { consentCrashlytics = value; } }
         public bool ConsentPersonalisedAds { get => consentPersonalisedAds; set { consentPersonalisedAds = value; } }
         public bool TutorialWasPlayed { get => tutorialWasPlayed; set { tutorialWasPlayed = value; } }
+        public PlayerSkinChanger.PlayerSkinConfiguration PlayerSkinInGame{ get => playerSkin; set { playerSkin = value; } }
 
-        public bool GetSkinInventory(int id)
+        public bool HasSkinInInventory(int id)
         {
             if (skinInventory.TryGetValue(id, out bool result))
             {
@@ -86,7 +90,10 @@ namespace Assets.Scripts.Game
 
         public void SetSkinInventory(int id, bool value)
         {
-            skinInventory.Add(id, value);
+            if (skinInventory.ContainsKey(id))
+                skinInventory[id] = value;
+            else
+                skinInventory.Add(id, value);            
         }
 
         public void SetSceneInventory(int id, bool value)
@@ -117,6 +124,12 @@ namespace Assets.Scripts.Game
             consentPersonalisedAds = PlayerPrefs.GetInt("consentPersonalisedAds", 0) != 0;
 
             tutorialWasPlayed = PlayerPrefs.GetInt("tutorialFlag", 0) != 0;
+
+            // Player Skin ( ingame )
+            playerSkin = new PlayerSkinChanger.PlayerSkinConfiguration();
+            string playerSkinString = PlayerPrefs.GetString("player_skin_configuration", "");
+            if (playerSkinString.Length > 0) playerSkin.Load(playerSkinString);
+
 
             skinInventory.Add(0, true);
             for (int i = 1; i < PlayerPrefs.GetInt("skin_size", 0); i++)
@@ -151,6 +164,8 @@ namespace Assets.Scripts.Game
 
             PlayerPrefs.SetInt("tutorialFlag", tutorialWasPlayed ? 1 : 0);
 
+            PlayerPrefs.SetString("player_skin_configuration", playerSkin.Save());
+
             for (int i = 1; i < skinInventory.Count; i++)
             {
                 if(skinInventory.TryGetValue(i, out bool result))
@@ -168,6 +183,10 @@ namespace Assets.Scripts.Game
                 if(upgradeInventory.TryGetValue(i, out int result))
                     PlayerPrefs.SetInt("upgrade_" + i, result);
             }
+
+            PlayerPrefs.SetInt("skin_size", skinInventory.Count);
+            PlayerPrefs.SetInt("scene_size", sceneInventory.Count);
+            PlayerPrefs.SetInt("upgrade_size", upgradeInventory.Count);
         }
 
         public void SaveConsent()

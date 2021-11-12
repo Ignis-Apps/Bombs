@@ -2,10 +2,6 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Experimental.U2D.Animation;
 
-
-
-
-
 public class PlayerSkinChanger : MonoBehaviour
 {
     // Contains the labels of the sprite library asset (PlayerParts)
@@ -167,7 +163,7 @@ public class PlayerSkinChanger : MonoBehaviour
                 + leftLegID+ "," 
                 + rightLegID+ "," 
                 + leftShoeID+ ","
-                + rightShoeID + ",";
+                + rightShoeID;
         }
 
     }

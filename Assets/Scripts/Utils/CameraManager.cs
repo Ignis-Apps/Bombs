@@ -57,4 +57,9 @@ public class CameraManager : MonoBehaviour
         camPos.y = cam.orthographicSize - originalOrthograficSize;
         cam.transform.position = camPos;
     }
+
+    public void resetCameraPosition()
+    {
+        fitCameraToScreen();
+    }
 }

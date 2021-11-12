@@ -99,4 +99,9 @@ public class TabGroup : MonoBehaviour
             cam.transform.position = camPos;
         }
     }
+
+    private void OnDisable()
+    {
+        cam.GetComponent<CameraManager>().resetCameraPosition();
+    }
 }

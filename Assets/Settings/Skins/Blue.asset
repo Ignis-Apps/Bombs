@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   title: Blue Suit
-  price: 1000
+  price: 100
   currency: 0
