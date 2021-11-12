@@ -119,6 +119,19 @@ namespace Assets.Scripts.Game
             return output;
         }
 
+        public static string GetCurrencyName(Currency c)
+        {
+            switch(c)
+            {
+                case Currency.COINS:
+                    return "Coins";
+                case Currency.CRYSTALS:
+                    return "Crystals";
+                default:
+                    return "Unknown";
+            }
+        }
+
         public void LoadData()
         {
             highScore = PlayerPrefs.GetInt("highScore", 0);

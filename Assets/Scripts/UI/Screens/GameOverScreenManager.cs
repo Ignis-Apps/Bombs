@@ -32,12 +32,37 @@ public class GameOverScreenManager: AbstractScreenManager
         // Provisorisch
         scoreText.SetText(CreateTimeString(gameManager.SurvivedSecounds));
 
+        Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventPostScore,
+                new Firebase.Analytics.Parameter[] {
+                    new Firebase.Analytics.Parameter(
+                        Firebase.Analytics.FirebaseAnalytics.ParameterScore, gameManager.SurvivedSecounds)
+                }
+            );
+
         gameData.CoinBalance += gameManager.session.playerStats.Coins;
+
+        Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventEarnVirtualCurrency,
+                new Firebase.Analytics.Parameter[] {
+                    new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterValue, gameManager.session.playerStats.Coins),
+                    new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterVirtualCurrencyName, "Coins"),
+                }
+            );
+
         gameData.CrystalBalance += gameManager.session.playerStats.Crystals;
+
+        Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventEarnVirtualCurrency,
+                new Firebase.Analytics.Parameter[] {
+                    new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterValue, gameManager.session.playerStats.Crystals),
+                    new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterVirtualCurrencyName, "Crystals"),
+                }
+            );
+
 
         if (gameManager.SurvivedSecounds > gameData.HighScore) { 
             bestScoreText.SetText("New Highscore");
             gameData.HighScore = gameManager.SurvivedSecounds;
+
+            Firebase.Analytics.FirebaseAnalytics.LogEvent("post_new_highscore", Firebase.Analytics.FirebaseAnalytics.ParameterScore, gameManager.SurvivedSecounds);
         } else
         {
             bestScoreText.SetText("Best " + CreateTimeString(gameData.HighScore));

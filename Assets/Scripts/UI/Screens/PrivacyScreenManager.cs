@@ -57,6 +57,8 @@ public class PrivacyScreenManager: AbstractScreenManager
         mainDialog.gameObject.SetActive(true);
         settingsDialog.gameObject.SetActive(false);
         warningDialog.gameObject.SetActive(false);
+
+        firebaseController.LogEvent("open_privacy_main_dialog");
     }
 
     public void ShowSettingsDialog(ScreenType callbackScreen)
@@ -66,6 +68,8 @@ public class PrivacyScreenManager: AbstractScreenManager
         mainDialog.gameObject.SetActive(false);
         settingsDialog.gameObject.SetActive(true);
         warningDialog.gameObject.SetActive(false);
+
+        firebaseController.LogEvent("open_privacy_settings_dialog");
     }
 
     private void AcceptAll()
@@ -82,11 +86,12 @@ public class PrivacyScreenManager: AbstractScreenManager
 
         screenManager.SwitchScreen(callbackScreen);
 
-        if(callbackScreen == ScreenType.TITLE_SCREEN)
-        {
-            //gpgsController.SignInPromptOnce();
-            GpgsController.UnlockTextAchivment();
-        }
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_analytics",
+            Firebase.Analytics.FirebaseAnalytics.ParameterValue, "true");
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_crashlytics",
+            Firebase.Analytics.FirebaseAnalytics.ParameterValue, "true");
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_personalised_ads",
+            Firebase.Analytics.FirebaseAnalytics.ParameterValue, "true");
     }
 
     private void AcceptSelected()
@@ -103,10 +108,12 @@ public class PrivacyScreenManager: AbstractScreenManager
 
         screenManager.SwitchScreen(callbackScreen);
 
-        if (callbackScreen == ScreenType.TITLE_SCREEN)
-        {
-            //gpgsController.SignInPromptOnce();
-        }
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_analytics",
+            Firebase.Analytics.FirebaseAnalytics.ParameterValue, analyticsToggle.isOn.ToString());
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_crashlytics",
+            Firebase.Analytics.FirebaseAnalytics.ParameterValue, crashReportingToggle.isOn.ToString());
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_personalised_ads",
+            Firebase.Analytics.FirebaseAnalytics.ParameterValue, personalizedAdsToggle.isOn.ToString());
     }
 
     private void ShowWarningDialog()
@@ -117,6 +124,8 @@ public class PrivacyScreenManager: AbstractScreenManager
             mainDialog.gameObject.SetActive(false);
             settingsDialog.gameObject.SetActive(false);
             warningDialog.gameObject.SetActive(true);
+
+            firebaseController.LogEvent("open_privacy_warning_dialog");
         }
         else
         {

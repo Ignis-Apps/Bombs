@@ -14,7 +14,6 @@ public class Skin : ScriptableObject
     {
         PlayerSkinChanger.PlayerSkinConfiguration psc = new PlayerSkinChanger.PlayerSkinConfiguration();
         psc.SetAll(id);
-        Debug.LogWarning("PSC ID: " + id + " (Title: " + title + ")");
         return psc;
     }
 }

@@ -16,7 +16,7 @@ public class GPGSController : Singleton<GPGSController>
 
         PlayGamesPlatform.InitializeInstance(config);
         // recommended for debugging:
-        PlayGamesPlatform.DebugLogEnabled = true;
+        // PlayGamesPlatform.DebugLogEnabled = true;
         // Activate the Google Play Games platform
         PlayGamesPlatform.Activate();
     }
@@ -74,7 +74,7 @@ public class GPGSController : Singleton<GPGSController>
             }
             else
             {
-                Debug.Log("Socre submission to the Test Leaderboard failed! Score: " + timeInMs);
+                Debug.Log("Score submission to the Test Leaderboard failed! Score: " + timeInMs);
             }
         });
     }
@@ -90,7 +90,7 @@ public class GPGSController : Singleton<GPGSController>
         }
     }
 
-    public void ShowLeaderboadUI()
+    public void ShowLeaderboardUI()
     {
         if (!userIsSignedIn)
         {

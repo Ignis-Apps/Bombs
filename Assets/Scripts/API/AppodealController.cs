@@ -25,7 +25,7 @@ public class AppodealController : Singleton<AppodealController>, IRewardedVideoA
         gameData = GameData.GetInstance();
 
         // TEST BUILD
-        Appodeal.setTesting(true);
+        // Appodeal.setTesting(true);
 
         Appodeal.disableLocationPermissionCheck();
         Appodeal.disableWriteExternalStoragePermissionCheck();

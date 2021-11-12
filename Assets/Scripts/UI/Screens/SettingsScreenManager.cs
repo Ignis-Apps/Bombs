@@ -27,6 +27,8 @@ public class SettingsScreenManager : AbstractScreenManager
         screenManager.SwitchScreen(ScreenType.PRIVACY_SCREEN);
         PrivacyScreenManager privacyScreenManager = (PrivacyScreenManager) screenManager.getScreenManager(ScreenType.PRIVACY_SCREEN);
         privacyScreenManager.ShowSettingsDialog(ScreenType.SETTINGS_SCREEN);
+
+        firebaseController.LogEvent("open_privacy_settings");
     }
 
     private void Save()

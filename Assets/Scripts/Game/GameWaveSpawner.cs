@@ -92,6 +92,12 @@ namespace Assets.Scripts.Game
             // Load next wave
             if (waveTimer.IsDone() || waveTimer.GetRemainingTime() < spawnTimer.GetRemainingTime())
             {
+                Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLevelEnd,
+                new Firebase.Analytics.Parameter[] {
+                    new Firebase.Analytics.Parameter(
+                        Firebase.Analytics.FirebaseAnalytics.ParameterLevelName, "wave_" + currentWaveIndex)}
+                );
+
                 int nextWave = Mathf.Min(currentWaveIndex + 1, gameWaveSettings.waves.Length - 1);
 
                 if (repeatWave){ nextWave = currentWaveIndex;}
@@ -198,7 +204,13 @@ namespace Assets.Scripts.Game
 
             if(gameManager == null) { return; }
 
-            if(waveIndex > 0)
+            Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLevelStart,
+                new Firebase.Analytics.Parameter[] {
+                    new Firebase.Analytics.Parameter(
+                        Firebase.Analytics.FirebaseAnalytics.ParameterLevelName, "wave_" + waveIndex)}
+                );
+
+            if (waveIndex > 0)
             {
                 gameManager.SetCurrentGameMessage(GameUIMessageTypes.WAVE_COMPLETE);
             }

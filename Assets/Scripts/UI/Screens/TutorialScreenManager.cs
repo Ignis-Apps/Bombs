@@ -45,7 +45,8 @@ public class TutorialScreenManager : AbstractScreenManager
 
     IEnumerator RunAllTutorials()
     {
-       
+        firebaseController.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventTutorialBegin);
+
         foreach (AbstractTutorial tutorial in tutorials)
         {           
             yield return StartCoroutine(RunTutorial(tutorial));

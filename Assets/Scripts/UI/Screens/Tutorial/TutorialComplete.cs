@@ -21,7 +21,8 @@ public class TutorialComplete : AbstractTutorial
         GameData gameData = GameData.GetInstance();
         gameData.TutorialWasPlayed = true;
         gameData.SaveData();
-        
+
+        firebaseController.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventTutorialComplete);
     }
 
     protected override void OnTutorialStart()

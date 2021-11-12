@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Game;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Shop.Tabs
@@ -20,6 +21,19 @@ namespace Assets.Scripts.Shop.Tabs
                 if (MakeTransaction(currentSkin.currency, currentSkin.price))
                 {
                     gameData.SetSkinInventory(currentSkin.id, true);
+
+                    Firebase.Analytics.FirebaseAnalytics.LogEvent(
+                        Firebase.Analytics.FirebaseAnalytics.EventSpendVirtualCurrency,
+                        new Firebase.Analytics.Parameter[] {
+                            new Firebase.Analytics.Parameter(
+                                Firebase.Analytics.FirebaseAnalytics.ParameterItemName, currentSkin.title),
+                            new Firebase.Analytics.Parameter(
+                                Firebase.Analytics.FirebaseAnalytics.ParameterValue, currentSkin.price),
+                            new Firebase.Analytics.Parameter(
+                                Firebase.Analytics.FirebaseAnalytics.ParameterVirtualCurrencyName, GameData.GetCurrencyName(currentSkin.currency)),
+                        }
+                    );
+
                     SBSButton.SetSelect();
                 }
             }

@@ -60,17 +60,23 @@ public class TitleScreenManager : AbstractScreenManager
 
     private void ShowLeaderboard()
     {
-        GpgsController.ShowLeaderboadUI();
+        GpgsController.ShowLeaderboardUI();
+
+        firebaseController.LogEvent("open_leaderboard");
     }
 
     private void ShowShop()
     {
         screenManager.SwitchScreen(ScreenType.SHOP_SCREEN);
+
+        firebaseController.LogEvent("open_shop");
     }
 
     private void ShowSettings()
     {
         screenManager.SwitchScreen(ScreenType.SETTINGS_SCREEN);
+
+        firebaseController.LogEvent("open_settings");
     }
 
     private void UpdateHighScore()
