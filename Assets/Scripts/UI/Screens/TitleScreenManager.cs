@@ -30,8 +30,6 @@ public class TitleScreenManager : AbstractScreenManager
 
         UpdateHighScore();
 
-        GpgsController.SignInPromptOnce();
-
         //Check for Consent
         if (!gameData.ConsentIsSet)
         {
@@ -42,7 +40,7 @@ public class TitleScreenManager : AbstractScreenManager
         }
         else
         {
-            //GpgsController.SignInPromptOnce();
+            GpgsController.SignInPromptOnce();
         }
     }
 

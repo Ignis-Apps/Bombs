@@ -2,9 +2,12 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Assets.Scripts.Game;
 
 public class GameOverScreenManager: AbstractScreenManager
 {
+    private static string APP_LINK = "https://play.google.com/store/apps/details?id=de.ignis_apps.bombs";
+
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI bestScoreText;
     [SerializeField] TextMeshProUGUI CoinsText;
@@ -146,6 +149,26 @@ public class GameOverScreenManager: AbstractScreenManager
 
     private void Share()
     {
-        Debug.Log("Sharing ...");
+        //execute the below lines if being run on a Android device
+#if UNITY_ANDROID
+        //Reference of AndroidJavaClass class for intent
+        AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
+        //Reference of AndroidJavaObject class for intent
+        AndroidJavaObject intentObject = new AndroidJavaObject("android.content.Intent");
+        //call setAction method of the Intent object created
+        intentObject.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
+        //set the type of sharing that is happening
+        intentObject.Call<AndroidJavaObject>("setType", "text/plain");
+        //add data to be passed to the other activity i.e., the data to be sent
+        intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"),
+            "Quick app shout-out:\nHelp our little alien bob to survive the attacks! I got " + GameData.GetTimeString(gameManager.SurvivedSecounds) +
+            " mins.\nDownload on Google Play: " + APP_LINK);
+        //get the current activity
+        AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");
+        //start the activity by sending the intent data
+        AndroidJavaObject jChooser = intentClass.CallStatic<AndroidJavaObject>("createChooser", intentObject, "Share Via");
+        currentActivity.Call("startActivity", jChooser);
+#endif
     }
 }

@@ -36,10 +36,15 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
         tabGroup.cameraYPosition -= relativYCameraMovment;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
         image = GetComponent<Image>();
         tabGroup.Subscribe(this);
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 }

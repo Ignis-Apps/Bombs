@@ -32,12 +32,15 @@ public class PrivacyScreenManager: AbstractScreenManager
         warningDialog = transform.Find("WarningDialog");
     }
 
-    public void Start()
+    public void OnEnable()
     {
         personalizedAdsToggle.isOn = gameData.ConsentPersonalisedAds;
         analyticsToggle.isOn = gameData.ConsentAnalytics;
         crashReportingToggle.isOn = gameData.ConsentCrashlytics;
+    }
 
+    public void Start()
+    {
         acceptAllMainButton.onClick.AddListener(AcceptAll);
         settingsButton.onClick.AddListener(() => ShowSettingsDialog(callbackScreen));
 
@@ -47,8 +50,6 @@ public class PrivacyScreenManager: AbstractScreenManager
         continueAnywayButton.onClick.AddListener(AcceptSelected);
         backButton.onClick.AddListener(() => ShowSettingsDialog(callbackScreen));
     }
-
-
 
     public void ShowMainDialog(ScreenType callbackScreen)
     {
@@ -84,14 +85,19 @@ public class PrivacyScreenManager: AbstractScreenManager
         settingsDialog.gameObject.SetActive(false);
         warningDialog.gameObject.SetActive(false);
 
-        screenManager.SwitchScreen(callbackScreen);
-
         Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_analytics",
             Firebase.Analytics.FirebaseAnalytics.ParameterValue, "true");
         Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_crashlytics",
             Firebase.Analytics.FirebaseAnalytics.ParameterValue, "true");
         Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_personalised_ads",
             Firebase.Analytics.FirebaseAnalytics.ParameterValue, "true");
+
+        screenManager.SwitchScreen(callbackScreen);
+
+        if(callbackScreen == ScreenType.TITLE_SCREEN)
+        {
+            GpgsController.SignInPromptOnce();
+        }
     }
 
     private void AcceptSelected()
@@ -106,14 +112,20 @@ public class PrivacyScreenManager: AbstractScreenManager
         settingsDialog.gameObject.SetActive(false);
         warningDialog.gameObject.SetActive(false);
 
-        screenManager.SwitchScreen(callbackScreen);
-
         Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_analytics",
             Firebase.Analytics.FirebaseAnalytics.ParameterValue, analyticsToggle.isOn.ToString());
         Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_crashlytics",
             Firebase.Analytics.FirebaseAnalytics.ParameterValue, crashReportingToggle.isOn.ToString());
         Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_personalised_ads",
             Firebase.Analytics.FirebaseAnalytics.ParameterValue, personalizedAdsToggle.isOn.ToString());
+
+
+        screenManager.SwitchScreen(callbackScreen);
+
+        if (callbackScreen == ScreenType.TITLE_SCREEN)
+        {
+            GpgsController.SignInPromptOnce();
+        }
     }
 
     private void ShowWarningDialog()
