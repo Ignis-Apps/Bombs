@@ -37,6 +37,9 @@ namespace Assets.Scripts.Game
 
         private GameTimer waveTimer;
         private GameTimer spawnTimer;
+        private GameTimer crateTimer;
+
+        [SerializeField] private float crateDropTime;        
 
         
         [Header("Spawnable Gameobjects")]
@@ -54,6 +57,10 @@ namespace Assets.Scripts.Game
 
             waveTimer = new GameTimer();
             spawnTimer = new GameTimer();
+            
+            crateTimer = new GameTimer();
+            crateTimer.SetTargetTime(crateDropTime);
+
             CreateSpawnPoints();
             LoadWave(0);
         }
@@ -79,6 +86,7 @@ namespace Assets.Scripts.Game
 
             waveTimer.Tick(Time.deltaTime);
             spawnTimer.Tick(Time.deltaTime);
+            crateTimer.Tick(Time.deltaTime);
             
 
             // Load next wave
@@ -91,7 +99,7 @@ namespace Assets.Scripts.Game
                 StartCoroutine(LoadWaveDelayed(2f,nextWave));
                 if (currentWave.SpawnCrateAtEnd())
                 {
-                    SpawnCrate();
+                    // SpawnCrate();
                 }
                 
                 return;
@@ -103,8 +111,13 @@ namespace Assets.Scripts.Game
                 // Decrease spawn time
                 spawnTimer.SetTargetTime(gameWaveSettings.waves[currentWaveIndex].GetSpawnInterval(waveTimer.getProgress()));                
                 SpawnBombs();
-                spawnTimer.Reset();
-                
+                spawnTimer.Reset();                
+            }
+
+            if (crateTimer.IsDone())
+            {
+                SpawnCrate();                
+                crateTimer.Reset();
             }
            
 
@@ -189,6 +202,10 @@ namespace Assets.Scripts.Game
             {
                 gameManager.SetCurrentGameMessage(GameUIMessageTypes.WAVE_COMPLETE);
             }
+            else
+            {
+                crateTimer.Reset();
+            }
 
             //Debug.Log("LOADING NEXT WAVE");
             GameWave wave = gameWaveSettings.waves[waveIndex];
@@ -209,7 +226,7 @@ namespace Assets.Scripts.Game
         private void ResetTimers()
         {
             waveTimer.Reset();
-            spawnTimer.Reset();
+            spawnTimer.Reset();            
         }
 
         private void CreateSpawnPoints()

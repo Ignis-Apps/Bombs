@@ -102,6 +102,7 @@ public class TabGroup : MonoBehaviour
 
     private void OnDisable()
     {
-        cam.GetComponent<CameraManager>().resetCameraPosition();
+        if(cam != null)
+            cam.GetComponent<CameraManager>().resetCameraPosition();
     }
 }

@@ -53,6 +53,7 @@ MonoBehaviour:
   debugSpawnBombAtPosition: -1
   repeatWave: 0
   gameWaveSettings: {fileID: 11400000, guid: 6eae339856135e544a1548b8b22f3481, type: 2}
+  crateDropTime: 40
   defaultBomb: {fileID: 5347834380977207295, guid: d5f4293344feb004c95a1b6f361074fa,
     type: 3}
   homingRocket: {fileID: 5198068931683851065, guid: ff09d2e2f0192894ba648b29e63c32bc,
