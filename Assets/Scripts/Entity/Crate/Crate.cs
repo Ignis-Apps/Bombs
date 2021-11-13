@@ -98,16 +98,25 @@ public class Crate : MonoBehaviour
         if (GameSessionEventHandler.crateOpenedDelegate != null)
             GameSessionEventHandler.crateOpenedDelegate();
         
-        GameObject drop;
-        
-        if(hasFixedDrop)
-            drop = Instantiate(fixedDropPrefab, transform.position, transform.rotation);
-        else    
+        GameObject drop = null;
+
+        if (hasFixedDrop)
+        {
+            if (fixedDropPrefab != null)
+            {
+                drop = Instantiate(fixedDropPrefab, transform.position, transform.rotation);            
+            }
+        }
+        else
+        {
             drop = Instantiate(crateSettings.GetCrateDrop(), transform.position, transform.rotation);
+        }    
 
-        SoundManager.PlaySound(SoundManager.Sound.POWERUP_RELEASED);
-        drop.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0f, 250f));
-
+        if(drop != null)
+        {
+            SoundManager.PlaySound(SoundManager.Sound.POWERUP_RELEASED);
+            drop.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0f, 250f));
+        }
 
         Destroy(this.gameObject);
 
@@ -128,12 +137,8 @@ public class Crate : MonoBehaviour
         {
             Rigidbody2D body = GetComponent<Rigidbody2D>();
 
-
-
             // transform.position = new Vector3(transform.position.x, GameManager.GetInstance().GroundTransform.position.y + GetComponent<SpriteRenderer>().bounds.size.y / 2f, transform.position.z);
             transform.position = new Vector3(transform.position.x, GameManager.GetInstance().GroundTransform.position.y + GetComponent<SpriteRenderer>().bounds.size.y / 2f, transform.position.z);
-
-
 
             boxColider.isTrigger = true;
             body.velocity = Vector2.zero;
@@ -165,4 +170,5 @@ public class Crate : MonoBehaviour
         hasFixedDrop = true;
         fixedDropPrefab = prefab;
     }
+    
 }

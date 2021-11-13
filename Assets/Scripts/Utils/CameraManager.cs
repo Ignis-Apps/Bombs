@@ -12,8 +12,8 @@ public class CameraManager : MonoBehaviour
     private float aspectRatio;
 
     private float originalAspectRatio;
-    private float originalOrthograficSize;
-    private Vector3 originalCameraPosition;
+    public float originalOrthograficSize { get; private set; }
+    public Vector3 originalCameraPosition { get; private set; }
 
     void Awake()
     {
@@ -58,8 +58,38 @@ public class CameraManager : MonoBehaviour
         cam.transform.position = camPos;
     }
 
-    public void resetCameraPosition()
+    public void ResetCameraPosition()
     {
         fitCameraToScreen();
+    }
+
+    private IEnumerator CameraMovementAnimation;
+
+    public void MoveToView(Vector3 position, float orthographicSize, float time)
+    {
+
+        if (CameraMovementAnimation != null)
+            StopCoroutine(CameraMovementAnimation);
+        
+        CameraMovementAnimation = AnimateCameraMovement(position, orthographicSize, time);
+        StartCoroutine(CameraMovementAnimation);
+        
+    }
+
+    IEnumerator AnimateCameraMovement(Vector3 targetPosition, float orthographicSize, float time)
+    {
+        Vector3 startPosition = cam.transform.position;
+        
+        float startSize = cam.orthographicSize;
+        float elapsedTime = 0f;
+        
+        while(elapsedTime < time)
+        {
+            elapsedTime += Time.deltaTime;
+            cam.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime/time);
+            cam.orthographicSize = Mathf.Lerp(startSize, orthographicSize, elapsedTime/time);
+            yield return null;
+        }
+                       
     }
 }

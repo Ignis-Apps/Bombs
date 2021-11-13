@@ -34,19 +34,20 @@ public class ShopScreenManger : AbstractScreenManager
     private UpgradeShopTab upgradeShopTab;
 
     private void OnEnable()
+    {   
+        UpdateBalance();
+
+        if (currentTab != null)
+            currentTab.TabSelected();
+        
+    }
+
+    private void Start()
     {
         skinShopTab = new SkinShopTab(BuyButton.GetComponent<SBS_Button>(), BackButton, NextButton, Skins);
         sceneShopTab = new SceneShopTab(BuyButton.GetComponent<SBS_Button>(), BackButton, NextButton, Scenes);
         upgradeShopTab = new UpgradeShopTab(BuyButton.GetComponent<SBS_Button>(), BackButton, NextButton, Upgrades);
 
-        UpdateBalance();
-
-        currentTab = skinShopTab;
-        currentTab.TabSelected();
-    }
-
-    private void Start()
-    {
         NextButton.onClick.AddListener(() => currentTab.Next());
         BackButton.onClick.AddListener(() => currentTab.Previous());
         BuyButton.onClick.AddListener(() => { currentTab.Buy(); UpdateBalance(); });
@@ -56,6 +57,9 @@ public class ShopScreenManger : AbstractScreenManager
         SkinTabButton.onClick.AddListener(() => SetCurrentTab(skinShopTab));
         SceneTabButton.onClick.AddListener(() => SetCurrentTab(sceneShopTab));
         UpgradeTabButton.onClick.AddListener(() => SetCurrentTab(upgradeShopTab));
+
+        currentTab = skinShopTab;
+        currentTab.TabSelected();
     }
 
     private void SetCurrentTab(ShopTabInterface shopTabInterface)

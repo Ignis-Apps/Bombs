@@ -3,48 +3,59 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
+public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public TabGroup tabGroup;
     public Image image;
     public float relativOrthograficCameraSizeChange;
     public float relativYCameraMovment;
 
-    public void OnPointerClick(PointerEventData eventData)
+    private bool IsSelected;
+
+    public void Awake()
     {
-        tabGroup.OnTabSelected(this);
+        image = GetComponent<Image>();        
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        tabGroup.OnTabEnter(this);
+      
+        image.color = tabGroup.hoverColor;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        tabGroup.OnTabExit(this);
+        if (IsSelected)
+            image.color = tabGroup.activeColor;
+        else
+            image.color = tabGroup.idleColor;
     }
 
     public void OnSelected()
     {
-        tabGroup.orthograficCameraSize += relativOrthograficCameraSizeChange;
-        tabGroup.cameraYPosition += + relativYCameraMovment;
+        IsSelected = true;
+        image.color = tabGroup.activeColor;
+        SetRelativeCameraPosition();
     }
     public void OnDeselected()
     {
-        tabGroup.orthograficCameraSize -= relativOrthograficCameraSizeChange;
-        tabGroup.cameraYPosition -= relativYCameraMovment;
+        IsSelected = false;
+        image.color = tabGroup.idleColor;        
     }
 
-    public void Awake()
+    private void SetRelativeCameraPosition()
     {
-        image = GetComponent<Image>();
-        tabGroup.Subscribe(this);
+        CameraManager camManager = Camera.main.GetComponent<CameraManager>();
+        Vector3 targetPosition = camManager.originalCameraPosition;
+        float targetSize = camManager.originalOrthograficSize;
+      
+        targetPosition.y += relativOrthograficCameraSizeChange;
+        targetSize += relativOrthograficCameraSizeChange;
+          
+        camManager.MoveToView(targetPosition, targetSize, .5f);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   
+    
+    
 }

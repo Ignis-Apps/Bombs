@@ -71,7 +71,7 @@ namespace Assets.Scripts.Shop.Tabs
         }
 
         protected override void OnTabClosed()
-        {
+        {        
             skinChanger.ApplySkinConfiguration(lastSelectedSkinConfiguration);
             gameData.PlayerSkinInGame = lastSelectedSkinConfiguration;
         }

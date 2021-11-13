@@ -21,6 +21,8 @@ public abstract class Powerup : MonoBehaviour
     protected float remaingTime;
     private bool powerupActive;
 
+    private bool deactivated;
+
     // Usefull to prevent the player from picking up the powerup too early [Crate Opening]
     [SerializeField] private float pickupProtectionTime;    
 
@@ -64,6 +66,7 @@ public abstract class Powerup : MonoBehaviour
     public void DeactivatePowerup()
     {
         powerupActive = false;
+        deactivated = true;
         CurrentActivePowerup = null;
         OnPowerupDeactivate();
         Destroy(gameObject, cleanUpTime);
@@ -74,11 +77,15 @@ public abstract class Powerup : MonoBehaviour
         if (powerupActive) { return; }
 
         if (collision.CompareTag("Player"))
-        {
-            ActivatePowerup();
+        {           
 
             if (GameSessionEventHandler.powerUpCollected != null)
-                GameSessionEventHandler.powerUpCollected();
+                GameSessionEventHandler.powerUpCollected(this);
+
+            if (deactivated)
+                return;
+
+            ActivatePowerup();
         }
     }
 

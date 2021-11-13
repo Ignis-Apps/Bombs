@@ -7,7 +7,7 @@ namespace Assets.Scripts.Game.Session
         public delegate void OnCoinCollected();
         public delegate void OnCrystalCollected();
         public delegate void OnTargetMarkerReached();
-        public delegate void OnPowerUpCollected();
+        public delegate void OnPowerUpCollected(Powerup powerup);
         public static OnCoinCollected coinColltedDelegate;
         public static OnCrystalCollected crystalColltedDelegate;
         public static OnTargetMarkerReached targetMarkerReachedDelegate;

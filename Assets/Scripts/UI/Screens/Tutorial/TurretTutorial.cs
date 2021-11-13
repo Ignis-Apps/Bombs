@@ -36,8 +36,9 @@ public class TurretTutorial : AbstractTutorial
         remainingBombs--;
     }
 
-    private void OnPowerUpCollected() {
-        Powerup.CurrentActivePowerup.DeactivatePowerup();
+    private void OnPowerUpCollected(Powerup p) {
+             
+        p.DeactivatePowerup();        
         Dialog.SetActive(true);
         GameSessionEventHandler.powerUpCollected -= OnPowerUpCollected;
     }
