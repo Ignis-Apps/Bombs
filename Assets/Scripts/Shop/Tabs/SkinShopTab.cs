@@ -86,13 +86,18 @@ namespace Assets.Scripts.Shop.Tabs
             {
                 if (!gameData.HasSkinInInventory(s.id))
                 {
-                    gameData.SetSkinInventory(s.id, false);
+                    if(s.id != 0)
+                    {
+                        gameData.SetSkinInventory(s.id, false);
+                    } else
+                    {
+                        gameData.SetSkinInventory(s.id, true);
+                    }
                 }
             }
 
             // Only works cause index and id are equal
             SetIndex(gameData.SelectedSkin);
-            Debug.LogWarning(gameData.SelectedSkin);
         }
     }
 }

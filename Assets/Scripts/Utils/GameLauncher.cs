@@ -8,9 +8,9 @@ public class GameLauncher : MonoBehaviour
     private AppodealController appodealController;
     private GPGSController gpgsController;
 
-    void Start()
+    private void Awake()
     {
-        Debug.Log("Initializing...");
+        Debug.Log("Loading Player Prefs...");
 
         Application.targetFrameRate = 300;
 
@@ -18,7 +18,14 @@ public class GameLauncher : MonoBehaviour
         gameData = GameData.GetInstance();
         gameData.LoadData();
 
+        Debug.Log("Finished Loading Player Prefs!");
+    }
+
+    private void Start()
+    {
         // Initialize APIs (gameData is required for gdpr consent)
+
+        Debug.Log("Init APIs (Firebase, Appodeal, GPGS) ...");
         firebaseController = FirebaseController.GetInstance();
         appodealController = AppodealController.GetInstance();
         gpgsController = GPGSController.GetInstance();
@@ -26,8 +33,7 @@ public class GameLauncher : MonoBehaviour
         firebaseController.Init();
         appodealController.Init();
         gpgsController.Init();
-
-        Debug.Log("Finished initializing!");
+        Debug.Log("Finished Init APIs (Firebase, Appodeal, GPGS)!");
     }
 
 }

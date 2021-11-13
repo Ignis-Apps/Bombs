@@ -33,7 +33,7 @@ public class ShopScreenManger : AbstractScreenManager
     private SceneShopTab sceneShopTab;
     private UpgradeShopTab upgradeShopTab;
 
-    private void Start()
+    private void OnEnable()
     {
         skinShopTab = new SkinShopTab(BuyButton.GetComponent<SBS_Button>(), BackButton, NextButton, Skins);
         sceneShopTab = new SceneShopTab(BuyButton.GetComponent<SBS_Button>(), BackButton, NextButton, Scenes);
@@ -41,6 +41,12 @@ public class ShopScreenManger : AbstractScreenManager
 
         UpdateBalance();
 
+        currentTab = skinShopTab;
+        currentTab.TabSelected();
+    }
+
+    private void Start()
+    {
         NextButton.onClick.AddListener(() => currentTab.Next());
         BackButton.onClick.AddListener(() => currentTab.Previous());
         BuyButton.onClick.AddListener(() => { currentTab.Buy(); UpdateBalance(); });
@@ -50,9 +56,6 @@ public class ShopScreenManger : AbstractScreenManager
         SkinTabButton.onClick.AddListener(() => SetCurrentTab(skinShopTab));
         SceneTabButton.onClick.AddListener(() => SetCurrentTab(sceneShopTab));
         UpgradeTabButton.onClick.AddListener(() => SetCurrentTab(upgradeShopTab));
-            
-        currentTab = skinShopTab;
-        currentTab.TabSelected();
     }
 
     private void SetCurrentTab(ShopTabInterface shopTabInterface)
@@ -74,11 +77,5 @@ public class ShopScreenManger : AbstractScreenManager
     {
         CyrstalBalanceText.text = gameData.CrystalBalance.ToString();
         CoinBalanceText.text = gameData.CoinBalance.ToString();
-    }
-
-    private void OnEnable()
-    {
-        if(currentTab != null)
-            currentTab.TabSelected();
     }
 }

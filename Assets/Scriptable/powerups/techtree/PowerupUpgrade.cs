@@ -10,7 +10,7 @@ public abstract class PowerupUpgrade : ScriptableObject
 
     public int GetLevel()
     {
-        return GameData.GetInstance().GetUpgradeInventory(UPGRADE_ID);
+        return GameData.GetInstance().HasUpgradeInInventory(UPGRADE_ID);
     }
 
     public bool IsUpgradeMaxed()

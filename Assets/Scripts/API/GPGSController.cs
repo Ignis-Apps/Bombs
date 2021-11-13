@@ -55,30 +55,36 @@ public class GPGSController : Singleton<GPGSController>
 
     public void UnlockTextAchivment()
     {
-        Social.ReportProgress(testAchievementId, 100.0f, (bool success) => {
-            if (success)
-            {
-                Debug.Log("Test Achievement successfully unlocked!");
-            }
-            else
-            {
-                Debug.LogWarning("Unlocking Test Achievement failed!");
-            }
-        });
+        if (userIsSignedIn)
+        {
+            Social.ReportProgress(testAchievementId, 100.0f, (bool success) => {
+                if (success)
+                {
+                    Debug.Log("Test Achievement successfully unlocked!");
+                }
+                else
+                {
+                    Debug.LogWarning("Unlocking Test Achievement failed!");
+                }
+            });
+        }
     }
 
     public void UpdateScoreTestLeaderboard(int timeInMs)
     {
-        Social.ReportScore(timeInMs, testLeaderboardId, (bool success) => {
-            if (success)
-            {
-                Debug.Log("Successfully submitted score to the Test Leaderboard! Score: " + timeInMs);
-            }
-            else
-            {
-                Debug.LogWarning("Score submission to the Test Leaderboard failed! Score: " + timeInMs);
-            }
-        });
+        if (userIsSignedIn)
+        {
+            Social.ReportScore(timeInMs, testLeaderboardId, (bool success) => {
+                if (success)
+                {
+                    Debug.Log("Successfully submitted score to the Test Leaderboard! Score: " + timeInMs);
+                }
+                else
+                {
+                    Debug.LogWarning("Score submission to the Test Leaderboard failed! Score: " + timeInMs);
+                }
+            });
+        }
     }
 
     public void ShowAchivmentUI()

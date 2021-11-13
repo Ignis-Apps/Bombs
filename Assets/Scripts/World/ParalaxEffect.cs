@@ -28,8 +28,6 @@ public class ParalaxEffect : MonoBehaviour
         if (renderer != null)
         {
             spriteWidth = renderer.bounds.size.x;
-            
-            Debug.Log(spriteWidth);
         }
     }
 

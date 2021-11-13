@@ -64,7 +64,7 @@ namespace Assets.Scripts.Game
             }
         }
 
-        public bool GetSceneInventory(int id)
+        public bool HasSceneInInventory(int id)
         {
             if (sceneInventory.TryGetValue(id, out bool result))
             {
@@ -76,7 +76,7 @@ namespace Assets.Scripts.Game
             }
         }
 
-        public int GetUpgradeInventory(int id)
+        public int HasUpgradeInInventory(int id)
         {
             if (upgradeInventory.TryGetValue(id, out int result))
             {
@@ -135,7 +135,7 @@ namespace Assets.Scripts.Game
         public void LoadData()
         {
             highScore = PlayerPrefs.GetInt("highScore", 0);
-            coinBalance = PlayerPrefs.GetInt("coinBalance", 0);
+            coinBalance = PlayerPrefs.GetInt("coinBalance", 50000);
             crystalBalance = PlayerPrefs.GetInt("crystalBalance", 0);
 
             selectedSkin = PlayerPrefs.GetInt("selectedSkin", 0);
@@ -156,15 +156,12 @@ namespace Assets.Scripts.Game
             string playerSkinString = PlayerPrefs.GetString("player_skin_configuration", "");
             if (playerSkinString.Length > 0) playerSkin.Load(playerSkinString);
 
-
-            skinInventory.Add(0, true);
-            for (int i = 1; i < PlayerPrefs.GetInt("skin_size", 0); i++)
+            for (int i = 0; i < PlayerPrefs.GetInt("skin_size", 0); i++)
             {
                 skinInventory.Add(i, System.Convert.ToBoolean(PlayerPrefs.GetInt("skin_" + i)));
             }
 
-            sceneInventory.Add(0, true);
-            for (int i = 1; i < PlayerPrefs.GetInt("scene_size", 0); i++)
+            for (int i = 0; i < PlayerPrefs.GetInt("scene_size", 0); i++)
             {
                 sceneInventory.Add(i, System.Convert.ToBoolean(PlayerPrefs.GetInt("scene_" + i)));
             }
