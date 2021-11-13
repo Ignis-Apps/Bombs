@@ -182,4 +182,9 @@ public class MovementController : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
+
+    public float GetVirtualSpeed()
+    {
+        return virtualVelocity;
+    }
 }

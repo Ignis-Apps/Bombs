@@ -4962,7 +4962,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5198068931683851065}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.32, y: -1.071, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 903971781945466245}
@@ -5010,7 +5010,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 36558a0f4a9cf0d498fa70517d0d3645, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f7d888ce76a37cf4eb1858876e2b1ab2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5018,7 +5018,7 @@ SpriteRenderer:
   m_Size: {x: 0.57, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &3100298996894366143
@@ -5090,7 +5090,7 @@ MonoBehaviour:
     type: 3}
   explosionSize: 0.3
   maxSpeed: 15
-  acceleration: 0.5
+  acceleration: 0.7
   angularAcceleration: 0
   shakeAngle: 0
   lootTableSettings: {fileID: 11400000, guid: 6124c79d54ce42243aa8455ccb8072b7, type: 2}

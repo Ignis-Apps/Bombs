@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a009145c0ade4ef4aad416d6be8dc150, type: 3}
-  m_Name: Tutorial
+  m_Name: Beta
   m_EditorClassIdentifier: 
   waves:
   - waveName: Normal Bombs
@@ -20,18 +20,18 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 2
-        inSlope: -1
-        outSlope: -1
+        value: 1.5
+        inSlope: -0.75
+        outSlope: -0.75
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 1
-        inSlope: -1
-        outSlope: -1
+        value: 0.75
+        inSlope: -0.75
+        outSlope: -0.75
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
@@ -111,8 +111,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
-    spawnGroupSizeMin: 1
-    spawnGroupSizeMax: 3
+    spawnGroupSizeMin: 2
+    spawnGroupSizeMax: 4
     playerSpeedMultiplier: 1
     spawnWeightDefaultBomb: 1
     spawnWeightHomingBomb: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 2
+        value: 1.5
         inSlope: -1
         outSlope: -1
         tangentMode: 34
@@ -134,7 +134,7 @@ MonoBehaviour:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 1
+        value: 0.5
         inSlope: -1
         outSlope: -1
         tangentMode: 34
@@ -216,8 +216,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
-    spawnGroupSizeMin: 1
-    spawnGroupSizeMax: 3
+    spawnGroupSizeMin: 3
+    spawnGroupSizeMax: 5
     playerSpeedMultiplier: 1.025
     spawnWeightDefaultBomb: 0
     spawnWeightHomingBomb: 0
@@ -229,19 +229,19 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.030110836
-        value: 2.9831686
-        inSlope: -1
-        outSlope: -1
+        time: 0.002550688
+        value: 0.9994039
+        inSlope: -0.5050927
+        outSlope: -0.5050927
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.0301108
-        value: 1.9831686
-        inSlope: -1
-        outSlope: -1
+        time: 1.0023875
+        value: 0.4943936
+        inSlope: -0.5050927
+        outSlope: -0.5050927
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
@@ -277,19 +277,19 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.019402474
-        value: 0.53344625
-        inSlope: 0.5000002
-        outSlope: 0.5000002
+        time: 0.010834333
+        value: 1.4952794
+        inSlope: 0.22605893
+        outSlope: 0.22605893
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.0194023
-        value: 1.0334463
-        inSlope: 0.5000002
-        outSlope: 0.5000002
+        time: 1.0283215
+        value: 1.7252915
+        inSlope: 0.22605893
+        outSlope: 0.22605893
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
@@ -322,7 +322,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
     spawnGroupSizeMin: 1
-    spawnGroupSizeMax: 1
+    spawnGroupSizeMax: 3
     playerSpeedMultiplier: 1.05
     spawnWeightDefaultBomb: 0
     spawnWeightHomingBomb: 1

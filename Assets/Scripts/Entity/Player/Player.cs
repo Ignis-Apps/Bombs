@@ -50,7 +50,11 @@ public class Player : MonoBehaviour
         }                          
         
         if (collision.name.Contains("Crystal"))
+        {
+            SoundManager.PlaySound(SoundManager.Sound.COIN);
             GameSessionEventHandler.crystalColltedDelegate();
+        }
+            
 
         if (collision.name.Contains("Marker"))
         {
@@ -123,6 +127,11 @@ public class Player : MonoBehaviour
         GetComponent<MovementController>().enabled = true;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         GetComponent<CapsuleCollider2D>().enabled = true;
+    }
+
+    public MovementController GetMovementController()
+    {
+        return controller;
     }
 
 }

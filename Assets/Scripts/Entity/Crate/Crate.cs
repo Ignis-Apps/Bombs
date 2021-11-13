@@ -66,11 +66,14 @@ public class Crate : MonoBehaviour
                     {
                         GameSessionEventHandler.crateLandedDelegate();
                     }
+
+                    requiredOpeningTime = Mathf.Max(requiredOpeningTime - (gameManager.session.progressStats.SurvivedWaves * .2f), .2f);
+
                 }
             }
         }
-
-        if (isPlayerNear && !gameManager.session.playerStats.IsMoving)
+      
+        if (isPlayerNear && gameManager.getPlayer().GetMovementController().GetVirtualSpeed() < .3f)
         {
             openingProgress += Time.deltaTime;
 
