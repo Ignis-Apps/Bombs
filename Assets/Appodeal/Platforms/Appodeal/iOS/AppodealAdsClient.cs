@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using AOT;
 using AppodealAds.Unity.Api;
 using AppodealAds.Unity.Common;
-using ConsentManager.Api;
+using ConsentManager;
 using UnityEngine;
 
 namespace AppodealAds.Unity.iOS
@@ -183,7 +183,7 @@ namespace AppodealAds.Unity.iOS
         {
             rewardedVideoListener?.onRewardedVideoFailedToLoad();
         }
-        
+
         [MonoPInvokeCallback(typeof(AppodealRewardedVideoCallbacks))]
         private static void rewardedVideoDidFailToPresentWithError()
         {
@@ -243,7 +243,7 @@ namespace AppodealAds.Unity.iOS
         [MonoPInvokeCallback(typeof(AppodealBannerDidLoadCallback))]
         private static void bannerDidLoadAd(int height, bool isPrecache)
         {
-            bannerListener?.onBannerLoaded(height,isPrecache);
+            bannerListener?.onBannerLoaded(height, isPrecache);
         }
 
         [MonoPInvokeCallback(typeof(AppodealBannerCallbacks))]
@@ -265,9 +265,9 @@ namespace AppodealAds.Unity.iOS
         }
 
         [MonoPInvokeCallback(typeof(AppodealBannerViewDidLoadCallback))]
-        private static void bannerViewDidLoadAd(int height,bool isPrecache)
+        private static void bannerViewDidLoadAd(int height, bool isPrecache)
         {
-            bannerListener?.onBannerLoaded(height,isPrecache);
+            bannerListener?.onBannerLoaded(height, isPrecache);
         }
 
         [MonoPInvokeCallback(typeof(AppodealBannerViewCallbacks))]
@@ -434,7 +434,7 @@ namespace AppodealAds.Unity.iOS
             AppodealObjCBridge.AppodealInitialize(appKey, nativeAdTypesForType(adTypes), hasConsent,
                 Appodeal.getPluginVersion(), Appodeal.getUnityVersion());
         }
-        
+
         public void initialize(string appKey, int adTypes, Consent consent)
         {
             AppodealObjCBridge.AppodealInitializeWithConsent(appKey, nativeAdTypesForType(adTypes),
@@ -523,7 +523,7 @@ namespace AppodealAds.Unity.iOS
         {
             AppodealObjCBridge.AppodealSetTabletBanners(value);
         }
-        
+
         public void setBannerRotation(int leftBannerRotation, int rightBannerRotation)
         {
             AppodealObjCBridge.AppodealSetBannerRotation(leftBannerRotation, rightBannerRotation);
@@ -567,7 +567,7 @@ namespace AppodealAds.Unity.iOS
         {
             AppodealObjCBridge.AppodealUpdateConsent(value);
         }
-        
+
         public void updateConsent(Consent consent)
         {
             AppodealObjCBridge.AppodealUpdateConsentReport();
@@ -586,11 +586,6 @@ namespace AppodealAds.Unity.iOS
         public void disableLocationPermissionCheck()
         {
             AppodealObjCBridge.AppodealDisableLocationPermissionCheck();
-        }
-
-        public void disableWriteExternalStoragePermissionCheck()
-        {
-            // Not supported for iOS SDK
         }
 
         public void muteVideosIfCallsMuted(bool value)
@@ -662,7 +657,7 @@ namespace AppodealAds.Unity.iOS
         {
             AppodealObjCBridge.AppodealSetSegmentFilterString(name, value);
         }
-        
+
         public void setCustomFilter(string name, bool value)
         {
             AppodealObjCBridge.AppodealSetCustomFilterBool(name, value);
@@ -721,7 +716,11 @@ namespace AppodealAds.Unity.iOS
         public void setUseSafeArea(bool value)
         {
             Debug.Log("Not Supported by iOS SDK");
+        }
 
+        public bool isAutoCacheEnabled(int adType)
+        {
+            return AppodealObjCBridge.AppodealIsAutoCacheEnabled(nativeAdTypesForType(adType));
         }
 
         //User Settings

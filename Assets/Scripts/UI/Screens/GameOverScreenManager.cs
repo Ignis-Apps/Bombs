@@ -161,7 +161,7 @@ public class GameOverScreenManager: AbstractScreenManager
         intentObject.Call<AndroidJavaObject>("setType", "text/plain");
         //add data to be passed to the other activity i.e., the data to be sent
         intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"),
-            "Quick app shout-out:\nHelp our little alien bob to survive the attacks! I got " + GameData.GetTimeString(gameManager.SurvivedSecounds) +
+            "Quick app shout-out:\nHelp our little alien Bob to survive the attacks! I got " + GameData.GetTimeString(gameManager.SurvivedSecounds) +
             " mins.\nDownload on Google Play: " + APP_LINK);
         //get the current activity
         AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");

@@ -15,8 +15,10 @@ public class GPGSController : Singleton<GPGSController>
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
 
         PlayGamesPlatform.InitializeInstance(config);
+
         // recommended for debugging:
-        // PlayGamesPlatform.DebugLogEnabled = true;
+        PlayGamesPlatform.DebugLogEnabled = true;
+
         // Activate the Google Play Games platform
         PlayGamesPlatform.Activate();
     }
@@ -31,7 +33,7 @@ public class GPGSController : Singleton<GPGSController>
             else
             {
                 userIsSignedIn = false;
-                Debug.Log("Google Play Games Sign-In Failed! Error: " + result);
+                Debug.LogWarning("Google Play Games Sign-In Failed! Error: " + result);
             }
         });
     }
@@ -46,7 +48,7 @@ public class GPGSController : Singleton<GPGSController>
             else
             {
                 userIsSignedIn = false;
-                Debug.Log("Google Play Games Sign-In Failed! Error: " + result);
+                Debug.LogWarning("Google Play Games Sign-In Failed! Error: " + result);
             }
         });
     }
@@ -60,7 +62,7 @@ public class GPGSController : Singleton<GPGSController>
             }
             else
             {
-                Debug.Log("Unlocking Test Achievement failed!");
+                Debug.LogWarning("Unlocking Test Achievement failed!");
             }
         });
     }
@@ -74,7 +76,7 @@ public class GPGSController : Singleton<GPGSController>
             }
             else
             {
-                Debug.Log("Score submission to the Test Leaderboard failed! Score: " + timeInMs);
+                Debug.LogWarning("Score submission to the Test Leaderboard failed! Score: " + timeInMs);
             }
         });
     }

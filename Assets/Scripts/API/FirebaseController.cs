@@ -14,8 +14,6 @@ public class FirebaseController : Singleton<FirebaseController>
     {
         gameData = GameData.GetInstance();
 
-        UpdateConsent(gameData.ConsentCrashlytics, gameData.ConsentAnalytics);
-
         Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
@@ -28,6 +26,8 @@ public class FirebaseController : Singleton<FirebaseController>
 
                 // Set a flag here for indicating that your project is ready to use Firebase.
                 firebaseAvailable = true;
+
+                UpdateConsent(gameData.ConsentCrashlytics, gameData.ConsentAnalytics);
             }
             else
             {
@@ -54,8 +54,11 @@ public class FirebaseController : Singleton<FirebaseController>
 
     public void UpdateConsent(bool crashlytics, bool analytics)
     {
-        Crashlytics.IsCrashlyticsCollectionEnabled = crashlytics;
-        FirebaseAnalytics.SetAnalyticsCollectionEnabled(analytics);
+        if (firebaseAvailable)
+        {
+            Crashlytics.IsCrashlyticsCollectionEnabled = crashlytics;
+            FirebaseAnalytics.SetAnalyticsCollectionEnabled(analytics);
+        }
     }
 
     private void SetRemoteConfigDefaults()

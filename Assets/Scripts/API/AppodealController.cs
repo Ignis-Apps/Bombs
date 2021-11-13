@@ -28,17 +28,12 @@ public class AppodealController : Singleton<AppodealController>, IRewardedVideoA
         // Appodeal.setTesting(true);
 
         Appodeal.disableLocationPermissionCheck();
-        Appodeal.disableWriteExternalStoragePermissionCheck();
         Appodeal.muteVideosIfCallsMuted(true);
         Appodeal.setRewardedVideoCallbacks(this);
 
         //Deactivate not used ad networks
-        Appodeal.disableNetwork(AppodealNetworks.A4G);
-        Appodeal.disableNetwork(AppodealNetworks.SMAATO);
         Appodeal.disableNetwork(AppodealNetworks.FACEBOOK);
         Appodeal.disableNetwork(AppodealNetworks.YANDEX);
-        Appodeal.disableNetwork(AppodealNetworks.AMAZON_ADS);
-        Appodeal.disableNetwork(AppodealNetworks.STARTAPP);
 
         Appodeal.initialize(appKey, Appodeal.REWARDED_VIDEO, gameData.ConsentPersonalisedAds);
     }

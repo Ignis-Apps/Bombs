@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using ConsentManager.Api;
 
 
 namespace ConsentManager.Common
@@ -12,12 +11,13 @@ namespace ConsentManager.Common
         void requestConsentInfoUpdate(string appodealAppKey, IConsentInfoUpdateListener listener);
         void setCustomVendor(Vendor customVendor);
         Vendor getCustomVendor(string bundle);
-        Api.ConsentManager.Storage getStorage();
-        void setStorage(Api.ConsentManager.Storage iabStorage);
+        ConsentManager.Storage getStorage();
+        void setStorage(ConsentManager.Storage iabStorage);
         Consent.ShouldShow shouldShowConsentDialog();
         Consent.Zone getConsentZone();
         Consent.Status getConsentStatus();
         Consent getConsent();
+        void disableAppTrackingTransparencyRequest();
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -65,6 +65,7 @@ namespace ConsentManager.Common
     {
         Consent.Zone getZone();
         Consent.Status getStatus();
+        Consent.AuthorizationStatus getAuthorizationStatus();
         Consent.HasConsent hasConsentForVendor(string bundle);
         string getIabConsentString();
     }

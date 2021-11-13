@@ -86,11 +86,11 @@ public class PrivacyScreenManager: AbstractScreenManager
         warningDialog.gameObject.SetActive(false);
 
         Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_analytics",
-            Firebase.Analytics.FirebaseAnalytics.ParameterValue, "true");
+            Firebase.Analytics.FirebaseAnalytics.ParameterValue, "True");
         Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_crashlytics",
-            Firebase.Analytics.FirebaseAnalytics.ParameterValue, "true");
+            Firebase.Analytics.FirebaseAnalytics.ParameterValue, "True");
         Firebase.Analytics.FirebaseAnalytics.LogEvent("privacy_accept_personalised_ads",
-            Firebase.Analytics.FirebaseAnalytics.ParameterValue, "true");
+            Firebase.Analytics.FirebaseAnalytics.ParameterValue, "True");
 
         screenManager.SwitchScreen(callbackScreen);
 

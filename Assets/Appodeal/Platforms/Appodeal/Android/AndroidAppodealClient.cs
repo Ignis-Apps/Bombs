@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using AppodealAds.Unity.Api;
 using AppodealAds.Unity.Common;
-using ConsentManager.Api;
+using ConsentManager;
 using ConsentManager.Platforms.Android;
 using UnityEngine;
 
@@ -203,7 +203,6 @@ namespace AppodealAds.Unity.Android
         public void setSmartBanners(bool value)
         {
             getAppodealClass().CallStatic("setSmartBanners", value);
-            getAppodealBannerInstance().Call("setSmartBanners", value);
         }
 
         public void setBannerAnimation(bool value)
@@ -303,12 +302,7 @@ namespace AppodealAds.Unity.Android
 
         public void disableLocationPermissionCheck()
         {
-            getAppodealClass().CallStatic("disableLocationPermissionCheck");
-        }
-
-        public void disableWriteExternalStoragePermissionCheck()
-        {
-            getAppodealClass().CallStatic("disableWriteExternalStoragePermissionCheck");
+            Debug.Log("Not support on Android platform");
         }
 
         public void setTriggerOnLoadedOnPrecache(int adTypes, bool onLoadedTriggerBoth)
@@ -532,6 +526,11 @@ namespace AppodealAds.Unity.Android
         public void setUseSafeArea(bool value)
         {
             getAppodealClass().CallStatic("setUseSafeArea", value);
+        }
+
+        public bool isAutoCacheEnabled(int adType)
+        {
+            return  getAppodealClass().CallStatic<bool>("isAutoCacheEnabled", nativeAdTypesForType(adType));
         }
     }
 }

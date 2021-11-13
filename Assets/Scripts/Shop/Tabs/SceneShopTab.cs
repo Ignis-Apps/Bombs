@@ -25,9 +25,7 @@ namespace Assets.Scripts.Shop.Tabs
 
         protected override void OnTabClosed()
         {
-            GameManager.GetInstance().getPlayer().gameObject.SetActive(true);
-            BackButton.gameObject.SetActive(true);
-            NextButton.gameObject.SetActive(true);
+
         }
 
         protected override void OnTabOpened()

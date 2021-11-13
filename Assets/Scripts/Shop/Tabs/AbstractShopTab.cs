@@ -57,7 +57,8 @@ namespace Assets.Scripts.Shop.Tabs
         public void TabSelected()
         {            
             OnTabOpened();
-            NotifyDataSetChanged();                   
+            NotifyDataSetChanged();
+            UpdateNavigationButtons();
         }
 
         public void TabDeselected()

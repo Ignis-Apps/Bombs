@@ -1,4 +1,5 @@
 ﻿#if UNITY_IPHONE
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -11,6 +12,8 @@ using UnityEditor.Callbacks;
 using UnityEditor.iOS.Xcode;
 using UnityEngine;
 
+#pragma warning disable 618
+
 namespace Appodeal.Unity.Editor.Utils
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -18,61 +21,165 @@ namespace Appodeal.Unity.Editor.Utils
     [SuppressMessage("ReSharper", "UnusedVariable")]
     [SuppressMessage("ReSharper", "UnusedMember.Local")]
     [SuppressMessage("ReSharper", "UnusedParameter.Local")]
+    [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
+    [SuppressMessage("ReSharper", "Unity.IncorrectMethodSignature")]
     public class iOSPostprocessUtils : MonoBehaviour
     {
         private const string suffix = ".framework";
         private const string minVersionToEnableBitcode = "10.0";
-        private static bool isCustomBuild = false;
-
-        [PostProcessBuildAttribute(41)]
-        private static void updatePod(BuildTarget target, string buildPath)
-        {
-            if (target != BuildTarget.iOS) return;
-            if (string.IsNullOrEmpty(PlayerSettings.iOS.targetOSVersionString)) return;
-            if (isCustomBuild)
-            {
-                var plistPath = buildPath + "/Info.plist";
-                var plist = new PlistDocument();
-                plist.ReadFromString(File.ReadAllText(plistPath));
-                var rootDict = plist.root;
-                const string buildKey = "GADApplicationIdentifier";
-                rootDict.SetString(buildKey, "ca-app-pub-3940256099942544~1458002511");
-                File.WriteAllText(plistPath, plist.WriteToString());
-            }
-
-            ReplaceInFile(buildPath + "/Podfile", $"platform :ios, '{PlayerSettings.iOS.targetOSVersionString}'",
-                "platform :ios, '10.0'\nuse_frameworks!");
-        }
 
         [PostProcessBuildAttribute(41)]
         public static void updateInfoPlist(BuildTarget buildTarget, string buildPath)
         {
+            var path = Path.Combine(buildPath, "Info.plist");
+            AddGADApplicationIdentifier(path);
+            AddNSUserTrackingUsageDescription(path);
+            AddNSCalendarsUsageDescription(path);
+            AddNSAppTransportSecurity();
+            AddSkAdNetworkIds(buildTarget, buildPath);
+        }
+
+        private static void AddSkAdNetworkIds(BuildTarget buildTarget, string buildPath)
+        {
+            
+            if (string.IsNullOrEmpty(PlayerSettings.iOS.targetOSVersionString)) return;
+
+            if (!AppodealSettings.Instance.IOSSkAdNetworkItems && (AppodealSettings.Instance.IOSSkAdNetworkItemsList == null ||
+                                                                  AppodealSettings.Instance.IOSSkAdNetworkItemsList.Count <= 0))  return;
+            if (buildTarget != BuildTarget.iOS) return;
+
+            var plistPath = buildPath + "/Info.plist";
+            var plist = new PlistDocument();
+            plist.ReadFromString(File.ReadAllText(plistPath));
+
+            PlistElementArray array = null;
+            if (plist.root.values.ContainsKey(AppodealUnityUtils.KeySkAdNetworkItems))
+            {
+                try
+                {
+                    PlistElement element;
+                    plist.root.values.TryGetValue(AppodealUnityUtils.KeySkAdNetworkItems, out element);
+                    if (element != null) array = element.AsArray();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e.Message);
+                    array = null;
+                }
+            }
+            else
+            {
+                array = plist.root.CreateArray(AppodealUnityUtils.KeySkAdNetworkItems);
+            }
+
+            if (array != null)
+            {
+                foreach (var id in AppodealSettings.Instance.IOSSkAdNetworkItemsList)
+                {
+                    if (ContainsSkAdNetworkIdentifier(array, id)) continue;
+                    var added = array.AddDict();
+                    added.SetString(AppodealUnityUtils.KeySkAdNetworkID, id);
+                }
+            }
+
+            File.WriteAllText(plistPath, plist.WriteToString());
+        }
+
+        private static void AddKeyToPlist(string path, string key, string value)
+        {
+            var plist = new PlistDocument();
+            plist.ReadFromFile(path);
+            plist.root.SetString(key, value);
+            File.WriteAllText(path, plist.WriteToString());
+        }
+
+        private static bool CheckContainsKey(string path, string key)
+        {
+            string contentString;
+            using (var reader = new StreamReader(path))
+            {
+                contentString = reader.ReadToEnd();
+                reader.Close();
+            }
+
+            return contentString.Contains(key);
+        }
+
+        private static void AddGADApplicationIdentifier(string path)
+        {
             if (!File.Exists("Assets/Appodeal/Editor/NetworkConfigs/GoogleAdMobDependencies.xml"))
             {
-                Debug.Log("Can't find Google Admob Config by path - Assets/Appodeal/Editor/NetworkConfigs/GoogleAdMobDependencies.xml");
+                Debug.Log(
+                    "Can't find Google Admob Config by path - Assets/Appodeal/Editor/NetworkConfigs/GoogleAdMobDependencies.xml");
                 return;
             }
 
             if (!CheckiOSAttribute())
             {
-                Debug.LogError("Google Admob Config is invalid. Ensure that Appodeal Unity plugin is imported correctly.");
+                Debug.LogError(
+                    "Google Admob Config is invalid. Ensure that Appodeal Unity plugin is imported correctly.");
                 return;
             }
-            
-            if (string.IsNullOrEmpty(AppodealSettings.Instance.AdMobIosAppId) 
-                || !AppodealSettings.Instance.AdMobIosAppId.StartsWith("ca-app-pub-"))
+
+            if (string.IsNullOrEmpty(AppodealSettings.Instance.AdMobIosAppId))
+            {
+                return;
+            }
+
+            if (!AppodealSettings.Instance.AdMobIosAppId.StartsWith("ca-app-pub-"))
             {
                 Debug.LogError(
                     "Please enter a valid AdMob app ID within the Appodeal/AdMob settings tool.");
                 return;
             }
 
-            var plistPath = Path.Combine(buildPath, "Info.plist");
-            var plist = new PlistDocument();
-            plist.ReadFromFile(plistPath);
-            plist.root.SetString("GADApplicationIdentifier", AppodealSettings.Instance.AdMobIosAppId);
+            if (!CheckContainsKey(path, "GADApplicationIdentifier"))
+            {
+                AddKeyToPlist(path, "GADApplicationIdentifier", AppodealSettings.Instance.AdMobIosAppId);
+            }
+        }
 
-            File.WriteAllText(plistPath, plist.WriteToString());
+        private static void AddNSUserTrackingUsageDescription(string path)
+        {
+            if (!AppodealSettings.Instance.NSUserTrackingUsageDescription) return;
+            if (!CheckContainsKey(path, "NSUserTrackingUsageDescription"))
+            {
+                AddKeyToPlist(path, "NSUserTrackingUsageDescription",
+                    "$(PRODUCT_NAME)" + " " +
+                    "needs your advertising identifier to provide personalised advertising experience tailored to you.");
+            }
+        }
+
+        private void AddNSLocationWhenInUseUsageDescription(string path)
+        {
+            if (!AppodealSettings.Instance.NSLocationWhenInUseUsageDescription) return;
+            if (!CheckContainsKey(path, "NSLocationWhenInUseUsageDescription"))
+            {
+                AddKeyToPlist(path, "NSLocationWhenInUseUsageDescription",
+                    "$(PRODUCT_NAME)" + " " +
+                    "needs your location for analytics and advertising purposes.");
+            }
+        }
+
+        private static void AddNSCalendarsUsageDescription(string path)
+        {
+            if (!AppodealSettings.Instance.NSCalendarsUsageDescription) return;
+            if (!CheckContainsKey(path, "NSCalendarsUsageDescription"))
+            {
+                AddKeyToPlist(path, "NSCalendarsUsageDescription",
+                    "$(PRODUCT_NAME)" + " " +
+                    "needs your calendar to provide personalised advertising experience tailored to you.");
+            }
+        }
+
+        private static void AddNSAppTransportSecurity()
+        {
+            if (!AppodealSettings.Instance.NSAppTransportSecurity) return;
+
+            if (!PlayerSettings.iOS.allowHTTPDownload)
+            {
+                PlayerSettings.iOS.allowHTTPDownload = true;
+            }
         }
 
         private static void ReplaceInFile(
@@ -126,14 +233,16 @@ namespace Appodeal.Unity.Editor.Utils
             "UIKit",
             "VideoToolbox",
             "WatchConnectivity",
-            "WebKit"
+            "WebKit",
+            
         };
 
         private static readonly string[] weakFrameworkList =
         {
             "CoreMotion",
             "WebKit",
-            "Social"
+            "Social",
+            "AppTrackingTransparency"
         };
 
         private static readonly string[] platformLibs =
@@ -295,6 +404,29 @@ namespace Appodeal.Unity.Editor.Utils
             return attributeElementiOSPod.Value.Equals("APDGoogleAdMobAdapter");
         }
 
+        private static bool ContainsSkAdNetworkIdentifier(PlistElementArray skAdNetworkItemsArray, string id)
+        {
+            foreach (var elem in skAdNetworkItemsArray.values)
+            {
+                try
+                {
+                    PlistElement value;
+                    var identifierExists = elem.AsDict().values
+                        .TryGetValue(AppodealUnityUtils.KeySkAdNetworkID, out value);
+
+                    if (identifierExists && value.AsString().Equals(id))
+                    {
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e.Message);
+                }
+            }
+
+            return false;
+        }
     }
 }
 #endif

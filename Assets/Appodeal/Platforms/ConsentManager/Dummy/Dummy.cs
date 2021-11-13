@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using ConsentManager.Api;
 using ConsentManager.Common;
 using UnityEngine;
 
@@ -28,13 +27,13 @@ namespace ConsentManager.Platforms.Dummy
             return null;
         }
 
-        public Api.ConsentManager.Storage getStorage()
+        public ConsentManager.Storage getStorage()
         {
             Debug.Log(DummyMessage);
-            return Api.ConsentManager.Storage.NONE;
+            return ConsentManager.Storage.NONE;
         }
 
-        public void setStorage(Api.ConsentManager.Storage iabStorage)
+        public void setStorage(ConsentManager.Storage iabStorage)
         {
             Debug.Log(DummyMessage);
         }
@@ -61,6 +60,11 @@ namespace ConsentManager.Platforms.Dummy
         {
             Debug.Log(DummyMessage);
             return null;
+        }
+
+        public void disableAppTrackingTransparencyRequest()
+        {
+            Debug.Log(DummyMessage);
         }
 
         public void load()
@@ -180,6 +184,12 @@ namespace ConsentManager.Platforms.Dummy
         {
             Debug.Log(DummyMessage);
             return Consent.Status.UNKNOWN;
+        }
+
+        public Consent.AuthorizationStatus getAuthorizationStatus()
+        {
+            Debug.Log(DummyMessage);
+            return Consent.AuthorizationStatus.NOT_DETERMINED;
         }
 
         public Consent.HasConsent hasConsentForVendor(string bundle)
