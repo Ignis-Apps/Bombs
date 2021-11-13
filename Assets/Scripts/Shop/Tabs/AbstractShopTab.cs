@@ -92,7 +92,7 @@ namespace Assets.Scripts.Shop.Tabs
 
         public void NotifyDataSetChanged()
         {
-            if (dataset == null)
+            if (dataset == null || dataset.Length == 0)
                 return;
 
             OnSelectionChanged(GetCurrentItem());

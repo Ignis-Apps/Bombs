@@ -135,7 +135,7 @@ namespace Assets.Scripts.Game
         public void LoadData()
         {
             highScore = PlayerPrefs.GetInt("highScore", 0);
-            coinBalance = PlayerPrefs.GetInt("coinBalance", 50000);
+            coinBalance = PlayerPrefs.GetInt("coinBalance", 0);
             crystalBalance = PlayerPrefs.GetInt("crystalBalance", 0);
 
             selectedSkin = PlayerPrefs.GetInt("selectedSkin", 0);
