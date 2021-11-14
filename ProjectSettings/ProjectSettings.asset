@@ -249,7 +249,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: "/Users/janik174/Google Drive/Ignis Apps/Projekte/Schl\xFCssel-Daten/keystore.jks"
+  AndroidKeystoreName: '{inproject}: Credentials/keystore.jks'
   AndroidKeyaliasName: ignis
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0

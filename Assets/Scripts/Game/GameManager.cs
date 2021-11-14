@@ -65,6 +65,7 @@ public class GameManager : Singleton<GameManager>
         deleteList.AddRange(GameObject.FindGameObjectsWithTag("ScoreOrb"));
         deleteList.AddRange(GameObject.FindGameObjectsWithTag("Bomb"));
         deleteList.AddRange(GameObject.FindGameObjectsWithTag("Crate"));
+        deleteList.AddRange(GameObject.FindGameObjectsWithTag("Powerup"));
         foreach (GameObject o in deleteList) { Destroy(o); }
 
         // Delete ingame message

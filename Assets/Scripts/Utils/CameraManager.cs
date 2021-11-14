@@ -79,7 +79,9 @@ public class CameraManager : MonoBehaviour
     IEnumerator AnimateCameraMovement(Vector3 targetPosition, float orthographicSize, float time)
     {
         Vector3 startPosition = cam.transform.position;
-        
+
+        Debug.Log(targetPosition);
+
         float startSize = cam.orthographicSize;
         float elapsedTime = 0f;
         

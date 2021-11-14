@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PickUp : MonoBehaviour
@@ -38,6 +39,8 @@ public class PickUp : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            /*
+
             // Calculate the velocity to arive at destination in time
             Vector2 dir = collision.gameObject.transform.position - transform.position;                                        
             dir /= timeToPickup;
@@ -53,6 +56,33 @@ public class PickUp : MonoBehaviour
             originalScale = transform.localScale;
             isPickedUp = true;
 
+            */
+
+            gameObject.layer = LayerMask.NameToLayer("NoCollision");
+            rigidBody.bodyType = RigidbodyType2D.Static;
+
+            StartCoroutine(Pickup(collision.gameObject.transform, timeToPickup));
+
         }
+    }
+
+    IEnumerator Pickup(Transform target, float time)
+    {
+
+        float elapsed = 0f;
+        
+        Vector3 startScale = transform.localScale;        
+
+        while(elapsed < time)
+        {
+            elapsed += Time.deltaTime;
+            float p = elapsed / time;
+            transform.position = Vector3.Lerp(transform.position, target.position, p);
+            transform.localScale = Vector3.Lerp(startScale, Vector3.zero, p);
+            yield return null;
+        }
+
+        Destroy(gameObject);
+
     }
 }

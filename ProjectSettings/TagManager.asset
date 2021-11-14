@@ -12,6 +12,7 @@ TagManager:
   - Crate
   - Crystal
   - Marker
+  - Powerup
   layers:
   - Default
   - TransparentFX

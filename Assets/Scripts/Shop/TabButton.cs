@@ -49,7 +49,7 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         Vector3 targetPosition = camManager.originalCameraPosition;
         float targetSize = camManager.originalOrthograficSize;
       
-        targetPosition.y += relativOrthograficCameraSizeChange;
+        targetPosition.y += relativYCameraMovment;
         targetSize += relativOrthograficCameraSizeChange;
           
         camManager.MoveToView(targetPosition, targetSize, .5f);

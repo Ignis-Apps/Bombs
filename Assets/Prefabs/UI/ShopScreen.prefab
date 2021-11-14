@@ -845,14 +845,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2367354c8467784ea15e1be3c50a569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabButtons: []
   selectedTab: {fileID: 6127037448290098168}
   idleColor: {r: 0.48235294, g: 0.48235294, b: 0.48235294, a: 1}
   hoverColor: {r: 0.7058824, g: 0.7042097, b: 0.7042097, a: 1}
   activeColor: {r: 1, g: 1, b: 1, a: 1}
-  orthograficCameraSize: 0
-  cameraYPosition: 0
-  cam: {fileID: 0}
 --- !u!1 &6127037447705981000
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,8 +1338,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tabGroup: {fileID: 6127037447393210458}
   image: {fileID: 0}
-  relativOrthograficCameraSizeChange: -1.5
-  relativYCameraMovment: -1.2
+  relativOrthograficCameraSizeChange: -2.25
+  relativYCameraMovment: -1.5
 --- !u!114 &5966072859428894032
 MonoBehaviour:
   m_ObjectHideFlags: 0
