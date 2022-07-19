@@ -39,25 +39,6 @@ public class PickUp : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            /*
-
-            // Calculate the velocity to arive at destination in time
-            Vector2 dir = collision.gameObject.transform.position - transform.position;                                        
-            dir /= timeToPickup;
-            
-            // Move object to an non colission layer
-            gameObject.layer = LayerMask.NameToLayer("NoCollision");
-
-            // Apply velocity and take controll over the physics
-            rigidBody.bodyType = RigidbodyType2D.Kinematic;
-            rigidBody.velocity = dir;
-
-            // Mark as picked up and prepare downscale animation
-            originalScale = transform.localScale;
-            isPickedUp = true;
-
-            */
-
             gameObject.layer = LayerMask.NameToLayer("NoCollision");
             rigidBody.bodyType = RigidbodyType2D.Static;
 

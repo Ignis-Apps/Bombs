@@ -37,7 +37,7 @@ namespace Assets.Scripts.Entity.Bomb
                 targetAngle = -targetAngle;
             }
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, targetAngle), Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, targetAngle), Time.fixedDeltaTime * rotationSpeed);
 
 
         }

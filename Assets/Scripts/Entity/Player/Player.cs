@@ -16,15 +16,15 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerSkinChanger.ApplySkinConfiguration(GameData.GetInstance().PlayerSkinInGame);                
-    }
+        PlayerSkinChanger.ApplySkinConfiguration(GameData.GetInstance().PlayerSkinInGame);
 
-    private void OnEnable()
-    {
         gameManager = GameManager.GetInstance();
         gameManager.PlayerObject = gameObject;
         controller = GetComponent<MovementController>();
+    }
 
+    private void OnEnable()
+    {     
         GameSessionEventHandler.waveCompleteDelegate += OnWaveSurvived;
         GameSessionEventHandler.sessionResetDelegate += OnGameReset;
         GameSessionEventHandler.playerDiedDelegate += OnPlayerDied;
