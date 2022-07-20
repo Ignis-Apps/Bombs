@@ -1,8 +1,9 @@
-using AppodealAds.Unity.Api;
-using AppodealAds.Unity.Common;
+using AppodealStack.Monetization.Api;
+using AppodealStack.Monetization.Common;
 using Assets.Scripts.Game;
+using System.Collections.Generic;
 
-public class AppodealController : Singleton<AppodealController>, IRewardedVideoAdListener
+public class AppodealController : Singleton<AppodealController>, IRewardedVideoAdListener, IAppodealInitializationListener
 {
     GameData gameData;
 
@@ -27,60 +28,72 @@ public class AppodealController : Singleton<AppodealController>, IRewardedVideoA
         // TEST BUILD
         // Appodeal.setTesting(true);
 
-        Appodeal.disableLocationPermissionCheck();
-        Appodeal.muteVideosIfCallsMuted(true);
-        Appodeal.setRewardedVideoCallbacks(this);
+       
+        Appodeal.SetLocationTracking(false);
+        Appodeal.MuteVideosIfCallsMuted(true);
+        Appodeal.SetRewardedVideoCallbacks(this);
 
         //Deactivate not used ad networks
-        Appodeal.disableNetwork(AppodealNetworks.FACEBOOK);
-        Appodeal.disableNetwork(AppodealNetworks.YANDEX);
+        Appodeal.DisableNetwork(AppodealNetworks.Facebook);
+        Appodeal.DisableNetwork(AppodealNetworks.Yandex);
 
-        Appodeal.initialize(appKey, Appodeal.REWARDED_VIDEO, gameData.ConsentPersonalisedAds);
+        Appodeal.Initialize(appKey, AppodealAdType.RewardedVideo, this);
     }
 
     public void UpdateConsent(bool consent)
     {
-        Appodeal.updateConsent(consent);
+        if (consent)
+        {
+            Appodeal.UpdateCcpaConsent(CcpaUserConsent.OptIn);
+            Appodeal.UpdateGdprConsent(GdprUserConsent.Personalized);
+        }
+        else
+        {
+            Appodeal.UpdateCcpaConsent(CcpaUserConsent.OptOut);
+            Appodeal.UpdateGdprConsent(GdprUserConsent.NonPersonalized);
+        }
     }
 
     public bool IsRewardedVideoLoaded()
     {
-        return Appodeal.isLoaded(Appodeal.REWARDED_VIDEO);
+        return Appodeal.IsLoaded(AppodealAdType.RewardedVideo);
     }
 
     public bool ShowRewardedVideo()
     {
         if (IsRewardedVideoLoaded())
         {
-            Appodeal.show(Appodeal.REWARDED_VIDEO);
+            Appodeal.Show(AppodealAdType.RewardedVideo);
             return true;
         }
         return false;
     }
 
-    public void onRewardedVideoLoaded(bool isPrecache) {
+    public void OnInitializationFinished(List<string> errors) { }
+
+    public void OnRewardedVideoLoaded(bool isPrecache) {
         videoIsLoaded = true;
         print("Video loaded"); 
     } //Called when rewarded video was loaded (precache flag shows if the loaded ad is precache). 
-    public void onRewardedVideoFailedToLoad() {
+    public void OnRewardedVideoFailedToLoad() {
         videoIsLoaded = false;
         print("Video failed"); 
     } // Called when rewarded video failed to load 
-    public void onRewardedVideoShowFailed() {
+    public void OnRewardedVideoShowFailed() {
         videoCanceled = true;
         print("Video show failed"); 
     } // Called when rewarded video was loaded, but cannot be shown (internal network errors, placement settings, or incorrect creative) 
-    public void onRewardedVideoShown() { print("Video shown"); } // Called when rewarded video is shown 
-    public void onRewardedVideoClicked() { print("Video clicked"); } // Called when reward video is clicked 
-    public void onRewardedVideoClosed(bool finished) {
+    public void OnRewardedVideoShown() { print("Video shown"); } // Called when rewarded video is shown 
+    public void OnRewardedVideoClicked() { print("Video clicked"); } // Called when reward video is clicked 
+    public void OnRewardedVideoClosed(bool finished) {
         videoCanceled = !finished;
         print("Video closed"); 
     } // Called when rewarded video is closed 
-    public void onRewardedVideoFinished(double amount, string name) {
+    public void OnRewardedVideoFinished(double amount, string name) {
         videoFinished = true;
         print("Reward: " + amount + " " + name);
     } // Called when rewarded video is viewed until the end 
-    public void onRewardedVideoExpired() {
+    public void OnRewardedVideoExpired() {
         videoIsLoaded = false;
         print("Video expired"); 
     } //Called when rewarded video is expired and can not be shown
