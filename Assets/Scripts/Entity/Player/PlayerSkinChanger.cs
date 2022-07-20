@@ -1,24 +1,24 @@
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Experimental.U2D.Animation;
+
 
 public class PlayerSkinChanger : MonoBehaviour
 {
     // Contains the labels of the sprite library asset (PlayerParts)
     [SerializeField] string[] assetLabels;
 
-    [SerializeField] SpriteResolver headResolver;
+    [SerializeField] UnityEngine.U2D.Animation.SpriteResolver headResolver;
     
-    [SerializeField] SpriteResolver bodyResolver;
+    [SerializeField] UnityEngine.U2D.Animation.SpriteResolver bodyResolver;
     
-    [SerializeField] SpriteResolver lArmResolver;
-    [SerializeField] SpriteResolver rArmResolver;
+    [SerializeField] UnityEngine.U2D.Animation.SpriteResolver lArmResolver;
+    [SerializeField] UnityEngine.U2D.Animation.SpriteResolver rArmResolver;
     
-    [SerializeField] SpriteResolver lLegResolver;
-    [SerializeField] SpriteResolver rLegResolver;
+    [SerializeField] UnityEngine.U2D.Animation.SpriteResolver lLegResolver;
+    [SerializeField] UnityEngine.U2D.Animation.SpriteResolver rLegResolver;
     
-    [SerializeField] SpriteResolver lShoeResolver;
-    [SerializeField] SpriteResolver rShoeResolver;
+    [SerializeField] UnityEngine.U2D.Animation.SpriteResolver lShoeResolver;
+    [SerializeField] UnityEngine.U2D.Animation.SpriteResolver rShoeResolver;
 
     [SerializeField] PlayerSkinConfiguration currentConfiguration;
 
