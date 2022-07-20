@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.appodeal.appodeal-unity-plugin-upm": {
+      "version": "https://github.com/appodeal/appodeal-unity-plugin-upm.git#v3.0.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "2477ee876efb8ed49a9f90db093052104821b916"
+    },
     "com.unity.2d.animation": {
       "version": "5.0.9",
       "depth": 0,
